@@ -9,7 +9,7 @@
   "use strict";
 
   var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var COLORS = ["123,97,255", "0,212,200", "255,95,160"]; // violet, teal, rose
+  var COLORS = ["114,222,255", "167,139,250", "177,93,255"]; // cyan, violet, purple
 
   /* shared pointer in viewport coordinates (updated passively) */
   var pointer = { x: -9999, y: -9999, nx: 0, ny: 0 };
@@ -84,17 +84,17 @@
       var pulse = 0.5 + 0.5 * Math.sin(time * 0.0013);
       var cr = Math.min(w, h) * (0.45 + 0.06 * pulse);
       var g = ctx.createRadialGradient(core.x + ox, core.y + oy, 0, core.x + ox, core.y + oy, cr);
-      g.addColorStop(0, "rgba(123,97,255," + (0.15 + 0.07 * pulse).toFixed(3) + ")");
-      g.addColorStop(0.5, "rgba(0,212,200,0.045)");
-      g.addColorStop(1, "rgba(8,8,15,0)");
+      g.addColorStop(0, "rgba(167,139,250," + (0.10 + 0.05 * pulse).toFixed(3) + ")");
+      g.addColorStop(0.5, "rgba(114,222,255,0.035)");
+      g.addColorStop(1, "rgba(39,39,47,0)");
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, w, h);
 
       /* pointer glow */
       if (inView && !reduceMotion) {
         var pg = ctx.createRadialGradient(lpx, lpy, 0, lpx, lpy, 120);
-        pg.addColorStop(0, "rgba(0,212,200,0.10)");
-        pg.addColorStop(1, "rgba(0,212,200,0)");
+        pg.addColorStop(0, "rgba(114,222,255,0.10)");
+        pg.addColorStop(1, "rgba(114,222,255,0)");
         ctx.fillStyle = pg;
         ctx.fillRect(0, 0, w, h);
       }

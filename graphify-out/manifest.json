@@ -1,0 +1,82 @@
+{
+  "/Users/mohsen/StudioProjects/vaultai-website/.claude/settings.local.json": {
+    "mtime": 1781396536.1359563,
+    "ast_hash": "41ad7e09cc5db2100b2ee131c038faf2",
+    "semantic_hash": "41ad7e09cc5db2100b2ee131c038faf2"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/app.js": {
+    "mtime": 1781395384.9563968,
+    "ast_hash": "caed10a0941061a8cf57ceed4eb4d8f1",
+    "semantic_hash": "caed10a0941061a8cf57ceed4eb4d8f1"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/CLAUDE.md": {
+    "mtime": 1781396070.000349,
+    "ast_hash": "109d138066d88f09189cdf9ba3457098",
+    "semantic_hash": "109d138066d88f09189cdf9ba3457098"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/README.md": {
+    "mtime": 1780763775.8411546,
+    "ast_hash": "04574562f0d5516857525586c5e93fc1",
+    "semantic_hash": "04574562f0d5516857525586c5e93fc1"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/index.html": {
+    "mtime": 1781395417.1490226,
+    "ast_hash": "4008caecdd28f21941ad7b24fdbd79e6",
+    "semantic_hash": "4008caecdd28f21941ad7b24fdbd79e6"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/assets/badge-app-store.svg": {
+    "mtime": 1780762885.1152005,
+    "ast_hash": "5d15596d263d450e83ce53f4509c7b9a",
+    "semantic_hash": "5d15596d263d450e83ce53f4509c7b9a"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/assets/badge-google-play.svg": {
+    "mtime": 1780762869.228609,
+    "ast_hash": "331b42971ef9605696b9fc6cc8637423",
+    "semantic_hash": "331b42971ef9605696b9fc6cc8637423"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/assets/favicon.svg": {
+    "mtime": 1781395431.007937,
+    "ast_hash": "6e7932593c779aca26b994a4d453b488",
+    "semantic_hash": "6e7932593c779aca26b994a4d453b488"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/assets/logo.svg": {
+    "mtime": 1781395429.6758385,
+    "ast_hash": "17871d7dd4565d91229639347d787530",
+    "semantic_hash": "17871d7dd4565d91229639347d787530"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/assets/og-image.png": {
+    "mtime": 1781393687.7482429,
+    "ast_hash": "ccc1b4ea1c8e780478df6ac143889739",
+    "semantic_hash": "ccc1b4ea1c8e780478df6ac143889739"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/assets/og-image.svg": {
+    "mtime": 1780763574.987875,
+    "ast_hash": "e8ce103b0ce7079ad48a18426fe1cf47",
+    "semantic_hash": "e8ce103b0ce7079ad48a18426fe1cf47"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/assets/screenshots/accounts.png": {
+    "mtime": 1781393695.023442,
+    "ast_hash": "27a9923ffe8ba130f3a607b0fecadb11",
+    "semantic_hash": "27a9923ffe8ba130f3a607b0fecadb11"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/assets/screenshots/bills.png": {
+    "mtime": 1781393695.0287905,
+    "ast_hash": "bee4777d1a5ad732b33e5506a9ad2ee8",
+    "semantic_hash": "bee4777d1a5ad732b33e5506a9ad2ee8"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/assets/screenshots/explore.png": {
+    "mtime": 1781393695.03143,
+    "ast_hash": "d4b245ed11be5076654b3949fc44d112",
+    "semantic_hash": "d4b245ed11be5076654b3949fc44d112"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/assets/screenshots/overview.png": {
+    "mtime": 1781395699.1579762,
+    "ast_hash": "63a123a143f4564c09ddf5cff25113e7",
+    "semantic_hash": "63a123a143f4564c09ddf5cff25113e7"
+  },
+  "/Users/mohsen/StudioProjects/vaultai-website/assets/screenshots/transactions.png": {
+    "mtime": 1781393695.0261593,
+    "ast_hash": "a1264e5b0dfdfb76f27a0a6bb15d7813",
+    "semantic_hash": "a1264e5b0dfdfb76f27a0a6bb15d7813"
+  }
+}
