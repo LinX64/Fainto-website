@@ -14,7 +14,7 @@ There is nothing to build or compile. To preview locally:
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-The site also works opened directly over `file://`. Deployment is GitHub Pages from the `master` branch root; `.nojekyll` is present so assets serve as-is.
+The site also works opened directly over `file://`. Deployment is GitHub Pages from the `master` branch root; `.nojekyll` is present so assets serve as-is
 
 ## Architecture
 

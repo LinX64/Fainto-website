@@ -4,40 +4,40 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VaultAI — Private AI for your money</title>
-  <meta name="description" content="VaultAI runs a real language model entirely on your phone — sharp budgeting, tax, and investing advice, with zero data ever leaving your device. Offline-first, on-device AI personal finance." />
+  <meta name="description" content="VaultAI runs a real language model entirely on your phone — budgeting, tax, and net-worth tracking, with zero data leaving your device. Offline-first, on-device AI personal finance." />
   <meta name="theme-color" content="#27272F" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
 
   <meta property="og:type" content="website" />
   <meta property="og:title" content="VaultAI — Private AI for your money" />
-  <meta property="og:description" content="A real language model that runs entirely on your phone. Budgeting, tax, and investing advice — with zero data ever leaving your device." />
+  <meta property="og:description" content="A real language model that runs entirely on your phone. Zero data ever leaves your device." />
   <meta property="og:image" content="assets/og-image.png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="VaultAI — Private AI for your money" />
   <meta name="twitter:description" content="On-device AI personal finance. Private by architecture." />
   <meta name="twitter:image" content="assets/og-image.png" />
 
+  <!-- Bootstrap 5 (layout skeleton; loaded BEFORE styles.css so the M3 skin wins) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- Material Symbols (icon font) — default display:block, so ligature text never flashes -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="nav" id="top" data-nav>
+  <header class="nav" id="top">
     <div class="nav-inner">
       <a class="brand" href="#top" aria-label="VaultAI home">
-        <img src="assets/logo.svg" width="34" height="34" alt="" />
+        <img src="assets/logo.svg" width="32" height="32" alt="" />
         <span class="brand-name">VaultAI</span>
       </a>
-      <nav class="nav-links" aria-label="Primary">
-        <a href="#features">Features</a>
-        <a href="#privacy">Privacy</a>
-        <a href="#screens">Screens</a>
-        <a href="#download">Download</a>
-      </nav>
-      <a class="btn btn-primary nav-cta" href="#download">Get the app</a>
+      <a class="btn btn-primary nav-cta" href="#get">Get the app</a>
     </div>
   </header>
 
@@ -45,49 +45,241 @@
 
     <!-- ===================== HERO ===================== -->
     <section class="hero" aria-labelledby="hero-title">
-      <canvas class="aurora-canvas" data-aurora aria-hidden="true"></canvas>
-      <div class="hero-veil" aria-hidden="true"></div>
+      <div class="hero-card band">
+        <div class="hero-inner">
+          <div class="row align-items-center gx-0 gy-4 gx-lg-5">
 
-      <div class="hero-inner">
-        <div class="hero-copy">
-          <p class="eyebrow"><span class="eyebrow-dot"></span>OFFLINE-FIRST · ON-DEVICE AI</p>
-          <h1 id="hero-title">Private AI for <span class="grad-text">your money</span>.</h1>
-          <p class="lede">VaultAI runs a real language model <strong>entirely on your phone</strong> — sharp budgeting, tax, and investing advice, with zero data ever leaving your device.</p>
+            <div class="col-12 col-lg-6 hero-copy">
+              <p class="eyebrow"><span class="eyebrow-dot"></span>OFFLINE-FIRST · ON-DEVICE AI</p>
+              <h1 id="hero-title">Private AI for <span class="grad-text">your money</span>.</h1>
+              <p class="lede">A real language model runs <strong>entirely on your phone</strong>. Budgeting, tax and net-worth tracking — zero data ever leaves your device.</p>
 
-          <!-- Signature: on-device streaming insight -->
-          <div class="stream" aria-hidden="true">
-            <div class="stream-head">
-              <span class="stream-pulse"></span>
-              <span class="stream-status">generating on-device</span>
-              <span class="stream-model">running gemma2-2b · 0&nbsp;bytes uploaded</span>
+              <hr class="grad-rule" />
+
+              <!-- Static example of an on-device insight (no animation) -->
+              <div class="insight">
+                <div class="insight-head">
+                  <span class="material-symbols-rounded" aria-hidden="true">lock</span>
+                  <span class="insight-status">on-device insight</span>
+                  <span class="insight-model">gemma2-2b · 0&nbsp;bytes uploaded</span>
+                </div>
+                <p class="insight-body">Build an emergency fund covering 3–6 months of expenses before you start investing.</p>
+              </div>
+
+              <!-- Store buttons: M3 icon buttons (Material Symbols + inline Apple glyph), not image badges -->
+              <div class="cta-row">
+                <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+                  <span class="material-symbols-rounded" aria-hidden="true">android</span>
+                  <span class="store-btn-text"><small>Get it on</small><strong>Google Play</strong></span>
+                </a>
+                <a class="store-btn" href="https://apps.apple.com/app/vaultai/id6480000000" target="_blank" rel="noopener" aria-label="Download on the App Store (coming soon)">
+                  <svg class="store-btn-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 12.04c-.03-2.6 2.13-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.89-1.74.03-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.79 1.3 10.34.86 1.25 1.89 2.65 3.24 2.6 1.3-.05 1.79-.84 3.36-.84 1.57 0 2.01.84 3.39.81 1.4-.02 2.29-1.27 3.14-2.53.99-1.45 1.4-2.85 1.42-2.92-.03-.01-2.72-1.04-2.75-4.13z"/><path d="M14.69 4.85c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44z"/></svg>
+                  <span class="store-btn-text"><small>Download on the</small><strong>App Store</strong><span class="coming-soon">Coming soon</span></span>
+                </a>
+              </div>
+
+              <ul class="cta-note">
+                <li><span class="material-symbols-rounded" aria-hidden="true">payments</span>Free</li>
+                <li><span class="material-symbols-rounded" aria-hidden="true">person_off</span>No account</li>
+                <li><span class="material-symbols-rounded" aria-hidden="true">wifi_off</span>Works offline</li>
+              </ul>
             </div>
-            <p class="stream-body"><span data-insight></span><span class="caret"></span></p>
-          </div>
 
-          <div class="cta-row">
-            <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener" aria-label="Get it on Google Play">
-              <img src="assets/badge-google-play.svg" width="182" height="54" alt="Get it on Google Play" />
-            </a>
-            <a class="store-badge" href="https://apps.apple.com/app/vaultai/id6480000000" target="_blank" rel="noopener" aria-label="Download on the App Store">
-              <img src="assets/badge-app-store.svg" width="182" height="54" alt="Download on the App Store" />
-            </a>
-          </div>
-          <p class="cta-note">Free · No account · Works offline</p>
-        </div>
+            <div class="col-12 col-lg-6 hero-device">
+              <!-- Auto-cycling showreel: the 8 promo scenes (screen + tag + headline), recreated as slides -->
+              <figure class="showreel" data-reel role="group" aria-roledescription="carousel" aria-label="VaultAI app showreel — eight screens, advancing automatically">
+                <div class="reel-stage">
+                  <img class="reel-slide is-active" src="assets/promo/01.png" alt="Overview screen — monthly net-income ring with income, spending and savings" fetchpriority="high" decoding="async" />
+                  <img class="reel-slide" src="assets/promo/02.png" alt="AI insights screen surfacing specific, money-saving moves" loading="lazy" decoding="async" aria-hidden="true" />
+                  <img class="reel-slide" src="assets/promo/03.png" alt="Dashboard — net worth, cash flow, retirement and VaultScore at a glance" loading="lazy" decoding="async" aria-hidden="true" />
+                  <img class="reel-slide" src="assets/promo/04.png" alt="Transactions — spending logged in seconds with budgets and categories" loading="lazy" decoding="async" aria-hidden="true" />
+                  <img class="reel-slide" src="assets/promo/05.png" alt="Net worth — assets, liabilities and total wealth tracked over time" loading="lazy" decoding="async" aria-hidden="true" />
+                  <img class="reel-slide" src="assets/promo/06.png" alt="Tax breakdown — gross-to-net waterfall and annual summary" loading="lazy" decoding="async" aria-hidden="true" />
+                  <img class="reel-slide" src="assets/promo/07.png" alt="Premium — deep AI analysis, scenario planning and richer reports" loading="lazy" decoding="async" aria-hidden="true" />
+                  <img class="reel-slide" src="assets/promo/08.png" alt="Appearance — a calm dark theme or a crisp light one" loading="lazy" decoding="async" aria-hidden="true" />
+                </div>
 
-        <div class="hero-device" aria-hidden="false">
-          <div class="device-glow" aria-hidden="true"></div>
-          <figure class="hero-shot">
-            <img src="assets/screenshots/overview.png" alt="VaultAI overview: monthly balance ring with spend vs savings and AI insights" />
-          </figure>
+                <!-- Captions mirror each slide and cross-fade in sync (decorative; slide alts carry the meaning) -->
+                <div class="reel-caps" aria-hidden="true">
+                  <figcaption class="reel-cap is-active"><span class="eyebrow reel-tag"><span class="eyebrow-dot"></span>AI Finance Coach</span><p class="reel-head">Your money, crystal <span class="grad-text">clear</span></p></figcaption>
+                  <figcaption class="reel-cap"><span class="eyebrow reel-tag"><span class="eyebrow-dot"></span>Powered by AI</span><p class="reel-head">Insights that pay <span class="grad-text">off</span></p></figcaption>
+                  <figcaption class="reel-cap"><span class="eyebrow reel-tag"><span class="eyebrow-dot"></span>One Dashboard</span><p class="reel-head">Your whole financial <span class="grad-text">life</span></p></figcaption>
+                  <figcaption class="reel-cap"><span class="eyebrow reel-tag"><span class="eyebrow-dot"></span>Transactions</span><p class="reel-head">Every dollar, <span class="grad-text">tracked</span></p></figcaption>
+                  <figcaption class="reel-cap"><span class="eyebrow reel-tag"><span class="eyebrow-dot"></span>Net Worth</span><p class="reel-head">Watch your wealth <span class="grad-text">grow</span></p></figcaption>
+                  <figcaption class="reel-cap"><span class="eyebrow reel-tag"><span class="eyebrow-dot"></span>Tax Breakdown</span><p class="reel-head">Taxes, <span class="grad-text">finally clear</span></p></figcaption>
+                  <figcaption class="reel-cap"><span class="eyebrow reel-tag"><span class="eyebrow-dot"></span>VaultAI Premium</span><p class="reel-head">Go further with <span class="grad-text">Premium</span></p></figcaption>
+                  <figcaption class="reel-cap"><span class="eyebrow reel-tag"><span class="eyebrow-dot"></span>Made Yours</span><p class="reel-head">Light or dark. Your <span class="grad-text">call</span></p></figcaption>
+                </div>
+
+                <div class="reel-dots">
+                  <button type="button" class="reel-dot is-active" aria-current="true" aria-label="Show screen 1: AI Finance Coach"></button>
+                  <button type="button" class="reel-dot" aria-current="false" aria-label="Show screen 2: Powered by AI"></button>
+                  <button type="button" class="reel-dot" aria-current="false" aria-label="Show screen 3: One Dashboard"></button>
+                  <button type="button" class="reel-dot" aria-current="false" aria-label="Show screen 4: Transactions"></button>
+                  <button type="button" class="reel-dot" aria-current="false" aria-label="Show screen 5: Net Worth"></button>
+                  <button type="button" class="reel-dot" aria-current="false" aria-label="Show screen 6: Tax Breakdown"></button>
+                  <button type="button" class="reel-dot" aria-current="false" aria-label="Show screen 7: VaultAI Premium"></button>
+                  <button type="button" class="reel-dot" aria-current="false" aria-label="Show screen 8: Made Yours"></button>
+                </div>
+              </figure>
+            </div>
+
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="scroll-hint" aria-hidden="true"><span></span></div>
+    <!-- ===================== TRUST STRIP ===================== -->
+    <section class="trust-section" aria-label="VaultAI at a glance">
+      <div class="trust-inner">
+        <div class="row text-center trust-strip">
+          <div class="col-6 col-md-3 stat" style="--accent:var(--positive)">
+            <span class="stat-num">0</span>
+            <span class="stat-cap">Bytes uploaded</span>
+            <span class="stat-sub">No data sent to a server, ever.</span>
+          </div>
+          <div class="col-6 col-md-3 stat" style="--accent:var(--teal)">
+            <span class="stat-num">5</span>
+            <span class="stat-cap">Local models</span>
+            <span class="stat-sub">Gemma 2 · Qwen 2.5 · Phi · Llama · Mistral.</span>
+          </div>
+          <div class="col-6 col-md-3 stat" style="--accent:var(--tertiary)">
+            <span class="stat-num">9</span>
+            <span class="stat-cap">Country tax engine</span>
+            <span class="stat-sub">Income, social &amp; health bands.</span>
+          </div>
+          <div class="col-6 col-md-3 stat" style="--accent:var(--secondary)">
+            <span class="stat-num">100%</span>
+            <span class="stat-cap">Offline-capable</span>
+            <span class="stat-sub">No account, no sign-in, no sync.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== PRIVACY ===================== -->
+    <section class="section" aria-labelledby="privacy-title">
+      <div class="band" style="--accent:var(--positive)">
+        <hr class="grad-rule" />
+        <div class="row align-items-center gy-4 gx-lg-5">
+          <div class="col-12 col-lg-7 privacy-copy">
+            <p class="eyebrow"><span class="eyebrow-dot"></span>ZERO-TRUST BY DESIGN</p>
+            <h2 id="privacy-title">Private by architecture, not by policy.</h2>
+            <p class="lede">The model, your transactions and every insight live in your phone's own storage. There is no account to create and no server to trust — because nothing is sent to one.</p>
+            <ul class="flow">
+              <li class="flow-step">Your data is read on-device only.</li>
+              <li class="flow-step">The on-device model reasons locally, fully offline.</li>
+              <li class="flow-step">Cloud deep-analysis is strictly opt-in, one request at a time.</li>
+            </ul>
+          </div>
+          <div class="col-12 col-lg-5">
+            <div class="insight ledger">
+              <div class="insight-head">
+                <span class="material-symbols-rounded" aria-hidden="true">wifi_off</span>
+                <span class="insight-status">outbound log</span>
+                <span class="insight-model">session</span>
+              </div>
+              <p class="insight-body">0&nbsp;B sent · 0&nbsp;requests · encrypted at rest</p>
+            </div>
+          </div>
+        </div>
+        <p class="band-foot">Educational information, not financial advice.</p>
+      </div>
+    </section>
+
+    <!-- ===================== FINAL CTA ===================== -->
+    <section class="section" aria-labelledby="get-title">
+      <div class="band cta-band" id="get" style="--accent:var(--secondary)">
+        <hr class="grad-rule" />
+        <p class="eyebrow"><span class="eyebrow-dot"></span>GET VAULTAI</p>
+        <h2 id="get-title">Your money's AI. On your phone. Nowhere else.</h2>
+        <p class="lede">Free, no account, works offline. Start in under a minute.</p>
+
+        <div class="cta-row">
+          <a class="store-btn" href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener" aria-label="Get it on Google Play">
+            <span class="material-symbols-rounded" aria-hidden="true">android</span>
+            <span class="store-btn-text"><small>Get it on</small><strong>Google Play</strong></span>
+          </a>
+          <a class="store-btn" href="https://apps.apple.com/app/vaultai/id6480000000" target="_blank" rel="noopener" aria-label="Download on the App Store (coming soon)">
+            <svg class="store-btn-glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 12.04c-.03-2.6 2.13-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.89-1.74.03-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.79 1.3 10.34.86 1.25 1.89 2.65 3.24 2.6 1.3-.05 1.79-.84 3.36-.84 1.57 0 2.01.84 3.39.81 1.4-.02 2.29-1.27 3.14-2.53.99-1.45 1.4-2.85 1.42-2.92-.03-.01-2.72-1.04-2.75-4.13z"/><path d="M14.69 4.85c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44z"/></svg>
+            <span class="store-btn-text"><small>Download on the</small><strong>App Store</strong><span class="coming-soon">Coming soon</span></span>
+          </a>
+        </div>
+
+        <ul class="cta-note">
+          <li><span class="material-symbols-rounded" aria-hidden="true">payments</span>Free</li>
+          <li><span class="material-symbols-rounded" aria-hidden="true">person_off</span>No account</li>
+          <li><span class="material-symbols-rounded" aria-hidden="true">wifi_off</span>Works offline</li>
+        </ul>
+      </div>
     </section>
 
   </main>
 
-  <script src="app.js" defer></script>
+  <footer class="footer-wrap">
+    <div class="footer">
+      <a class="brand" href="#top" aria-label="VaultAI home">
+        <img src="assets/logo.svg" width="28" height="28" alt="" />
+        <span class="brand-name">VaultAI</span>
+      </a>
+      <div class="footer-meta">
+        <span>Private AI for your money.</span>
+        <span aria-hidden="true">·</span>
+        <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener">Google&nbsp;Play</a>
+        <span aria-hidden="true">·</span>
+        <span>Educational information, not financial advice.</span>
+        <span aria-hidden="true">·</span>
+        <span>© 2026 VaultAI</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Hero showreel: cross-fade the 8 slides + captions, sync the dots. Auto-advances,
+       pauses on hover/focus/hidden-tab, and stays still under prefers-reduced-motion. -->
+  <script>
+  (function () {
+    "use strict";
+    var reel = document.querySelector("[data-reel]");
+    if (!reel) return;
+    var slides = [].slice.call(reel.querySelectorAll(".reel-slide"));
+    var caps   = [].slice.call(reel.querySelectorAll(".reel-cap"));
+    var dots   = [].slice.call(reel.querySelectorAll(".reel-dot"));
+    var n = slides.length;
+    if (n < 2) return;
+
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var i = 0, timer = null, DELAY = 3400;
+
+    function go(k) {
+      k = ((k % n) + n) % n;
+      if (k === i) return;
+      slides[i].classList.remove("is-active");
+      slides[i].setAttribute("aria-hidden", "true");
+      if (caps[i]) caps[i].classList.remove("is-active");
+      if (dots[i]) { dots[i].classList.remove("is-active"); dots[i].setAttribute("aria-current", "false"); }
+      i = k;
+      slides[i].classList.add("is-active");
+      slides[i].removeAttribute("aria-hidden");
+      if (caps[i]) caps[i].classList.add("is-active");
+      if (dots[i]) { dots[i].classList.add("is-active"); dots[i].setAttribute("aria-current", "true"); }
+    }
+
+    function start() { if (!reduce && !timer) timer = setInterval(function () { go(i + 1); }, DELAY); }
+    function stop()  { if (timer) { clearInterval(timer); timer = null; } }
+
+    dots.forEach(function (d, di) {
+      d.addEventListener("click", function () { stop(); go(di); start(); });
+    });
+    reel.addEventListener("mouseenter", stop);
+    reel.addEventListener("mouseleave", start);
+    reel.addEventListener("focusin", stop);
+    reel.addEventListener("focusout", start);
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) stop(); else start();
+    });
+
+    start();
+  })();
+  </script>
 </body>
 </html>
