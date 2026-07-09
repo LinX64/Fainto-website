@@ -1,0 +1,41 @@
+name: Deploy to cPanel
+
+# Auto-push the site to Namecheap cPanel on every commit to master.
+# Setup (one time): in GitHub → repo → Settings → Secrets and variables → Actions,
+# add three repository secrets:
+#   FTP_SERVER    e.g. server345.web-hosting.com   (or your domain)
+#   FTP_USERNAME  the FTP account user (cPanel → FTP Accounts; make a dedicated one)
+#   FTP_PASSWORD  that FTP account's password
+# The FTP account's "Directory" should point at the web root you want to publish to
+# (usually public_html). Adjust server-dir below if your site lives in a subfolder.
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-cpanel
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync to cPanel over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps                # encrypted FTP over TLS (port 21 explicit)
+          server-dir: public_html/      # web root; change if using a subdomain/addon dir
+          # Only ship the static site — keep repo/dev files off the server:
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            **/*.md
+            .gitignore

@@ -32,11 +32,13 @@ When a color/shape/type question comes up, reconcile against those files — not
 
 Three top-level files:
 
-- **`index.html`** — one page, sections in order: sticky header → hero (CSS conic ring + working Income/Expenses/Savings segmented control) → spec ledger (0 / 5 / 9 / $0) → **the reel** (signature: draggable scroll-snap rail of 8 real app screenshots with a scroll-linked crisp→round shape morph) → specimen quote (verbatim on-device insight) → privacy band with **live egress ledger** → tax engine (exhibit + retypeset PLN table) → engine grid (6 feature cards) → Premium consent spec → closing CTA → footer colophon. JS hooks are `data-*` attributes only (`data-nav`, `data-ring*`, `data-reel*`, `data-egress*`, `data-stamp`) plus `.reveal`/`.stamp-row` classes. Per-card accents via inline `style="--accent:var(--cyan)"`.
+- **`index.html`** — one page, **minimalist two-section cut (July 2026)**: sticky header → hero (CSS conic ring + working Income/Expenses/Savings segmented control) → closing CTA → footer colophon. Rebranded VaultAI→**Fainto** in the same pass — **visible brand text only**; the Play id stays `com.vaultai.app` and the Pages/og host stays `vaultai-website` (app package + repo were NOT renamed). JS hooks are `data-*` attributes only (`data-nav`, `data-ring*`) plus the `.reveal` class. The earlier proof-heavy sections below (spec ledger, reel, specimen, privacy/egress, tax, engine grid, premium) were removed at the user's request for a sparse page — their CSS/JS was pruned too.
 - **`styles.css`** — all styling; every color/shape/space/motion value flows from the `:root` tokens (no raw hexes below `:root`). Flat single-class selectors, no IDs, no `!important`. Breakpoints: 920 / 720 / 560. The `prefers-reduced-motion` block is last.
 - **`app.js`** — one strict IIFE with independent sub-modules: header scrolled state, hero ring + segmented control, the reel (drag, morph, IntersectionObserver dots, prev/next), live egress ledger (PerformanceObserver), reveal/stamp observers.
 
 ### Binding design laws (from the judged design brief — do not regress)
+
+> Note: after the July 2026 two-section cut, laws referencing the reel, live egress ledger, spec-ledger gradient, and tax table describe **removed** sections — kept here for history. The still-active spirit: no auto-advance/auto-play, figures never tween (typeset), static-visible is the CSS default with JS-added motion gated on `prefers-reduced-motion`, corners/colors from tokens only, no glows.
 
 1. **No auto-advancing** carousel or timers, ever (WCAG 2.2.2; a previous version auto-cycled — it was killed by a 3-judge panel).
 2. **Figures never count up or tween** — numerals are typeset; the live ledger swaps text instantly.
@@ -48,11 +50,11 @@ Three top-level files:
 
 ## Assets
 
-- **`assets/screens/`** — the eight current app screenshots (1080×2090, status/nav bars cropped), captured 2026-07-01 from the live `com.vaultai.app.debug` build via adb; `assets/screens/reel/` holds 640px-wide copies used by the reel (only the tax full-res is loaded elsewhere). To refresh: connect the device, launch the app, `adb exec-out screencap -p`, crop top 100px / bottom 150px.
+- **`assets/screens/`** — the eight current app screenshots (1080×2090, status/nav bars cropped), captured 2026-07-01 from the live `com.vaultai.app.debug` build via adb; `assets/screens/reel/` holds 640px-wide copies used by the reel (after the two-section cut the page no longer references any of them — retained for future use). To refresh: connect the device, launch the app, `adb exec-out screencap -p`, crop top 100px / bottom 150px.
 - `assets/logo.svg`, `favicon.svg`, `og-image.png` (og image still shows the older design — regenerate when convenient).
 - **Deprecated, do not reference**: `assets/promo/` (June 2026 pre-Lexend screens) and `assets/screenshots/` (old Play-Store cards with baked headlines).
 
 ## Content notes
 
 - Product truth (verified against the app build, July 2026): **5 on-device models** — SmolLM 135M, Qwen 2.5 0.5B (free) and Qwen 2.5 1.5B, DeepSeek R1 1.5B, Phi-4 Mini 3.8B (Premium) — plus optional **Cloud AI via OpenRouter (Premium, opt-in)**. 9-country tax engine. Accounts exist but are optional → say "no account required", never "no accounts exist". The old model list (Gemma 2 / Llama / Mistral) is obsolete.
-- Positioning is **educational information, not financial advice** — that framing is contractual copy, as are the real Play id `com.fainto.app`, iOS "coming soon" (a note, not a fake store link), and the Free / No account required / Works offline trio.
+- Positioning is **educational information, not financial advice** — that framing is contractual copy, as are the real Play id `com.vaultai.app` (kept — the app package did NOT rename), iOS "coming soon" (a note, not a fake store link), and the Free / No account required / Works offline trio.

@@ -20,11 +20,7 @@
   --primary: #FFFFFF;
   --on-primary: #2A2931;
 
-  /* Brand violet */
-  --violet: #A78BFA;
-
   /* Data accents — DataAccents.kt bright ramp (dark surfaces) */
-  --cyan: #72DEFF;
   --green: #36F0AB;
   --amber: #FFCF44;
   --coral: #FF6859;
@@ -34,6 +30,7 @@
   --muted-2: #ABABB5;
   --line: rgba(174, 174, 177, 0.20);
   --outline: #8F8F99;
+  --mask-on: #000;           /* opaque sentinel for alpha masks (RGB irrelevant) */
 
   /* Type — Lexend everywhere, like the app */
   --font: "Lexend", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
@@ -83,7 +80,6 @@ body {
   font-weight: 300;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 img { max-width: 100%; display: block; }
@@ -155,6 +151,20 @@ strong { font-weight: 500; }
   opacity: 0.75;
 }
 .btn-store-text strong { font-size: 1rem; font-weight: 600; }
+
+/* App Store — honest "coming soon" pill, visibly not a live button */
+.store-note {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 18px 11px 14px;
+  border-radius: var(--r-pill);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.86rem;
+  font-weight: 400;
+}
+.store-note .glyph { width: 18px; height: 18px; opacity: 0.7; }
 
 .cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 20px; }
 
@@ -250,8 +260,8 @@ strong { font-weight: 500; }
   --sweep: 100;
   --ring-color: var(--green);
   background: conic-gradient(var(--ring-color) calc(var(--sweep) * 1%), var(--surface-3) 0);
-  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 16px), #000 calc(100% - 15px));
-  mask: radial-gradient(closest-side, transparent calc(100% - 16px), #000 calc(100% - 15px));
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 16px), var(--mask-on) calc(100% - 15px));
+  mask: radial-gradient(closest-side, transparent calc(100% - 16px), var(--mask-on) calc(100% - 15px));
   transition: --sweep 900ms var(--ease-std), background-color var(--dur-med) var(--ease-std);
 }
 .ring-center {
@@ -352,8 +362,8 @@ strong { font-weight: 500; }
   aspect-ratio: 1;
   border-radius: 50%;
   background: conic-gradient(var(--amber) 78%, transparent 0);
-  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 14px), #000 calc(100% - 13px));
-  mask: radial-gradient(closest-side, transparent calc(100% - 14px), #000 calc(100% - 13px));
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 14px), var(--mask-on) calc(100% - 13px));
+  mask: radial-gradient(closest-side, transparent calc(100% - 14px), var(--mask-on) calc(100% - 13px));
   opacity: 0.08;
   pointer-events: none;
 }
@@ -377,7 +387,7 @@ strong { font-weight: 500; }
   font-size: 0.78rem;
   color: var(--muted-2);
 }
-.footer-meta a { font-weight: 500; }
+.footer-meta a { font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
 .footer-meta a:hover { color: var(--text); }
 .footer-meta span[aria-hidden] { color: var(--outline); }
 
