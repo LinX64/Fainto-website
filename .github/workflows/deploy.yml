@@ -10,9 +10,14 @@ name: Deploy to cPanel
 #
 # Setup (one time): repo → Settings → Secrets and variables → Actions → Secrets:
 #   FTP_SERVER    e.g. serverXXX.web-hosting.com   (the Namecheap server host, not domain)
-#   FTP_USERNAME  the FTP account user (cPanel → FTP Accounts; make a dedicated one)
-#   FTP_PASSWORD  that FTP account's password       (avoid " ` \ chars in it)
-# server-dir below (public_html/) is relative to the FTP account's login directory.
+#   FTP_USERNAME  the MAIN cPanel account user (e.g. fainvimc) so login lands in
+#                 /home/<acct>/ and the public_html/ target below resolves to the ROOT
+#                 docroot /home/<acct>/public_html. A per-domain FTP account such as
+#                 admin@fainto.app is JAILED to /home/<acct>/fainto.app/admin/ and would
+#                 deposit the whole site at fainto.app/admin/public_html (the wrong path).
+#   FTP_PASSWORD  that account's password            (avoid " ` \ chars in it)
+# The mirror target (public_html/) is RELATIVE to the FTP login's landing directory.
+# The `pwd` line below prints that landing dir to the run log — confirm it is /home/<acct>.
 
 on:
   push:
@@ -49,6 +54,7 @@ jobs:
           set ftp:use-mdtm off
           open "ftp://$FTP_SERVER"
           user "$FTP_USERNAME" "$FTP_PASSWORD"
+          pwd
           mirror -R --only-newer --parallel=1 --verbose \
             --exclude-glob '*.md' \
             --exclude '\.git' \
