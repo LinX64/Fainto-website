@@ -10,14 +10,12 @@ name: Deploy to cPanel
 #
 # Setup (one time): repo → Settings → Secrets and variables → Actions → Secrets:
 #   FTP_SERVER    e.g. serverXXX.web-hosting.com   (the Namecheap server host, not domain)
-#   FTP_USERNAME  the MAIN cPanel account user (e.g. fainvimc) so login lands in
-#                 /home/<acct>/ and the public_html/ target below resolves to the ROOT
-#                 docroot /home/<acct>/public_html. A per-domain FTP account such as
-#                 admin@fainto.app is JAILED to /home/<acct>/fainto.app/admin/ and would
-#                 deposit the whole site at fainto.app/admin/public_html (the wrong path).
+#   FTP_USERNAME  the MAIN cPanel account (e.g. fainvimc) — it logs in at /home/<acct>/
 #   FTP_PASSWORD  that account's password            (avoid " ` \ chars in it)
-# The mirror target (public_html/) is RELATIVE to the FTP login's landing directory.
-# The `pwd` line below prints that landing dir to the run log — confirm it is /home/<acct>.
+# The mirror target below (public_html/) is RELATIVE to the login landing dir, so with the
+# main account it resolves to /home/<acct>/public_html — the primary domain's web root.
+# The `pwd` line prints the landing dir to the run log; confirm it is /home/<acct> before
+# trusting the deploy (a per-domain FTP account would land elsewhere and misplace the site).
 
 on:
   push:
@@ -57,8 +55,10 @@ jobs:
           pwd
           mirror -R --only-newer --parallel=1 --verbose \
             --exclude-glob '*.md' \
+            --exclude-glob '.DS_Store' \
             --exclude '\.git' \
             --exclude '\.github/' \
+            --exclude '\.claude/' \
             --exclude 'graphify-out/' \
             ./ public_html/
           bye
