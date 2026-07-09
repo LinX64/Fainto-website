@@ -1,13 +1,18 @@
 name: Deploy to cPanel
 
 # Auto-push the site to Namecheap cPanel on every commit to master.
-# Setup (one time): in GitHub → repo → Settings → Secrets and variables → Actions,
-# add three repository secrets:
-#   FTP_SERVER    e.g. server345.web-hosting.com   (or your domain)
+#
+# Why lftp instead of an FTP-Deploy-Action: cPanel's FTPS server (ProFTPd/Pure-FTPd)
+# requires the data connection to REUSE the control channel's TLS session. The action's
+# bundled basic-ftp 5.x can't resume a TLS 1.3 data session, so the server drops it with
+# "Server sent FIN packet unexpectedly" on the very first file. lftp reuses the session
+# correctly, and we pin TLS 1.2 to be safe. It also retries where basic-ftp gives up.
+#
+# Setup (one time): repo → Settings → Secrets and variables → Actions → Secrets:
+#   FTP_SERVER    e.g. serverXXX.web-hosting.com   (the Namecheap server host, not domain)
 #   FTP_USERNAME  the FTP account user (cPanel → FTP Accounts; make a dedicated one)
-#   FTP_PASSWORD  that FTP account's password
-# The FTP account's "Directory" should point at the web root you want to publish to
-# (usually public_html). Adjust server-dir below if your site lives in a subfolder.
+#   FTP_PASSWORD  that FTP account's password       (avoid " ` \ chars in it)
+# server-dir below (public_html/) is relative to the FTP account's login directory.
 
 on:
   push:
@@ -24,18 +29,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Sync to cPanel over FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps                # encrypted FTP over TLS (port 21 explicit)
-          server-dir: public_html/      # web root; change if using a subdomain/addon dir
-          # Only ship the static site — keep repo/dev files off the server:
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/.github/**
-            **/*.md
-            .gitignore
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
+      - name: Sync to cPanel over FTPS (TLS 1.2, session reuse)
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          lftp <<EOF
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate no
+          set ssl:priority "NORMAL:-VERS-TLS1.3"
+          set net:max-retries 3
+          set net:persist-retries 3
+          set net:reconnect-interval-base 5
+          set ftp:use-mdtm off
+          open "ftp://$FTP_SERVER"
+          user "$FTP_USERNAME" "$FTP_PASSWORD"
+          mirror -R --only-newer --parallel=1 --verbose \
+            --exclude-glob '*.md' \
+            --exclude '\.git' \
+            --exclude '\.github/' \
+            --exclude 'graphify-out/' \
+            ./ public_html/
+          bye
+          EOF
