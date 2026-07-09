@@ -1,59 +1,35 @@
-# VaultAI — Marketing Website
+# Fainto — marketing site
 
-A unique, single-page marketing site for **VaultAI**, the offline-first personal-finance app
-with an on-device AI coach. Built to mirror the app's **Aurora** design system.
+Single-page marketing website for **Fainto**, an offline-first personal-finance app that runs real language models entirely on the phone.
 
-> _Private AI for your money — a real language model that runs entirely on your phone._
+- **Stack:** vanilla HTML + CSS + JS. No framework, no build step, no dependencies.
+- **Design:** the app's own Material 3 "Rally" dark system (mirrored from the app's `core/designsystem` tokens), set in Lexend.
+- **Signature pieces:** a CSS-drawn Rally ring with a working segmented control, a draggable reel of eight real app screenshots, and a live outbound-traffic ledger measured in the visitor's own browser.
 
-## ✨ Highlights
-
-- **Signature AI animation** — a hand-written `<canvas>` "neural aurora field" with a breathing
-  on-device core and a financial-insight **typewriter** that streams advice token-by-token, exactly
-  like the app's on-device LLM (`generating on-device · running gemma2-2b · 0 bytes uploaded`).
-- **Aurora design system** — cosmic-void `#08080F`, Aurora Violet `#7B61FF`, Teal `#00D4C8`,
-  Rose `#FF5FA0`, Amber `#FFB347`; Plus Jakarta Sans + DM Mono (numbers), straight from
-  `core/designsystem/theme/Theme.kt`.
-- **Real app screenshots** framed in CSS phone mockups (dark-theme captures from the app's
-  snapshot tests), including an auto-scrolling hero device.
-- **Google Play + App Store** download badges (custom, brand-accurate SVGs).
-- 100% vanilla **HTML/CSS/JS** — no framework, no build step, no dependencies.
-- Responsive (360px → desktop), accessible (semantic landmarks, focus rings, alt text), and fully
-  honors `prefers-reduced-motion`.
-
-## 🗂 Structure
+## Structure
 
 ```
-index.html              # markup — 9 sections (hero → footer)
-styles.css              # Aurora tokens + all styling
-app.js                  # canvas neural field, insight stream, reveals, count-up, gallery drag
+index.html          # one page: hero → spec ledger → reel → specimen → privacy → tax → engine → premium → CTA
+styles.css          # Rally M3 tokens (:root) + all styling
+app.js              # ring control, reel, live egress ledger, reveals — all motion JS-added and RM-gated
 assets/
-  logo.svg              # brand mark (white "V" + amber star, cosmic squircle)
-  favicon.svg
-  og-image.svg / .png   # 1200×630 social share card
-  badge-google-play.svg
-  badge-app-store.svg
-  screenshots/          # real dark-theme app captures
-    dashboard.png  insights.png  chat.png  premium.png  settings.png  onboarding.png
+  logo.svg  favicon.svg  og-image.png
+  screens/          # current app captures (1080×2090), reel/ holds 640px copies
 ```
 
-## 🚀 Preview
-
-Just open `index.html` in a browser (works over `file://`), or serve it:
+## Develop
 
 ```bash
-python3 -m http.server 8000   # then visit http://localhost:8000
+python3 -m http.server 8000
+# open http://localhost:8000
 ```
 
-## 🌐 Deploy (GitHub Pages)
+Also works over `file://`.
 
-It's a static site — push to a repo and enable Pages on the `master` branch (root).
-A `.nojekyll` file is included so the assets are served as-is.
+## Deploy
 
-## 📝 Notes
+GitHub Pages serves the `master` branch root (`.nojekyll` included).
 
-- **Store links** point at `com.vaultai.app` on Google Play; the App Store URL is a placeholder
-  (iOS is "coming soon") — swap in the real listing IDs when published.
-- Screenshots are the app's dark-theme UI; they already carry the cosmic background, so they blend
-  into the phone mockups seamlessly.
-- This content is marketing copy, grounded in the app's real features (on-device LLM, 9-country tax
-  engine, scenario planning, opt-in cloud deep-analysis). It is not financial advice.
+## Accessibility & motion
+
+Honors `prefers-reduced-motion` end-to-end: static-visible content is the default; JavaScript only ever *adds* motion. The screenshot reel never auto-advances. All figures are sample data from the app's demo profile; Fainto provides educational information, not financial advice.

@@ -1,20 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" role="img" aria-label="VaultAI logo">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" role="img" aria-label="Fainto logo">
   <defs>
-    <linearGradient id="vaultaiAccent" x1="102" y1="6" x2="74" y2="34" gradientUnits="userSpaceOnUse">
+    <linearGradient id="faintoAccent" x1="102" y1="6" x2="74" y2="34" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#A78BFA"/>
       <stop offset="1" stop-color="#72DEFF"/>
     </linearGradient>
-    <clipPath id="vaultaiTile">
+    <clipPath id="faintoTile">
       <rect x="6" y="6" width="96" height="96" rx="26"/>
     </clipPath>
   </defs>
 
   <!-- light app-icon tile, everything clipped to its rounded corners -->
-  <g clip-path="url(#vaultaiTile)">
+  <g clip-path="url(#faintoTile)">
     <rect x="6" y="6" width="96" height="96" fill="#FDFDFD"/>
 
     <!-- violet -> cyan accent corner sliver, top-right; arc follows the tile radius -->
-    <path d="M74,6 L102,6 L102,34 A38,38 0 0 0 74,6 Z" fill="url(#vaultaiAccent)"/>
+    <path d="M74,6 L102,6 L102,34 A38,38 0 0 0 74,6 Z" fill="url(#faintoAccent)"/>
 
     <!-- graphite donut / quadrant mark, centered on (54,54) -->
     <path fill="#1E2024" d="M25.02,54 A28.98,28.98 0 0 1 54,25.02 L54,40.89 A13.11,13.11 0 0 0 40.89,54 Z"/>

@@ -4,39 +4,55 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-A single-page marketing website for **VaultAI**, an offline-first personal-finance app with an on-device AI coach. 100% vanilla HTML/CSS/JS — **no framework, no build step, no dependencies, no package.json**. The site deliberately mirrors the app's **Material 3 "Rally" dark** design system (neutral blue-grey surfaces, WHITE chrome primary, violet brand accent, with cyan/green/amber/coral/purple data accents and Rally "architectural" crisp 0 dp cards).
+A single-page marketing website for **Fainto**, an offline-first personal-finance Android app with an on-device AI coach. 100% vanilla HTML/CSS/JS — **no framework, no build step, no dependencies, no package.json**. The design direction is "Rally, Out Loud — The Audited Cut": the app's own Material 3 "Rally" dark system extended to the web, typeset entirely in **Lexend** (the app's typeface), with a proof-over-claims structure.
 
 ## Commands
 
-There is nothing to build or compile. To preview locally:
+Nothing to build. Preview locally:
 
 ```bash
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-The site also works opened directly over `file://`. Deployment is GitHub Pages from the `master` branch root; `.nojekyll` is present so assets serve as-is
+Deployment is GitHub Pages from `master` root; `.nojekyll` is present.
+
+## Design system source of truth
+
+**Tokens are mirrored from the sibling Android app, not invented here.** Canonical sources in `/Users/mohsen/StudioProjects/VaultAI/core/designsystem/src/main/kotlin/com/vaultai/designsystem/theme/`:
+
+- `Color.kt` — dark scheme container ladder: page `#27272F` (surfaceContainerLowest) stepping up `#2E2E37 / #373741 / #3F3F49 / #474751`; WHITE chrome primary (`#FFFFFF` on `#2A2931`); violet brand `#A78BFA`.
+- `DataAccents.kt` — bright data accents: cyan `#72DEFF`, green `#36F0AB`, amber `#FFCF44`, purple `#B15DFF`, coral `#FF6859`.
+- `Shape.kt` — Rally "architectural": data cards crisp **0dp**, panels/sheets 28dp, pills for CTAs/chips.
+- `MotionTokens.kt` — M3 emphasized easings, 150/220/300ms tiers.
+- `Type.kt` — **Lexend app-wide** (Eczar + Roboto Condensed were dropped in June 2026; do not reintroduce them).
+
+When a color/shape/type question comes up, reconcile against those files — not against screenshots (PNGs shift hues).
 
 ## Architecture
 
-Three top-level files do all the work:
+Three top-level files:
 
-- **`index.html`** — all markup, one page, ~9 `<section>` blocks in order: hero → trust strip → features → privacy band → screens (gallery) → how-it-works → download CTA → footer. Elements are wired to JS purely through `data-*` attributes (`data-aurora`, `data-insight`, `data-nav`, `data-gallery`, `data-count`/`data-suffix`) and the `.reveal` class — there are no IDs used as JS hooks. Section accent colors are passed via inline `style="--accent:#..."`.
-- **`styles.css`** — all styling. The Material 3 "Rally" design system lives in `:root` as CSS custom properties: neutral blue-grey surfaces `--bg:#27272F` (page) stepping up through `--surface:#2E2E37` / `--surface-2:#373741` (cards) / `--surface-3:#3F3F49` / `--surface-4:#474751`; WHITE chrome `--primary:#FFFFFF` (with `--on-primary:#2A2931` / `--primary-container:#373741` / `--on-primary-container:#FFFFFF`) drives filled buttons, focus ring, caret and check marks; brand color comes from the VIOLET `--secondary:#A78BFA` (seed `#7C3AED`, used for eyebrows/accents/step chips via `--secondary-container:#2E2640` / `--on-secondary-container:#E9DDFF`) plus the data accents `--teal:#72DEFF` (brand cyan), `--positive:#36F0AB` (income green), `--amber`/`--tertiary:#FFCF44` (savings), `--alert:#B15DFF` (purple) and `--error`/`--spend:#FF6859` (coral); text `--text:#FFFFFF` / `--muted:#AEAEB1` / `--muted-2:#8F8F99`; the hairline `--line:rgba(174,174,177,0.20)` with `--outline:#8F8F99`; the `--grad` brand gradient (purple→cyan→green); Rally "architectural" shapes `--r-lg:28` (big panels) and crisp `--r-md:0` / `--r-sm:0` (cards, steps, stream, tiles), with pills reserved for CTAs/chips. Components follow M3: filled tonal cards, state-layer hovers (the white primary darkens toward `--on-primary` on hover), tonal violet chips (`.eyebrow`/`.step-n`), restrained elevation shadows (no neon glows). **Change colors and spacing through these tokens, not by hardcoding values in rules.** Responsive breakpoints are at the bottom (920 / 720 / 560px) followed by a `prefers-reduced-motion` block.
-- **`app.js`** — all interaction, one IIFE in strict mode, organized as independent sub-IIFEs: the Aurora "neural field" canvas, the streaming-insight typewriter, scroll reveals, stat count-up, navbar scrolled-state, and gallery drag-to-scroll. No modules, no imports.
+- **`index.html`** — one page, sections in order: sticky header → hero (CSS conic ring + working Income/Expenses/Savings segmented control) → spec ledger (0 / 5 / 9 / $0) → **the reel** (signature: draggable scroll-snap rail of 8 real app screenshots with a scroll-linked crisp→round shape morph) → specimen quote (verbatim on-device insight) → privacy band with **live egress ledger** → tax engine (exhibit + retypeset PLN table) → engine grid (6 feature cards) → Premium consent spec → closing CTA → footer colophon. JS hooks are `data-*` attributes only (`data-nav`, `data-ring*`, `data-reel*`, `data-egress*`, `data-stamp`) plus `.reveal`/`.stamp-row` classes. Per-card accents via inline `style="--accent:var(--cyan)"`.
+- **`styles.css`** — all styling; every color/shape/space/motion value flows from the `:root` tokens (no raw hexes below `:root`). Flat single-class selectors, no IDs, no `!important`. Breakpoints: 920 / 720 / 560. The `prefers-reduced-motion` block is last.
+- **`app.js`** — one strict IIFE with independent sub-modules: header scrolled state, hero ring + segmented control, the reel (drag, morph, IntersectionObserver dots, prev/next), live egress ledger (PerformanceObserver), reveal/stamp observers.
 
-### Conventions that matter
+### Binding design laws (from the judged design brief — do not regress)
 
-- **`prefers-reduced-motion` is honored everywhere.** `app.js` reads it once into `reduceMotion` at the top; every animated feature has a static fallback (canvas draws one frame, typewriter shows full text, reveals/counts jump to final). When adding any animation, add the reduced-motion path too — both in JS and in the CSS media block.
-- **The canvas color palette is duplicated**: `COLORS` in `app.js` (as `"r,g,b"` strings — currently `["114,222,255","167,139,250","177,93,255"]`, i.e. cyan/violet/purple) must stay in sync with the `--teal`/`--secondary`/`--alert` brand data-accent tokens in `styles.css`.
-- **`data-aurora` canvases self-configure**: the CTA canvas is detected via `classList.contains("cta-canvas")` to run a denser, centered field. Any new aurora canvas just needs the `data-aurora` attribute.
-- Performance patterns are intentional: scroll/resize handlers are throttled via `requestAnimationFrame` or debounce timers, the render loop pauses on `visibilitychange`, and DPR is capped at 2.
-- **The design tokens are mirrored from the app, not invented here.** The canonical Rally M3 values are the sibling VaultAI Android app's `core/designsystem` theme — when a color or shape needs to change, reconcile against that source, not against the screenshots (PNGs compress/shift the hues).
+1. **No auto-advancing** carousel or timers, ever (WCAG 2.2.2; a previous version auto-cycled — it was killed by a 3-judge panel).
+2. **Figures never count up or tween** — numerals are typeset; the live ledger swaps text instantly.
+3. **Exactly one gradient** on the page: the spec-ledger closing double rule (`--grad`). The tax double rule is solid green.
+4. The website never claims zero traffic for **itself** — its egress figures are measured live via the Performance API (or replaced by honest static copy when the API is missing). The app's `0 requests · 0 B` row is framed "by default, by design".
+5. Motion is **additive**: static-visible is the CSS default; JS adds the `js-motion` class (only when `prefers-reduced-motion` allows) and all pending/moving states are scoped under it. No-JS and reduced-motion render everything visible and functional.
+6. Every sample figure matches a real app screenshot and sits near a "sample data" disclosure. Current values: net income 12 482,22 zł (+56.7%), income 12.5K / expenses 1.0K / savings 7.1K zł, accounts 107 400,00 zł, tax PLN 240,000 → 149,787 (Poland preset), IKZE insight quote verbatim.
+7. Corner radii only from the shape tokens; no decorative shape alternation. No glows or colored shadows.
 
-### Assets
+## Assets
 
-`assets/` holds brand SVGs (`logo.svg`, `favicon.svg`, custom store badges, `og-image.svg`/`.png`) and `assets/screenshots/` holds the five self-contained Play-Store marketing cards (`overview`, `accounts`, `transactions`, `bills`, `explore` `.png`) — each bakes in its own headline, device frame and dark Rally M3 background. They're shown directly (no CSS phone mockup): the hero uses `overview.png` in a cropped `.hero-shot` and the Screens gallery renders all five as `.shot` cards.
+- **`assets/screens/`** — the eight current app screenshots (1080×2090, status/nav bars cropped), captured 2026-07-01 from the live `com.vaultai.app.debug` build via adb; `assets/screens/reel/` holds 640px-wide copies used by the reel (only the tax full-res is loaded elsewhere). To refresh: connect the device, launch the app, `adb exec-out screencap -p`, crop top 100px / bottom 150px.
+- `assets/logo.svg`, `favicon.svg`, `og-image.png` (og image still shows the older design — regenerate when convenient).
+- **Deprecated, do not reference**: `assets/promo/` (June 2026 pre-Lexend screens) and `assets/screenshots/` (old Play-Store cards with baked headlines).
 
 ## Content notes
 
-- Marketing copy is grounded in the app's real features (on-device LLMs — Gemma 2, Qwen 2.5, Phi, Llama, Mistral; a 9-country tax engine; scenario planning; opt-in cloud deep-analysis). It is positioned as educational information, **not financial advice** — keep that framing.
-- The Google Play link uses real id `com.vaultai.app`; the **App Store URL is a placeholder** (iOS "coming soon") — swap in the real listing id when published.
+- Product truth (verified against the app build, July 2026): **5 on-device models** — SmolLM 135M, Qwen 2.5 0.5B (free) and Qwen 2.5 1.5B, DeepSeek R1 1.5B, Phi-4 Mini 3.8B (Premium) — plus optional **Cloud AI via OpenRouter (Premium, opt-in)**. 9-country tax engine. Accounts exist but are optional → say "no account required", never "no accounts exist". The old model list (Gemma 2 / Llama / Mistral) is obsolete.
+- Positioning is **educational information, not financial advice** — that framing is contractual copy, as are the real Play id `com.fainto.app`, iOS "coming soon" (a note, not a fake store link), and the Free / No account required / Works offline trio.
