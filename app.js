@@ -146,8 +146,10 @@
   /* ------------------- contact form (static, no backend) -------------------
      On submit, build a clean mailto: so the message opens in the user's OWN
      email app — nothing is sent to or stored on any server (matches the app's
-     no-tracking stance). No-JS fallback: the form's action="mailto:" still opens
-     the mail app. Native `required` validation runs first (no novalidate). */
+     no-tracking stance). The form has NO mailto action on purpose: an insecure
+     (non-https) form target trips Chrome's "not secure / autofill off" warning.
+     The visible support@fainto.app link is the no-JS fallback. Native `required`
+     validation runs first. */
   (function () {
     var form = document.querySelector("[data-contact-form]");
     if (!form) return;
