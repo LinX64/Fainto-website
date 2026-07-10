@@ -49,11 +49,12 @@
     reveals.forEach(function (el) { io.observe(el); });
   })();
 
-  /* ------------------- screenshot slider (manual) -------------------
-     Horizontal scroll-snap track + injected prev/next/dots. NO timer,
-     NO auto-advance (design law 1 / WCAG 2.2.2) — user-driven only. Runs
-     regardless of the .js-motion gate so navigation works for reduced-motion
-     users too; only the scroll animation itself honours prefers-reduced-motion. */
+  /* ------------------- screenshot slider (auto-advance + dots) -------------------
+     Horizontal scroll-snap track + injected dots. Auto-advances every 1.5s, but
+     ONLY when prefers-reduced-motion allows, and it PAUSES on hover / keyboard
+     focus / hidden tab; clicking a dot takes over and restarts the timer. So the
+     motion is always stoppable (WCAG 2.2.2), and reduced-motion users get a
+     static, dot-navigable slider with no movement. */
   (function () {
     var track = document.querySelector("[data-shots]");
     if (!track) return;
@@ -62,39 +63,27 @@
 
     var stage = track.closest(".hero-stage") || track.parentNode;
     var behavior = reduceMotion ? "auto" : "smooth";
-    var idx = 0;
+    var DELAY = 4000;
+    var idx = 0, programmatic = false, timer = null;
 
     var nav = document.createElement("div");
     nav.className = "shot-nav";
-    var prev = arrowBtn("prev", "Previous screenshot", "M15 18l-6-6 6-6");
     var dotsWrap = document.createElement("div");
     dotsWrap.className = "shot-dots";
-    var next = arrowBtn("next", "Next screenshot", "M9 18l6-6-6-6");
-
     var dots = slides.map(function (slide, i) {
       var d = document.createElement("button");
       d.type = "button";
       d.className = "shot-dot";
       d.setAttribute("aria-label", "Show screenshot " + (i + 1) + " of " + slides.length);
-      d.addEventListener("click", function () { go(i); });
+      d.addEventListener("click", function () { go(i); restart(); });
       dotsWrap.appendChild(d);
       return d;
     });
-
-    nav.appendChild(prev);
     nav.appendChild(dotsWrap);
-    nav.appendChild(next);
     stage.appendChild(nav);
-
-    prev.addEventListener("click", function () { go(idx - 1); });
-    next.addEventListener("click", function () { go(idx + 1); });
-
-    var programmatic = false;
 
     function clamp(i) { return Math.max(0, Math.min(slides.length - 1, i)); }
 
-    /* update dots + disabled state directly — never depend on the scroll event
-       firing (button clicks must feel instant; swipes call this via sync). */
     function setActive(c) {
       idx = clamp(c);
       dots.forEach(function (d, i) {
@@ -102,22 +91,18 @@
         d.classList.toggle("is-on", on);
         if (on) { d.setAttribute("aria-current", "true"); } else { d.removeAttribute("aria-current"); }
       });
-      /* aria-disabled (NOT the `disabled` property) so an end arrow keeps focus
-         instead of dropping it to <body>; go() is clamped, so a click safely no-ops. */
-      prev.setAttribute("aria-disabled", idx <= 0 ? "true" : "false");
-      next.setAttribute("aria-disabled", idx >= slides.length - 1 ? "true" : "false");
     }
 
     function go(i) {
       var t = clamp(i);
-      /* mark a button-driven scroll so its own mid-animation frames don't clobber idx;
+      /* mark a programmatic scroll so its own mid-animation frames don't clobber idx;
          only when it will actually move, else the flag would never clear (no scroll event). */
       if (Math.round(track.scrollLeft / track.clientWidth) !== t) programmatic = true;
       track.scrollTo({ left: track.clientWidth * t, behavior: behavior });
       setActive(t);
     }
 
-    /* swipe-driven updates; while a button scroll is in flight, ignore the
+    /* swipe-driven updates; while a programmatic scroll is in flight, ignore the
        mid-animation frames and clear the flag once we've arrived at the target. */
     function sync() {
       var c = Math.round(track.scrollLeft / track.clientWidth);
@@ -131,16 +116,20 @@
     }, { passive: true });
     window.addEventListener("resize", function () { track.scrollLeft = track.clientWidth * idx; }, { passive: true });
 
-    sync();
+    /* auto-advance — motion-gated + pausable (hover / focus / hidden tab) */
+    function tick() { go((idx + 1) % slides.length); }
+    function start() { if (!reduceMotion && timer === null) timer = setInterval(tick, DELAY); }
+    function stop() { if (timer !== null) { clearInterval(timer); timer = null; } }
+    function restart() { stop(); start(); }
 
-    function arrowBtn(kind, label, d) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.className = "shot-arrow shot-" + kind;
-      b.setAttribute("aria-label", label);
-      b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + d + '"/></svg>';
-      return b;
-    }
+    stage.addEventListener("pointerenter", stop);
+    stage.addEventListener("pointerleave", start);
+    stage.addEventListener("focusin", stop);
+    stage.addEventListener("focusout", start);
+    document.addEventListener("visibilitychange", function () { if (document.hidden) { stop(); } else { start(); } });
+
+    setActive(0);
+    start();
   })();
 
   /* ------------------- contact form (static, no backend) -------------------
@@ -155,9 +144,20 @@
     if (!form) return;
     form.addEventListener("submit", function (e) {
       e.preventDefault();
-      function val(n) { var el = form.elements[n]; return el && el.value ? el.value.trim() : ""; }
+      /* run native constraint validation (required / type=email / minlength) and
+         show the browser's messages if anything is invalid */
+      if (typeof form.checkValidity === "function" && !form.checkValidity()) { form.reportValidity(); return; }
+      function field(n) { return form.elements[n]; }
+      function val(n) { var el = field(n); return el && el.value ? el.value.trim() : ""; }
       var name = val("name"), email = val("email"), message = val("message");
-      var subject = "Fainto — message from " + (name || "someone");
+      /* catch whitespace-only that slips past required/minlength */
+      var missing = !name ? "name" : !email ? "email" : !message ? "message" : null;
+      if (missing) {
+        var el = field(missing);
+        if (el) { el.setCustomValidity("Please fill this in."); el.reportValidity(); el.setCustomValidity(""); }
+        return;
+      }
+      var subject = "Fainto — message from " + name;
       var body = message + "\n\n— " + name + " <" + email + ">";
       var note = form.querySelector("[data-form-note]");
       if (note) note.hidden = false;

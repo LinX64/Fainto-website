@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Contact — Fainto</title>
   <meta name="description" content="Get in touch with Fainto — questions, bugs, and feedback go straight to support@fainto.app." />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="Mo" />
+  <meta property="og:locale" content="en_US" />
   <meta name="theme-color" content="#27272F" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="canonical" href="https://fainto.app/contact.html" />
@@ -17,12 +20,60 @@
   <meta property="og:title" content="Contact — Fainto" />
   <meta property="og:description" content="Get in touch with Fainto — questions, bugs, and feedback." />
   <meta property="og:image" content="https://fainto.app/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content="Fainto — a private budget tracker with an on-device AI coach for Android." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Contact — Fainto" />
+  <meta name="twitter:description" content="Get in touch with Fainto — questions, bugs, and feedback." />
+  <meta name="twitter:image" content="https://fainto.app/assets/og-image.png" />
+  <meta name="twitter:image:alt" content="Fainto — a private budget tracker with an on-device AI coach for Android." />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Self-hosted Lexend (variable 300–600) — zero third-party requests. -->
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/lexend-latin.woff2" crossorigin />
 
   <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://fainto.app/contact.html#webpage",
+      "url": "https://fainto.app/contact.html",
+      "name": "Contact — Fainto",
+      "description": "Get in touch with Fainto — questions, bugs, and feedback go straight to support@fainto.app.",
+      "inLanguage": "en",
+      "isPartOf": { "@id": "https://fainto.app/#website" },
+      "primaryImageOfPage": "https://fainto.app/assets/og-image.png",
+      "about": { "@id": "https://fainto.app/#org" },
+      "publisher": { "@id": "https://fainto.app/#org" },
+      "mainEntity": {
+        "@type": "Organization",
+        "name": "Fainto",
+        "email": "support@fainto.app",
+        "url": "https://fainto.app/",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "email": "support@fainto.app",
+          "contactType": "customer support",
+          "availableLanguage": "English"
+        }
+      },
+      "breadcrumb": { "@id": "https://fainto.app/contact.html#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://fainto.app/contact.html#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://fainto.app/" },
+        { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://fainto.app/contact.html" }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -51,15 +102,15 @@
         <form class="contact-form" data-contact-form>
           <label class="field">
             <span class="field-label">Name</span>
-            <input class="input" type="text" name="name" autocomplete="name" required />
+            <input class="input" type="text" name="name" autocomplete="name" required minlength="2" maxlength="80" />
           </label>
           <label class="field">
             <span class="field-label">Email</span>
-            <input class="input" type="email" name="email" autocomplete="email" required />
+            <input class="input" type="email" name="email" autocomplete="email" inputmode="email" required maxlength="120" />
           </label>
           <label class="field">
             <span class="field-label">Message</span>
-            <textarea class="input" name="message" rows="6" required></textarea>
+            <textarea class="input" name="message" rows="6" required minlength="10" maxlength="3000"></textarea>
           </label>
           <button class="btn-primary" type="submit">Send message</button>
           <p class="form-note" data-form-note role="status" hidden>Opening your email app&hellip;</p>

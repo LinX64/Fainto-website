@@ -1,0 +1,137 @@
+########################################################################
+#  fainto.app — public_html/.htaccess   (LiteSpeed, honors Apache dirs)
+#  Static vanilla site: index/about/contact + styles.css + app.js +
+#  self-hosted Lexend (assets/fonts/*.woff2) + webp/png screens.
+#  Every directive is wrapped in IfModule so a missing module never 500s.
+########################################################################
+
+Options -Indexes
+AddDefaultCharset utf-8
+
+# ---------------------------------------------------------------------
+# 1. Canonicalization: www -> apex, http -> https, /index.html -> /
+# ---------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # www.fainto.app -> fainto.app (scheme upgraded by the next rule)
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # any http -> https (LiteSpeed sets HTTPS=on for TLS; proxy header is belt+braces)
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP:X-Forwarded-Proto} =http
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # /index.html -> /  (one indexable home URL, matches rel=canonical)
+  RewriteCond %{THE_REQUEST} \s/index\.html[\s?] [NC]
+  RewriteRule ^index\.html$ / [R=301,L]
+</IfModule>
+
+# ---------------------------------------------------------------------
+# 2. MIME types (woff2 needed now that Lexend is self-hosted)
+# ---------------------------------------------------------------------
+<IfModule mod_mime.c>
+  AddType font/woff2 .woff2
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+  AddType application/manifest+json .webmanifest
+</IfModule>
+
+# ---------------------------------------------------------------------
+# 3. Security headers (always = also on error/redirect responses)
+# ---------------------------------------------------------------------
+<IfModule mod_headers.c>
+
+  # --- HSTS ----------------------------------------------------------
+  # SAFE DEFAULT: apex/www only, no includeSubDomains, no preload — so it
+  # can NEVER break cpanel./webmail./mail./autodiscover. subdomains.
+  # After you confirm EVERY subdomain serves valid HTTPS (cPanel AutoSSL),
+  # you MAY upgrade to: "max-age=31536000; includeSubDomains" and, only
+  # once stable + submitted at hstspreload.org, append "; preload"
+  # (preload is a one-way, months-to-reverse commitment).
+  Header always set Strict-Transport-Security "max-age=31536000"
+
+  # --- Content-Security-Policy (FIRST-PARTY ONLY; Lexend self-hosted) --
+  # Zero third-party origins. Every token maps to a real resource:
+  #  script-src 'self'  -> app.js (deferred, local). JSON-LD is DATA
+  #    (type=application/ld+json), never executed -> needs no allowance.
+  #  style-src 'self'   -> styles.css. No <style>, no style="" (verified).
+  #    Inline <svg> uses presentation attrs (fill=/viewBox=) which CSP
+  #    does NOT treat as inline styles. style-src-attr 'none' bars future style="".
+  #  font-src 'self'    -> assets/fonts/lexend-*.woff2.
+  #  img-src 'self' data: -> local images + the one feTurbulence data: URI.
+  #  connect-src 'none' -> app.js makes no fetch/XHR/beacon (verified);
+  #    hard-guarantees the page cannot phone home. mailto: is a navigation.
+  #  form-action 'self' -> contact form has no action; JS builds a mailto:
+  #    navigation, JS-off fallback is a same-origin GET.
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; frame-src 'none'; script-src 'self'; style-src 'self'; style-src-attr 'none'; font-src 'self'; img-src 'self' data:; connect-src 'none'; form-action 'self'; worker-src 'none'; manifest-src 'self'; upgrade-insecure-requests"
+
+  Header always set X-Frame-Options "DENY"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+  Header always set X-XSS-Protection "0"
+
+  # Empty allowlist () = feature denied for ALL origins incl. self.
+  Header always set Permissions-Policy "accelerometer=(), autoplay=(), browsing-topics=(), camera=(), clipboard-read=(), clipboard-write=(), display-capture=(), encrypted-media=(), fullscreen=(), geolocation=(), gyroscope=(), hid=(), idle-detection=(), interest-cohort=(), local-fonts=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(), publickey-credentials-get=(), screen-wake-lock=(), serial=(), usb=(), web-share=(), xr-spatial-tracking=()"
+
+  # Trim fingerprinting where the platform allows (Server: LiteSpeed stays).
+  Header always unset X-Powered-By
+</IfModule>
+
+# ---------------------------------------------------------------------
+# 4. Caching  (no content hashing -> only stable binaries are immutable;
+#    css/js revalidate fast so a file-mirror deploy propagates)
+# ---------------------------------------------------------------------
+<IfModule mod_headers.c>
+  <FilesMatch "\.(png|jpe?g|gif|webp|svg|ico|woff2)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=0, must-revalidate"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/webp    "access plus 1 year"
+  ExpiresByType image/png     "access plus 1 year"
+  ExpiresByType image/jpeg    "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon  "access plus 1 year"
+  ExpiresByType font/woff2    "access plus 1 year"
+  ExpiresByType text/css      "access plus 1 hour"
+  ExpiresByType application/javascript "access plus 1 hour"
+  ExpiresByType text/html     "access plus 0 seconds"
+</IfModule>
+
+# ---------------------------------------------------------------------
+# 5. Compression (LiteSpeed does this natively; harmless to declare)
+# ---------------------------------------------------------------------
+<IfModule mod_brotli.c>
+  AddOutputFilterByType BROTLI_COMPRESS text/html text/css text/plain text/xml application/javascript application/json application/ld+json image/svg+xml
+</IfModule>
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json application/ld+json image/svg+xml
+</IfModule>
+
+# ---------------------------------------------------------------------
+# 6. Deny dotfiles (.htaccess, .git*, etc.)
+# ---------------------------------------------------------------------
+<FilesMatch "^\.">
+  Require all denied
+</FilesMatch>
+<IfModule !mod_authz_core.c>
+  <FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+  </FilesMatch>
+</IfModule>
+
+# 7. Optional custom 404 — uncomment ONLY after adding /404.html:
+# ErrorDocument 404 /404.html

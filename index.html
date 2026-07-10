@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fainto — Private Budget Tracker</title>
   <meta name="description" content="Private budget tracker with an on-device AI coach. See where your money goes — nothing leaves your phone, nothing uploaded by default." />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+  <meta name="author" content="Mo" />
+  <meta property="og:locale" content="en_US" />
   <meta name="theme-color" content="#27272F" />
   <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
   <link rel="canonical" href="https://fainto.app/" />
@@ -17,16 +20,110 @@
   <meta property="og:title" content="Fainto — Private Budget Tracker" />
   <meta property="og:description" content="See where your money goes — nothing leaves your phone. A private budget tracker with an on-device AI coach." />
   <meta property="og:image" content="https://fainto.app/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content="Fainto — a private budget tracker with an on-device AI coach for Android." />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Fainto — Private Budget Tracker" />
   <meta name="twitter:description" content="Private budget tracker with an on-device AI coach. Private by architecture, not by policy." />
   <meta name="twitter:image" content="https://fainto.app/assets/og-image.png" />
+  <meta name="twitter:image:alt" content="Fainto — a private budget tracker with an on-device AI coach for Android." />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <!-- Self-hosted Lexend (variable 300–600) — zero third-party requests. crossorigin is required even same-origin (fonts fetch in CORS mode). -->
+  <link rel="preload" as="font" type="font/woff2" href="assets/fonts/lexend-latin.woff2" crossorigin />
+  <!-- LCP hero screenshot: discover early, fetch first. Must match the <picture> webp source exactly. -->
+  <link rel="preload" as="image" href="assets/screens/overview.webp" type="image/webp" fetchpriority="high" />
 
   <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://fainto.app/#org",
+      "name": "Fainto",
+      "url": "https://fainto.app/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://fainto.app/assets/apple-touch-icon.png",
+        "width": 180,
+        "height": 180
+      },
+      "image": "https://fainto.app/assets/og-image.png",
+      "email": "support@fainto.app",
+      "description": "Maker of Fainto, a private, offline-first budget tracker for Android with an on-device AI coach.",
+      "founder": { "@type": "Person", "name": "Mo" },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "support@fainto.app",
+        "contactType": "customer support",
+        "url": "https://fainto.app/contact.html",
+        "availableLanguage": "English"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://fainto.app/#website",
+      "url": "https://fainto.app/",
+      "name": "Fainto",
+      "description": "Private budget tracker with an on-device AI coach — nothing leaves your phone.",
+      "inLanguage": "en",
+      "publisher": { "@id": "https://fainto.app/#org" }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://fainto.app/#webpage",
+      "url": "https://fainto.app/",
+      "name": "Fainto — Private Budget Tracker",
+      "description": "Private budget tracker with an on-device AI coach. See where your money goes — nothing leaves your phone, nothing uploaded by default.",
+      "isPartOf": { "@id": "https://fainto.app/#website" },
+      "inLanguage": "en",
+      "primaryImageOfPage": "https://fainto.app/assets/og-image.png",
+      "about": { "@id": "https://fainto.app/#app" }
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": "https://fainto.app/#app",
+      "name": "Fainto: Private Budget Tracker",
+      "description": "A private, offline-first budget tracker for Android with an on-device AI coach. Five language models run locally to read your spending, a built-in tax engine covers 45 countries, and the interface is localised in 25 languages. No account, works offline, and nothing about your money is uploaded by default — cloud AI is opt-in only.",
+      "operatingSystem": "Android",
+      "applicationCategory": "FinanceApplication",
+      "applicationSubCategory": "Budget Tracker",
+      "url": "https://fainto.app/",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.vaultai.app",
+      "installUrl": "https://play.google.com/store/apps/details?id=com.vaultai.app",
+      "image": "https://fainto.app/assets/og-image.png",
+      "isFamilyFriendly": true,
+      "publisher": { "@id": "https://fainto.app/#org" },
+      "author": { "@type": "Person", "name": "Mo" },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "featureList": [
+        "On-device AI coach — five local language models (SmolLM 135M up to Phi-4 Mini 3.8B)",
+        "Nothing uploaded by default — private by architecture; cloud AI is opt-in only",
+        "Built-in income-tax engine for 45 countries",
+        "Interface localised in 25 languages",
+        "No account required",
+        "Works fully offline",
+        "Free to use"
+      ],
+      "screenshot": [
+        "https://fainto.app/assets/screens/overview.png",
+        "https://fainto.app/assets/screens/coach.png",
+        "https://fainto.app/assets/screens/networth.png"
+      ]
+    }
+  ]
+}
+</script>
+
+<!-- NO aggregateRating/review/FAQPage/HowTo — none are verifiable and marking them = spam risk. MobileApplication yields entity/Knowledge-Graph understanding, NOT a star rich result. -->
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -51,7 +148,7 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-wash" aria-hidden="true"></div>
       <div class="wrap hero-grid">
-        <div class="hero-copy reveal">
+        <div class="hero-copy">
           <h1 id="hero-title">See where your money goes. Nothing leaves your phone.</h1>
           <p class="lede">A private budget tracker with an on-device AI coach — real language models that read your spending, not the cloud.</p>
 
@@ -89,7 +186,7 @@
           </ul>
         </div>
 
-        <div class="hero-stage reveal">
+        <div class="hero-stage">
           <div class="hero-device">
             <div class="hero-mesh" aria-hidden="true">
               <span class="orbit orbit-a"><span class="blob blob-a"></span></span>
@@ -101,16 +198,25 @@
             <figure class="hero-shot">
               <div class="shot-track" data-shots tabindex="0" role="group" aria-roledescription="carousel" aria-label="Fainto app screenshots — swipe, or use the controls below">
                 <div class="shot-slide" role="group" aria-roledescription="slide" aria-label="1 of 3: Overview">
-                  <img src="assets/screens/overview.png" width="640" height="1248" loading="eager" decoding="async"
-                       alt="Fainto's overview: net income 12 482,22 zł per month (up 56.7%), split into income 12.5K, expenses 1.0K and savings 7.1K zł, above AI insights, accounts and bills." />
+                  <picture>
+                    <source srcset="assets/screens/overview.webp" type="image/webp" />
+                    <img src="assets/screens/overview.png" width="640" height="1248" fetchpriority="high" decoding="async"
+                         alt="Fainto's overview: net income 12 482,22 zł per month (up 56.7%), split into income 12.5K, expenses 1.0K and savings 7.1K zł, above AI insights, accounts and bills." />
+                  </picture>
                 </div>
                 <div class="shot-slide" role="group" aria-roledescription="slide" aria-label="2 of 3: AI Coach">
-                  <img src="assets/screens/coach.png" width="640" height="1248" loading="lazy" decoding="async"
-                       alt="Fainto's on-device AI Coach answering a money question with the SmolLM 135M model at 10 tokens per second, labelled On-device · Private." />
+                  <picture>
+                    <source srcset="assets/screens/coach.webp" type="image/webp" />
+                    <img src="assets/screens/coach.png" width="640" height="1248" loading="lazy" decoding="async"
+                         alt="Fainto's on-device AI Coach answering a money question with the SmolLM 135M model at 10 tokens per second, labelled On-device · Private." />
+                  </picture>
                 </div>
                 <div class="shot-slide" role="group" aria-roledescription="slide" aria-label="3 of 3: Net worth">
-                  <img src="assets/screens/networth.png" width="640" height="1248" loading="lazy" decoding="async"
-                       alt="Fainto's net worth view: 107 400,00 zł of assets and zero liabilities, shown as a green ring with an asset breakdown." />
+                  <picture>
+                    <source srcset="assets/screens/networth.webp" type="image/webp" />
+                    <img src="assets/screens/networth.png" width="640" height="1248" loading="lazy" decoding="async"
+                         alt="Fainto's net worth view: 107 400,00 zł of assets and zero liabilities, shown as a green ring with an asset breakdown." />
+                  </picture>
                 </div>
               </div>
             </figure>

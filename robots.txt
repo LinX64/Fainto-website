@@ -1,0 +1,5 @@
+# robots.txt — https://fainto.app/
+User-agent: *
+Allow: /
+
+Sitemap: https://fainto.app/sitemap.xml
