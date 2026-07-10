@@ -27,12 +27,10 @@
   --cyan:   #72DEFF;
   --violet: #A78BFA;         /* brand accent, now tokenised */
 
-  /* Mesh — hero signature jewel */
-  --mesh-size:  clamp(300px, 34vw, 460px); /* square stage */
-  --mesh-blur:  34px;        /* baked ONCE into each cached GPU layer */
-  --mesh-alpha: 0.9;         /* blob opacity over --surface */
-  --dur-drift:  22s;         /* glacial ambient tempo — not a carousel */
-  --ease-io:    cubic-bezier(0.4, 0, 0.2, 1); /* M3 standard in/out for the alternate breathe */
+  /* Mesh — device aurora halo + full-bleed wash (one system) */
+  --mesh-blur:  34px;        /* baked ONCE into each cached GPU layer; never animated */
+  --mesh-alpha: 0.62;        /* matte aurora over --surface, glowing around the device */
+  --dur-orbit:  26s;         /* coach AiInsightsAmbience tempo — shared clock, continuous orbit */
 
   --text: #FFFFFF;
   --muted: #AEAEB1;
@@ -144,19 +142,24 @@ strong { font-weight: 500; }
 }
 .btn-store-text strong { font-size: 1rem; font-weight: 600; }
 
-/* App Store — honest "coming soon" pill, visibly not a live button */
-.store-note {
+/* App Store — honest "coming soon", SAME SIZE as the Play button but visibly inert
+   (outline, muted, no shadow, default cursor). Wears .btn-store for identical padding
+   + the two-line text stack, so it matches the Google Play pill's footprint exactly. */
+.btn-soon {
   display: inline-flex;
   align-items: center;
-  gap: 9px;
-  padding: 11px 18px 11px 14px;
+  gap: 10px;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 0.95rem;
   border-radius: var(--r-pill);
   border: 1px solid var(--line);
+  background: transparent;
   color: var(--muted);
-  font-size: 0.86rem;
-  font-weight: 400;
+  cursor: default;
 }
-.store-note .glyph { width: 18px; height: 18px; opacity: 0.7; }
+.btn-soon .glyph { opacity: 0.7; }
+.btn-soon .btn-store-text small { opacity: 0.75; }
 
 .cta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 20px; }
 
@@ -227,12 +230,17 @@ strong { font-weight: 500; }
 
 /* ------------------------------- hero ------------------------------- */
 .hero {
+  position: relative;                     /* anchor for the full-bleed .hero-wash */
+  overflow: hidden;                       /* seals the wash — no bloom leak, no h-scroll */
+  isolation: isolate;                     /* contains the wash's stack under the copy */
   min-height: min(84vh, 760px);
   display: grid;
   align-content: center;
   padding: clamp(48px, 7vw, 96px) 0 var(--sect);
 }
 .hero-grid {
+  position: relative;
+  z-index: 1;                             /* copy + jewel sit ABOVE the wash */
   display: grid;
   grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
   gap: clamp(32px, 5vw, 72px);
@@ -246,31 +254,99 @@ strong { font-weight: 500; }
   text-wrap: pretty;
 }
 
-/* the mesh — the app's data-accents let loose over the Rally surface floor.
-   A contained 28dp jewel: carries NO text, aria-hidden, sealed by overflow:hidden. */
-.hero-mesh {
+/* ================= hero ambience — one aurora, two layers =================
+   (1) .hero-wash  full-bleed flowing wash: ONE painted layer (three baked radial
+       gradients), melts down the page, ultra-low alpha — the "endless flow" read.
+   (2) .hero-mesh  focal 28dp jewel: three blobs on continuous, SEAMLESS LINEAR
+       orbits (the app's AiInsightsAmbience) — matte color-mix peaks, no glow.
+   Shared --violet/--cyan/--green tokens + one 26s tempo => a single system:
+   the jewel is where the wash blooms. Both aria-hidden, sealed by overflow:hidden. */
+
+/* (1) full-bleed wash — decorative; present from first paint (NO .reveal => no flash) */
+.hero-wash {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;                      /* clips the oversized, drifting gradient child */
+  /* vertical "melt": opaque to 45%, faded out by the bottom so copy/CTA sit on the page
+     floor. Mask lives on this STATIC parent, so the drift below never drags it. */
+  -webkit-mask: linear-gradient(to bottom, var(--mask-on) 0%, var(--mask-on) 45%, transparent 100%);
+          mask: linear-gradient(to bottom, var(--mask-on) 0%, var(--mask-on) 45%, transparent 100%);
+}
+/* the moving field: one element, three baked radial gradients = ONE paint layer.
+   No blur filter — softness is pure radial falloff (matte). Centers biased toward the
+   jewel (upper-right) so the wash reads as its aura leaking into the surface. */
+.hero-wash::before {
+  content: "";
+  position: absolute;
+  inset: -30%;                           /* oversized so the small drift never bares an edge */
+  background:
+    radial-gradient(44% 44% at 74% 22%, color-mix(in srgb, var(--violet) 18%, transparent) 0%, color-mix(in srgb, var(--violet) 6%, transparent) 42%, transparent 66%),
+    radial-gradient(48% 46% at 92% 60%, color-mix(in srgb, var(--cyan)   14%, transparent) 0%, color-mix(in srgb, var(--cyan)  5%, transparent) 44%, transparent 66%),
+    radial-gradient(52% 50% at 34% 100%, color-mix(in srgb, var(--green)  11%, transparent) 0%, color-mix(in srgb, var(--green) 4%, transparent) 46%, transparent 68%);
+}
+
+/* (2) the device stage — the app screenshot floats over a live aurora HALO.
+   .hero-stage sizes to the phone; .hero-mesh is the glow ring behind + around it. */
+.hero-stage {
   position: relative;
-  width: min(var(--mesh-size), 84vw);   /* 84vw guard so it can never force horizontal scroll */
-  aspect-ratio: 1;
+  z-index: 1;
+  width: min(320px, 82vw);               /* 82vw guard so it can never force horizontal scroll */
   margin-inline: auto;
-  border-radius: var(--r-panel);         /* 28dp panel token */
-  overflow: hidden;                      /* seals blobs to the panel edge — no bloom leak */
+}
+.hero-mesh {
+  position: absolute;
+  inset: -7% -14% -5%;                   /* bleeds past the phone => soft aurora ring on every side */
+  z-index: 0;
+  border-radius: 44px;
+  overflow: hidden;                      /* seals blobs to the ring edge — no bloom leak */
   background: var(--surface);            /* frozen floor + no-CSS / no-JS fallback */
   box-shadow: var(--el-1);               /* restrained dark elevation, never a glow */
   isolation: isolate;                    /* contains the grain's blend + the blob stack */
   contain: paint;                        /* cheap, keeps paints bounded */
 }
+/* Each blob rides an .orbit wrapper that fills the ring; the blob sits OFF-centre
+   (its inset IS its orbit radius). Rotating the wrapper sweeps the blob around a
+   perfect circle => a continuous, seamless LINEAR orbit with no ping-pong turnaround
+   (coach RepeatMode.Restart). The blob's radial gradient is rotationally symmetric,
+   so its own spin is invisible. Three color stops => a smoother, higher-quality matte
+   falloff; peaks are color-mix translucent => matte aurora, not vivid, no glow. */
+.orbit { position: absolute; inset: 0; }
 .blob {
   position: absolute;
-  width: 78%;
   aspect-ratio: 1;
   border-radius: 50%;
   filter: blur(var(--mesh-blur));        /* blurred once into a cached layer */
-  opacity: var(--mesh-alpha);
+  opacity: var(--mesh-alpha);            /* matte aurora alpha — no glow */
 }
-.blob-a { background: radial-gradient(circle, var(--green)  0%, transparent 68%); inset: -8% auto auto -6%;  transform: translate3d(0,0,0) scale(1);    } /* REST: green, top-left */
-.blob-b { background: radial-gradient(circle, var(--cyan)   0%, transparent 68%); inset: auto -10% -8% auto; transform: translate3d(0,0,0) scale(1.05); } /* REST: cyan, bottom-right */
-.blob-c { background: radial-gradient(circle, var(--violet) 0%, transparent 70%); inset: 20% 8% auto auto;   transform: translate3d(0,0,0) scale(.95);  } /* REST: violet, upper-right */
+.blob-a { width: 82%; background: radial-gradient(circle, color-mix(in srgb, var(--green),  transparent 52%) 0%, color-mix(in srgb, var(--green),  transparent 72%) 46%, transparent 72%); inset: -6% auto auto -4%; } /* green, top-left */
+.blob-b { width: 90%; background: radial-gradient(circle, color-mix(in srgb, var(--cyan),   transparent 56%) 0%, color-mix(in srgb, var(--cyan),   transparent 74%) 46%, transparent 74%); inset: auto -8% -6% auto; } /* cyan, bottom-right */
+.blob-c { width: 74%; background: radial-gradient(circle, color-mix(in srgb, var(--violet), transparent 50%) 0%, color-mix(in srgb, var(--violet), transparent 72%) 46%, transparent 72%); inset: 10% 2% auto auto;  } /* violet, upper-right */
+.blob-d { width: 80%; background: radial-gradient(circle, color-mix(in srgb, var(--amber),  transparent 60%) 0%, color-mix(in srgb, var(--amber),  transparent 76%) 46%, transparent 76%); inset: auto auto -8% -6%; } /* amber, bottom-left */
+
+/* the framed screenshot — clean rounded device over the aurora, restrained elevation */
+.hero-shot {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 6px;
+  border-radius: 34px;
+  background: color-mix(in srgb, var(--surface-4), transparent 6%);
+  border: 1px solid var(--line);
+  box-shadow: var(--el-2);
+}
+.hero-shot img { display: block; width: 100%; height: auto; border-radius: 28px; }
+
+/* AI sparkles — the app's coach-sparkle motif, drifting over the aurora margins.
+   Decorative (aria-hidden), token-coloured, matte solid fill (no glow). They twinkle
+   only under .js-motion; static/reduced-motion leaves them softly visible. */
+.spark { position: absolute; z-index: 2; pointer-events: none; opacity: 0.55; }
+.spark svg { display: block; width: 100%; height: 100%; }
+.spark svg path { fill: currentColor; }
+.spark-1 { width: 22px; height: 22px; top: 3%;  left: -7%;  color: var(--cyan);   }
+.spark-2 { width: 13px; height: 13px; top: 16%; right: -5%; color: var(--violet); }
+.spark-3 { width: 17px; height: 17px; bottom: 8%; left: -6%; color: var(--green);  }
 
 /* static grain — inline feTurbulence data-URI, no dependency, no motion.
    Kills 8-bit banding on #27272F. Normal blend (no mix-blend-mode) so it never
@@ -284,11 +360,38 @@ strong { font-weight: 500; }
   background-size: 120px 120px;
 }
 
-/* high-contrast users: collapse the decorative mesh to a flat tone */
+/* high-contrast users: collapse the whole aurora to a flat tone */
 @media (prefers-contrast: more) {
+  .hero-wash { display: none; }
   .blob { display: none; }
+  .spark { display: none; }
   .hero-mesh { background: var(--surface-3); }
 }
+
+/* --------------------------- what it is (value) --------------------------- */
+/* One sparse proof strip — names the category + the three reasons the trio can't.
+   Rally-architectural: crisp hairline rules (0dp), tokens only, no second gradient. */
+.eyebrow {
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: var(--track);
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 12px;
+}
+.value > h2 { max-width: 24ch; }
+.value-grid {
+  list-style: none;
+  margin: clamp(28px, 4vw, 44px) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 36px);
+}
+.value-item { border-top: 1px solid var(--line); padding-top: 16px; }
+.value-item h3 { margin: 0 0 8px; font-size: 1.05rem; font-weight: 600; letter-spacing: -0.01em; }
+.value-item p { color: var(--muted); font-size: 0.95rem; line-height: 1.55; }
+.value-item .nums { font-variant-numeric: var(--nums); }
 
 /* ------------------------------ closing CTA ------------------------------ */
 .cta-band {
@@ -299,6 +402,12 @@ strong { font-weight: 500; }
 }
 .cta-band .cta-row { justify-content: center; }
 .cta-band .btn-store { padding: 14px 30px 14px 22px; }
+.cta-sub {
+  max-width: 46ch;
+  margin: 14px auto 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
 /* a crisp, thin architectural arc (Rally shape language) — masked ring, no blur,
    no bloom. Tucked bottom-right and mostly clipped by the band, away from copy. */
 .cta-arc {
@@ -342,20 +451,41 @@ strong { font-weight: 500; }
 .js-motion .reveal { opacity: 0; translate: 0 12px; transition: opacity 400ms ease-out, translate 400ms ease-out; }
 .js-motion .reveal.in { opacity: 1; translate: 0 0; }
 
-/* additive, js-motion-only ambient drift — transform-only (compositor thread, no paint/layout).
-   `alternate` + M3 in/out easing gives a seamless ping-pong from the REST frame to a small peak;
-   a lone 50% keyframe under the decelerate-only --ease-std would jerk at the turnaround.
-   will-change is scoped HERE (motion path only) so static/no-JS/reduced-motion stay layer-free. */
-.js-motion .blob { will-change: transform; }
-.js-motion .blob-a { animation: driftA var(--dur-drift)              var(--ease-io) infinite alternate; }
-.js-motion .blob-b { animation: driftB calc(var(--dur-drift) * 1.3)  var(--ease-io) infinite alternate; }
-.js-motion .blob-c { animation: driftC calc(var(--dur-drift) * 1.15) var(--ease-io) infinite alternate; }
-@keyframes driftA { to { transform: translate3d( 14%,  10%, 0) scale(1.12); } }
-@keyframes driftB { to { transform: translate3d(-12%,  -8%, 0) scale(.92);  } }
-@keyframes driftC { to { transform: translate3d( -8%,  12%, 0) scale(1.08); } }
+/* additive, js-motion-only ambient orbit — compositor-only (transform, no paint/layout).
+   Seamless BY CONSTRUCTION: rotate(360deg) is 0deg==360deg, so `linear infinite` can never
+   jerk at a turnaround (unlike the old `alternate` ping-pong). De-synced periods — one
+   reversed — keep the three colors drifting out of phase so the loop never reads as a repeat.
+   Translate/rotate only (no animated scale/filter) so the blurred layer is cached, not re-drawn.
+   will-change is scoped HERE (motion paths only) so static/no-JS/reduced-motion stay layer-free. */
+.js-motion .orbit             { will-change: transform; }
+.js-motion .orbit-a           { animation: orbit var(--dur-orbit)              linear infinite; }
+.js-motion .orbit-b           { animation: orbit calc(var(--dur-orbit) * 1.28) linear infinite reverse; }
+.js-motion .orbit-c           { animation: orbit calc(var(--dur-orbit) * 0.86) linear infinite; }
+.js-motion .orbit-d           { animation: orbit calc(var(--dur-orbit) * 1.12) linear infinite reverse; }
+.js-motion .hero-wash::before { will-change: transform; animation: washdrift calc(var(--dur-orbit) * 3) linear infinite; }
+@keyframes orbit { to { transform: rotate(360deg); } }
+/* a tiny closed translate loop (0%==100%), amplitude far inside the -30% margin so no
+   edge is ever bared; translate-only so the parent's melt mask is left untouched. */
+@keyframes washdrift {
+  0%, 100% { transform: translate3d( 3%,  1%, 0); }
+  25%      { transform: translate3d( 1%, -3%, 0); }
+  50%      { transform: translate3d(-3%, -1%, 0); }
+  75%      { transform: translate3d(-1%,  3%, 0); }
+}
 
-/* craft: copy resolves first, the jewel a beat later */
-.js-motion .hero-mesh.in { transition-delay: 120ms; }
+/* AI sparkles twinkle — additive, compositor-only (opacity + transform), de-synced.
+   will-change scoped here; static/no-JS/reduced-motion leave them at rest opacity. */
+.js-motion .spark   { will-change: transform, opacity; }
+.js-motion .spark-1 { animation: twinkle 3.6s ease-in-out infinite; }
+.js-motion .spark-2 { animation: twinkle 4.4s ease-in-out infinite; animation-delay: -1.3s; }
+.js-motion .spark-3 { animation: twinkle 5s   ease-in-out infinite; animation-delay: -2.6s; }
+@keyframes twinkle {
+  0%, 100% { opacity: .25; transform: scale(.82) rotate(-8deg); }
+  50%      { opacity: .9;  transform: scale(1.08) rotate(8deg); }
+}
+
+/* craft: copy resolves first, the device a beat later */
+.js-motion .hero-stage.in { transition-delay: 120ms; }
 
 /* ------------------------------ responsive ------------------------------ */
 @media (max-width: 920px) {
@@ -363,10 +493,11 @@ strong { font-weight: 500; }
   .hero-copy { text-align: center; }
   .hero-copy .lede { margin-inline: auto; }
   .cta-row, .trio { justify-content: center; }
-  .hero-mesh { order: 2; }
+  .hero-stage { order: 2; margin-top: clamp(20px, 6vw, 40px); }
 }
 @media (max-width: 720px) {
   .footer { justify-content: center; text-align: center; }
+  .value-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
   .cta-row { flex-direction: column; }

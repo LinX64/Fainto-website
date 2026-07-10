@@ -45,6 +45,7 @@
 
     <!-- ============================ HERO ============================ -->
     <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-wash" aria-hidden="true"></div>
       <div class="wrap hero-grid">
         <div class="hero-copy reveal">
           <h1 id="hero-title">A money coach that never phones home.</h1>
@@ -55,9 +56,9 @@
               <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3.5v17c0 .6.7 1 1.2.7l14.4-8.5c.5-.3.5-1 0-1.3L5.2 2.8C4.7 2.5 4 2.9 4 3.5z" fill="currentColor"/></svg>
               <span class="btn-store-text"><small>Get it on</small><strong>Google Play</strong></span>
             </a>
-            <span class="store-note">
+            <span class="btn-store btn-soon">
               <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 12.04c-.03-2.6 2.13-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.89-1.74.03-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.79 1.3 10.34.86 1.25 1.89 2.65 3.24 2.6 1.3-.05 1.79-.84 3.36-.84 1.57 0 2.01.84 3.39.81 1.4-.02 2.29-1.27 3.14-2.53.99-1.45 1.4-2.85 1.42-2.92-.03-.01-2.72-1.04-2.75-4.13z" fill="currentColor"/><path d="M14.69 4.85c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44z" fill="currentColor"/></svg>
-              App Store — coming soon
+              <span class="btn-store-text"><small>Coming soon</small><strong>App&nbsp;Store</strong></span>
             </span>
           </div>
 
@@ -68,12 +69,44 @@
           </ul>
         </div>
 
-        <div class="hero-mesh reveal" aria-hidden="true">
-          <span class="blob blob-a"></span>
-          <span class="blob blob-b"></span>
-          <span class="blob blob-c"></span>
-          <span class="mesh-grain"></span>
+        <div class="hero-stage reveal">
+          <div class="hero-mesh" aria-hidden="true">
+            <span class="orbit orbit-a"><span class="blob blob-a"></span></span>
+            <span class="orbit orbit-b"><span class="blob blob-b"></span></span>
+            <span class="orbit orbit-c"><span class="blob blob-c"></span></span>
+            <span class="orbit orbit-d"><span class="blob blob-d"></span></span>
+            <span class="mesh-grain"></span>
+          </div>
+          <figure class="hero-shot">
+            <img src="assets/screens/overview.png" width="640" height="1248" loading="eager" decoding="async"
+                 alt="Fainto's overview: net income 12 482,22 zł per month (up 56.7%), broken into income 12.5K, expenses 1.0K and savings 7.1K zł, above AI insights, accounts and bills." />
+          </figure>
+          <span class="spark spark-1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0c.6 7.4 4.6 11.4 12 12-7.4.6-11.4 4.6-12 12-.6-7.4-4.6-11.4-12-12 7.4-.6 11.4-4.6 12-12Z"/></svg></span>
+          <span class="spark spark-2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0c.6 7.4 4.6 11.4 12 12-7.4.6-11.4 4.6-12 12-.6-7.4-4.6-11.4-12-12 7.4-.6 11.4-4.6 12-12Z"/></svg></span>
+          <span class="spark spark-3" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0c.6 7.4 4.6 11.4 12 12-7.4.6-11.4 4.6-12 12-.6-7.4-4.6-11.4-12-12 7.4-.6 11.4-4.6 12-12Z"/></svg></span>
         </div>
+      </div>
+    </section>
+
+    <!-- ========================= WHAT IT IS ========================= -->
+    <section class="section" aria-labelledby="what-title">
+      <div class="wrap value">
+        <p class="eyebrow reveal">What it is</p>
+        <h2 id="what-title" class="reveal">An AI money coach that runs on your phone, not on our servers.</h2>
+        <ul class="value-grid" role="list">
+          <li class="value-item reveal">
+            <h3>The AI is on-device</h3>
+            <p>Five language models run locally — from a 135M featherweight up to Phi-4&nbsp;Mini 3.8B — so the coaching happens on your phone, not on a server.</p>
+          </li>
+          <li class="value-item reveal">
+            <h3>Nothing uploaded by default</h3>
+            <p>Private by architecture, not policy. The app can show <span class="nums">0</span> requests, <span class="nums">0</span> bytes — by default, by design. Cloud AI is opt-in only.</p>
+          </li>
+          <li class="value-item reveal">
+            <h3>Tax math for nine countries</h3>
+            <p>A built-in tax engine runs the numbers across nine countries, so the arithmetic is done before you think to ask.</p>
+          </li>
+        </ul>
       </div>
     </section>
 
@@ -82,6 +115,7 @@
       <div class="wrap band cta-band reveal" id="get" tabindex="-1">
         <div class="cta-arc" aria-hidden="true"></div>
         <h2 id="get-title">Start at zero. Stay at zero.</h2>
+        <p class="cta-sub">Nothing to pay, no account to make, and nothing uploaded by default. iOS coming soon.</p>
         <div class="cta-row">
           <a class="btn-primary btn-store" href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener" aria-label="Get it on Google Play (opens in a new tab)">
             <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3.5v17c0 .6.7 1 1.2.7l14.4-8.5c.5-.3.5-1 0-1.3L5.2 2.8C4.7 2.5 4 2.9 4 3.5z" fill="currentColor"/></svg>

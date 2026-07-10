@@ -18,7 +18,7 @@ Deployment is GitHub Pages from `master` root; `.nojekyll` is present.
 
 ## Design system source of truth
 
-**Tokens are mirrored from the sibling Android app, not invented here.** Canonical sources in `/Users/mohsen/StudioProjects/VaultAI/core/designsystem/src/main/kotlin/com/vaultai/designsystem/theme/`:
+**Tokens are mirrored from the sibling Android app, not invented here.** The app was renamed VaultAI→Fainto (source now at `/Users/mohsen/StudioProjects/Fainto/`, package `com.fainto.*`). Canonical sources in `/Users/mohsen/StudioProjects/Fainto/core/designsystem/src/main/kotlin/com/fainto/core/designsystem/theme/`:
 
 - `Color.kt` — dark scheme container ladder: page `#27272F` (surfaceContainerLowest) stepping up `#2E2E37 / #373741 / #3F3F49 / #474751`; WHITE chrome primary (`#FFFFFF` on `#2A2931`); violet brand `#A78BFA`.
 - `DataAccents.kt` — bright data accents: cyan `#72DEFF`, green `#36F0AB`, amber `#FFCF44`, purple `#B15DFF`, coral `#FF6859`.
@@ -32,9 +32,9 @@ When a color/shape/type question comes up, reconcile against those files — not
 
 Three top-level files:
 
-- **`index.html`** — one page, **minimalist two-section cut (July 2026)**: sticky header → hero (CSS conic ring + working Income/Expenses/Savings segmented control) → closing CTA → footer colophon. Rebranded VaultAI→**Fainto** in the same pass — **visible brand text only**; the Play id stays `com.vaultai.app` and the Pages/og host stays `vaultai-website` (app package + repo were NOT renamed). JS hooks are `data-*` attributes only (`data-nav`, `data-ring*`) plus the `.reveal` class. The earlier proof-heavy sections below (spec ledger, reel, specimen, privacy/egress, tax, engine grid, premium) were removed at the user's request for a sparse page — their CSS/JS was pruned too.
+- **`index.html`** — one page, **sparse three-section cut (July 2026)**: sticky header → **hero** (app screenshot `.hero-shot` floating over a live **aurora**: `.hero-mesh` halo of four orbiting blobs + a full-bleed `.hero-wash`; copy left, device right) → **"What it is"** value strip (`.value` — eyebrow + heading + 3 hairline proof items, added 2026-07-10 to fix the cold-visitor gap) → **closing CTA** → footer colophon. Brand text is all **Fainto**. Store links keep the Play id `com.vaultai.app` (the immutable, live listing titled "Fainto: AI Finance Coach"; `com.fainto.app` 404s — do NOT change it). iOS is a matched-size but inert `.btn-soon` "coming soon" pill. JS hooks are `data-nav` + the `.reveal` class only (the old `data-ring*` ring/segmented control is gone). The earlier proof-heavy sections (spec ledger, reel, specimen, privacy/egress, tax, engine grid, premium) were removed for a sparse page — CSS/JS pruned too.
 - **`styles.css`** — all styling; every color/shape/space/motion value flows from the `:root` tokens (no raw hexes below `:root`). Flat single-class selectors, no IDs, no `!important`. Breakpoints: 920 / 720 / 560. The `prefers-reduced-motion` block is last.
-- **`app.js`** — one strict IIFE with independent sub-modules: header scrolled state, hero ring + segmented control, the reel (drag, morph, IntersectionObserver dots, prev/next), live egress ledger (PerformanceObserver), reveal/stamp observers.
+- **`app.js`** — one strict IIFE, now minimal: adds `.js-motion` to `<html>` only when `prefers-reduced-motion` allows AND `IntersectionObserver` exists (the additive-motion gate), a sticky-header scrolled state, and the `.reveal`-on-scroll IntersectionObserver. The mesh/aurora is **pure CSS** (seamless `rotate(360deg)` orbits + a `washdrift` translate loop) — no JS drives it.
 
 ### Binding design laws (from the judged design brief — do not regress)
 
@@ -50,11 +50,11 @@ Three top-level files:
 
 ## Assets
 
-- **`assets/screens/`** — the eight current app screenshots (1080×2090, status/nav bars cropped), captured 2026-07-01 from the live `com.vaultai.app.debug` build via adb; `assets/screens/reel/` holds 640px-wide copies used by the reel (after the two-section cut the page no longer references any of them — retained for future use). To refresh: connect the device, launch the app, `adb exec-out screencap -p`, crop top 100px / bottom 150px.
+- **`assets/screens/overview.png`** — the single hero product shot (640×1248, web-resized, phone status/nav bars cropped): the **Overview** dashboard — net income 12 482,22 zł/mo (+56.7%) with income/expenses/savings in the green/coral/amber data accents, above AI insights, accounts and bills. Sourced from the app repo `/Users/mohsen/StudioProjects/Fainto/build/run-shots/r03-overview-deep.png` (1080×2340) → `sips -c 2106 1080` to drop the system bars → `sips --resampleWidth 640`. The older `assets/screens/*` set + `reel/` were removed. To refresh: pick a frame from `build/run-shots/`, re-crop/resize the same way. (Decorative AI **sparkles** — `.spark`, the app's coach-sparkle motif in token colours — twinkle over the aurora margins around this shot; aria-hidden, js-motion-gated.)
 - `assets/logo.svg`, `favicon.svg`, `og-image.png` (og image still shows the older design — regenerate when convenient).
 - **Deprecated, do not reference**: `assets/promo/` (June 2026 pre-Lexend screens) and `assets/screenshots/` (old Play-Store cards with baked headlines).
 
 ## Content notes
 
 - Product truth (verified against the app build, July 2026): **5 on-device models** — SmolLM 135M, Qwen 2.5 0.5B (free) and Qwen 2.5 1.5B, DeepSeek R1 1.5B, Phi-4 Mini 3.8B (Premium) — plus optional **Cloud AI via OpenRouter (Premium, opt-in)**. 9-country tax engine. Accounts exist but are optional → say "no account required", never "no accounts exist". The old model list (Gemma 2 / Llama / Mistral) is obsolete.
-- Positioning is **educational information, not financial advice** — that framing is contractual copy, as are the real Play id `com.vaultai.app` (kept — the app package did NOT rename), iOS "coming soon" (a note, not a fake store link), and the Free / No account required / Works offline trio.
+- Positioning is **educational information, not financial advice** — contractual framing. The store link uses Play id `com.vaultai.app`: verified live 2026-07-10 as the listing titled **"Fainto: AI Finance Coach"**, while `com.fainto.app` returns 404. The Android *source* package was renamed to `com.fainto`, but the *published store id* is immutable — **keep `com.vaultai.app` in every store link**; changing it breaks the live listing. iOS "coming soon" stays a note, not a real store link. Free / No account required / Works offline trio is also contractual.
