@@ -61,6 +61,7 @@
   /* Elevation — restrained M3 dark shadows, never glows */
   --el-1: 0 1px 2px rgba(0, 0, 0, 0.30), 0 1px 3px 1px rgba(0, 0, 0, 0.15);
   --el-2: 0 1px 2px rgba(0, 0, 0, 0.30), 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --el-3: 0 26px 55px -22px rgba(0, 0, 0, 0.55);   /* deep neutral float — the device shot */
 
   /* Motion — MotionTokens.kt */
   --ease-std: cubic-bezier(0.2, 0, 0, 1);
@@ -359,16 +360,47 @@ strong { font-weight: 500; }
 .blob-c { width: 74%; background: radial-gradient(circle, color-mix(in srgb, var(--violet), transparent 50%) 0%, color-mix(in srgb, var(--violet), transparent 72%) 46%, transparent 72%); inset: 10% 2% auto auto;  } /* violet, upper-right */
 .blob-d { width: 80%; background: radial-gradient(circle, color-mix(in srgb, var(--amber),  transparent 60%) 0%, color-mix(in srgb, var(--amber),  transparent 76%) 46%, transparent 76%); inset: auto auto -8% -6%; } /* amber, bottom-left */
 
-/* the framed screenshot — clean rounded device over the aurora, restrained elevation */
+/* the device — a modern Samsung-Galaxy-style frame over the aurora: thin even
+   near-black bezel, flagship corner radius, subtle titanium rim + side buttons,
+   deep neutral float shadow. Pure CSS, no mockup image (keeps the no-dep ethos). */
 .hero-shot {
   position: relative;
   z-index: 1;
   margin: 0;
-  padding: 6px;
-  border-radius: 34px;
-  background: color-mix(in srgb, var(--surface-4), transparent 6%);
-  border: 1px solid var(--line);
-  box-shadow: var(--el-2);
+  padding: 11px;
+  border-radius: 48px;
+  background: color-mix(in srgb, var(--bg), black 62%);   /* near-black bezel */
+  box-shadow:
+    inset 0 0 0 1.5px color-mix(in srgb, var(--surface-4), white 6%),  /* titanium rim */
+    var(--el-2),
+    var(--el-3);                                           /* deep float */
+}
+/* Galaxy side buttons on the right edge — subtle metal slivers (volume + power) */
+.hero-shot::before,
+.hero-shot::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: color-mix(in srgb, var(--surface-4), black 34%);
+}
+.hero-shot::before { top: 23%; height: 44px; }   /* volume rocker */
+.hero-shot::after  { top: 39%; height: 68px; }   /* power */
+/* punch-hole selfie camera — a solid near-black dot with a faint top-left lens
+   glint (no lighter ring, which read as a donut), centred in the status bar */
+.cam {
+  position: absolute;
+  z-index: 2;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 38% 34%,
+      color-mix(in srgb, var(--surface-4), transparent 35%) 0%,
+      color-mix(in srgb, var(--bg), black 90%) 58%);
 }
 /* screenshot slider — native scroll-snap (works with NO JS); JS adds the controls.
    No timer, no auto-advance (design law 1 / WCAG 2.2.2) — user-driven only. */
@@ -379,12 +411,12 @@ strong { font-weight: 500; }
   scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;                 /* Firefox — hide the scrollbar */
-  border-radius: 28px;
+  border-radius: 38px;
 }
 .shot-track::-webkit-scrollbar { display: none; }   /* WebKit — hide the scrollbar */
 .shot-slide { flex: 0 0 100%; scroll-snap-align: center; }
 .shot-slide picture { display: block; }
-.shot-slide img { display: block; width: 100%; height: auto; border-radius: 28px; }
+.shot-slide img { display: block; width: 100%; height: auto; border-radius: 38px; }
 
 /* slider dots (JS-injected below the device) — position indicator + manual control */
 .shot-nav { display: flex; justify-content: center; margin-top: 18px; }
@@ -506,11 +538,19 @@ strong { font-weight: 500; }
 .footer-meta a { font-weight: 500; text-decoration: underline; text-underline-offset: 2px; }
 .footer-meta a:hover { color: var(--text); }
 .footer-meta span[aria-hidden] { color: var(--outline); }
+.made {
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--muted-2);
+  margin: 0;
+  padding: 0 var(--gutter) clamp(16px, 3vw, 24px);
+}
 
 /* ---------------------------- pages: about / contact ---------------------------- */
 .page { padding-block: clamp(40px, 7vw, 88px); min-height: 62vh; }
 .prose { max-width: 62ch; }
 .prose h1 { font-size: var(--fs-h2); margin: 10px 0 0; }
+.prose h2 { font-size: 1.3rem; font-weight: 600; letter-spacing: -0.01em; margin: 32px 0 0; }
 .prose > p:not([class]) { color: var(--muted); font-size: 1.05rem; line-height: 1.65; margin-top: 18px; }
 .prose a:not(.btn-primary) { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 .prose a:not(.btn-primary):hover { color: var(--muted); }
