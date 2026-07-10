@@ -188,6 +188,16 @@ strong { font-weight: 500; }
   background: var(--green);
 }
 
+/* flags — a small taste of the 45-country / 25-language coverage, under the trio */
+.flags { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 18px 0 0; padding: 0; }
+.flag { width: 26px; height: 18px; border-radius: 3px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line); }
+.flag svg { display: block; width: 100%; height: 100%; }
+.flag-more {
+  display: inline-flex; align-items: center; height: 18px; padding: 0 9px;
+  border-radius: var(--r-pill); border: 1px solid var(--line);
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.02em; color: var(--muted);
+}
+
 /* contained tonal panel */
 .band {
   background: var(--surface);
@@ -219,6 +229,7 @@ strong { font-weight: 500; }
 .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 600; }
 .brand img { border-radius: var(--r-tile); }
 .brand-name { font-size: 1.12rem; letter-spacing: -0.02em; }
+.nav-links { display: inline-flex; align-items: center; gap: clamp(14px, 3vw, 22px); }
 .nav-link {
   font-size: 0.92rem;
   font-weight: 500;
@@ -295,6 +306,8 @@ strong { font-weight: 500; }
   width: min(320px, 82vw);               /* 82vw guard so it can never force horizontal scroll */
   margin-inline: auto;
 }
+/* the phone box — anchors the aurora, the framed slider, and the sparkles */
+.hero-device { position: relative; }
 .hero-mesh {
   position: absolute;
   inset: -7% -14% -5%;                   /* bleeds past the phone => soft aurora ring on every side */
@@ -336,7 +349,46 @@ strong { font-weight: 500; }
   border: 1px solid var(--line);
   box-shadow: var(--el-2);
 }
-.hero-shot img { display: block; width: 100%; height: auto; border-radius: 28px; }
+/* screenshot slider — native scroll-snap (works with NO JS); JS adds the controls.
+   No timer, no auto-advance (design law 1 / WCAG 2.2.2) — user-driven only. */
+.shot-track {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;                 /* Firefox — hide the scrollbar */
+  border-radius: 28px;
+}
+.shot-track::-webkit-scrollbar { display: none; }   /* WebKit — hide the scrollbar */
+.shot-slide { flex: 0 0 100%; scroll-snap-align: center; }
+.shot-slide img { display: block; width: 100%; height: auto; border-radius: 28px; }
+
+/* slider controls (JS-injected below the device) — real buttons, keyboard-first */
+.shot-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 18px; }
+.shot-arrow {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px; padding: 0;
+  border-radius: var(--r-pill);
+  background: var(--surface-3);
+  color: var(--text);
+  border: 1px solid var(--line);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-std), opacity var(--dur-fast) var(--ease-std);
+}
+.shot-arrow:hover { background: var(--surface-4); }
+.shot-arrow[aria-disabled="true"] { opacity: 0.35; cursor: default; }
+.shot-arrow svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.shot-dots { display: flex; align-items: center; gap: 8px; }
+.shot-dot {
+  width: 8px; height: 8px; padding: 0;
+  border: 0; border-radius: 50%;
+  background: var(--outline);
+  opacity: 0.5;
+  cursor: pointer;
+  transition: width var(--dur-fast) var(--ease-std), opacity var(--dur-fast) var(--ease-std), background var(--dur-fast) var(--ease-std);
+}
+.shot-dot.is-on { width: 20px; border-radius: var(--r-pill); background: var(--primary); opacity: 1; }
 
 /* AI sparkles — the app's coach-sparkle motif, drifting over the aurora margins.
    Decorative (aria-hidden), token-coloured, matte solid fill (no glow). They twinkle
@@ -446,6 +498,31 @@ strong { font-weight: 500; }
 .footer-meta a:hover { color: var(--text); }
 .footer-meta span[aria-hidden] { color: var(--outline); }
 
+/* ---------------------------- pages: about / contact ---------------------------- */
+.page { padding-block: clamp(40px, 7vw, 88px); min-height: 62vh; }
+.prose { max-width: 62ch; }
+.prose h1 { font-size: var(--fs-h2); margin: 10px 0 0; }
+.prose > p:not([class]) { color: var(--muted); font-size: 1.05rem; line-height: 1.65; margin-top: 18px; }
+.prose a:not(.btn-primary) { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
+.prose a:not(.btn-primary):hover { color: var(--muted); }
+.prose .prose-sig { margin-top: 24px; color: var(--text); font-weight: 500; }
+.prose-cta { margin-top: 28px; }
+
+/* contact form — static, no backend: submit builds a mailto (JS) or POSTs to mailto (no-JS) */
+.contact-form { margin-top: 30px; display: grid; gap: 18px; max-width: 32rem; }
+.field { display: grid; gap: 7px; }
+.field-label { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; color: var(--muted); }
+.input {
+  font-family: var(--font); font-size: 1rem; color: var(--text);
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-tile);
+  padding: 12px 14px; width: 100%;
+  transition: border-color var(--dur-fast) var(--ease-std);
+}
+.input:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+textarea.input { resize: vertical; min-height: 120px; }
+.contact-form .btn-primary { justify-self: start; }
+.form-note { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
 /* ------------------------- motion (JS-gated) ------------------------- */
 /* JS adds .js-motion to <html> only when allowed; static is the default. */
 .js-motion .reveal { opacity: 0; translate: 0 12px; transition: opacity 400ms ease-out, translate 400ms ease-out; }
@@ -492,7 +569,7 @@ strong { font-weight: 500; }
   .hero-grid { grid-template-columns: 1fr; }
   .hero-copy { text-align: center; }
   .hero-copy .lede { margin-inline: auto; }
-  .cta-row, .trio { justify-content: center; }
+  .cta-row, .trio, .flags { justify-content: center; }
   .hero-stage { order: 2; margin-top: clamp(20px, 6vw, 40px); }
 }
 @media (max-width: 720px) {

@@ -37,7 +37,11 @@
         <img src="assets/logo.svg" width="32" height="32" alt="" />
         <span class="brand-name">Fainto</span>
       </a>
-      <a class="nav-link" href="#get">Get the app</a>
+      <nav class="nav-links" aria-label="Primary">
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="contact.html">Contact</a>
+        <a class="nav-link" href="#get">Get the app</a>
+      </nav>
     </div>
   </header>
 
@@ -67,23 +71,53 @@
             <li>No account</li>
             <li>Works offline</li>
           </ul>
+
+          <ul class="flags" role="list" aria-hidden="true">
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect y="1" width="3" height="1" fill="#DC143C"/></svg></li>
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#000"/><rect y="0.667" width="3" height="1.333" fill="#DD0000"/><rect y="1.333" width="3" height="0.667" fill="#FFCE00"/></svg></li>
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#0055A4"/><rect x="2" width="1" height="2" fill="#EF4135"/></svg></li>
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#009246"/><rect x="2" width="1" height="2" fill="#CE2B37"/></svg></li>
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect width="3" height="0.667" fill="#AE1C28"/><rect y="1.333" width="3" height="0.667" fill="#21468B"/></svg></li>
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect width="1" height="2" fill="#169B62"/><rect x="2" width="1" height="2" fill="#FF883E"/></svg></li>
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#006AA7"/><rect x="0.8" width="0.4" height="2" fill="#FECC00"/><rect y="0.8" width="3" height="0.4" fill="#FECC00"/></svg></li>
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#FCD116"/><rect width="1" height="2" fill="#002B7F"/><rect x="2" width="1" height="2" fill="#CE1126"/></svg></li>
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#ED2939"/><rect y="0.667" width="3" height="0.667" fill="#fff"/></svg></li>
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#fff"/><rect width="3" height="0.667" fill="#CE2939"/><rect y="1.333" width="3" height="0.667" fill="#477050"/></svg></li>
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#AA151B"/><rect y="0.5" width="3" height="1" fill="#F1BF00"/></svg></li>
+            <li class="flag"><svg viewBox="0 0 3 2"><rect width="3" height="2" fill="#FFD90C"/><rect width="1" height="2" fill="#000"/><rect x="2" width="1" height="2" fill="#F31830"/></svg></li>
+            <li class="flag-more">+33</li>
+          </ul>
         </div>
 
         <div class="hero-stage reveal">
-          <div class="hero-mesh" aria-hidden="true">
-            <span class="orbit orbit-a"><span class="blob blob-a"></span></span>
-            <span class="orbit orbit-b"><span class="blob blob-b"></span></span>
-            <span class="orbit orbit-c"><span class="blob blob-c"></span></span>
-            <span class="orbit orbit-d"><span class="blob blob-d"></span></span>
-            <span class="mesh-grain"></span>
+          <div class="hero-device">
+            <div class="hero-mesh" aria-hidden="true">
+              <span class="orbit orbit-a"><span class="blob blob-a"></span></span>
+              <span class="orbit orbit-b"><span class="blob blob-b"></span></span>
+              <span class="orbit orbit-c"><span class="blob blob-c"></span></span>
+              <span class="orbit orbit-d"><span class="blob blob-d"></span></span>
+              <span class="mesh-grain"></span>
+            </div>
+            <figure class="hero-shot">
+              <div class="shot-track" data-shots tabindex="0" role="group" aria-roledescription="carousel" aria-label="Fainto app screenshots — swipe, or use the controls below">
+                <div class="shot-slide" role="group" aria-roledescription="slide" aria-label="1 of 3: Overview">
+                  <img src="assets/screens/overview.png" width="640" height="1248" loading="eager" decoding="async"
+                       alt="Fainto's overview: net income 12 482,22 zł per month (up 56.7%), split into income 12.5K, expenses 1.0K and savings 7.1K zł, above AI insights, accounts and bills." />
+                </div>
+                <div class="shot-slide" role="group" aria-roledescription="slide" aria-label="2 of 3: AI Coach">
+                  <img src="assets/screens/coach.png" width="640" height="1248" loading="lazy" decoding="async"
+                       alt="Fainto's on-device AI Coach answering a money question with the SmolLM 135M model at 10 tokens per second, labelled On-device · Private." />
+                </div>
+                <div class="shot-slide" role="group" aria-roledescription="slide" aria-label="3 of 3: Net worth">
+                  <img src="assets/screens/networth.png" width="640" height="1248" loading="lazy" decoding="async"
+                       alt="Fainto's net worth view: 107 400,00 zł of assets and zero liabilities, shown as a green ring with an asset breakdown." />
+                </div>
+              </div>
+            </figure>
+            <span class="spark spark-1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0c.6 7.4 4.6 11.4 12 12-7.4.6-11.4 4.6-12 12-.6-7.4-4.6-11.4-12-12 7.4-.6 11.4-4.6 12-12Z"/></svg></span>
+            <span class="spark spark-2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0c.6 7.4 4.6 11.4 12 12-7.4.6-11.4 4.6-12 12-.6-7.4-4.6-11.4-12-12 7.4-.6 11.4-4.6 12-12Z"/></svg></span>
+            <span class="spark spark-3" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0c.6 7.4 4.6 11.4 12 12-7.4.6-11.4 4.6-12 12-.6-7.4-4.6-11.4-12-12 7.4-.6 11.4-4.6 12-12Z"/></svg></span>
           </div>
-          <figure class="hero-shot">
-            <img src="assets/screens/overview.png" width="640" height="1248" loading="eager" decoding="async"
-                 alt="Fainto's overview: net income 12 482,22 zł per month (up 56.7%), broken into income 12.5K, expenses 1.0K and savings 7.1K zł, above AI insights, accounts and bills." />
-          </figure>
-          <span class="spark spark-1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0c.6 7.4 4.6 11.4 12 12-7.4.6-11.4 4.6-12 12-.6-7.4-4.6-11.4-12-12 7.4-.6 11.4-4.6 12-12Z"/></svg></span>
-          <span class="spark spark-2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0c.6 7.4 4.6 11.4 12 12-7.4.6-11.4 4.6-12 12-.6-7.4-4.6-11.4-12-12 7.4-.6 11.4-4.6 12-12Z"/></svg></span>
-          <span class="spark spark-3" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 0c.6 7.4 4.6 11.4 12 12-7.4.6-11.4 4.6-12 12-.6-7.4-4.6-11.4-12-12 7.4-.6 11.4-4.6 12-12Z"/></svg></span>
         </div>
       </div>
     </section>
@@ -103,8 +137,8 @@
             <p>Private by architecture, not policy. The app can show <span class="nums">0</span> requests, <span class="nums">0</span> bytes — by default, by design. Cloud AI is opt-in only.</p>
           </li>
           <li class="value-item reveal">
-            <h3>Tax math for nine countries</h3>
-            <p>A built-in tax engine runs the numbers across nine countries, so the arithmetic is done before you think to ask.</p>
+            <h3>Tax math for 45 countries</h3>
+            <p>A built-in engine runs real income-tax rules for 45 countries, with the app localised in 25 languages — so the numbers fit where you actually live.</p>
           </li>
         </ul>
       </div>
@@ -121,6 +155,10 @@
             <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3.5v17c0 .6.7 1 1.2.7l14.4-8.5c.5-.3.5-1 0-1.3L5.2 2.8C4.7 2.5 4 2.9 4 3.5z" fill="currentColor"/></svg>
             <span class="btn-store-text"><small>Get it on</small><strong>Google Play</strong></span>
           </a>
+          <span class="btn-store btn-soon">
+            <svg class="glyph" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.05 12.04c-.03-2.6 2.13-3.85 2.22-3.91-1.21-1.77-3.09-2.01-3.76-2.04-1.6-.16-3.12.94-3.93.94-.81 0-2.06-.92-3.39-.89-1.74.03-3.35 1.01-4.25 2.57-1.81 3.14-.46 7.79 1.3 10.34.86 1.25 1.89 2.65 3.24 2.6 1.3-.05 1.79-.84 3.36-.84 1.57 0 2.01.84 3.39.81 1.4-.02 2.29-1.27 3.14-2.53.99-1.45 1.4-2.85 1.42-2.92-.03-.01-2.72-1.04-2.75-4.13z" fill="currentColor"/><path d="M14.69 4.85c.71-.86 1.19-2.06 1.06-3.25-1.02.04-2.26.68-2.99 1.54-.66.76-1.23 1.98-1.08 3.15 1.14.09 2.3-.58 3.01-1.44z" fill="currentColor"/></svg>
+            <span class="btn-store-text"><small>Coming soon</small><strong>App&nbsp;Store</strong></span>
+          </span>
         </div>
       </div>
     </section>
@@ -137,6 +175,10 @@
         <span>Private by architecture, not by policy.</span>
         <span aria-hidden="true">·</span>
         <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener" aria-label="Get it on Google Play (opens in a new tab)">Google&nbsp;Play</a>
+        <span aria-hidden="true">·</span>
+        <a href="about.html">About</a>
+        <span aria-hidden="true">·</span>
+        <a href="contact.html">Contact</a>
         <span aria-hidden="true">·</span>
         <span>Educational information, not financial advice.</span>
         <span aria-hidden="true">·</span>

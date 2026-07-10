@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact — Fainto</title>
+  <meta name="description" content="Get in touch with Fainto — questions, bugs, and feedback go straight to support@fainto.app." />
+  <meta name="theme-color" content="#27272F" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="canonical" href="https://fainto.app/contact.html" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Fainto" />
+  <meta property="og:url" content="https://fainto.app/contact.html" />
+  <meta property="og:title" content="Contact — Fainto" />
+  <meta property="og:description" content="Get in touch with Fainto — questions, bugs, and feedback." />
+  <meta property="og:image" content="https://fainto.app/assets/og-image.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="nav" id="top" data-nav>
+    <div class="wrap nav-inner">
+      <a class="brand" href="index.html" aria-label="Fainto home">
+        <img src="assets/logo.svg" width="32" height="32" alt="" />
+        <span class="brand-name">Fainto</span>
+      </a>
+      <nav class="nav-links" aria-label="Primary">
+        <a class="nav-link" href="about.html">About</a>
+        <a class="nav-link" href="contact.html" aria-current="page">Contact</a>
+        <a class="nav-link" href="index.html#get">Get the app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="section page">
+      <div class="wrap prose">
+        <p class="eyebrow">Contact</p>
+        <h1>Get in touch.</h1>
+        <p>Questions, a bug, or feedback? Drop a note below — it goes straight to <a href="mailto:support@fainto.app">support@fainto.app</a>. Nothing is stored on this site; the form just opens your own email app.</p>
+
+        <form class="contact-form" data-contact-form action="mailto:support@fainto.app" method="post" enctype="text/plain">
+          <label class="field">
+            <span class="field-label">Name</span>
+            <input class="input" type="text" name="name" autocomplete="name" required />
+          </label>
+          <label class="field">
+            <span class="field-label">Email</span>
+            <input class="input" type="email" name="email" autocomplete="email" required />
+          </label>
+          <label class="field">
+            <span class="field-label">Message</span>
+            <textarea class="input" name="message" rows="6" required></textarea>
+          </label>
+          <button class="btn-primary" type="submit">Send message</button>
+          <p class="form-note" data-form-note role="status" hidden>Opening your email app&hellip;</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-wrap">
+    <div class="wrap footer">
+      <a class="brand" href="index.html" aria-label="Fainto home">
+        <img src="assets/logo.svg" width="28" height="28" alt="" />
+        <span class="brand-name">Fainto</span>
+      </a>
+      <div class="footer-meta">
+        <span>Private by architecture, not by policy.</span>
+        <span aria-hidden="true">·</span>
+        <a href="about.html">About</a>
+        <span aria-hidden="true">·</span>
+        <a href="contact.html">Contact</a>
+        <span aria-hidden="true">·</span>
+        <span>Educational information, not financial advice.</span>
+        <span aria-hidden="true">·</span>
+        <span>&copy; 2026 Fainto</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
