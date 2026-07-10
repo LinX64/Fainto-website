@@ -60,6 +60,6 @@ jobs:
             --exclude '\.github/' \
             --exclude '\.claude/' \
             --exclude 'graphify-out/' \
-            ./ /home/fainvimc/public_html/
+            ./ public_html/
           bye
           EOF
