@@ -24,6 +24,15 @@
   --green: #36F0AB;
   --amber: #FFCF44;
   --coral: #FF6859;
+  --cyan:   #72DEFF;
+  --violet: #A78BFA;         /* brand accent, now tokenised */
+
+  /* Mesh — hero signature jewel */
+  --mesh-size:  clamp(300px, 34vw, 460px); /* square stage */
+  --mesh-blur:  34px;        /* baked ONCE into each cached GPU layer */
+  --mesh-alpha: 0.9;         /* blob opacity over --surface */
+  --dur-drift:  22s;         /* glacial ambient tempo — not a carousel */
+  --ease-io:    cubic-bezier(0.4, 0, 0.2, 1); /* M3 standard in/out for the alternate breathe */
 
   --text: #FFFFFF;
   --muted: #AEAEB1;
@@ -36,7 +45,7 @@
   --font: "Lexend", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --fs-h1: clamp(2.35rem, 5.4vw, 3.9rem);
   --fs-h2: clamp(1.7rem, 3.4vw, 2.5rem);
-  --fs-lede: clamp(1.05rem, 1.7vw, 1.2rem);
+  --fs-lede: clamp(1.15rem, 1.7vw, 1.35rem);
   --fs-label: 0.74rem;
   --track: 0.14em;
   --nums: lining-nums tabular-nums;
@@ -61,13 +70,6 @@
   --dur-med: 220ms;
 }
 
-/* Registered so the hero ring can transition its sweep; harmless if unsupported */
-@property --sweep {
-  syntax: "<number>";
-  inherits: false;
-  initial-value: 100;
-}
-
 /* ------------------------------ base ------------------------------ */
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -77,14 +79,14 @@ body {
   color: var(--text);
   font-family: var(--font);
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
-h1, h2 { margin: 0; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; }
+h1, h2 { margin: 0; font-weight: 600; letter-spacing: -0.02em; line-height: 1.1; text-wrap: balance; }
 h1 { font-size: var(--fs-h1); }
 h2 { font-size: var(--fs-h2); }
 p { margin: 0; }
@@ -92,16 +94,6 @@ strong { font-weight: 500; }
 :focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 4px; }
 
 .wrap { max-width: var(--wrap); margin-inline: auto; padding-inline: var(--gutter); }
-
-.visually-hidden {
-  position: absolute;
-  width: 1px; height: 1px;
-  margin: -1px; padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-  border: 0;
-}
 
 .skip-link {
   position: absolute;
@@ -224,10 +216,22 @@ strong { font-weight: 500; }
 .brand { display: inline-flex; align-items: center; gap: 11px; font-weight: 600; }
 .brand img { border-radius: var(--r-tile); }
 .brand-name { font-size: 1.12rem; letter-spacing: -0.02em; }
-.nav-cta { padding: 9px 20px; }
+.nav-link {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 8px 4px;
+  transition: color var(--dur-fast) var(--ease-std);
+}
+.nav-link:hover { color: var(--text); }
 
 /* ------------------------------- hero ------------------------------- */
-.hero { padding: clamp(40px, 7vw, 88px) 0 var(--sect); }
+.hero {
+  min-height: min(84vh, 760px);
+  display: grid;
+  align-content: center;
+  padding: clamp(48px, 7vw, 96px) 0 var(--sect);
+}
 .hero-grid {
   display: grid;
   grid-template-columns: minmax(0, 11fr) minmax(0, 9fr);
@@ -236,113 +240,54 @@ strong { font-weight: 500; }
 }
 .hero-copy .lede {
   font-size: var(--fs-lede);
-  color: var(--muted);
+  color: color-mix(in srgb, var(--text) 24%, var(--muted));
   margin-top: 16px;
-  max-width: 46ch;
+  max-width: 40ch;
+  text-wrap: pretty;
 }
 
-/* the ring — the app's signature donut, drawn in CSS */
-.hero-ring {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-.ring-stage {
+/* the mesh — the app's data-accents let loose over the Rally surface floor.
+   A contained 28dp jewel: carries NO text, aria-hidden, sealed by overflow:hidden. */
+.hero-mesh {
   position: relative;
-  width: clamp(230px, 22vw, 310px);
+  width: min(var(--mesh-size), 84vw);   /* 84vw guard so it can never force horizontal scroll */
   aspect-ratio: 1;
+  margin-inline: auto;
+  border-radius: var(--r-panel);         /* 28dp panel token */
+  overflow: hidden;                      /* seals blobs to the panel edge — no bloom leak */
+  background: var(--surface);            /* frozen floor + no-CSS / no-JS fallback */
+  box-shadow: var(--el-1);               /* restrained dark elevation, never a glow */
+  isolation: isolate;                    /* contains the grain's blend + the blob stack */
+  contain: paint;                        /* cheap, keeps paints bounded */
 }
-.ring {
+.blob {
   position: absolute;
-  inset: 0;
+  width: 78%;
+  aspect-ratio: 1;
   border-radius: 50%;
-  --sweep: 100;
-  --ring-color: var(--green);
-  background: conic-gradient(var(--ring-color) calc(var(--sweep) * 1%), var(--surface-3) 0);
-  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 16px), var(--mask-on) calc(100% - 15px));
-  mask: radial-gradient(closest-side, transparent calc(100% - 16px), var(--mask-on) calc(100% - 15px));
-  transition: --sweep 900ms var(--ease-std), background-color var(--dur-med) var(--ease-std);
+  filter: blur(var(--mesh-blur));        /* blurred once into a cached layer */
+  opacity: var(--mesh-alpha);
 }
-.ring-center {
+.blob-a { background: radial-gradient(circle, var(--green)  0%, transparent 68%); inset: -8% auto auto -6%;  transform: translate3d(0,0,0) scale(1);    } /* REST: green, top-left */
+.blob-b { background: radial-gradient(circle, var(--cyan)   0%, transparent 68%); inset: auto -10% -8% auto; transform: translate3d(0,0,0) scale(1.05); } /* REST: cyan, bottom-right */
+.blob-c { background: radial-gradient(circle, var(--violet) 0%, transparent 70%); inset: 20% 8% auto auto;   transform: translate3d(0,0,0) scale(.95);  } /* REST: violet, upper-right */
+
+/* static grain — inline feTurbulence data-URI, no dependency, no motion.
+   Kills 8-bit banding on #27272F. Normal blend (no mix-blend-mode) so it never
+   re-composites against the moving blobs — a flat, cheap noise overlay. */
+.mesh-grain {
   position: absolute;
   inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  text-align: center;
-  padding: 18%;
+  pointer-events: none;
+  opacity: .05;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") repeat;
+  background-size: 120px 120px;
 }
-.ring-num {
-  font-size: clamp(1.9rem, 3.4vw, 2.7rem);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  font-variant-numeric: var(--nums);
-  transition: opacity var(--dur-med) ease;
-}
-.ring-cap {
-  font-size: var(--fs-label);
-  font-weight: 600;
-  letter-spacing: var(--track);
-  text-transform: uppercase;
-  color: var(--muted);
-  transition: opacity var(--dur-med) ease;
-}
-.ring.is-swapping ~ .ring-center .ring-num,
-.ring.is-swapping ~ .ring-center .ring-cap { opacity: 0; }
 
-/* segmented control — the app's dark full-pill control, selected fill + check */
-.seg {
-  display: none;
-  margin: 0;
-  padding: 0;
-  border: 1px solid var(--outline);
-  border-radius: var(--r-pill);
-  overflow: hidden;
-}
-.js .seg { display: inline-flex; }
-.seg:focus-within { outline: 2px solid var(--primary); outline-offset: 3px; }
-.seg-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding: 9px 18px;
-  font-size: 0.86rem;
-  font-weight: 500;
-  color: var(--text);
-  cursor: pointer;
-  border-left: 1px solid var(--outline);
-  transition: background var(--dur-med) var(--ease-std);
-}
-.seg-btn:first-of-type { border-left: 0; }
-.seg-btn input {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  margin: 0;
-  cursor: pointer;
-}
-.seg-check {
-  width: 15px; height: 15px;
-  flex: none;
-  display: none;
-}
-.seg-btn:has(input:checked) { background: var(--surface-4); }
-.seg-btn:has(input:checked) .seg-check { display: inline; }
-.seg-btn:has(input:focus-visible) { outline: 2px solid var(--primary); outline-offset: -2px; }
-.seg-btn:hover { background: color-mix(in srgb, var(--text) 8%, transparent); }
-.seg-btn:has(input:checked):hover { background: var(--surface-4); }
-
-.sample-tag {
-  font-size: 0.64rem;
-  font-weight: 600;
-  letter-spacing: var(--track);
-  text-transform: uppercase;
-  color: var(--muted-2);
+/* high-contrast users: collapse the decorative mesh to a flat tone */
+@media (prefers-contrast: more) {
+  .blob { display: none; }
+  .hero-mesh { background: var(--surface-3); }
 }
 
 /* ------------------------------ closing CTA ------------------------------ */
@@ -353,23 +298,24 @@ strong { font-weight: 500; }
   scroll-margin-top: 84px;
 }
 .cta-band .cta-row { justify-content: center; }
+.cta-band .btn-store { padding: 14px 30px 14px 22px; }
+/* a crisp, thin architectural arc (Rally shape language) — masked ring, no blur,
+   no bloom. Tucked bottom-right and mostly clipped by the band, away from copy. */
 .cta-arc {
   position: absolute;
-  top: -40%;
-  left: 50%;
-  translate: -50% 0;
-  width: 560px;
+  inset: auto -18% -50% auto;            /* tucked deep into the bottom-right corner, clear of centered copy at every width */
+  width: min(52%, 420px);
   aspect-ratio: 1;
   border-radius: 50%;
-  background: conic-gradient(var(--amber) 78%, transparent 0);
-  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 14px), var(--mask-on) calc(100% - 13px));
-  mask: radial-gradient(closest-side, transparent calc(100% - 14px), var(--mask-on) calc(100% - 13px));
-  opacity: 0.08;
+  background: var(--amber);
+  -webkit-mask: radial-gradient(closest-side, transparent calc(100% - 10px), var(--mask-on) calc(100% - 9px));
+  mask: radial-gradient(closest-side, transparent calc(100% - 10px), var(--mask-on) calc(100% - 9px));
+  opacity: 0.12;
   pointer-events: none;
 }
 
 /* -------------------------------- footer -------------------------------- */
-.footer-wrap { margin-top: calc(var(--sect) / 2.5); border-top: 1px solid var(--line); }
+.footer-wrap { margin-top: var(--sect); border-top: 1px solid var(--line); }
 .footer {
   display: flex;
   flex-wrap: wrap;
@@ -395,7 +341,21 @@ strong { font-weight: 500; }
 /* JS adds .js-motion to <html> only when allowed; static is the default. */
 .js-motion .reveal { opacity: 0; translate: 0 12px; transition: opacity 400ms ease-out, translate 400ms ease-out; }
 .js-motion .reveal.in { opacity: 1; translate: 0 0; }
-.js-motion .ring.is-pending { --sweep: 0; }
+
+/* additive, js-motion-only ambient drift — transform-only (compositor thread, no paint/layout).
+   `alternate` + M3 in/out easing gives a seamless ping-pong from the REST frame to a small peak;
+   a lone 50% keyframe under the decelerate-only --ease-std would jerk at the turnaround.
+   will-change is scoped HERE (motion path only) so static/no-JS/reduced-motion stay layer-free. */
+.js-motion .blob { will-change: transform; }
+.js-motion .blob-a { animation: driftA var(--dur-drift)              var(--ease-io) infinite alternate; }
+.js-motion .blob-b { animation: driftB calc(var(--dur-drift) * 1.3)  var(--ease-io) infinite alternate; }
+.js-motion .blob-c { animation: driftC calc(var(--dur-drift) * 1.15) var(--ease-io) infinite alternate; }
+@keyframes driftA { to { transform: translate3d( 14%,  10%, 0) scale(1.12); } }
+@keyframes driftB { to { transform: translate3d(-12%,  -8%, 0) scale(.92);  } }
+@keyframes driftC { to { transform: translate3d( -8%,  12%, 0) scale(1.08); } }
+
+/* craft: copy resolves first, the jewel a beat later */
+.js-motion .hero-mesh.in { transition-delay: 120ms; }
 
 /* ------------------------------ responsive ------------------------------ */
 @media (max-width: 920px) {
@@ -403,14 +363,12 @@ strong { font-weight: 500; }
   .hero-copy { text-align: center; }
   .hero-copy .lede { margin-inline: auto; }
   .cta-row, .trio { justify-content: center; }
-  .hero-ring { order: 2; }
+  .hero-mesh { order: 2; }
 }
 @media (max-width: 720px) {
   .footer { justify-content: center; text-align: center; }
 }
 @media (max-width: 560px) {
-  .seg-btn { padding: 9px 13px; font-size: 0.8rem; }
-  .ring-stage { width: min(260px, 78vw); }
   .cta-row { flex-direction: column; }
 }
 
