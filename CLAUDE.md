@@ -14,7 +14,7 @@ Nothing to build. Preview locally:
 python3 -m http.server 8000   # then open http://localhost:8000
 ```
 
-Deployment is GitHub Pages from `master` root; `.nojekyll` is present.
+Deployment: a GitHub Actions workflow (`.github/workflows/deploy.yml`) pushes the site to Namecheap **cPanel over FTPS** (lftp mirror → `public_html/`) on every push to `master`. **GitHub Pages is disabled** — cPanel is the only deploy path. (Live host `fainto.app` = Namecheap LiteSpeed at `66.29.141.97`.)
 
 ## Design system source of truth
 
