@@ -2,3 +2,18 @@
 *.log
 .idea/
 .vscode/
+
+# Secrets — never commit or deploy
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.keystore
+*.crt
+secrets*
+credentials*
+
+# Local scratch (not part of the site)
+graphify-out/
+__probe.html
