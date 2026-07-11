@@ -133,5 +133,5 @@ AddDefaultCharset utf-8
   </FilesMatch>
 </IfModule>
 
-# 7. Optional custom 404 — uncomment ONLY after adding /404.html:
-# ErrorDocument 404 /404.html
+# 7. Custom 404 page
+ErrorDocument 404 /404.html
