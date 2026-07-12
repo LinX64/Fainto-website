@@ -310,9 +310,7 @@ strong {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--bg) 80%, transparent);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
   border-bottom: 1px solid var(--line);
   transition: box-shadow var(--dur-fast) var(--ease-std);
 }
@@ -360,6 +358,109 @@ strong {
   align-items: center;
   gap: 8px;
 }
+@font-face {
+  font-family: "Vazirmatn";
+  font-style: normal;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url(assets/fonts/vazirmatn-arabic.woff2) format("woff2");
+}
+:root[lang="fa"] {
+  --font: "Vazirmatn", "Lexend", system-ui, sans-serif;
+}
+.lang-fa {
+  font-family: "Vazirmatn", system-ui, sans-serif;
+}
+.lang {
+  position: relative;
+}
+.lang-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  padding: 7px 11px;
+  cursor: pointer;
+  transition:
+    color var(--dur-fast) var(--ease-std),
+    background var(--dur-fast) var(--ease-std);
+}
+.lang-btn:hover {
+  background: var(--surface-3);
+}
+.lang-btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+.lang-flag {
+  font-size: 1rem;
+  line-height: 1;
+}
+.lang-caret {
+  width: 15px;
+  height: 15px;
+  color: var(--muted);
+  transition: transform var(--dur-fast) var(--ease-std);
+}
+.lang-btn[aria-expanded="true"] .lang-caret {
+  transform: rotate(180deg);
+}
+.lang-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  inset-inline-end: 0;
+  z-index: 60;
+  min-width: 168px;
+  margin: 0;
+  padding: 6px;
+  list-style: none;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-tile);
+  box-shadow: var(--el-2);
+}
+.lang-menu[hidden] {
+  display: none;
+}
+.lang-opt {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+  background: 0 0;
+  border: 0;
+  border-radius: var(--r-tile);
+  padding: 9px 10px;
+  cursor: pointer;
+  text-align: start;
+}
+.lang-opt:hover {
+  background: var(--surface-3);
+}
+.lang-opt .lang-flag {
+  font-size: 1.1rem;
+}
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
 .theme-toggle {
   display: inline-flex;
   align-items: center;
@@ -367,13 +468,14 @@ strong {
   width: 38px;
   height: 38px;
   padding: 8px;
-  border: 1px solid var(--line);
+  border: 1px solid transparent;
   border-radius: var(--r-pill);
-  background: 0 0;
-  color: var(--muted);
+  background: var(--surface);
+  color: var(--text);
   cursor: pointer;
   transition:
     color var(--dur-fast) var(--ease-std),
+    background var(--dur-fast) var(--ease-std),
     border-color var(--dur-fast) var(--ease-std);
 }
 .theme-toggle:hover {
@@ -624,7 +726,7 @@ strong {
 .shot-dot.is-on {
   width: 36px;
   border-radius: var(--r-pill);
-  background: var(--primary);
+  background: var(--violet);
   background-clip: content-box;
   opacity: 1;
 }

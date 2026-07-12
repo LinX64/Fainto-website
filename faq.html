@@ -2,12 +2,14 @@
 <html lang="en">
   <head>
     <script src="theme-init.js"></script>
+    <script src="lang-init.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Fainto FAQ — Private AI Budget Tracker</title>
+    <title data-i18n="faq.title">Fainto FAQ — Private AI Budget Tracker</title>
     <meta
       name="description"
       content="Answers about Fainto: is it free, does it work offline, what data it collects, which countries the tax engine covers, and which AI models run on-device."
+      data-i18n-attr="content:faq.desc"
     />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="author" content="Mo" />
@@ -42,7 +44,7 @@
       content="Fainto — a private budget tracker with an on-device AI coach for Android."
     />
     <link rel="preload" as="font" type="font/woff2" href="assets/fonts/lexend-latin.woff2" crossorigin />
-    <link rel="stylesheet" href="styles.css?v=20260712f" />
+    <link rel="stylesheet" href="styles.css?v=20260712g" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -207,118 +209,203 @@
     </script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main" data-i18n="chrome.skip">Skip to content</a>
     <header class="nav" id="top" data-nav>
       <div class="wrap nav-inner">
-        <a class="brand" href="index.html" aria-label="Fainto home">
+        <a class="brand" href="index.html" aria-label="Fainto home" data-i18n-attr="aria-label:nav.brand.aria">
           <img src="assets/logo.svg" width="32" height="32" alt="" /> <span class="brand-name">Fainto</span>
         </a>
-        <nav class="nav-links" aria-label="Primary">
-          <a class="nav-link" href="about.html">About</a> <a class="nav-link" href="features.html">Features</a>
-          <a class="nav-link" href="faq.html" aria-current="page">FAQ</a>
-          <a class="nav-link" href="contact.html">Contact</a> <a class="nav-link" href="index.html#get">Get the app</a>
+        <nav class="nav-links" aria-label="Primary" data-i18n-attr="aria-label:nav.aria">
+          <a class="nav-link" href="about.html" data-i18n="nav.about">About</a>
+          <a class="nav-link" href="features.html" data-i18n="nav.features">Features</a>
+          <a class="nav-link" href="faq.html" aria-current="page" data-i18n="nav.faq">FAQ</a>
+          <a class="nav-link" href="contact.html" data-i18n="nav.contact">Contact</a>
+          <a class="nav-link" href="index.html#get" data-i18n="nav.getapp">Get the app</a>
         </nav>
         <div class="nav-tools">
-          <button class="theme-toggle" type="button" data-theme-toggle aria-label="Switch to light theme">
-            <svg class="glyph icon-sun" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4" /></svg>
-            <svg class="glyph icon-moon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" /></svg>
+          <button
+            class="theme-toggle"
+            type="button"
+            data-theme-toggle
+            aria-label="Switch to light theme"
+            data-i18n-attr="aria-label:nav.theme.aria"
+          >
+            <svg
+              class="glyph icon-sun"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+              />
+            </svg>
+            <svg
+              class="glyph icon-moon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+            </svg>
           </button>
+          <div class="lang" data-lang>
+            <button
+              class="lang-btn"
+              type="button"
+              data-lang-btn
+              aria-haspopup="listbox"
+              aria-expanded="false"
+              aria-label="Language"
+            >
+              <span class="lang-flag" data-lang-flag>🇬🇧</span>
+              <span class="lang-name" data-lang-name>English</span>
+              <svg
+                class="lang-caret"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+            <ul class="lang-menu" data-lang-menu role="listbox" hidden>
+              <li>
+                <button class="lang-opt" type="button" data-lang-opt="en" role="option">
+                  <span class="lang-flag">🇬🇧</span><span>English</span>
+                </button>
+              </li>
+              <li>
+                <button class="lang-opt" type="button" data-lang-opt="de" role="option">
+                  <span class="lang-flag">🇩🇪</span><span>Deutsch</span>
+                </button>
+              </li>
+              <li>
+                <button class="lang-opt" type="button" data-lang-opt="pl" role="option">
+                  <span class="lang-flag">🇵🇱</span><span>Polski</span>
+                </button>
+              </li>
+              <li>
+                <button class="lang-opt" type="button" data-lang-opt="tr" role="option">
+                  <span class="lang-flag">🇹🇷</span><span>Türkçe</span>
+                </button>
+              </li>
+              <li>
+                <button class="lang-opt" type="button" data-lang-opt="fa" role="option">
+                  <span class="lang-flag">🇮🇷</span><span class="lang-fa" lang="fa">فارسی</span>
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
     <main id="main" tabindex="-1">
       <section class="section page">
         <div class="wrap prose">
-          <p class="eyebrow">FAQ</p>
-          <h1>Fainto — frequently asked questions</h1>
+          <p class="eyebrow" data-i18n="faq.eyebrow">FAQ</p>
+          <h1 data-i18n="faq.h1">Fainto — frequently asked questions</h1>
 
           <div class="faq-list">
             <details class="faq-item" open>
-              <summary><h2 class="faq-q">Is Fainto free?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q1">Is Fainto free?</h2></summary>
+              <p data-i18n="faq.a1">
                 Yes. Fainto is free to use, and the core budget tracker and free-tier AI coach cost nothing. A Premium
                 tier unlocks larger on-device AI models and optional Cloud AI, but you can track your money and get
                 coaching without paying.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">Does Fainto need an account?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q2">Does Fainto need an account?</h2></summary>
+              <p data-i18n="faq.a2">
                 No account is required. You can open Fainto and start tracking immediately. Accounts are optional, so
                 you never have to hand over an email to see your own money.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">Does Fainto work offline?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q3">Does Fainto work offline?</h2></summary>
+              <p data-i18n="faq.a3">
                 Yes. The AI models and your data live on the phone, so Fainto works fully offline — you can log spending
                 and get coaching with the network off. The only feature that needs a connection is opt-in Cloud AI,
                 which is off unless you turn it on.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">What data does Fainto collect?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q4">What data does Fainto collect?</h2></summary>
+              <p data-i18n="faq.a4">
                 By default, nothing about your money leaves the device. The website has no cookies, analytics, or
                 trackers, and the app is built so that your financial data stays on your phone. The app can show you 0
                 requests and 0 bytes sent. The only time anything is sent is when you deliberately opt in to Cloud AI.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">Is my financial data uploaded to the cloud?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q5">Is my financial data uploaded to the cloud?</h2></summary>
+              <p data-i18n="faq.a5">
                 Not by default. Fainto is private by architecture, not by policy: your data has nowhere to go unless you
                 choose it. Cloud AI via OpenRouter is the only feature that sends anything out, and it is strictly
                 opt-in — nothing routes to it until you enable it yourself.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">What AI models run on-device in Fainto?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q6">What AI models run on-device in Fainto?</h2></summary>
+              <p data-i18n="faq.a6">
                 Five language models run locally on your phone. On the free tier: SmolLM 135M and Qwen 2.5 0.5B. On
                 Premium: Qwen 2.5 1.5B, DeepSeek R1 1.5B, and Phi-4 Mini 3.8B. All five run on-device, so the coaching
                 happens on your phone rather than on a server.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">What is Cloud AI and is it optional?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q7">What is Cloud AI and is it optional?</h2></summary>
+              <p data-i18n="faq.a7">
                 Cloud AI is an optional Premium feature that routes your questions to a larger model through OpenRouter
                 when your phone can't hold one big enough. It is strictly opt-in and off by default — if you never
                 enable it, nothing about your money is ever sent to the cloud.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">Which countries does the tax engine support?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q8">Which countries does the tax engine support?</h2></summary>
+              <p data-i18n="faq.a8">
                 Fainto's built-in income-tax engine covers 45 countries — 44 country configurations plus a bespoke
                 Poland engine — so the numbers reflect where you actually live rather than a generic default.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">How many languages does Fainto support?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q9">How many languages does Fainto support?</h2></summary>
+              <p data-i18n="faq.a9">
                 The interface is localised in 25 languages, so the app reads naturally in your own language and pairs
                 with the multi-country tax engine for your region.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">Is there an iPhone or iOS version of Fainto?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q10">Is there an iPhone or iOS version of Fainto?</h2></summary>
+              <p data-i18n="faq.a10">
                 Not yet. Fainto is available on Android now, and an iOS version is coming soon. There is no iPhone
                 download link at this time.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">Does Fainto show ads?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q11">Does Fainto show ads?</h2></summary>
+              <p data-i18n="faq.a11">
                 No. There are no ads in Fainto — nothing is wedged between your transactions — and there are no
                 trackers, analytics, or cookies watching what you do.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">Where can I download Fainto?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q12">Where can I download Fainto?</h2></summary>
+              <p data-i18n="faq.a12" data-i18n-html="1">
                 Fainto is on Google Play, listed as "Fainto: AI Finance Coach", at
                 <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener"
                   >https://play.google.com/store/apps/details?id=com.vaultai.app</a
@@ -326,31 +413,33 @@
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">Is Fainto financial advice?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q13">Is Fainto financial advice?</h2></summary>
+              <p data-i18n="faq.a13">
                 No. Fainto provides educational information to help you understand and plan your money, including tax
                 estimates. It is not financial or tax advice.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">How does the on-device AI coach work?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q14">How does the on-device AI coach work?</h2></summary>
+              <p data-i18n="faq.a14">
                 One of five local language models reads your spending and answers your money questions directly on the
                 phone. You can pick a lightweight model for speed or a larger one for more depth, and it all runs
                 without a round trip to the cloud.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">Is Fainto really private if it uses AI?</h2></summary>
-              <p>
+              <summary><h2 class="faq-q" data-i18n="faq.q15">Is Fainto really private if it uses AI?</h2></summary>
+              <p data-i18n="faq.a15">
                 Yes. The AI runs on-device, so using the coach does not send your data anywhere. Because the models are
                 local, private AI and privacy are not a trade-off in Fainto — the coaching happens on your phone by
                 default.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q">What does "private by architecture, not by policy" mean?</h2></summary>
-              <p>
+              <summary>
+                <h2 class="faq-q" data-i18n="faq.q16">What does "private by architecture, not by policy" mean?</h2>
+              </summary>
+              <p data-i18n="faq.a16">
                 It means the privacy guarantee is built into how the app works, not just promised in a document. Your
                 money data stays on the device because it has nowhere else to go by default, rather than because a
                 policy says a company won't misuse it.
@@ -358,31 +447,40 @@
             </details>
           </div>
 
-          <p>
+          <p data-i18n="faq.outro" data-i18n-html="1">
             Want the full picture? <a href="features.html">See the full feature breakdown</a>, or
             <a href="privacy.html">read Fainto's privacy policy</a>.
           </p>
-          <p class="prose-cta"><a class="btn-primary" href="index.html#get">Get the app</a></p>
+          <p class="prose-cta" data-i18n="faq.cta" data-i18n-html="1">
+            <a class="btn-primary" href="index.html#get">Get the app</a>
+          </p>
         </div>
       </section>
     </main>
     <footer class="footer-wrap">
       <div class="wrap footer">
-        <a class="brand" href="index.html" aria-label="Fainto home">
+        <a class="brand" href="index.html" aria-label="Fainto home" data-i18n-attr="aria-label:nav.brand.aria">
           <img src="assets/logo.svg" width="28" height="28" alt="" /> <span class="brand-name">Fainto</span>
         </a>
         <div class="footer-meta">
-          <span>Private by architecture, not by policy.</span> <span aria-hidden="true">·</span>
-          <a href="about.html">About</a> <span aria-hidden="true">·</span> <a href="features.html">Features</a>
-          <span aria-hidden="true">·</span> <a href="faq.html">FAQ</a> <span aria-hidden="true">·</span>
-          <a href="contact.html">Contact</a> <span aria-hidden="true">·</span> <a href="privacy.html">Privacy</a>
-          <span aria-hidden="true">·</span> <span>Educational information, not financial advice.</span>
-          <span aria-hidden="true">·</span> <span>&copy; 2026 Fainto</span>
+          <span data-i18n="footer.tagline">Private by architecture, not by policy.</span>
+          <span aria-hidden="true">·</span> <a href="about.html" data-i18n="footer.link.about">About</a>
+          <span aria-hidden="true">·</span>
+          <a href="features.html" data-i18n="footer.link.features">Features</a>
+          <span aria-hidden="true">·</span> <a href="faq.html" data-i18n="footer.link.faq">FAQ</a>
+          <span aria-hidden="true">·</span> <a href="contact.html" data-i18n="footer.link.contact">Contact</a>
+          <span aria-hidden="true">·</span>
+          <a href="privacy.html" data-i18n="footer.link.privacy">Privacy</a>
+          <span aria-hidden="true">·</span>
+          <span data-i18n="footer.disclaimer">Educational information, not financial advice.</span>
+          <span aria-hidden="true">·</span> <span data-i18n="footer.copyright">&copy; 2026 Fainto</span>
         </div>
       </div>
-      <p class="made">Developed &amp; designed with ❤️ in Poland.</p>
+      <p class="made" data-i18n="footer.made">Developed &amp; designed with ❤️ in Poland.</p>
     </footer>
     <script src="theme.js" defer="defer"></script>
+    <script src="i18n.js" defer="defer"></script>
+    <script src="lang.js" defer="defer"></script>
     <script src="app.js" defer="defer"></script>
   </body>
 </html>
