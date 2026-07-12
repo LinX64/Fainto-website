@@ -310,7 +310,7 @@ strong {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  background: var(--bg);
   border-bottom: 1px solid var(--line);
   transition: box-shadow var(--dur-fast) var(--ease-std);
 }
