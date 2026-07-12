@@ -402,6 +402,13 @@ strong {
   font-size: 1rem;
   line-height: 1;
 }
+.lang-flag svg,
+.lang-flag img {
+  display: block;
+  width: 19px;
+  height: 14px;
+  border-radius: 2px;
+}
 .lang-caret {
   width: 15px;
   height: 15px;

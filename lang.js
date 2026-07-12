@@ -7,7 +7,7 @@
     de: { flag: "🇩🇪", name: "Deutsch" },
     pl: { flag: "🇵🇱", name: "Polski" },
     tr: { flag: "🇹🇷", name: "Türkçe" },
-    fa: { flag: "🇮🇷", name: "فارسی" },
+    fa: { flag: "", name: "فارسی" },
   };
   var DICT = window.__I18N || {};
 
@@ -46,7 +46,8 @@
 
     var fl = document.querySelector("[data-lang-flag]");
     var nm = document.querySelector("[data-lang-name]");
-    if (fl) fl.textContent = META[lang].flag;
+    var src = document.querySelector('[data-lang-opt="' + lang + '"] .lang-flag');
+    if (fl) fl.innerHTML = src ? src.innerHTML : META[lang].flag;
     if (nm) nm.textContent = META[lang].name;
   }
 
