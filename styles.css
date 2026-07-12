@@ -1068,20 +1068,6 @@ textarea.input {
   color: var(--muted);
   font-size: 0.9rem;
 }
-.js-motion .reveal {
-  opacity: 0;
-  translate: 0 12px;
-  transition:
-    opacity 400ms ease-out,
-    translate 400ms ease-out;
-}
-.js-motion .reveal.in {
-  opacity: 1;
-  translate: 0 0;
-}
-.js-motion .hero-stage.in {
-  transition-delay: 120ms;
-}
 @media (max-width: 920px) {
   .hero-grid {
     grid-template-columns: 1fr;
