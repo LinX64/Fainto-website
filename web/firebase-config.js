@@ -27,12 +27,12 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-aut
 import { getFirestore } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 export const FIREBASE_WEB_CONFIG = {
-  apiKey: "AIzaSyBllBk40CEftHoJTolOec03Zx3LgDPxy5g",
+  apiKey: "REPLACE_WITH_FIREBASE_WEB_API_KEY",
   authDomain: "vaultai-26d8f.firebaseapp.com",
   projectId: "vaultai-26d8f",
   storageBucket: "vaultai-26d8f.firebasestorage.app",
   messagingSenderId: "860764082981",
-  appId: "1:860764082981:web:2289c87da2466fdaef00cc",
+  appId: "REPLACE_WITH_FIREBASE_WEB_APP_ID",
 };
 
 const PLACEHOLDER_PREFIX = "REPLACE_WITH_";
