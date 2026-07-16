@@ -170,6 +170,19 @@ footer.site-footer {
 }
 footer.site-footer a { text-decoration: underline; }
 </style>
+<style>
+  html[data-mode="connect"] #panel-signin,
+  html[data-mode="signin"] #panel-qr { display: none; }
+  html[data-mode="connect"] .gate-grid,
+  html[data-mode="signin"] .gate-grid { grid-template-columns: minmax(0, 460px); justify-content: center; }
+  html[data-mode] .intro p { display: none; }
+</style>
+<script>
+  (function () {
+    var m = new URLSearchParams(location.search).get('mode');
+    if (m === 'connect' || m === 'signin') document.documentElement.setAttribute('data-mode', m);
+  }());
+</script>
 </head>
 <body>
 <div class="page">
