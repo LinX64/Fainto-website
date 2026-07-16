@@ -56,6 +56,7 @@ jobs:
           mirror -R --parallel=1 --verbose \
             --exclude-glob '*.md' \
             --exclude-glob '.DS_Store' \
+            --exclude-glob 'firebase-config.js' \
             --exclude '\.git' \
             --exclude '\.github/' \
             --exclude '\.claude/' \

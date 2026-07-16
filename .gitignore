@@ -4,6 +4,7 @@
 .vscode/
 
 # Secrets — never commit or deploy
+web/firebase-config.js
 .env
 .env.*
 *.key
