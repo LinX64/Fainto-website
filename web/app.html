@@ -217,7 +217,7 @@ footer.site-footer a { text-decoration: underline; }
 
       <ol class="qr-steps">
         <li>Make sure your phone and this computer are on the <strong>same Wi‑Fi network</strong> (client/AP isolation off).</li>
-        <li>Open Fainto → Settings → Connect to Web.</li>
+        <li>Open Fainto → Settings → Privacy &amp; Data → Export &amp; Backup → <strong>Connect to Web</strong> → <strong>Scan QR code</strong>.</li>
         <li>Scan the code below.</li>
       </ol>
 
@@ -1437,7 +1437,9 @@ if (!isFirebaseConfigured()) {
     var db = getFirebaseFirestore();
     var sessionId = makeSessionId();
     var pc = new RTCPeerConnection({ iceServers: ICE_SERVERS });
-    var channel = pc.createDataChannel('fainto-bundle', { ordered: true });
+    // Must match Android's WebRtcSessionManagerImpl.EXPECTED_DATA_CHANNEL_LABEL exactly —
+    // the answerer rejects any channel whose label differs and tears down the connection.
+    var channel = pc.createDataChannel('faintoBundle', { ordered: true });
     var docRef = doc(db, SIGNALING_COLLECTION, sessionId);
     var callerCandidatesRef = collection(docRef, 'callerCandidates');
     var calleeCandidatesRef = collection(docRef, 'calleeCandidates');
