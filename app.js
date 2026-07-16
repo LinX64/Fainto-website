@@ -7,18 +7,49 @@
     (function () {
       var e = document.querySelector("[data-nav]");
       if (e) {
-        var t = !1;
-        window.addEventListener(
-          "scroll",
-          function () {
-            t || ((t = !0), requestAnimationFrame(n));
-          },
-          { passive: !0 },
-        ),
+        var t = !1,
+          i = Math.max(0, window.scrollY),
+          r = 0,
+          g = Date.now() + (location.hash ? 1400 : 700),
+          o = window.matchMedia("(max-width: 720px)");
+        o.addEventListener &&
+          o.addEventListener("change", function (t) {
+            t.matches || ((r = 0), e.classList.remove("nav-hide"));
+          }),
+          window.addEventListener(
+            "hashchange",
+            function () {
+              g = Date.now() + 1400;
+            },
+            { passive: !0 },
+          ),
+          window.addEventListener(
+            "scroll",
+            function () {
+              t || ((t = !0), requestAnimationFrame(n));
+            },
+            { passive: !0 },
+          ),
+          e.addEventListener("focusin", function () {
+            e.classList.contains("nav-hide") &&
+              ((e.style.transition = "none"), e.classList.remove("nav-hide"), void e.offsetHeight, (e.style.transition = ""));
+          }),
           n();
       }
       function n() {
-        e.classList.toggle("is-scrolled", window.scrollY > 8), (t = !1);
+        var a = Math.max(0, Math.min(window.scrollY, document.documentElement.scrollHeight - window.innerHeight)),
+          d = a - i;
+        e.classList.toggle("is-scrolled", a > 8),
+          o.matches
+            ? Math.abs(d) > window.innerHeight
+              ? (e.classList.remove("nav-hide"), (r = 0))
+              : ((r = d ? ((d >= 0) === (r >= 0) ? r + d : d) : r),
+                a <= 96 || r < -12
+                  ? e.classList.remove("nav-hide")
+                  : r > 12 && Date.now() >= g && !e.contains(document.activeElement) && e.classList.add("nav-hide"))
+            : e.classList.remove("nav-hide"),
+          (i = a),
+          (t = !1);
       }
     })(),
     (function () {

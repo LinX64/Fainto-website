@@ -44,7 +44,7 @@
     />
     <link rel="preload" as="font" type="font/woff2" href="assets/fonts/lexend-latin.woff2" crossorigin />
     <link rel="preload" as="image" href="assets/screens/overview.avif" type="image/avif" fetchpriority="high" />
-    <link rel="stylesheet" href="styles.css?v=20260713a" />
+    <link rel="stylesheet" href="styles.css?v=20260716" />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -243,11 +243,8 @@
         <div class="hero-wash" aria-hidden="true"></div>
         <div class="wrap hero-grid">
           <div class="hero-copy">
-            <h1 id="hero-title" data-i18n="hero.h1">See where your money goes. Nothing leaves your phone.</h1>
-            <p class="lede" data-i18n="hero.lede">
-              A private budget tracker with an on-device AI coach — real language models that read your spending, not
-              the cloud.
-            </p>
+            <h1 id="hero-title" data-i18n="hero.h1">See where your money goes — nothing leaves your phone.</h1>
+            <p class="lede" data-i18n="hero.lede">A private budget tracker with an on-device AI coach — not the cloud.</p>
             <div class="cta-row">
               <a
                 class="btn-primary btn-store"
@@ -282,6 +279,29 @@
                   ><small data-i18n="store.appstore.small">Coming soon</small><strong>App&nbsp;Store</strong></span
                 >
               </span>
+              <a
+                class="btn-store btn-web"
+                href="web/"
+                aria-label="Open Fainto Web in your browser"
+                data-i18n-attr="aria-label:store.web.aria"
+              >
+                <svg
+                  class="glyph"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.7"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <circle cx="12" cy="12" r="9" />
+                  <path d="M3 12h18M12 3c2.5 2.6 3.9 5.7 3.9 9s-1.4 6.4-3.9 9c-2.5-2.6-3.9-5.7-3.9-9s1.4-6.4 3.9-9z" />
+                </svg>
+                <span class="btn-store-text"
+                  ><small data-i18n="store.web.small">Open</small><strong>Fainto&nbsp;Web</strong></span
+                >
+              </a>
             </div>
             <ul class="trio" role="list">
               <li data-i18n="hero.trio.free">Free</li>
@@ -568,6 +588,29 @@
                 ><small data-i18n="store.appstore.small">Coming soon</small><strong>App&nbsp;Store</strong></span
               >
             </span>
+            <a
+              class="btn-store btn-web"
+              href="web/"
+              aria-label="Open Fainto Web in your browser"
+              data-i18n-attr="aria-label:store.web.aria"
+            >
+              <svg
+                class="glyph"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="9" />
+                <path d="M3 12h18M12 3c2.5 2.6 3.9 5.7 3.9 9s-1.4 6.4-3.9 9c-2.5-2.6-3.9-5.7-3.9-9s1.4-6.4 3.9-9z" />
+              </svg>
+              <span class="btn-store-text"
+                ><small data-i18n="store.web.small">Open</small><strong>Fainto&nbsp;Web</strong></span
+              >
+            </a>
           </div>
           <a
             class="ph-badge"
@@ -605,6 +648,10 @@
             data-i18n="footer.link.googleplay"
             >Google&nbsp;Play</a
           >
+          <span aria-hidden="true">·</span>
+          <a href="web/" aria-label="Open Fainto Web in your browser" data-i18n-attr="aria-label:store.web.aria"
+            >Fainto&nbsp;Web</a
+          >
           <span aria-hidden="true">·</span> <a href="about.html" data-i18n="footer.link.about">About</a>
           <span aria-hidden="true">·</span>
           <a href="features.html" data-i18n="footer.link.features">Features</a> <span aria-hidden="true">·</span>
@@ -620,8 +667,8 @@
       <p class="made" data-i18n="footer.made">Developed &amp; designed with ❤️ in Poland.</p>
     </footer>
     <script src="theme.js" defer="defer"></script>
-    <script src="i18n.js" defer="defer"></script>
+    <script src="i18n.js?v=20260716" defer="defer"></script>
     <script src="lang.js?v=20260713a" defer="defer"></script>
-    <script src="app.js" defer="defer"></script>
+    <script src="app.js?v=20260716" defer="defer"></script>
   </body>
 </html>
