@@ -24,6 +24,83 @@
   function numOrNull(v) { return (typeof v === 'number' && isFinite(v)) ? v : null; }
   function str(v, fallback) { return (typeof v === 'string' && v.length > 0) ? v : (fallback || ''); }
 
+  /* ---- Category + icon visuals (mirrored from the app: TransactionHelpers + SelectableIcons) ----
+     Only the iconKey STRING syncs to the phone; these inline Lucide (MIT) SVGs are just how the web
+     draws it. Unknown keys fall back to the category's default icon. */
+  var ICON_PATHS = {
+    'beer': '<path d="M17 11h1a3 3 0 0 1 0 6h-1" /><path d="M9 12v6" /><path d="M13 12v6" /><path d="M14 7.5c-1 0-1.44.5-3 .5s-2-.5-3-.5-1.72.5-2.5.5a2.5 2.5 0 0 1 0-5c.78 0 1.57.5 2.5.5S9.44 2 11 2s2 1.5 3 1.5 1.72-.5 2.5-.5a2.5 2.5 0 0 1 0 5c-.78 0-1.5-.5-2.5-.5Z" /><path d="M5 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8" />',
+    'book': '<path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20" />',
+    'briefcase': '<path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" /><rect width="20" height="14" x="2" y="6" rx="2" />',
+    'bus': '<path d="M8 6v6" /><path d="M15 6v6" /><path d="M2 12h19.6" /><path d="M18 18h3s.5-1.7.8-2.8c.1-.4.2-.8.2-1.2 0-.4-.1-.8-.2-1.2l-1.4-5C20.1 6.8 19.1 6 18 6H4a2 2 0 0 0-2 2v10h3" /><circle cx="7" cy="18" r="2" /><path d="M9 18h5" /><circle cx="16" cy="18" r="2" />',
+    'car': '<path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2" /><circle cx="7" cy="17" r="2" /><path d="M9 17h6" /><circle cx="17" cy="17" r="2" />',
+    'circle': '<circle cx="12" cy="12" r="10" />',
+    'coffee': '<path d="M10 2v2" /><path d="M14 2v2" /><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1" /><path d="M6 2v2" />',
+    'credit-card': '<rect width="20" height="14" x="2" y="5" rx="2" /><line x1="2" x2="22" y1="10" y2="10" />',
+    'dog': '<path d="M11.25 16.25h1.5L12 17z" /><path d="M16 14v.5" /><path d="M4.42 11.247A13.152 13.152 0 0 0 4 14.556C4 18.728 7.582 21 12 21s8-2.272 8-6.444a11.702 11.702 0 0 0-.493-3.309" /><path d="M8 14v.5" /><path d="M8.5 8.5c-.384 1.05-1.083 2.028-2.344 2.5-1.931.722-3.576-.297-3.656-1-.113-.994 1.177-6.53 4-7 1.923-.321 3.651.845 3.651 2.235A7.497 7.497 0 0 1 14 5.277c0-1.39 1.844-2.598 3.767-2.277 2.823.47 4.113 6.006 4 7-.08.703-1.725 1.722-3.656 1-1.261-.472-1.855-1.45-2.239-2.5" />',
+    'dumbbell': '<path d="M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z" /><path d="m2.5 21.5 1.4-1.4" /><path d="m20.1 3.9 1.4-1.4" /><path d="M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z" /><path d="m9.6 14.4 4.8-4.8" />',
+    'film': '<rect width="18" height="18" x="3" y="3" rx="2" /><path d="M7 3v18" /><path d="M3 7.5h4" /><path d="M3 12h18" /><path d="M3 16.5h4" /><path d="M17 3v18" /><path d="M17 7.5h4" /><path d="M17 16.5h4" />',
+    'fuel': '<path d="M14 13h2a2 2 0 0 1 2 2v2a2 2 0 0 0 4 0v-6.998a2 2 0 0 0-.59-1.42L18 5" /><path d="M14 21V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v16" /><path d="M2 21h13" /><path d="M3 9h11" />',
+    'gamepad-2': '<line x1="6" x2="10" y1="11" y2="11" /><line x1="8" x2="8" y1="9" y2="13" /><line x1="15" x2="15.01" y1="12" y2="12" /><line x1="18" x2="18.01" y1="10" y2="10" /><path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" />',
+    'gift': '<path d="M12 7v14" /><path d="M20 11v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-8" /><path d="M7.5 7a1 1 0 0 1 0-5A4.8 8 0 0 1 12 7a4.8 8 0 0 1 4.5-5 1 1 0 0 1 0 5" /><rect x="3" y="7" width="18" height="4" rx="1" />',
+    'graduation-cap': '<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z" /><path d="M22 10v6" /><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5" />',
+    'heart': '<path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />',
+    'heart-pulse': '<path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /><path d="M3.22 13H9.5l.5-1 2 4.5 2-7 1.5 3.5h5.27" />',
+    'house': '<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8" /><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />',
+    'music': '<path d="M9 18V5l12-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="18" cy="16" r="3" />',
+    'piggy-bank': '<path d="M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-4V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1z" /><path d="M16 10h.01" /><path d="M2 8v1a2 2 0 0 0 2 2h1" />',
+    'pill': '<path d="m10.5 20.5 10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z" /><path d="m8.5 8.5 7 7" />',
+    'pizza': '<path d="m12 14-1 1" /><path d="m13.75 18.25-1.25 1.42" /><path d="M17.775 5.654a15.68 15.68 0 0 0-12.121 12.12" /><path d="M18.8 9.3a1 1 0 0 0 2.1 7.7" /><path d="M21.964 20.732a1 1 0 0 1-1.232 1.232l-18-5a1 1 0 0 1-.695-1.232A19.68 19.68 0 0 1 15.732 2.037a1 1 0 0 1 1.232.695z" />',
+    'plane': '<path d="M17.8 19.2 16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.5 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z" />',
+    'shirt': '<path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z" />',
+    'shopping-cart': '<circle cx="8" cy="21" r="1" /><circle cx="19" cy="21" r="1" /><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />',
+    'smartphone': '<rect width="14" height="20" x="5" y="2" rx="2" ry="2" /><path d="M12 18h.01" />',
+    'star': '<path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />',
+    'trending-down': '<path d="M16 17h6v-6" /><path d="m22 17-8.5-8.5-5 5L2 7" />',
+    'trending-up': '<path d="M16 7h6v6" /><path d="m22 7-8.5 8.5-5-5L2 17" />',
+    'utensils': '<path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" />',
+    'wallet': '<path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1" /><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4" />',
+    'wifi': '<path d="M12 20h.01" /><path d="M2 8.82a15 15 0 0 1 20 0" /><path d="M5 12.859a10 10 0 0 1 14 0" /><path d="M8.5 16.429a5 5 0 0 1 7 0" />',
+    'zap': '<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z" />'
+  };
+  // app iconKey -> ICON_PATHS name (the subset offered in the web picker; the phone has all 54)
+  var ICONKEY_SVG = {
+    car: 'car', bus: 'bus', plane: 'plane', fuel: 'fuel', house: 'house', savings: 'piggy-bank',
+    wallet: 'wallet', card: 'credit-card', food: 'utensils', pizza: 'pizza', coffee: 'coffee',
+    beer: 'beer', shopping: 'shopping-cart', clothing: 'shirt', health: 'heart-pulse', pill: 'pill',
+    fitness: 'dumbbell', utilities: 'zap', internet: 'wifi', gaming: 'gamepad-2', music: 'music',
+    movies: 'film', book: 'book', work: 'briefcase', education: 'graduation-cap', phone: 'smartphone',
+    pet: 'dog', gift: 'gift', heart: 'heart', star: 'star'
+  };
+  // category -> { label, color token, default icon } — mirrors the app's TransactionCategory.icon()
+  var CATS = {
+    FOOD:          { label: 'Food',          color: 'var(--orange)',      icon: 'utensils' },
+    HOUSING:       { label: 'Housing',       color: 'var(--blue-deep)',   icon: 'house' },
+    TRANSPORT:     { label: 'Transport',     color: 'var(--acc-brand)',   icon: 'car' },
+    UTILITIES:     { label: 'Utilities',     color: 'var(--yellow)',      icon: 'zap' },
+    ENTERTAINMENT: { label: 'Entertainment', color: 'var(--purple-deep)', icon: 'gamepad-2' },
+    HEALTH:        { label: 'Health',        color: 'var(--acc-spend)',   icon: 'heart-pulse' },
+    SHOPPING:      { label: 'Shopping',      color: 'var(--orange-deep)', icon: 'shopping-cart' },
+    SAVINGS:       { label: 'Savings',       color: 'var(--green)',       icon: 'trending-up' },
+    SALARY:        { label: 'Salary',        color: 'var(--green-deep)',  icon: 'trending-down' },
+    EDUCATION:     { label: 'Education',     color: 'var(--yellow-deep)', icon: 'graduation-cap' },
+    OTHER:         { label: 'Other',         color: 'var(--muted)',       icon: 'circle' }
+  };
+  var CATEGORY_ORDER = ['FOOD', 'HOUSING', 'TRANSPORT', 'UTILITIES', 'ENTERTAINMENT', 'HEALTH', 'SHOPPING', 'SAVINGS', 'SALARY', 'EDUCATION', 'OTHER'];
+  // app iconKeys offered in the optional override picker
+  var PICK_ICON_KEYS = ['food', 'coffee', 'pizza', 'beer', 'shopping', 'clothing', 'car', 'bus', 'plane', 'fuel', 'house', 'wallet', 'card', 'savings', 'gift', 'health', 'pill', 'fitness', 'utilities', 'internet', 'gaming', 'music', 'movies', 'book', 'work', 'education', 'phone', 'pet', 'heart', 'star'];
+
+  function iconSvg(name) {
+    var p = ICON_PATHS[name];
+    if (!p) return '';
+    return '<svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + p + '</svg>';
+  }
+  function catMeta(category) { return CATS[category] || CATS.OTHER; }
+  function txIconName(iconKey, category) {
+    if (iconKey && ICONKEY_SVG[iconKey]) return ICONKEY_SVG[iconKey];
+    return catMeta(category).icon;
+  }
+  function iconKeySvg(iconKey) { return iconSvg(ICONKEY_SVG[iconKey] || 'circle'); }
+
   function sanitizeTransaction(raw) {
     if (!isObj(raw)) return null;
     var ts = numOrNull(raw.timestampMillis);
@@ -38,6 +115,8 @@
       note: typeof raw.note === 'string' ? raw.note : '',
       foreignAmount: numOrNull(raw.foreignAmount),
       foreignCurrency: typeof raw.foreignCurrency === 'string' ? raw.foreignCurrency : null,
+      // Per-transaction icon override (syncs to the phone); null → use the category's default icon.
+      iconKey: (typeof raw.iconKey === 'string' && raw.iconKey.length > 0) ? raw.iconKey : null,
       // Stable identity carried through so interactive callers can identify a row.
       // A missing id does NOT drop the transaction.
       id: str(raw.id, ''),
@@ -514,7 +593,9 @@
 
   function buildRow(opts) {
     return '<div class="row' + (opts.extra ? ' row-extra' : '') + '"' + (opts.extra ? ' style="display:none;"' : '') + '>' +
-      '<span class="accent-bar" style="background:' + opts.color + '"></span>' +
+      (opts.iconHtml
+        ? '<span class="row-icon" style="color:' + opts.color + '">' + opts.iconHtml + '</span>'
+        : '<span class="accent-bar" style="background:' + opts.color + '"></span>') +
       '<div class="row-main">' +
         '<div class="row-name">' + escapeHtml(opts.name) + '</div>' +
         (opts.descHtml ? '<div class="row-desc">' + opts.descHtml + '</div>' : '') +
@@ -655,15 +736,17 @@
 
   function txRowHtml(t, currency, interactive) {
     var isIncome = t.type === 'INCOME';
-    var color = isIncome ? 'var(--green)' : 'var(--orange)';
+    var cat = catMeta(t.category);
     var sign = isIncome ? '+' : '−';
     var foreignBadge = (t.foreignAmount !== null && t.foreignCurrency) ?
       '<span class="badge">' + t.foreignAmount.toFixed(2) + ' ' + escapeHtml(t.foreignCurrency) + '</span>' : '';
     var opts = {
-      color: color,
+      color: cat.color,                                         // icon badge tinted by category
+      iconHtml: iconSvg(txIconName(t.iconKey, t.category)),     // override icon, else category default
       name: titleCase(t.category),
       descHtml: formatDate(t.timestampMillis) + (t.note ? ' &middot; ' + escapeHtml(t.note) : ''),
-      amountHtml: sign + formatMoney(Math.abs(t.amount), currency) + foreignBadge,
+      amountHtml: '<span style="color:' + (isIncome ? 'var(--green)' : 'var(--acc-spend)') + '">' +
+        sign + formatMoney(Math.abs(t.amount), currency) + '</span>' + foreignBadge,
     };
     if (interactive) {
       var rowId = escapeHtml(t.__docId || t.id || '');
@@ -841,5 +924,12 @@
     formatMoney: formatMoney,
     formatDate: formatDate,
     renderDashboard: renderDashboard,
+    // Category + icon catalog for the interactive add/edit pickers in app.html.
+    categories: CATS,
+    categoryOrder: CATEGORY_ORDER,
+    pickIconKeys: PICK_ICON_KEYS,
+    iconSvg: iconSvg,
+    iconKeySvg: iconKeySvg,
+    catMeta: catMeta,
   };
 }());

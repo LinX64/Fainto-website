@@ -744,6 +744,38 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
   .account-dash .row { flex-wrap: wrap; }
   .account-dash .row-actions { flex-basis: 100%; justify-content: flex-end; margin-left: 0; margin-top: var(--sp-xs); }
 }
+
+/* Category-tinted icon badge on transaction rows */
+.fic { display: block; }
+.row .row-icon { flex: none; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; background: var(--surface-2); }
+.row .row-icon .fic { width: 18px; height: 18px; }
+
+/* Visual category picker (color + icon chips) */
+.cat-picker { display: grid; grid-template-columns: repeat(auto-fill, minmax(94px, 1fr)); gap: var(--sp-sm); }
+.cat-chip { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 10px 6px; border: 1px solid var(--line); border-radius: 14px; background: transparent; cursor: pointer; font-family: inherit; font-size: 12px; }
+.cat-chip .cat-chip-ic { width: 34px; height: 34px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; background: var(--surface-2); color: var(--chip); }
+.cat-chip .cat-chip-ic .fic { width: 19px; height: 19px; }
+.cat-chip .cat-chip-label { color: var(--muted); }
+.cat-chip:hover { border-color: var(--outline); }
+.cat-chip[aria-pressed="true"] { border-color: var(--chip); background: var(--surface-2); }
+.cat-chip[aria-pressed="true"] .cat-chip-label { color: var(--text); }
+.cat-chip:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }
+
+/* Optional icon override picker */
+.icon-toggle { margin-bottom: var(--sp-sm); }
+.icon-picker { display: grid; grid-template-columns: repeat(auto-fill, minmax(44px, 1fr)); gap: 6px; margin-top: var(--sp-sm); }
+.icon-picker[hidden] { display: none; }
+.icon-opt { width: 100%; aspect-ratio: 1 / 1; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 12px; background: transparent; color: var(--muted); cursor: pointer; }
+.icon-opt .fic { width: 20px; height: 20px; }
+.icon-opt:hover { border-color: var(--outline); color: var(--text); }
+.icon-opt[aria-pressed="true"] { border-color: var(--acc-brand); color: var(--text); background: var(--surface-2); }
+.icon-opt:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }
+
+/* Horizontal transaction list on wide screens (was one long vertical column) */
+@media (min-width: 760px) {
+  #sec-transactions .rows { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--sp-xl); }
+  #sec-transactions .rows .row:nth-child(2) { border-top: none; }
+}
 .tx-add {
   margin-left: auto;
   border: 1px solid var(--line);
@@ -959,20 +991,12 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
         </div>
       </div>
       <div class="field">
-        <label for="expCategory">Category</label>
-        <select id="expCategory">
-          <option value="FOOD">Food</option>
-          <option value="HOUSING">Housing</option>
-          <option value="TRANSPORT">Transport</option>
-          <option value="UTILITIES">Utilities</option>
-          <option value="ENTERTAINMENT">Entertainment</option>
-          <option value="HEALTH">Health</option>
-          <option value="SHOPPING">Shopping</option>
-          <option value="SAVINGS">Savings</option>
-          <option value="SALARY">Salary</option>
-          <option value="EDUCATION">Education</option>
-          <option value="OTHER" selected>Other</option>
-        </select>
+        <label id="catPickerLabel">Category</label>
+        <div class="cat-picker" id="expCatPicker" role="group" aria-labelledby="catPickerLabel"></div>
+      </div>
+      <div class="field">
+        <button type="button" class="link-btn icon-toggle" id="iconToggle" aria-expanded="false" aria-controls="expIconPicker">Choose an icon <span class="opt">(optional)</span></button>
+        <div class="icon-picker" id="expIconPicker" role="group" aria-label="Transaction icon" hidden></div>
       </div>
       <div class="field">
         <label for="expNote">Note <span class="opt">(optional)</span></label>
@@ -1629,7 +1653,7 @@ var QRCode;
 })();
 </script>
 
-<script src="dashboard-core.js?v=20260717e"></script>
+<script src="dashboard-core.js?v=20260717f"></script>
 <script type="module">
 import {
   getFirebaseAuth,
@@ -1729,6 +1753,7 @@ function buildTxObj(inp) {
     note: String(inp.note == null ? '' : inp.note).slice(0, 500),
   };
   if (inp.importSource === 'CSV' || inp.importSource === 'MANUAL') obj.importSource = inp.importSource;
+  if (typeof inp.iconKey === 'string' && inp.iconKey.length > 0) obj.iconKey = inp.iconKey; // syncs to phone
   return obj;
 }
 
@@ -2293,7 +2318,9 @@ if (!isFirebaseConfigured()) {
   function wireAccount() {
     var expForm = qs('expenseForm');
     var amtInput = qs('expAmount');
-    var catSelect = qs('expCategory');
+    var catPicker = qs('expCatPicker');
+    var iconPicker = qs('expIconPicker');
+    var iconToggle = qs('iconToggle');
     var dateInput = qs('expDate');
     var noteInput = qs('expNote');
     var typeExpBtn = qs('expTypeExpense');
@@ -2316,6 +2343,57 @@ if (!isFirebaseConfigured()) {
     var dashTxById = {};   // (docId||id) -> full raw transaction, for edit fidelity
     var dashTxCount = 0;   // authoritative Firestore doc count, for the last-item delete guard
     var busy = false;
+
+    // ---- Category + icon pickers (visuals from dashboard-core's shared catalog) ----
+    var FD = window.FaintoDashboard || {};
+    var selectedCategory = 'OTHER';
+    var selectedIconKey = null;
+    function buildCatPicker() {
+      if (!catPicker || !FD.categoryOrder) return;
+      catPicker.innerHTML = FD.categoryOrder.map(function (key) {
+        var c = FD.categories[key];
+        return '<button type="button" class="cat-chip" data-cat="' + key + '" aria-pressed="false" style="--chip:' + c.color + '">' +
+          '<span class="cat-chip-ic">' + FD.iconSvg(c.icon) + '</span>' +
+          '<span class="cat-chip-label">' + c.label + '</span></button>';
+      }).join('');
+      catPicker.addEventListener('click', function (e) {
+        var btn = e.target.closest ? e.target.closest('.cat-chip') : null;
+        if (btn && btn.getAttribute('data-cat')) setCategory(btn.getAttribute('data-cat'));
+      });
+    }
+    function setCategory(key) {
+      selectedCategory = (FD.categories && FD.categories[key]) ? key : 'OTHER';
+      if (catPicker) Array.prototype.forEach.call(catPicker.querySelectorAll('.cat-chip'), function (b) {
+        b.setAttribute('aria-pressed', String(b.getAttribute('data-cat') === selectedCategory));
+      });
+      // Keep the "default" icon option previewing the current category's icon.
+      var defBtn = iconPicker && iconPicker.querySelector('.icon-opt[data-icon=""]');
+      if (defBtn && FD.iconSvg && FD.catMeta) defBtn.innerHTML = FD.iconSvg(FD.catMeta(selectedCategory).icon);
+    }
+    function buildIconPicker() {
+      if (!iconPicker || !FD.pickIconKeys) return;
+      var def = '<button type="button" class="icon-opt" data-icon="" aria-pressed="true" title="Category default">' +
+        FD.iconSvg(FD.catMeta(selectedCategory).icon) + '</button>';
+      iconPicker.innerHTML = def + FD.pickIconKeys.map(function (k) {
+        return '<button type="button" class="icon-opt" data-icon="' + k + '" aria-pressed="false" title="' + k + '">' + FD.iconKeySvg(k) + '</button>';
+      }).join('');
+      iconPicker.addEventListener('click', function (e) {
+        var btn = e.target.closest ? e.target.closest('.icon-opt') : null;
+        if (btn) setIcon(btn.getAttribute('data-icon') || null);
+      });
+    }
+    function setIcon(key) {
+      selectedIconKey = key || null;
+      if (iconPicker) Array.prototype.forEach.call(iconPicker.querySelectorAll('.icon-opt'), function (b) {
+        b.setAttribute('aria-pressed', String((b.getAttribute('data-icon') || null) === selectedIconKey));
+      });
+    }
+    if (iconToggle) iconToggle.addEventListener('click', function () {
+      var open = iconPicker.hidden;
+      iconPicker.hidden = !open;
+      iconToggle.setAttribute('aria-expanded', String(open));
+    });
+    buildCatPicker(); buildIconPicker(); setCategory('OTHER');
 
     // #csvStatus holds a persistent spinner + a text span; update text without wiping the spinner.
     function setCsvStatus(text, done) {
@@ -2353,7 +2431,9 @@ if (!isFirebaseConfigured()) {
       editBanner.classList.remove('on');
       submitBtn.textContent = 'Add & sync';
       amtInput.value = ''; noteInput.value = '';
-      catSelect.value = 'OTHER';
+      setCategory('OTHER'); setIcon(null);
+      if (iconPicker) iconPicker.hidden = true;
+      if (iconToggle) iconToggle.setAttribute('aria-expanded', 'false');
       dateInput.value = todayIso();
       setType('EXPENSE');
       expForm.hidden = true; // collapsed by default — opened by Add/Edit, keeps the view compact
@@ -2376,7 +2456,8 @@ if (!isFirebaseConfigured()) {
       editingOriginal = full;
       amtInput.value = String(full.amount);
       setType(full.type === 'INCOME' ? 'INCOME' : 'EXPENSE');
-      catSelect.value = CATEGORY_SET[full.category] ? full.category : 'OTHER';
+      setCategory(CATEGORY_SET[full.category] ? full.category : 'OTHER');
+      setIcon(full.iconKey || null);
       dateInput.value = millisToIso(full.timestampMillis);
       noteInput.value = full.note || '';
       submitBtn.textContent = 'Save changes';
@@ -2511,11 +2592,12 @@ if (!isFirebaseConfigured()) {
         tx.id = editingOriginal.id;
         tx.amount = Math.abs(amount);
         tx.type = txType;
-        tx.category = CATEGORY_SET[catSelect.value] ? catSelect.value : coerceCategory(catSelect.value);
+        tx.category = selectedCategory;
+        if (selectedIconKey) tx.iconKey = selectedIconKey; else delete tx.iconKey;
         tx.timestampMillis = Math.round(ts);
         tx.note = String(noteInput.value == null ? '' : noteInput.value).slice(0, 500);
       } else {
-        tx = buildTxObj({ amount: amount, type: txType, category: catSelect.value, timestampMillis: ts, note: noteInput.value, importSource: 'MANUAL' });
+        tx = buildTxObj({ amount: amount, type: txType, category: selectedCategory, iconKey: selectedIconKey, timestampMillis: ts, note: noteInput.value, importSource: 'MANUAL' });
       }
       if (!isValidTxObj(tx)) { showExpError('That entry isn’t valid — check the amount and category.'); return; }
       var editDocId = editing ? (editingOriginal.__docId || editingOriginal.id) : tx.id;

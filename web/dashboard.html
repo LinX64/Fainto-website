@@ -426,6 +426,15 @@ footer.bottom {
   flex: none;
 }
 
+.fic { display: block; }
+.row .row-icon { flex: none; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border-radius: 999px; background: var(--surface-2); }
+.row .row-icon .fic { width: 18px; height: 18px; }
+
+@media (min-width: 760px) {
+  #sec-transactions .rows { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--sp-4); }
+  #sec-transactions .rows .row:nth-child(2) { border-top: none; }
+}
+
 .row .row-main {
   flex: 1 1 auto;
   min-width: 0;
@@ -755,7 +764,7 @@ footer.bottom {
   </footer>
 </div>
 
-<script src="dashboard-core.js?v=20260717e"></script>
+<script src="dashboard-core.js?v=20260717f"></script>
 <script>
 (function () {
   'use strict';
