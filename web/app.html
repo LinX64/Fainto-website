@@ -42,6 +42,19 @@
   --chrome: #1C1C1E;
   --on-chrome: #FFFFFF;
 
+  /* Dashboard data-accent aliases (mirrored from dashboard.html) */
+  --green: var(--acc-income);
+  --green-deep: #2F9D78;
+  --green-deepest: #82C4AC;
+  --orange: var(--acc-spend);
+  --orange-deep: #E07A38;
+  --yellow: #D6A21F;
+  --yellow-deep: #E8BE55;
+  --purple: var(--acc-savings);
+  --purple-deep: #D89A3E;
+  --blue: var(--acc-brand);
+  --blue-deep: #8B5CF6;
+
   --ease-emph-dec: cubic-bezier(0.05, 0.7, 0.1, 1);
   --ease-emph-acc: cubic-bezier(0.3, 0, 0.8, 0.15);
   --ease-std: cubic-bezier(0.2, 0, 0, 1);
@@ -53,6 +66,12 @@
   --sp-xl: 24px;
   --sp-xxl: 32px;
   --sp-xxxl: 48px;
+  /* Numeric spacing scale used by the ported dashboard CSS */
+  --sp-1: 8px;
+  --sp-2: 12px;
+  --sp-3: 16px;
+  --sp-4: 24px;
+  --sp-5: 32px;
 
   --font: 'Lexend', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   color-scheme: light dark;
@@ -63,6 +82,7 @@
     --text: #FFFFFF; --muted: #AEAEB1; --line: rgba(174,174,177,.2); --outline: #8F8F99;
     --acc-brand: #72DEFF; --acc-income: #36F0AB; --acc-spend: #FF6859; --acc-savings: #FFCF44; --acc-alert: #B15DFF;
     --chrome: #FFFFFF; --on-chrome: #2A2931;
+    --green-deep: #21AF6C; --green-deepest: #0E6C40; --orange-deep: #FD9C12; --yellow: #FFCF44; --yellow-deep: #FDE047; --purple-deep: #FDE047; --blue-deep: #72DEFF;
   }
 }
 :root[data-theme="dark"] {
@@ -70,12 +90,14 @@
   --text: #FFFFFF; --muted: #AEAEB1; --line: rgba(174,174,177,.2); --outline: #8F8F99;
   --acc-brand: #72DEFF; --acc-income: #36F0AB; --acc-spend: #FF6859; --acc-savings: #FFCF44; --acc-alert: #B15DFF;
   --chrome: #FFFFFF; --on-chrome: #2A2931;
+  --green-deep: #21AF6C; --green-deepest: #0E6C40; --orange-deep: #FD9C12; --yellow: #FFCF44; --yellow-deep: #FDE047; --purple-deep: #FDE047; --blue-deep: #72DEFF;
 }
 :root[data-theme="light"] {
   --bg: #F5F5F7; --surface: #FFFFFF; --surface-2: #F9F9FB; --surface-3: #ECECEE; --surface-4: #E3E3E6;
   --text: #1C1C1E; --muted: #636368; --line: #E3E3E6; --outline: #D1D1D6;
   --acc-brand: #6D28D9; --acc-income: #047857; --acc-spend: #C2410C; --acc-savings: #B45309; --acc-alert: #6A1B9A;
   --chrome: #1C1C1E; --on-chrome: #FFFFFF;
+  --green-deep: #2F9D78; --green-deepest: #82C4AC; --orange-deep: #E07A38; --yellow: #D6A21F; --yellow-deep: #E8BE55; --purple-deep: #D89A3E; --blue-deep: #8B5CF6;
 }
 
 * { box-sizing: border-box; }
@@ -158,23 +180,6 @@ button, input { font-family: inherit; }
 .account-actions { margin-top: var(--sp-xl); }
 .edit-banner { display: none; font-size: 14px; color: var(--acc-brand); margin-bottom: var(--sp-md); }
 .edit-banner.on { display: block; }
-.tx-section { margin-top: var(--sp-xl); }
-.tx-title { font-size: 16px; font-weight: 600; margin: 0 0 var(--sp-sm); }
-.tx-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
-.tx-row { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-md); padding: var(--sp-md) 0; border-bottom: 1px solid var(--line); }
-.tx-info { min-width: 0; }
-.tx-meta { font-size: 13px; color: var(--muted); }
-.tx-note { font-size: 15px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 32ch; }
-.tx-right { display: flex; align-items: center; gap: var(--sp-md); flex-shrink: 0; }
-.tx-amount { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
-.tx-amount.exp { color: var(--acc-spend); }
-.tx-amount.inc { color: var(--acc-income); }
-.tx-btns { display: flex; gap: var(--sp-xs); }
-.tx-btn { min-height: 32px; padding: 4px 12px; font-size: 13px; font-weight: 600; border: 1px solid var(--outline); background: transparent; color: var(--text); cursor: pointer; border-radius: 999px; }
-.tx-btn:hover { background: var(--surface-2); }
-.tx-btn.del { color: var(--acc-spend); border-color: var(--acc-spend); }
-.tx-btn:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }
-.tx-empty { color: var(--muted); font-size: 15px; padding: var(--sp-md) 0; }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-sm);
@@ -354,6 +359,362 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
 }
 </style>
 <style>
+/* ================= Inline account dashboard (rendered by dashboard-core.js) =================
+   Section styles mirrored from dashboard.html so the signed-in panel renders the same
+   rich cards inline. All class names below are unique to this dashboard (no collisions
+   with the account/auth chrome above). */
+.account-dash { margin: var(--sp-md) 0; }
+@media (min-width: 760px) {
+  .account-dash { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-lg); align-items: start; }
+  .account-dash > .card:first-child, .account-dash > .card:last-child { grid-column: 1 / -1; }
+}
+.tnum { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  padding: var(--sp-4);
+  margin-bottom: var(--sp-3);
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 22px;
+  letter-spacing: 0.002em;
+  color: var(--text);
+  font-weight: 500;
+  margin: 0 0 var(--sp-3);
+}
+
+.section-label svg {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  color: var(--muted);
+}
+
+.hero-amount {
+  font-size: clamp(38px, 6vw, 48px);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  margin: 0 0 var(--sp-2);
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  word-break: break-word;
+}
+
+#sec-overview .hero-amount { color: var(--acc-brand); }
+
+.hero-caption {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 0 0 var(--sp-3);
+}
+
+.spark {
+  display: flex;
+  width: 100%;
+  height: 2px;
+  gap: 2px;
+  margin-bottom: var(--sp-3);
+  background: var(--line);
+  overflow: hidden;
+}
+
+.spark > span {
+  display: block;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.spark.revealed > span {
+  transform: scaleX(1);
+  transition: transform 1000ms var(--ease-emph-dec);
+}
+
+.diverging {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background: var(--line);
+  margin-bottom: var(--sp-1);
+  display: flex;
+  overflow: hidden;
+}
+
+.diverging .half {
+  width: 50%;
+  height: 100%;
+  position: relative;
+}
+
+.diverging .half.left { display: flex; justify-content: flex-end; }
+.diverging .half.right { display: flex; justify-content: flex-start; }
+
+.diverging .bar {
+  height: 100%;
+  transform: scaleX(0);
+}
+
+.diverging .half.left .bar { transform-origin: right; }
+.diverging .half.right .bar { transform-origin: left; }
+
+.diverging.revealed .bar {
+  transform: scaleX(1);
+  transition: transform 1000ms var(--ease-emph-dec);
+}
+
+.diverging-caption {
+  font-size: 15px;
+  color: var(--muted);
+  margin: 0 0 var(--sp-3);
+}
+
+.cashflow-line {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 16px;
+  color: var(--muted);
+  padding-top: var(--sp-2);
+  border-top: 1px solid var(--line);
+}
+
+.cashflow-line b { color: var(--text); font-weight: 600; }
+
+.dot { width: 8px; height: 8px; display: inline-block; flex: none; }
+
+.rows { display: flex; flex-direction: column; }
+
+.row {
+  display: flex;
+  align-items: center;
+  padding: 14px 0;
+  border-top: 1px solid var(--line);
+  gap: var(--sp-2);
+}
+
+.rows .row:first-child { border-top: none; }
+
+.row .accent-bar {
+  width: 4px;
+  align-self: stretch;
+  flex: none;
+}
+
+.row .row-main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.row .row-name {
+  font-size: 18px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.row .row-desc {
+  font-size: 15px;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.row .row-amount {
+  font-size: 20px;
+  font-weight: 600;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'tnum' 1;
+  flex: none;
+  text-align: right;
+}
+
+.row .row-amount .badge {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+  font-weight: 400;
+  text-align: right;
+}
+
+.show-all {
+  margin-top: var(--sp-2);
+  margin-left: -12px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--acc-brand);
+  border: none;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  align-self: flex-start;
+  transition: background 150ms var(--ease-std);
+}
+
+.show-all:hover {
+  background: var(--surface-2);
+}
+
+.progress-track {
+  width: 100%;
+  height: 3px;
+  background: var(--line);
+  margin-top: 6px;
+  overflow: hidden;
+}
+
+.progress-track .progress-fill {
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.progress-track.revealed .progress-fill {
+  transform: scaleX(1);
+  transition: transform 1000ms var(--ease-emph-dec);
+}
+
+.empty-row {
+  padding: var(--sp-3) 0;
+  color: var(--muted);
+  font-size: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.rows .empty-row:first-child { border-top: none; }
+
+.card.stagger {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+.card.stagger.in {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms var(--ease-emph-dec), transform 300ms var(--ease-emph-dec);
+}
+
+.tx-controls {
+  display: flex;
+  gap: var(--sp-2);
+  margin-bottom: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+.tx-search {
+  flex: 1 1 240px;
+  min-height: 48px;
+  padding: 12px 16px;
+  font-size: 17px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 0;
+}
+
+.tx-sort {
+  min-height: 48px;
+  padding: 12px 16px;
+  font-size: 17px;
+  font-family: inherit;
+  color: var(--text);
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 0;
+}
+
+.tx-search:focus-visible,
+.tx-sort:focus-visible {
+  outline: 2px solid var(--acc-brand);
+  outline-offset: -1px;
+}
+
+.tx-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--sp-3);
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.tx-pagination button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 150ms var(--ease-std), border-color 150ms var(--ease-std);
+}
+
+.tx-pagination button:not(:disabled):hover {
+  background: var(--surface-2);
+  border-color: var(--outline);
+}
+
+.tx-pagination button:disabled {
+  color: var(--muted);
+  cursor: default;
+  opacity: 0.5;
+}
+
+/* Interactive controls injected by the renderer in this page (edit/delete/add) */
+.row-actions { display: inline-flex; gap: var(--sp-xs); margin-left: var(--sp-sm); }
+.tx-act {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 13px;
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+.tx-act:hover { background: var(--surface-2); }
+.tx-act:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }
+.tx-act-del { color: var(--acc-spend); border-color: var(--acc-spend); }
+.tx-add {
+  margin-left: auto;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+}
+.tx-add:hover { background: var(--surface-2); border-color: var(--outline); }
+.tx-add:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .account-dash .card.stagger { opacity: 1; transform: none; }
+  .account-dash .spark > span,
+  .account-dash .diverging .bar,
+  .account-dash .progress-fill { transform: scaleX(1) !important; }
+}
+</style>
+<style>
   html[data-mode="connect"] #panel-signin,
   html[data-mode="signin"] #panel-qr { display: none; }
   html[data-mode="connect"] .gate-grid,
@@ -473,10 +834,12 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
   <!-- ============ Signed-in account panel (write-back) ============ -->
   <section class="gate-card" id="panel-account" aria-labelledby="account-heading" hidden>
     <span class="card-tag accent-green">Signed in &middot; syncs to your phone</span>
-    <h2 id="account-heading">Add to <span id="accountWho">your account</span></h2>
-    <p class="desc">Type an expense here — or import a bank CSV — and it saves to your account and syncs to the Fainto app on your phone automatically.</p>
+    <h2 id="account-heading">Signed in as <span id="accountWho">your account</span></h2>
+    <p class="desc">Edits here sync to your phone.</p>
 
-    <form id="expenseForm" novalidate>
+    <div id="accountDash" class="account-dash"></div>
+
+    <form id="expenseForm" novalidate hidden>
       <div class="edit-banner" id="editBanner">Editing an existing transaction — <button type="button" class="link-btn" id="cancelEditBtn">cancel</button></div>
       <div class="field">
         <label>Type</label>
@@ -520,12 +883,6 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
       <div class="alert alert-error" id="expenseError" hidden role="alert"></div>
     </form>
 
-    <div class="tx-section">
-      <h3 class="tx-title">Your transactions</h3>
-      <div class="status-row" id="txStatus" role="status" aria-live="polite"></div>
-      <div class="tx-list" id="txList"></div>
-    </div>
-
     <div class="divider">or import many</div>
 
     <label class="btn btn-secondary" for="csvInput">Import a bank CSV to your account</label>
@@ -533,7 +890,6 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
     <div class="status-row" id="csvStatus" role="status" aria-live="polite"></div>
 
     <div class="account-actions">
-      <button type="button" class="btn btn-primary" id="openDashBtn">Open your dashboard &rarr;</button>
       <div class="alert alert-error" id="accountError" hidden role="alert"></div>
       <div class="link-row"><button type="button" class="link-btn" id="accountSignOut">Sign out</button></div>
     </div>
@@ -1173,6 +1529,7 @@ var QRCode;
 })();
 </script>
 
+<script src="dashboard-core.js?v=20260717c"></script>
 <script type="module">
 import {
   getFirebaseAuth,
@@ -1684,7 +2041,9 @@ if (!isFirebaseConfigured()) {
       var data = docSnap.data();
       if (!data || !data.dataJson) return;
       var parsed = safeParseJson(data.dataJson);
-      if (parsed) out.push(parsed);
+      // Attach the authoritative Firestore doc id so interactive edit/delete in the
+      // inline dashboard target the right document (mirrors the old loadTxList).
+      if (parsed) { parsed.__docId = docSnap.id; out.push(parsed); }
     });
     return out;
   }
@@ -1803,19 +2162,17 @@ if (!isFirebaseConfigured()) {
     var expError = qs('expenseError');
     var csvInput = qs('csvInput');
     var csvStatus = qs('csvStatus');
-    var openDashBtn = qs('openDashBtn');
+    var dashEl = qs('accountDash');
     var accountError = qs('accountError');
     var signOutBtn = qs('accountSignOut');
     var editBanner = qs('editBanner');
     var cancelEditBtn = qs('cancelEditBtn');
     var submitBtn = qs('expenseSubmit');
-    var txListEl = qs('txList');
-    var txStatus = qs('txStatus');
     var txType = 'EXPENSE';
     var editingId = null;
     var editingOriginal = null;
-    var txById = {};
-    var txCount = 0;
+    var dashTxById = {};   // (docId||id) -> full raw transaction, for edit fidelity
+    var dashTxCount = 0;   // authoritative Firestore doc count, for the last-item delete guard
     var busy = false;
 
     dateInput.value = todayIso();
@@ -1842,9 +2199,6 @@ if (!isFirebaseConfigured()) {
       var s = n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       return (tx.type === 'INCOME' ? '+' : '−') + s;
     }
-    function setListDisabled(on) {
-      Array.prototype.forEach.call(txListEl.querySelectorAll('button'), function (b) { b.disabled = on; });
-    }
     function resetForm() {
       editingId = null; editingOriginal = null;
       editBanner.classList.remove('on');
@@ -1853,121 +2207,102 @@ if (!isFirebaseConfigured()) {
       catSelect.value = 'OTHER';
       dateInput.value = todayIso();
       setType('EXPENSE');
+      expForm.hidden = true; // collapsed by default — opened by Add/Edit, keeps the view compact
     }
-    function startEdit(id) {
-      var tx = txById[id];
+    // Interactive dashboard callbacks (invoked by FaintoDashboard.renderDashboard).
+    // The renderer passes the SANITIZED tx (carries id + __docId); we look the full
+    // raw transaction back up (dashTxById) so an edit preserves fields the renderer
+    // strips (tags/receiptUri/importSource/etc.).
+    function onAddTx() {
+      resetForm();
+      expForm.hidden = false;
+      expForm.scrollIntoView({ block: 'start' });
+      amtInput.focus();
+    }
+    function onEditTx(tx) {
       if (!tx) return;
-      editingId = id; editingOriginal = tx;
-      amtInput.value = String(tx.amount);
-      setType(tx.type === 'INCOME' ? 'INCOME' : 'EXPENSE');
-      catSelect.value = CATEGORY_SET[tx.category] ? tx.category : 'OTHER';
-      dateInput.value = millisToIso(tx.timestampMillis);
-      noteInput.value = tx.note || '';
+      var docId = tx.__docId || tx.id;
+      var full = dashTxById[docId] || tx; // full raw object preserves extra fields on write-back
+      editingId = full.__docId || full.id || docId;
+      editingOriginal = full;
+      amtInput.value = String(full.amount);
+      setType(full.type === 'INCOME' ? 'INCOME' : 'EXPENSE');
+      catSelect.value = CATEGORY_SET[full.category] ? full.category : 'OTHER';
+      dateInput.value = millisToIso(full.timestampMillis);
+      noteInput.value = full.note || '';
       submitBtn.textContent = 'Save changes';
       editBanner.classList.add('on');
       showExpError(''); expStatus.textContent = '';
+      expForm.hidden = false;
       expForm.scrollIntoView({ block: 'start' });
       amtInput.focus();
     }
     cancelEditBtn.addEventListener('click', function () { resetForm(); });
 
-    function renderTxList(txs) {
-      txById = {};
-      txListEl.textContent = '';
-      var sorted = txs.slice().filter(function (t) { return t && t.id; }).sort(function (a, b) { return (b.timestampMillis || 0) - (a.timestampMillis || 0); });
-      sorted.forEach(function (t) { txById[t.__docId || t.id] = t; });
-      txCount = sorted.length;
-      if (txCount === 0) {
-        var empty = document.createElement('p');
-        empty.className = 'tx-empty';
-        empty.textContent = 'No transactions yet — add one above.';
-        txListEl.appendChild(empty);
+    async function renderAccountDash() {
+      if (!window.FaintoDashboard) {
+        dashEl.textContent = 'The dashboard view could not load — please refresh the page.';
         return;
       }
-      sorted.slice(0, 60).forEach(function (t) {
-        var row = document.createElement('div'); row.className = 'tx-row';
-        var info = document.createElement('div'); info.className = 'tx-info';
-        var meta = document.createElement('div'); meta.className = 'tx-meta';
-        meta.textContent = millisToIso(t.timestampMillis) + ' · ' + (t.category || 'OTHER');
-        var noteEl = document.createElement('div'); noteEl.className = 'tx-note';
-        noteEl.textContent = t.note || '—';
-        info.appendChild(meta); info.appendChild(noteEl);
-        var right = document.createElement('div'); right.className = 'tx-right';
-        var amt = document.createElement('span'); amt.className = 'tx-amount ' + (t.type === 'INCOME' ? 'inc' : 'exp');
-        amt.textContent = fmtAmount(t);
-        var btns = document.createElement('div'); btns.className = 'tx-btns';
-        var editB = document.createElement('button'); editB.type = 'button'; editB.className = 'tx-btn'; editB.textContent = 'Edit'; editB.setAttribute('data-edit', t.__docId || t.id);
-        var delB = document.createElement('button'); delB.type = 'button'; delB.className = 'tx-btn del'; delB.textContent = 'Delete'; delB.setAttribute('data-del', t.__docId || t.id);
-        btns.appendChild(editB); btns.appendChild(delB);
-        right.appendChild(amt); right.appendChild(btns);
-        row.appendChild(info); row.appendChild(right);
-        txListEl.appendChild(row);
-      });
-    }
-
-    async function loadTxList() {
-      txStatus.textContent = 'Loading your transactions…';
+      dashEl.textContent = 'Loading your dashboard…';
       try {
-        var db = getFirebaseFirestore();
-        var snap = await getDocs(collection(db, 'users', currentUid, 'transactions'));
-        var txs = [];
-        snap.forEach(function (docSnap) {
-          var data = docSnap.data();
-          if (!data || !data.dataJson) return;
-          var parsed = safeParseJson(data.dataJson);
-          if (!parsed || !parsed.id) return;
-          parsed.__docId = docSnap.id; // authoritative Firestore doc id, used for edit/delete
-          txs.push(parsed);
+        var raw = await buildBundleFromFirestore(currentUid);
+        dashTxCount = (raw.transactions || []).length;
+        dashTxById = {};
+        (raw.transactions || []).forEach(function (tx) {
+          if (tx && (tx.__docId || tx.id)) dashTxById[tx.__docId || tx.id] = tx;
         });
-        renderTxList(txs);
-        txStatus.textContent = '';
+        if (isBundleEmpty(raw)) {
+          dashEl.textContent = 'No synced data yet — add an expense below, or turn on Cloud sync in the Fainto app on your phone.';
+          expForm.hidden = false; // nothing to show yet — surface the add form directly
+          return;
+        }
+        var clean = window.FaintoDashboard.sanitizeBundle(raw);
+        if (!clean) { dashEl.textContent = 'Your synced data could not be read.'; return; }
+        window.FaintoDashboard.renderDashboard(dashEl, clean, {
+          interactive: true,
+          currency: (clean.financialProfile && clean.financialProfile.currency) || 'USD',
+          onEditTx: onEditTx,
+          onDeleteTx: onDeleteTx,
+          onAddTx: onAddTx,
+        });
       } catch (err) {
-        // Fail-safe: an unknown count must never let a delete empty the collection.
-        txCount = 0;
-        setListDisabled(true);
-        txStatus.textContent = 'Could not load transactions: ' + friendlyWriteError(err);
+        dashEl.textContent = 'Could not load your dashboard: ' + friendlyWriteError(err);
       }
     }
 
-    async function onDelete(id) {
+    async function onDeleteTx(tx) {
       if (busy) return; // no concurrent deletes — the count guard must act on a fresh count
-      var tx = txById[id];
       if (!tx) return;
+      var docId = tx.__docId || tx.id;
+      if (!docId) return;
       // Hard rule from the Android sync: never delete down to an empty collection —
       // the phone would re-upload its local copies and undo the delete.
-      if (txCount <= 1) {
+      if (dashTxCount <= 1) {
         showAccountError('This is your only synced transaction — delete it from the phone app instead (deleting the last one here would be undone on the next sync).');
         return;
       }
-      var label = (tx.note ? tx.note : (tx.category || 'this transaction')) + ' · ' + fmtAmount(tx);
+      var full = dashTxById[docId] || tx;
+      var label = (full.note ? full.note : (full.category || 'this transaction')) + ' · ' + fmtAmount(full);
       if (!window.confirm('Delete “' + label + '”? This removes it from your account and your phone.')) return;
       var guard = writeGuard();
       if (guard) { showAccountError(guard); return; }
       busy = true;
-      setListDisabled(true);
       showAccountError('');
-      txStatus.textContent = 'Deleting…';
+      expStatus.textContent = 'Deleting…';
       try {
-        await deleteTransaction(currentUid, id);
-        txCount = Math.max(0, txCount - 1); // reflect immediately so a stale count can't permit emptying
-        txStatus.textContent = '✓ Deleted — syncing to your phone.';
-        if (editingId === id) resetForm();
-        await loadTxList();
+        await deleteTransaction(currentUid, docId);
+        dashTxCount = Math.max(0, dashTxCount - 1); // reflect immediately so a stale count can't permit emptying
+        expStatus.textContent = '✓ Deleted — syncing to your phone.';
+        if (editingId === docId) resetForm();
+        await renderAccountDash();
       } catch (err) {
-        txStatus.textContent = 'Could not delete: ' + friendlyWriteError(err);
+        expStatus.textContent = '';
+        showAccountError('Could not delete: ' + friendlyWriteError(err));
       } finally {
         busy = false;
-        setListDisabled(false);
       }
     }
-
-    txListEl.addEventListener('click', function (e) {
-      var t = e.target;
-      var editId = t.getAttribute && t.getAttribute('data-edit');
-      if (editId) { startEdit(editId); return; }
-      var delId = t.getAttribute && t.getAttribute('data-del');
-      if (delId) { onDelete(delId); return; }
-    });
 
     expForm.addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -2000,7 +2335,7 @@ if (!isFirebaseConfigured()) {
         await writeTransaction(currentUid, tx, editDocId, editing);
         expStatus.textContent = editing ? '✓ Updated — syncing to your phone.' : '✓ Synced — it’ll appear on your phone shortly.';
         resetForm();
-        await loadTxList();
+        await renderAccountDash();
         amtInput.focus();
       } catch (err) {
         expStatus.textContent = '';
@@ -2026,7 +2361,7 @@ if (!isFirebaseConfigured()) {
         try {
           await writeTransactionsBatch(currentUid, parsed.transactions);
           csvStatus.textContent = '✓ Imported ' + parsed.imported + ' · ' + parsed.skipped + ' skipped — syncing to your phone.';
-          await loadTxList();
+          await renderAccountDash();
         } catch (err) {
           csvStatus.textContent = 'Import failed: ' + friendlyWriteError(err);
         }
@@ -2036,27 +2371,12 @@ if (!isFirebaseConfigured()) {
       reader.readAsText(file);
     });
 
-    openDashBtn.addEventListener('click', async function () {
-      showAccountError('');
-      openDashBtn.disabled = true;
-      var prev = openDashBtn.textContent;
-      openDashBtn.textContent = 'Loading…';
-      try {
-        var bundle = await buildBundleFromFirestore(currentUid);
-        handoff(bundle, function (msg) { openDashBtn.disabled = false; openDashBtn.textContent = prev; showAccountError(msg); });
-      } catch (err) {
-        openDashBtn.disabled = false;
-        openDashBtn.textContent = prev;
-        showAccountError('Could not load your dashboard: ' + friendlyWriteError(err));
-      }
-    });
-
     signOutBtn.addEventListener('click', async function () {
       try { await signOut(getFirebaseAuth()); } catch (err) { /* ignore */ }
       location.reload();
     });
 
-    loadTxList(); // initial load of the signed-in account's transactions
+    renderAccountDash(); // initial render of the signed-in account's dashboard
   }
 
   form.addEventListener('submit', async function (event) {
