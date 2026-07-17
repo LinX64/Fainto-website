@@ -140,6 +140,21 @@ button, input { font-family: inherit; }
 }
 .field input:hover { border-color: var(--outline); }
 .field input:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: -2px; border-color: var(--acc-brand); }
+.field select, .field textarea {
+  width: 100%; min-height: 48px; padding: 10px var(--sp-lg); border: 1px solid var(--line);
+  background: var(--surface-2); color: var(--text); font-size: 17px; border-radius: 0; font-family: inherit;
+}
+.field textarea { min-height: 76px; resize: vertical; }
+.field select:hover, .field textarea:hover { border-color: var(--outline); }
+.field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: -2px; border-color: var(--acc-brand); }
+.field .opt { font-weight: 400; color: var(--muted); }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-lg); }
+@media (max-width: 600px) { .field-row { grid-template-columns: 1fr; } }
+.seg { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
+.seg button { flex: 1; min-height: 44px; border: 0; background: transparent; color: var(--muted); font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; }
+.seg button[aria-pressed="true"] { background: var(--chrome); color: var(--on-chrome); }
+.seg button:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: -2px; }
+.account-actions { margin-top: var(--sp-xl); }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-sm);
@@ -434,6 +449,70 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
     </section>
 
   </div>
+
+  <!-- ============ Signed-in account panel (write-back) ============ -->
+  <section class="gate-card" id="panel-account" aria-labelledby="account-heading" hidden>
+    <span class="card-tag accent-green">Signed in &middot; syncs to your phone</span>
+    <h2 id="account-heading">Add to <span id="accountWho">your account</span></h2>
+    <p class="desc">Type an expense here — or import a bank CSV — and it saves to your account and syncs to the Fainto app on your phone automatically.</p>
+
+    <form id="expenseForm" novalidate>
+      <div class="field">
+        <label>Type</label>
+        <div class="seg" role="group" aria-label="Transaction type">
+          <button type="button" id="expTypeExpense" aria-pressed="true">Expense</button>
+          <button type="button" id="expTypeIncome" aria-pressed="false">Income</button>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="expAmount">Amount</label>
+          <input type="text" inputmode="decimal" id="expAmount" placeholder="0.00" autocomplete="off" required>
+        </div>
+        <div class="field">
+          <label for="expDate">Date</label>
+          <input type="date" id="expDate" required>
+        </div>
+      </div>
+      <div class="field">
+        <label for="expCategory">Category</label>
+        <select id="expCategory">
+          <option value="FOOD">Food</option>
+          <option value="HOUSING">Housing</option>
+          <option value="TRANSPORT">Transport</option>
+          <option value="UTILITIES">Utilities</option>
+          <option value="ENTERTAINMENT">Entertainment</option>
+          <option value="HEALTH">Health</option>
+          <option value="SHOPPING">Shopping</option>
+          <option value="SAVINGS">Savings</option>
+          <option value="SALARY">Salary</option>
+          <option value="EDUCATION">Education</option>
+          <option value="OTHER" selected>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="expNote">Note <span class="opt">(optional)</span></label>
+        <input type="text" id="expNote" maxlength="500" autocomplete="off" placeholder="e.g. Groceries at the market">
+      </div>
+      <button type="submit" class="btn btn-primary" id="expenseSubmit">Add &amp; sync</button>
+      <div class="status-row" id="expenseStatus" role="status" aria-live="polite"></div>
+      <div class="alert alert-error" id="expenseError" hidden role="alert"></div>
+    </form>
+
+    <div class="divider">or import many</div>
+
+    <label class="btn btn-secondary" for="csvInput">Import a bank CSV to your account</label>
+    <input type="file" id="csvInput" accept=".csv,text/csv" style="display:none">
+    <div class="status-row" id="csvStatus" role="status" aria-live="polite"></div>
+
+    <div class="account-actions">
+      <button type="button" class="btn btn-primary" id="openDashBtn">Open your dashboard &rarr;</button>
+      <div class="alert alert-error" id="accountError" hidden role="alert"></div>
+      <div class="link-row"><button type="button" class="link-btn" id="accountSignOut">Sign out</button></div>
+    </div>
+
+    <div class="gap-note">Added or imported items merge into your account and appear on your phone the next time it syncs — usually within seconds when the app is open. Categories the app doesn't recognise are filed under <strong>Other</strong>.</div>
+  </section>
 
   <footer class="site-footer">
     Fainto is offline‑first — your financial data lives on your device by default. Signing in only reads the data
@@ -1078,6 +1157,7 @@ import {
   signInWithPopup,
   signInAnonymously,
   sendPasswordResetEmail,
+  signOut,
   GoogleAuthProvider,
 } from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js';
 import {
@@ -1087,6 +1167,7 @@ import {
   collection,
   addDoc,
   setDoc,
+  writeBatch,
   deleteDoc,
   onSnapshot,
 } from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js';
@@ -1098,6 +1179,349 @@ function safeParseJson(text) {
 }
 
 function asArray(value) { return Array.isArray(value) ? value : []; }
+
+/* ============================================================
+   Write-back: build & write transactions the Fainto app accepts.
+   Contract (verified against the Android app):
+     path  users/{uid}/transactions/{tx.id}
+     doc   { dataJson: <JSON of Transaction>, updatedAt: <epoch millis Long>, schemaVersion: 2 }
+   The Android sync listener LWW-merges any doc whose updatedAt is newer than
+   its local index and whose schemaVersion <= 2, then decodes dataJson. A wrong
+   category/type enum makes the phone silently DROP the row, so every field is
+   normalised here. updatedAt MUST be a plain Number (ms) — never serverTimestamp().
+   ============================================================ */
+var TX_CATEGORIES = ['FOOD','HOUSING','TRANSPORT','UTILITIES','ENTERTAINMENT','HEALTH','SHOPPING','SAVINGS','SALARY','EDUCATION','OTHER'];
+var CATEGORY_SET = {};
+TX_CATEGORIES.forEach(function (c) { CATEGORY_SET[c] = true; });
+var CATEGORY_SYNONYMS = {
+  GROCERY: 'FOOD', GROCERIES: 'FOOD', SUPERMARKET: 'FOOD', RESTAURANT: 'FOOD', RESTAURANTS: 'FOOD', DINING: 'FOOD', CAFE: 'FOOD', COFFEE: 'FOOD', MEAL: 'FOOD', MEALS: 'FOOD', DRINKS: 'FOOD',
+  RENT: 'HOUSING', MORTGAGE: 'HOUSING', HOME: 'HOUSING', HOUSE: 'HOUSING', ACCOMMODATION: 'HOUSING',
+  FUEL: 'TRANSPORT', GAS: 'TRANSPORT', PETROL: 'TRANSPORT', UBER: 'TRANSPORT', TAXI: 'TRANSPORT', CAR: 'TRANSPORT', TRAIN: 'TRANSPORT', BUS: 'TRANSPORT', TRAVEL: 'TRANSPORT', FLIGHT: 'TRANSPORT', PARKING: 'TRANSPORT',
+  ELECTRIC: 'UTILITIES', ELECTRICITY: 'UTILITIES', WATER: 'UTILITIES', INTERNET: 'UTILITIES', PHONE: 'UTILITIES', MOBILE: 'UTILITIES', UTILITY: 'UTILITIES', BILL: 'UTILITIES', BILLS: 'UTILITIES', HEATING: 'UTILITIES',
+  MOVIE: 'ENTERTAINMENT', MOVIES: 'ENTERTAINMENT', GAME: 'ENTERTAINMENT', GAMES: 'ENTERTAINMENT', MUSIC: 'ENTERTAINMENT', NETFLIX: 'ENTERTAINMENT', SPOTIFY: 'ENTERTAINMENT', STREAMING: 'ENTERTAINMENT', LEISURE: 'ENTERTAINMENT',
+  PHARMACY: 'HEALTH', DOCTOR: 'HEALTH', MEDICAL: 'HEALTH', HEALTHCARE: 'HEALTH', GYM: 'HEALTH', FITNESS: 'HEALTH', DENTAL: 'HEALTH', INSURANCE: 'HEALTH',
+  CLOTHES: 'SHOPPING', CLOTHING: 'SHOPPING', AMAZON: 'SHOPPING', SHOP: 'SHOPPING', RETAIL: 'SHOPPING', ELECTRONICS: 'SHOPPING', GIFT: 'SHOPPING', GIFTS: 'SHOPPING',
+  PAYROLL: 'SALARY', WAGE: 'SALARY', WAGES: 'SALARY', PAYCHECK: 'SALARY', PAYCHEQUE: 'SALARY', PAY: 'SALARY', BONUS: 'SALARY',
+  SCHOOL: 'EDUCATION', TUITION: 'EDUCATION', COURSE: 'EDUCATION', COURSES: 'EDUCATION', BOOKS: 'EDUCATION', UNIVERSITY: 'EDUCATION', TRAINING: 'EDUCATION',
+  SAVING: 'SAVINGS', DEPOSIT: 'SAVINGS', INVESTMENT: 'SAVINGS', INVEST: 'SAVINGS'
+};
+
+function coerceCategory(raw) {
+  var up = String(raw == null ? '' : raw).toUpperCase().replace(/[^A-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  if (!up) return 'OTHER';
+  if (CATEGORY_SET[up]) return up;
+  if (CATEGORY_SYNONYMS[up]) return CATEGORY_SYNONYMS[up];
+  var parts = up.split('_');
+  for (var i = 0; i < parts.length; i += 1) {
+    if (CATEGORY_SET[parts[i]]) return parts[i];
+    if (CATEGORY_SYNONYMS[parts[i]]) return CATEGORY_SYNONYMS[parts[i]];
+  }
+  return 'OTHER';
+}
+
+function genUuid() {
+  var c = window.crypto || window.msCrypto;
+  if (c && typeof c.randomUUID === 'function') return c.randomUUID();
+  var b = new Uint8Array(16);
+  if (c && c.getRandomValues) c.getRandomValues(b);
+  else for (var k = 0; k < 16; k += 1) b[k] = Math.floor(Math.random() * 256);
+  b[6] = (b[6] & 0x0f) | 0x40;
+  b[8] = (b[8] & 0x3f) | 0x80;
+  var h = [];
+  for (var j = 0; j < 16; j += 1) h.push((b[j] + 0x100).toString(16).slice(1));
+  return h.slice(0, 4).join('') + '-' + h.slice(4, 6).join('') + '-' + h.slice(6, 8).join('') + '-' + h.slice(8, 10).join('') + '-' + h.slice(10, 16).join('');
+}
+
+function buildTxObj(inp) {
+  var type = inp.type === 'INCOME' ? 'INCOME' : 'EXPENSE';
+  var category = CATEGORY_SET[inp.category] ? inp.category : coerceCategory(inp.category);
+  var obj = {
+    id: genUuid(),
+    amount: Math.abs(Number(inp.amount)),
+    type: type,
+    category: category,
+    timestampMillis: Math.round(Number(inp.timestampMillis)),
+    note: String(inp.note == null ? '' : inp.note).slice(0, 500),
+  };
+  if (inp.importSource === 'CSV' || inp.importSource === 'MANUAL') obj.importSource = inp.importSource;
+  return obj;
+}
+
+function isValidTxObj(tx) {
+  return tx && typeof tx.id === 'string' && tx.id.length > 0 &&
+    isFinite(tx.amount) && tx.amount > 0 &&
+    (tx.type === 'INCOME' || tx.type === 'EXPENSE') &&
+    CATEGORY_SET[tx.category] === true &&
+    isFinite(tx.timestampMillis) && tx.timestampMillis > 0;
+}
+
+async function writeTransaction(uid, tx) {
+  var db = getFirebaseFirestore();
+  await setDoc(doc(db, 'users', uid, 'transactions', tx.id), {
+    dataJson: JSON.stringify(tx),
+    updatedAt: Date.now(),
+    schemaVersion: 2,
+  });
+}
+
+async function writeTransactionsBatch(uid, txs) {
+  var db = getFirebaseFirestore();
+  var CHUNK = 450; // Firestore hard limit is 500 writes per batch
+  for (var i = 0; i < txs.length; i += CHUNK) {
+    var batch = writeBatch(db);
+    var slice = txs.slice(i, i + CHUNK);
+    var now = Date.now();
+    slice.forEach(function (tx) {
+      batch.set(doc(db, 'users', uid, 'transactions', tx.id), {
+        dataJson: JSON.stringify(tx),
+        updatedAt: now,
+        schemaVersion: 2,
+      });
+    });
+    await batch.commit();
+  }
+}
+
+function todayIso() {
+  var d = new Date();
+  var m = d.getMonth() + 1;
+  var day = d.getDate();
+  return d.getFullYear() + '-' + (m < 10 ? '0' + m : m) + '-' + (day < 10 ? '0' + day : day);
+}
+
+function isoToMillis(s) {
+  var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(s || ''));
+  if (!m) return null;
+  var y = +m[1], mo = +m[2], d = +m[3];
+  if (mo < 1 || mo > 12 || d < 1 || d > 31) return null;
+  var dt = new Date(y, mo - 1, d, 12, 0, 0, 0); // noon local avoids TZ day-shift
+  if (dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== d) return null;
+  return dt.getTime();
+}
+
+function friendlyWriteError(err) {
+  var code = err && err.code ? err.code : '';
+  if (code === 'permission-denied') return 'permission denied — please sign in again.';
+  if (code === 'unavailable' || code === 'auth/network-request-failed') return 'network unavailable — try again.';
+  if (code === 'unauthenticated') return 'your session expired — sign in again.';
+  return (err && err.message) ? err.message : 'something went wrong.';
+}
+
+/* ---- CSV import (bank exports) → transactions written to your account ---- */
+function csvRows(text, delim) {
+  var rows = [], row = [], field = '', inQuotes = false, i = 0;
+  while (i < text.length) {
+    var c = text.charAt(i);
+    if (inQuotes) {
+      if (c === '"') {
+        if (text.charAt(i + 1) === '"') { field += '"'; i += 2; continue; }
+        inQuotes = false; i += 1; continue;
+      }
+      field += c; i += 1; continue;
+    }
+    if (c === '"') { inQuotes = true; i += 1; continue; }
+    if (c === delim) { row.push(field); field = ''; i += 1; continue; }
+    if (c === '\r' || c === '\n') {
+      if (c === '\r' && text.charAt(i + 1) === '\n') i += 1;
+      row.push(field); field = ''; rows.push(row); row = []; i += 1; continue;
+    }
+    field += c; i += 1;
+  }
+  if (field.length > 0 || row.length > 0) { row.push(field); rows.push(row); }
+  return rows.filter(function (r) { return r.some(function (cell) { return String(cell).trim().length > 0; }); });
+}
+
+function csvDelimiter(text) {
+  var candidates = [',', ';', '\t'], best = null;
+  candidates.forEach(function (d) {
+    var rows = csvRows(text, d).slice(0, 10);
+    if (rows.length === 0) return;
+    var counts = {};
+    rows.forEach(function (r) { counts[r.length] = (counts[r.length] || 0) + 1; });
+    var modeCount = 0, modeCols = 1;
+    Object.keys(counts).forEach(function (k) {
+      var cols = Number(k);
+      if (counts[k] > modeCount || (counts[k] === modeCount && cols > modeCols)) { modeCount = counts[k]; modeCols = cols; }
+    });
+    if (modeCols < 2) return;
+    var score = (modeCount / rows.length) * 100 + modeCols;
+    if (!best || score > best.score) best = { delim: d, score: score };
+  });
+  return best ? best.delim : ',';
+}
+
+function csvDateMs(y, mo, d) {
+  if (mo < 1 || mo > 12 || d < 1 || d > 31) return null;
+  var dt = new Date(y, mo - 1, d, 12, 0, 0, 0);
+  if (!isFinite(dt.getTime())) return null;
+  if (dt.getFullYear() !== y || dt.getMonth() !== mo - 1 || dt.getDate() !== d) return null;
+  return dt.getTime();
+}
+
+function csvParseDate(s, dayFirst) {
+  var raw = String(s == null ? '' : s).trim();
+  if (!raw) return null;
+  var m = raw.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);
+  if (m) return csvDateMs(+m[1], +m[2], +m[3]);
+  m = raw.match(/^(\d{1,2})\.(\d{1,2})\.(\d{4})/);
+  if (m) return csvDateMs(+m[3], +m[2], +m[1]);
+  m = raw.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})/);
+  if (m) return csvDateMs(+m[1], +m[2], +m[3]);
+  m = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})/);
+  if (m) {
+    var y = +m[3];
+    if (y < 100) y += 2000;
+    return dayFirst ? csvDateMs(y, +m[2], +m[1]) : csvDateMs(y, +m[1], +m[2]);
+  }
+  return null;
+}
+
+function csvParseAmount(s) {
+  var raw = String(s == null ? '' : s).trim();
+  if (!raw) return null;
+  var negative = /^\(.*\)$/.test(raw) || raw.indexOf('-') !== -1;
+  var cleaned = raw.replace(/[^0-9.,]/g, '');
+  if (!cleaned) return null;
+  var lastComma = cleaned.lastIndexOf(','), lastDot = cleaned.lastIndexOf('.'), normalized;
+  if (lastComma !== -1 && lastDot !== -1) {
+    if (lastComma > lastDot) normalized = cleaned.replace(/\./g, '').replace(/,/g, '.');
+    else normalized = cleaned.replace(/,/g, '');
+  } else if (lastComma !== -1) {
+    var afterComma = cleaned.length - lastComma - 1;
+    if (cleaned.indexOf(',') === lastComma && afterComma > 0 && afterComma <= 2) normalized = cleaned.replace(/,/g, '.');
+    else normalized = cleaned.replace(/,/g, '');
+  } else if (lastDot !== -1) {
+    var afterDot = cleaned.length - lastDot - 1;
+    if (cleaned.indexOf('.') === lastDot && afterDot > 0 && afterDot <= 2) normalized = cleaned;
+    else if (/^\d{1,3}(\.\d{3})+$/.test(cleaned)) normalized = cleaned.replace(/\./g, '');
+    else normalized = cleaned;
+  } else { normalized = cleaned; }
+  var v = parseFloat(normalized);
+  if (!isFinite(v)) return null;
+  return negative ? -v : v;
+}
+
+// Maps a textual direction/indicator cell (Type / Dr-Cr / Soll-Haben) to a type.
+// Returns null when the cell doesn't clearly say debit or credit — the caller
+// then SKIPS the row rather than guessing (never silently invert a transaction).
+function mapDirection(cell) {
+  var s = String(cell == null ? '' : cell).trim().toUpperCase();
+  if (!s) return null;
+  // Exact indicator tokens ONLY — no substring/keyword matching, so free-text
+  // descriptions ("DIRECT DEBIT ...", "CREDIT CARD PAYMENT") never map, and
+  // ambiguous category words (PAYMENT/SALARY) are deliberately excluded.
+  if (/^(DR|DEBIT|D|W|WD|WITHDRAWAL|OUT|SOLL|-)$/.test(s)) return 'EXPENSE';
+  if (/^(CR|CREDIT|C|DEP|DEPOSIT|IN|HABEN|\+)$/.test(s)) return 'INCOME';
+  return null;
+}
+
+// Finds the direction/indicator column by VALUE, not header name: the column whose
+// cells actually read as debit/credit tokens. A column qualifies only if >=60% of its
+// non-empty sampled cells map to a direction — so a "Type" column holding channels
+// (POS / ATM / Transfer) is rejected rather than trusted, and a combined "Debit/Credit"
+// or German "Soll/Haben" column is caught regardless of its header. Returns -1 if none.
+function detectDirectionColumn(dataRows, ncols, exclude) {
+  var best = -1, bestFrac = 0;
+  for (var c = 0; c < ncols; c += 1) {
+    if (exclude.indexOf(c) !== -1) continue;
+    var seen = 0, mapped = 0, maxLen = 0, distinct = {};
+    for (var r = 0; r < dataRows.length && seen < 60; r += 1) {
+      var s = String(dataRows[r][c] == null ? '' : dataRows[r][c]).trim();
+      if (!s) continue;
+      seen += 1;
+      if (s.length > maxLen) maxLen = s.length;
+      distinct[s.toUpperCase()] = 1;
+      if (mapDirection(s)) mapped += 1;
+    }
+    if (seen === 0) continue;
+    // A genuine debit/credit indicator uses a few short tokens; reject anything that
+    // looks like free text (long cells) or a category column (many distinct values).
+    if (maxLen > 12 || Object.keys(distinct).length > 6) continue;
+    var frac = mapped / seen;
+    if (frac >= 0.6 && frac > bestFrac) { bestFrac = frac; best = c; }
+  }
+  return best;
+}
+
+function parseCsvTransactions(text) {
+  var clean = String(text || '').replace(/^﻿/, '');
+  var delim = csvDelimiter(clean);
+  var rows = csvRows(clean, delim);
+  if (rows.length < 2) return { error: 'The CSV needs a header row and at least one data row.' };
+  var headers = rows[0].map(function (h) { return String(h).trim().toLowerCase(); });
+  var dataRows = rows.slice(1);
+  function findCol(re, exclude) {
+    for (var i = 0; i < headers.length; i += 1) {
+      if (exclude && exclude.indexOf(i) !== -1) continue;
+      if (re.test(headers[i])) return i;
+    }
+    return -1;
+  }
+  var dateRe = /(date|posted|booking|time|datum|tarih|data)/;
+  var dateIdx = findCol(dateRe);
+  // Identify the free-text description and category columns by header FIRST, so the
+  // value-based direction detector can never mistake them for a Dr/Cr indicator.
+  var descIdx = findCol(/(description|merchant|payee|memo|name|title|opis|aciklama|açıklama)/, [dateIdx]);
+  var catIdx = findCol(/(categor|kategori)/, [dateIdx, descIdx]);
+  // Direction/indicator column by value (short, low-cardinality Dr/Cr tokens), detected
+  // before the debit/credit split so a combined "Debit/Credit" indicator isn't stolen.
+  var dirIdx = detectDirectionColumn(dataRows, headers.length, [dateIdx, descIdx, catIdx]);
+  var debitIdx = findCol(/(debit|withdrawal)/, [dateIdx, descIdx, catIdx, dirIdx]);
+  var creditIdx = findCol(/(credit|deposit)/, [dateIdx, descIdx, catIdx, dirIdx, debitIdx]);
+  var hasDebitCredit = debitIdx !== -1 && creditIdx !== -1;
+  function findAmountCol(exclude) {
+    var loose = -1;
+    for (var i = 0; i < headers.length; i += 1) {
+      if (exclude.indexOf(i) !== -1) continue;
+      if (!/(amount|value|betrag|kwota|tutar)/.test(headers[i])) continue;
+      if (dateRe.test(headers[i])) continue;
+      if (/^(amount|value|betrag|kwota|tutar)$/.test(headers[i])) return i;
+      if (loose === -1) loose = i;
+    }
+    return loose;
+  }
+  var amountIdx = findAmountCol([dateIdx, descIdx, catIdx, dirIdx, debitIdx, creditIdx]);
+  if (dateIdx === -1 || (amountIdx === -1 && !hasDebitCredit)) {
+    return { error: 'Could not find the needed columns — a date column plus an amount column (or separate debit + credit columns).' };
+  }
+  var dayFirst = false;
+  for (var r = 0; r < dataRows.length; r += 1) {
+    var dm = String(dataRows[r][dateIdx] == null ? '' : dataRows[r][dateIdx]).trim().match(/^(\d{1,2})\/(\d{1,2})\/\d{2,4}/);
+    if (dm && +dm[1] > 12) { dayFirst = true; break; }
+  }
+  var transactions = [], skipped = 0;
+  dataRows.forEach(function (cells) {
+    var ts = csvParseDate(cells[dateIdx], dayFirst);
+    var amount = null, type = null;
+    if (hasDebitCredit) {
+      var debit = csvParseAmount(cells[debitIdx]);
+      var credit = csvParseAmount(cells[creditIdx]);
+      if (debit !== null && debit !== 0) { amount = Math.abs(debit); type = 'EXPENSE'; }
+      else if (credit !== null && credit !== 0) { amount = Math.abs(credit); type = 'INCOME'; }
+    } else {
+      var v = csvParseAmount(cells[amountIdx]);
+      if (v !== null && v !== 0) {
+        amount = Math.abs(v);
+        if (v < 0) {
+          type = 'EXPENSE'; // an explicit sign always wins
+        } else if (dirIdx !== -1) {
+          var dir = mapDirection(cells[dirIdx]);
+          if (dir) { type = dir; }
+          else { skipped += 1; return; } // direction column present but unreadable — skip, don't guess
+        } else {
+          type = 'INCOME'; // unsigned amount, no direction column: nothing better to infer
+        }
+      }
+    }
+    if (ts === null || amount === null || !type) { skipped += 1; return; }
+    var catRaw = catIdx !== -1 ? String(cells[catIdx] == null ? '' : cells[catIdx]).trim() : '';
+    var note = descIdx !== -1 ? String(cells[descIdx] == null ? '' : cells[descIdx]).trim() : '';
+    var tx = buildTxObj({ amount: amount, type: type, category: coerceCategory(catRaw), timestampMillis: ts, note: note, importSource: 'CSV' });
+    if (isValidTxObj(tx)) transactions.push(tx); else skipped += 1;
+  });
+  if (transactions.length === 0) return { error: 'No rows in the CSV could be read as transactions (' + skipped + ' skipped). Check the date and amount columns.' };
+  return { transactions: transactions, imported: transactions.length, skipped: skipped };
+}
 
 function makeSessionId() {
   if (window.crypto && typeof crypto.randomUUID === 'function') return crypto.randomUUID();
@@ -1285,18 +1709,141 @@ if (!isFirebaseConfigured()) {
       bundle.chatHistory.length === 0;
   }
 
+  var currentUid = null;
+  var accountWired = false;
+
+  // Never let a write happen on the anonymous session the Wi-Fi/QR flow uses,
+  // or on an account other than the one the panel was opened for. Firestore
+  // rules enforce this too; this is the friendly client-side guard.
+  function writeGuard() {
+    var user = getFirebaseAuth().currentUser;
+    if (!user || user.isAnonymous) return 'You’re not signed in — sign in again to save.';
+    if (currentUid && user.uid !== currentUid) return 'Account mismatch — please sign in again.';
+    return null;
+  }
+
   async function completeCloudSignIn(uid) {
-    setBusy(true, 'Reading your data…');
-    try {
-      var bundle = await buildBundleFromFirestore(uid);
-      setBusy(true, isBundleEmpty(bundle)
-        ? 'No synced data found on this account yet — continuing to an empty dashboard…'
-        : 'Connected — redirecting…');
-      handoff(bundle, function (msg) { setBusy(false, ''); showError(msg); });
-    } catch (err) {
-      setBusy(false, '');
-      showError('Could not read your data: ' + friendlyAuthError(err));
+    setBusy(false, '');
+    enterAccount(uid);
+  }
+
+  function enterAccount(uid) {
+    currentUid = uid;
+    showError('');
+    var grid = document.querySelector('.gate-grid');
+    if (grid) grid.style.display = 'none';
+    var intro = document.querySelector('.intro');
+    if (intro) intro.style.display = 'none';
+    var strap = document.querySelector('.strap-line');
+    if (strap) strap.style.display = 'none';
+    var panel = qs('panel-account');
+    panel.hidden = false;
+    var user = getFirebaseAuth().currentUser;
+    qs('accountWho').textContent = (user && user.email) ? user.email : 'your account';
+    if (!accountWired) { wireAccount(); accountWired = true; }
+    panel.scrollIntoView({ block: 'start' });
+  }
+
+  function wireAccount() {
+    var expForm = qs('expenseForm');
+    var amtInput = qs('expAmount');
+    var catSelect = qs('expCategory');
+    var dateInput = qs('expDate');
+    var noteInput = qs('expNote');
+    var typeExpBtn = qs('expTypeExpense');
+    var typeIncBtn = qs('expTypeIncome');
+    var expStatus = qs('expenseStatus');
+    var expError = qs('expenseError');
+    var csvInput = qs('csvInput');
+    var csvStatus = qs('csvStatus');
+    var openDashBtn = qs('openDashBtn');
+    var accountError = qs('accountError');
+    var signOutBtn = qs('accountSignOut');
+    var txType = 'EXPENSE';
+
+    dateInput.value = todayIso();
+
+    function setType(t) {
+      txType = (t === 'INCOME') ? 'INCOME' : 'EXPENSE';
+      typeExpBtn.setAttribute('aria-pressed', String(txType === 'EXPENSE'));
+      typeIncBtn.setAttribute('aria-pressed', String(txType === 'INCOME'));
     }
+    typeExpBtn.addEventListener('click', function () { setType('EXPENSE'); });
+    typeIncBtn.addEventListener('click', function () { setType('INCOME'); });
+
+    function showExpError(msg) { expError.hidden = !msg; expError.textContent = msg || ''; }
+    function showAccountError(msg) { accountError.hidden = !msg; accountError.textContent = msg || ''; }
+
+    expForm.addEventListener('submit', async function (e) {
+      e.preventDefault();
+      showExpError(''); expStatus.textContent = '';
+      var amount = parseFloat(String(amtInput.value).replace(',', '.').replace(/[^0-9.\-]/g, ''));
+      if (!isFinite(amount) || amount <= 0) { showExpError('Enter an amount greater than 0.'); return; }
+      var ts = isoToMillis(dateInput.value);
+      if (ts === null) { showExpError('Pick a valid date.'); return; }
+      var guard = writeGuard();
+      if (guard) { showExpError(guard); return; }
+      var tx = buildTxObj({ amount: amount, type: txType, category: catSelect.value, timestampMillis: ts, note: noteInput.value, importSource: 'MANUAL' });
+      if (!isValidTxObj(tx)) { showExpError('That entry isn’t valid — check the amount and category.'); return; }
+      qs('expenseSubmit').disabled = true;
+      expStatus.textContent = 'Saving…';
+      try {
+        await writeTransaction(currentUid, tx);
+        expStatus.textContent = '✓ Synced — it’ll appear on your phone shortly.';
+        amtInput.value = ''; noteInput.value = '';
+        amtInput.focus();
+      } catch (err) {
+        expStatus.textContent = '';
+        showExpError('Could not save: ' + friendlyWriteError(err));
+      } finally {
+        qs('expenseSubmit').disabled = false;
+      }
+    });
+
+    csvInput.addEventListener('change', function (e) {
+      var file = e.target.files && e.target.files[0];
+      if (!file) return;
+      var guard = writeGuard();
+      if (guard) { csvStatus.textContent = guard; csvInput.value = ''; return; }
+      csvStatus.textContent = 'Reading ' + file.name + '…';
+      var reader = new FileReader();
+      reader.onload = async function () {
+        var parsed = parseCsvTransactions(String(reader.result || ''));
+        if (parsed.error) { csvStatus.textContent = parsed.error; csvInput.value = ''; return; }
+        var reguard = writeGuard(); // re-check: the session may have changed during the async read
+        if (reguard) { csvStatus.textContent = reguard; csvInput.value = ''; return; }
+        csvStatus.textContent = 'Importing ' + parsed.transactions.length + '…';
+        try {
+          await writeTransactionsBatch(currentUid, parsed.transactions);
+          csvStatus.textContent = '✓ Imported ' + parsed.imported + ' · ' + parsed.skipped + ' skipped — syncing to your phone.';
+        } catch (err) {
+          csvStatus.textContent = 'Import failed: ' + friendlyWriteError(err);
+        }
+        csvInput.value = '';
+      };
+      reader.onerror = function () { csvStatus.textContent = 'Could not read that file.'; csvInput.value = ''; };
+      reader.readAsText(file);
+    });
+
+    openDashBtn.addEventListener('click', async function () {
+      showAccountError('');
+      openDashBtn.disabled = true;
+      var prev = openDashBtn.textContent;
+      openDashBtn.textContent = 'Loading…';
+      try {
+        var bundle = await buildBundleFromFirestore(currentUid);
+        handoff(bundle, function (msg) { openDashBtn.disabled = false; openDashBtn.textContent = prev; showAccountError(msg); });
+      } catch (err) {
+        openDashBtn.disabled = false;
+        openDashBtn.textContent = prev;
+        showAccountError('Could not load your dashboard: ' + friendlyWriteError(err));
+      }
+    });
+
+    signOutBtn.addEventListener('click', async function () {
+      try { await signOut(getFirebaseAuth()); } catch (err) { /* ignore */ }
+      location.reload();
+    });
   }
 
   form.addEventListener('submit', async function (event) {
