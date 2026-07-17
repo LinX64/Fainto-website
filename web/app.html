@@ -155,6 +155,25 @@ button, input { font-family: inherit; }
 .seg button[aria-pressed="true"] { background: var(--chrome); color: var(--on-chrome); }
 .seg button:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: -2px; }
 .account-actions { margin-top: var(--sp-xl); }
+.edit-banner { display: none; font-size: 14px; color: var(--acc-brand); margin-bottom: var(--sp-md); }
+.edit-banner.on { display: block; }
+.tx-section { margin-top: var(--sp-xl); }
+.tx-title { font-size: 16px; font-weight: 600; margin: 0 0 var(--sp-sm); }
+.tx-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.tx-row { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-md); padding: var(--sp-md) 0; border-bottom: 1px solid var(--line); }
+.tx-info { min-width: 0; }
+.tx-meta { font-size: 13px; color: var(--muted); }
+.tx-note { font-size: 15px; color: var(--text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 32ch; }
+.tx-right { display: flex; align-items: center; gap: var(--sp-md); flex-shrink: 0; }
+.tx-amount { font-variant-numeric: tabular-nums; font-weight: 600; white-space: nowrap; }
+.tx-amount.exp { color: var(--acc-spend); }
+.tx-amount.inc { color: var(--acc-income); }
+.tx-btns { display: flex; gap: var(--sp-xs); }
+.tx-btn { min-height: 32px; padding: 4px 12px; font-size: 13px; font-weight: 600; border: 1px solid var(--outline); background: transparent; color: var(--text); cursor: pointer; border-radius: 999px; }
+.tx-btn:hover { background: var(--surface-2); }
+.tx-btn.del { color: var(--acc-spend); border-color: var(--acc-spend); }
+.tx-btn:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }
+.tx-empty { color: var(--muted); font-size: 15px; padding: var(--sp-md) 0; }
 
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-sm);
@@ -457,6 +476,7 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
     <p class="desc">Type an expense here — or import a bank CSV — and it saves to your account and syncs to the Fainto app on your phone automatically.</p>
 
     <form id="expenseForm" novalidate>
+      <div class="edit-banner" id="editBanner">Editing an existing transaction — <button type="button" class="link-btn" id="cancelEditBtn">cancel</button></div>
       <div class="field">
         <label>Type</label>
         <div class="seg" role="group" aria-label="Transaction type">
@@ -498,6 +518,12 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
       <div class="status-row" id="expenseStatus" role="status" aria-live="polite"></div>
       <div class="alert alert-error" id="expenseError" hidden role="alert"></div>
     </form>
+
+    <div class="tx-section">
+      <h3 class="tx-title">Your transactions</h3>
+      <div class="status-row" id="txStatus" role="status" aria-live="polite"></div>
+      <div class="tx-list" id="txList"></div>
+    </div>
 
     <div class="divider">or import many</div>
 
@@ -1255,13 +1281,32 @@ function isValidTxObj(tx) {
     isFinite(tx.timestampMillis) && tx.timestampMillis > 0;
 }
 
-async function writeTransaction(uid, tx) {
+async function writeTransaction(uid, tx, docId, isEdit) {
   var db = getFirebaseFirestore();
-  await setDoc(doc(db, 'users', uid, 'transactions', tx.id), {
-    dataJson: JSON.stringify(tx),
-    updatedAt: Date.now(),
-    schemaVersion: 2,
-  });
+  var ref = doc(db, 'users', uid, 'transactions', docId || tx.id);
+  // LWW: the phone applies this write only if updatedAt exceeds the doc's current
+  // value. On an edit the doc already exists, so bump past whatever is there; on a
+  // fresh add the doc is absent and Date.now() (> the local index of 0) is enough.
+  var updatedAt = Date.now();
+  var snap = null;
+  try {
+    snap = await getDoc(ref);
+  } catch (err) {
+    // On an edit, guessing updatedAt = Date.now() risks a value <= the doc's current
+    // one (clock skew / prior +1 bumps), which the phone would silently ignore — so
+    // fail loudly instead of committing a no-op edit.
+    if (isEdit) throw err;
+  }
+  if (snap && snap.exists()) {
+    var cur = (snap.data() && typeof snap.data().updatedAt === 'number') ? snap.data().updatedAt : 0;
+    if (cur >= updatedAt) updatedAt = cur + 1;
+  }
+  await setDoc(ref, { dataJson: JSON.stringify(tx), updatedAt: updatedAt, schemaVersion: 2 });
+}
+
+async function deleteTransaction(uid, id) {
+  var db = getFirebaseFirestore();
+  await deleteDoc(doc(db, 'users', uid, 'transactions', id));
 }
 
 async function writeTransactionsBatch(uid, txs) {
@@ -1759,7 +1804,17 @@ if (!isFirebaseConfigured()) {
     var openDashBtn = qs('openDashBtn');
     var accountError = qs('accountError');
     var signOutBtn = qs('accountSignOut');
+    var editBanner = qs('editBanner');
+    var cancelEditBtn = qs('cancelEditBtn');
+    var submitBtn = qs('expenseSubmit');
+    var txListEl = qs('txList');
+    var txStatus = qs('txStatus');
     var txType = 'EXPENSE';
+    var editingId = null;
+    var editingOriginal = null;
+    var txById = {};
+    var txCount = 0;
+    var busy = false;
 
     dateInput.value = todayIso();
 
@@ -1774,6 +1829,144 @@ if (!isFirebaseConfigured()) {
     function showExpError(msg) { expError.hidden = !msg; expError.textContent = msg || ''; }
     function showAccountError(msg) { accountError.hidden = !msg; accountError.textContent = msg || ''; }
 
+    function millisToIso(ms) {
+      var d = new Date(Number(ms));
+      if (!isFinite(d.getTime())) return todayIso();
+      var m = d.getMonth() + 1, day = d.getDate();
+      return d.getFullYear() + '-' + (m < 10 ? '0' + m : m) + '-' + (day < 10 ? '0' + day : day);
+    }
+    function fmtAmount(tx) {
+      var n = Math.abs(Number(tx.amount)) || 0;
+      var s = n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return (tx.type === 'INCOME' ? '+' : '−') + s;
+    }
+    function setListDisabled(on) {
+      Array.prototype.forEach.call(txListEl.querySelectorAll('button'), function (b) { b.disabled = on; });
+    }
+    function resetForm() {
+      editingId = null; editingOriginal = null;
+      editBanner.classList.remove('on');
+      submitBtn.textContent = 'Add & sync';
+      amtInput.value = ''; noteInput.value = '';
+      catSelect.value = 'OTHER';
+      dateInput.value = todayIso();
+      setType('EXPENSE');
+    }
+    function startEdit(id) {
+      var tx = txById[id];
+      if (!tx) return;
+      editingId = id; editingOriginal = tx;
+      amtInput.value = String(tx.amount);
+      setType(tx.type === 'INCOME' ? 'INCOME' : 'EXPENSE');
+      catSelect.value = CATEGORY_SET[tx.category] ? tx.category : 'OTHER';
+      dateInput.value = millisToIso(tx.timestampMillis);
+      noteInput.value = tx.note || '';
+      submitBtn.textContent = 'Save changes';
+      editBanner.classList.add('on');
+      showExpError(''); expStatus.textContent = '';
+      expForm.scrollIntoView({ block: 'start' });
+      amtInput.focus();
+    }
+    cancelEditBtn.addEventListener('click', function () { resetForm(); });
+
+    function renderTxList(txs) {
+      txById = {};
+      txListEl.textContent = '';
+      var sorted = txs.slice().filter(function (t) { return t && t.id; }).sort(function (a, b) { return (b.timestampMillis || 0) - (a.timestampMillis || 0); });
+      sorted.forEach(function (t) { txById[t.__docId || t.id] = t; });
+      txCount = sorted.length;
+      if (txCount === 0) {
+        var empty = document.createElement('p');
+        empty.className = 'tx-empty';
+        empty.textContent = 'No transactions yet — add one above.';
+        txListEl.appendChild(empty);
+        return;
+      }
+      sorted.slice(0, 60).forEach(function (t) {
+        var row = document.createElement('div'); row.className = 'tx-row';
+        var info = document.createElement('div'); info.className = 'tx-info';
+        var meta = document.createElement('div'); meta.className = 'tx-meta';
+        meta.textContent = millisToIso(t.timestampMillis) + ' · ' + (t.category || 'OTHER');
+        var noteEl = document.createElement('div'); noteEl.className = 'tx-note';
+        noteEl.textContent = t.note || '—';
+        info.appendChild(meta); info.appendChild(noteEl);
+        var right = document.createElement('div'); right.className = 'tx-right';
+        var amt = document.createElement('span'); amt.className = 'tx-amount ' + (t.type === 'INCOME' ? 'inc' : 'exp');
+        amt.textContent = fmtAmount(t);
+        var btns = document.createElement('div'); btns.className = 'tx-btns';
+        var editB = document.createElement('button'); editB.type = 'button'; editB.className = 'tx-btn'; editB.textContent = 'Edit'; editB.setAttribute('data-edit', t.__docId || t.id);
+        var delB = document.createElement('button'); delB.type = 'button'; delB.className = 'tx-btn del'; delB.textContent = 'Delete'; delB.setAttribute('data-del', t.__docId || t.id);
+        btns.appendChild(editB); btns.appendChild(delB);
+        right.appendChild(amt); right.appendChild(btns);
+        row.appendChild(info); row.appendChild(right);
+        txListEl.appendChild(row);
+      });
+    }
+
+    async function loadTxList() {
+      txStatus.textContent = 'Loading your transactions…';
+      try {
+        var db = getFirebaseFirestore();
+        var snap = await getDocs(collection(db, 'users', currentUid, 'transactions'));
+        var txs = [];
+        snap.forEach(function (docSnap) {
+          var data = docSnap.data();
+          if (!data || !data.dataJson) return;
+          var parsed = safeParseJson(data.dataJson);
+          if (!parsed || !parsed.id) return;
+          parsed.__docId = docSnap.id; // authoritative Firestore doc id, used for edit/delete
+          txs.push(parsed);
+        });
+        renderTxList(txs);
+        txStatus.textContent = '';
+      } catch (err) {
+        // Fail-safe: an unknown count must never let a delete empty the collection.
+        txCount = 0;
+        setListDisabled(true);
+        txStatus.textContent = 'Could not load transactions: ' + friendlyWriteError(err);
+      }
+    }
+
+    async function onDelete(id) {
+      if (busy) return; // no concurrent deletes — the count guard must act on a fresh count
+      var tx = txById[id];
+      if (!tx) return;
+      // Hard rule from the Android sync: never delete down to an empty collection —
+      // the phone would re-upload its local copies and undo the delete.
+      if (txCount <= 1) {
+        showAccountError('This is your only synced transaction — delete it from the phone app instead (deleting the last one here would be undone on the next sync).');
+        return;
+      }
+      var label = (tx.note ? tx.note : (tx.category || 'this transaction')) + ' · ' + fmtAmount(tx);
+      if (!window.confirm('Delete “' + label + '”? This removes it from your account and your phone.')) return;
+      var guard = writeGuard();
+      if (guard) { showAccountError(guard); return; }
+      busy = true;
+      setListDisabled(true);
+      showAccountError('');
+      txStatus.textContent = 'Deleting…';
+      try {
+        await deleteTransaction(currentUid, id);
+        txCount = Math.max(0, txCount - 1); // reflect immediately so a stale count can't permit emptying
+        txStatus.textContent = '✓ Deleted — syncing to your phone.';
+        if (editingId === id) resetForm();
+        await loadTxList();
+      } catch (err) {
+        txStatus.textContent = 'Could not delete: ' + friendlyWriteError(err);
+      } finally {
+        busy = false;
+        setListDisabled(false);
+      }
+    }
+
+    txListEl.addEventListener('click', function (e) {
+      var t = e.target;
+      var editId = t.getAttribute && t.getAttribute('data-edit');
+      if (editId) { startEdit(editId); return; }
+      var delId = t.getAttribute && t.getAttribute('data-del');
+      if (delId) { onDelete(delId); return; }
+    });
+
     expForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       showExpError(''); expStatus.textContent = '';
@@ -1783,20 +1976,35 @@ if (!isFirebaseConfigured()) {
       if (ts === null) { showExpError('Pick a valid date.'); return; }
       var guard = writeGuard();
       if (guard) { showExpError(guard); return; }
-      var tx = buildTxObj({ amount: amount, type: txType, category: catSelect.value, timestampMillis: ts, note: noteInput.value, importSource: 'MANUAL' });
+      var editing = !!(editingId && editingOriginal);
+      var tx;
+      if (editing) {
+        tx = Object.assign({}, editingOriginal); // preserve tags/receiptUri/importSource/etc.
+        delete tx.__docId; // web-only field, never write it into dataJson
+        tx.id = editingOriginal.id;
+        tx.amount = Math.abs(amount);
+        tx.type = txType;
+        tx.category = CATEGORY_SET[catSelect.value] ? catSelect.value : coerceCategory(catSelect.value);
+        tx.timestampMillis = Math.round(ts);
+        tx.note = String(noteInput.value == null ? '' : noteInput.value).slice(0, 500);
+      } else {
+        tx = buildTxObj({ amount: amount, type: txType, category: catSelect.value, timestampMillis: ts, note: noteInput.value, importSource: 'MANUAL' });
+      }
       if (!isValidTxObj(tx)) { showExpError('That entry isn’t valid — check the amount and category.'); return; }
-      qs('expenseSubmit').disabled = true;
-      expStatus.textContent = 'Saving…';
+      var editDocId = editing ? (editingOriginal.__docId || editingOriginal.id) : tx.id;
+      submitBtn.disabled = true;
+      expStatus.textContent = editing ? 'Saving changes…' : 'Saving…';
       try {
-        await writeTransaction(currentUid, tx);
-        expStatus.textContent = '✓ Synced — it’ll appear on your phone shortly.';
-        amtInput.value = ''; noteInput.value = '';
+        await writeTransaction(currentUid, tx, editDocId, editing);
+        expStatus.textContent = editing ? '✓ Updated — syncing to your phone.' : '✓ Synced — it’ll appear on your phone shortly.';
+        resetForm();
+        await loadTxList();
         amtInput.focus();
       } catch (err) {
         expStatus.textContent = '';
         showExpError('Could not save: ' + friendlyWriteError(err));
       } finally {
-        qs('expenseSubmit').disabled = false;
+        submitBtn.disabled = false;
       }
     });
 
@@ -1816,6 +2024,7 @@ if (!isFirebaseConfigured()) {
         try {
           await writeTransactionsBatch(currentUid, parsed.transactions);
           csvStatus.textContent = '✓ Imported ' + parsed.imported + ' · ' + parsed.skipped + ' skipped — syncing to your phone.';
+          await loadTxList();
         } catch (err) {
           csvStatus.textContent = 'Import failed: ' + friendlyWriteError(err);
         }
@@ -1844,6 +2053,8 @@ if (!isFirebaseConfigured()) {
       try { await signOut(getFirebaseAuth()); } catch (err) { /* ignore */ }
       location.reload();
     });
+
+    loadTxList(); // initial load of the signed-in account's transactions
   }
 
   form.addEventListener('submit', async function (event) {
