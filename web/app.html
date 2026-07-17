@@ -100,6 +100,7 @@ button, input { font-family: inherit; }
 .monogram { width: 36px; height: 36px; flex-shrink: 0; object-fit: contain; }
 .wordmark { font-size: 20px; font-weight: 600; line-height: 1.1; letter-spacing: -0.01em; }
 .eyebrow { font-size: 13px; line-height: 1.3; text-transform: uppercase; letter-spacing: .12em; font-weight: 700; color: var(--muted); }
+.brand-link { display: inline-flex; align-items: center; gap: var(--sp-md); text-decoration: none; color: inherit; }
 .topnav { margin-left: auto; display: flex; align-items: center; gap: 20px; }
 .topnav a { font-size: 15px; font-weight: 500; color: var(--muted); text-decoration: none; }
 .topnav a:hover { color: var(--text); }
@@ -371,11 +372,11 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
 
   <header class="site-header">
     <a class="backlink" href="./" aria-label="Back to Fainto Web start">←&nbsp;Back</a>
-    <svg class="monogram" width="34" height="34" viewBox="0 0 108 108" role="img" aria-label="Fainto"><circle cx="54" cy="54" r="54" fill="#FDFDFD"/><path fill="#1E2024" d="M25.02,54 A28.98,28.98 0 0 1 54,25.02 L54,40.89 A13.11,13.11 0 0 0 40.89,54 Z"/><path fill="#474B53" d="M54,25.02 L73.32,25.02 A9.66,9.66 0 0 1 82.98,34.68 L82.98,54 L67.11,54 A13.11,13.11 0 0 0 54,40.89 Z"/><path fill="#606672" d="M82.98,54 A28.98,28.98 0 0 1 54,82.98 L54,67.11 A13.11,13.11 0 0 0 67.11,54 Z"/><path fill="#282B31" d="M54,82.98 A28.98,28.98 0 0 1 25.02,54 L40.89,54 A13.11,13.11 0 0 0 54,67.11 Z"/></svg>
+    <a class="brand-link" href="/" aria-label="Fainto — go to fainto.app"><svg class="monogram" width="34" height="34" viewBox="0 0 108 108" role="img" aria-label="Fainto"><circle cx="54" cy="54" r="54" fill="#FDFDFD"/><path fill="#1E2024" d="M25.02,54 A28.98,28.98 0 0 1 54,25.02 L54,40.89 A13.11,13.11 0 0 0 40.89,54 Z"/><path fill="#474B53" d="M54,25.02 L73.32,25.02 A9.66,9.66 0 0 1 82.98,34.68 L82.98,54 L67.11,54 A13.11,13.11 0 0 0 54,40.89 Z"/><path fill="#606672" d="M82.98,54 A28.98,28.98 0 0 1 54,82.98 L54,67.11 A13.11,13.11 0 0 0 67.11,54 Z"/><path fill="#282B31" d="M54,82.98 A28.98,28.98 0 0 1 25.02,54 L40.89,54 A13.11,13.11 0 0 0 54,67.11 Z"/></svg>
     <div>
       <div class="wordmark">Fainto</div>
       <div class="eyebrow">Connect</div>
-    </div>
+    </div></a>
     <nav class="topnav" aria-label="Site">
       <a href="/faq.html">FAQ</a>
       <a href="/contact.html">Contact</a>
@@ -1184,6 +1185,7 @@ import {
   signInAnonymously,
   sendPasswordResetEmail,
   signOut,
+  onAuthStateChanged,
   GoogleAuthProvider,
 } from 'https://www.gstatic.com/firebasejs/12.16.0/firebase-auth.js';
 import {
@@ -2119,6 +2121,25 @@ if (!isFirebaseConfigured()) {
       showError(friendlyAuthError(err));
     }
   }
+
+  // Stay signed in: Firebase persists the auth token in this browser, so resume the
+  // account view automatically on return — unless the user explicitly opened the
+  // Wi-Fi/QR connect flow, or arrived here to sign out.
+  (function initSession() {
+    if (!isFirebaseConfigured()) return;
+    var params = new URLSearchParams(location.search);
+    if (params.get('signout') === '1') {
+      signOut(getFirebaseAuth()).catch(function () {}).then(function () {
+        try { history.replaceState(null, '', location.pathname); } catch (e) {}
+      });
+      return;
+    }
+    if (params.get('mode') === 'connect') return; // respect an explicit no-account pairing intent
+    onAuthStateChanged(getFirebaseAuth(), function (user) {
+      if (currentUid) return; // already in the account panel
+      if (user && !user.isAnonymous) enterAccount(user.uid);
+    });
+  })();
 })();
 
 /* ============================================================
@@ -2347,6 +2368,9 @@ if (!isFirebaseConfigured()) {
 
     try {
       var auth = getFirebaseAuth();
+      // Let any persisted (real) sign-in finish restoring BEFORE deciding to sign in
+      // anonymously — otherwise the anonymous pairing session clobbers the saved account.
+      if (auth.authStateReady) { try { await auth.authStateReady(); } catch (e) {} }
       if (!auth.currentUser) await signInAnonymously(auth);
     } catch (err) {
       showError('Could not start a pairing session: ' + friendlyAuthError(err));
@@ -2443,7 +2467,19 @@ if (!isFirebaseConfigured()) {
   qrRetryBtn.addEventListener('click', function () { startQrSession(); });
   window.addEventListener('beforeunload', function () { if (current) teardown(current); });
 
-  if (new URLSearchParams(location.search).get('mode') !== 'signin') startQrSession();
+  (async function maybeStartQr() {
+    var params = new URLSearchParams(location.search);
+    if (params.get('mode') === 'signin' || params.get('signout') === '1') return;
+    if (isFirebaseConfigured()) {
+      try {
+        var auth = getFirebaseAuth();
+        if (auth.authStateReady) await auth.authStateReady();
+        // A signed-in account resumes into the account panel — don't also open pairing.
+        if (auth.currentUser && !auth.currentUser.isAnonymous) return;
+      } catch (e) { /* fall through and start pairing */ }
+    }
+    startQrSession();
+  })();
 })();
 </script>
 

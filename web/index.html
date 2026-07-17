@@ -47,7 +47,7 @@
   a:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }
   .wrap { max-width: 880px; margin: 0 auto; padding: 56px var(--pad) 28px; }
   header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 36px; }
-  .brand-group { display: flex; align-items: center; gap: 12px; }
+  .brand-group { display: flex; align-items: center; gap: 12px; text-decoration: none; }
   .topnav { display: flex; align-items: center; gap: 20px; }
   .topnav a { font-size: 15px; font-weight: 500; color: var(--muted); text-decoration: none; }
   .topnav a:hover { color: var(--text); }
@@ -101,10 +101,10 @@
 <body>
 <div class="wrap">
   <header>
-    <div class="brand-group">
+    <a class="brand-group" href="/" aria-label="Fainto — go to fainto.app">
     <svg class="mark" width="34" height="34" viewBox="0 0 108 108" role="img" aria-label="Fainto"><circle cx="54" cy="54" r="54" fill="#FDFDFD"/><path fill="#1E2024" d="M25.02,54 A28.98,28.98 0 0 1 54,25.02 L54,40.89 A13.11,13.11 0 0 0 40.89,54 Z"/><path fill="#474B53" d="M54,25.02 L73.32,25.02 A9.66,9.66 0 0 1 82.98,34.68 L82.98,54 L67.11,54 A13.11,13.11 0 0 0 54,40.89 Z"/><path fill="#606672" d="M82.98,54 A28.98,28.98 0 0 1 54,82.98 L54,67.11 A13.11,13.11 0 0 0 67.11,54 Z"/><path fill="#282B31" d="M54,82.98 A28.98,28.98 0 0 1 25.02,54 L40.89,54 A13.11,13.11 0 0 0 54,67.11 Z"/></svg>
     <div class="brand">Fainto <span>· Web</span></div>
-    </div>
+    </a>
     <nav class="topnav" aria-label="Site">
       <a href="/faq.html">FAQ</a>
       <a href="/contact.html">Contact</a>

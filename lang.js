@@ -54,7 +54,15 @@
   var cur = "en";
   try {
     var s = localStorage.getItem("fainto-lang");
-    if (LANGS.indexOf(s) >= 0) cur = s;
+    if (LANGS.indexOf(s) >= 0) {
+      cur = s;
+    } else {
+      // No saved choice — follow the browser's language (no IP/geo lookup; the site
+      // makes zero third-party requests). Explicit picks below still override + persist.
+      var nav = (navigator.languages && navigator.languages[0]) || navigator.language || "en";
+      var primary = String(nav).toLowerCase().split("-")[0];
+      if (LANGS.indexOf(primary) >= 0) cur = primary;
+    }
   } catch (e) {}
   apply(cur);
 

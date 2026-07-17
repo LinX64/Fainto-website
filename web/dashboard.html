@@ -246,6 +246,24 @@ header.top {
 
 .icon-btn svg { width: 20px; height: 20px; }
 
+a.brand { text-decoration: none; color: inherit; }
+.top-link {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 16px;
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--muted);
+  background: transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 150ms var(--ease-std), border-color 150ms var(--ease-std), color 150ms var(--ease-std);
+}
+.top-link:hover { color: var(--text); background: var(--surface-2); border-color: var(--outline); }
+
 footer.bottom {
   text-align: center;
   color: var(--muted);
@@ -698,11 +716,13 @@ footer.bottom {
 <body>
 <div class="wrap">
   <header class="top">
-    <div class="brand">
+    <a class="brand" href="/" aria-label="Back to fainto.app">
       <svg class="mark" width="32" height="32" viewBox="0 0 108 108" role="img" aria-label="Fainto"><circle cx="54" cy="54" r="54" fill="#FDFDFD"/><path fill="#1E2024" d="M25.02,54 A28.98,28.98 0 0 1 54,25.02 L54,40.89 A13.11,13.11 0 0 0 40.89,54 Z"/><path fill="#474B53" d="M54,25.02 L73.32,25.02 A9.66,9.66 0 0 1 82.98,34.68 L82.98,54 L67.11,54 A13.11,13.11 0 0 0 54,40.89 Z"/><path fill="#606672" d="M82.98,54 A28.98,28.98 0 0 1 54,82.98 L54,67.11 A13.11,13.11 0 0 0 67.11,54 Z"/><path fill="#282B31" d="M54,82.98 A28.98,28.98 0 0 1 25.02,54 L40.89,54 A13.11,13.11 0 0 0 54,67.11 Z"/></svg>
       <span class="name">Fainto</span>
-    </div>
+    </a>
     <div class="top-actions">
+      <a class="top-link" href="./app.html?mode=signin">Account</a>
+      <button class="top-link" id="dashSignout" type="button">Sign out</button>
       <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light/dark theme" title="Toggle theme">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
       </button>
@@ -730,6 +750,20 @@ footer.bottom {
     }
   }
   applyStoredTheme();
+
+  var dashSignout = document.getElementById('dashSignout');
+  if (dashSignout) {
+    dashSignout.addEventListener('click', function () {
+      // This viewer is offline (no Firebase). Drop the in-tab data and hand off to
+      // app.html, which performs the actual Firebase sign-out.
+      try { sessionStorage.removeItem('fainto_bundle'); } catch (e) {}
+      // Wipe the rendered data before navigating so a Back-button (bfcache) restore
+      // can't re-expose it after sign-out.
+      var app = document.getElementById('app');
+      if (app) app.innerHTML = '';
+      location.href = './app.html?signout=1';
+    });
+  }
 
   document.getElementById('themeToggle').addEventListener('click', function () {
     var current = document.documentElement.getAttribute('data-theme');
