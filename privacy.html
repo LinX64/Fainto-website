@@ -8,11 +8,11 @@
     <title data-i18n="privacy.title">Privacy Policy — Fainto</title>
     <meta
       name="description"
-      content="Fainto's website collects nothing about you — no cookies, no analytics, no trackers, self-hosted fonts. Here's exactly how we handle data, GDPR included."
+      content="How Fainto handles your data: local-first by design, no ads or trackers, optional encrypted backup &amp; sync, and your GDPR rights — explained in plain language."
       data-i18n-attr="content:privacy.desc"
     />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="author" content="Mo" />
+    <meta name="author" content="Mohsen Rezania" />
     <meta name="theme-color" content="#27272F" />
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
     <link rel="canonical" href="https://fainto.app/privacy.html" />
@@ -25,7 +25,7 @@
     <meta property="og:title" content="Privacy Policy — Fainto" />
     <meta
       property="og:description"
-      content="No cookies, no analytics, no trackers. Exactly how Fainto's website handles data — GDPR included."
+      content="Local-first by design, no ads or trackers. Exactly how Fainto handles data — GDPR included."
     />
     <meta property="og:image" content="https://fainto.app/assets/og-image.png" />
     <meta property="og:image:width" content="1200" />
@@ -36,7 +36,7 @@
     <meta name="twitter:title" content="Privacy Policy — Fainto" />
     <meta
       name="twitter:description"
-      content="No cookies, no analytics, no trackers — exactly how Fainto's website handles data, GDPR included."
+      content="Local-first by design, no ads or trackers — exactly how Fainto handles data, GDPR included."
     />
     <meta name="twitter:image" content="https://fainto.app/assets/og-image.png" />
     <meta
@@ -54,12 +54,12 @@
             "@id": "https://fainto.app/privacy.html#webpage",
             "url": "https://fainto.app/privacy.html",
             "name": "Privacy Policy — Fainto",
-            "description": "How Fainto's website handles data: no cookies, no analytics, no trackers. GDPR included.",
+            "description": "How Fainto handles data: local-first by design, no ads or trackers, optional encrypted backup and sync. GDPR included.",
             "inLanguage": "en",
             "isPartOf": { "@id": "https://fainto.app/#website" },
             "about": { "@id": "https://fainto.app/#org" },
             "publisher": { "@id": "https://fainto.app/#org" },
-            "dateModified": "2026-07-10",
+            "dateModified": "2026-07-17",
             "breadcrumb": { "@id": "https://fainto.app/privacy.html#breadcrumb" }
           },
           {
@@ -186,22 +186,49 @@
           <p class="eyebrow" data-i18n="privacy.eyebrow">Privacy</p>
           <h1 data-i18n="privacy.h1">Privacy Policy</h1>
           <p data-i18n="privacy.intro" data-i18n-html="1">
-            This policy covers both the <strong>Fainto</strong> Android app and this website. In short: the financial
-            data you enter stays on your device, we run no ads or trackers, and nothing about your money is uploaded
-            unless you deliberately switch on an optional feature. It's written to meet the EU/UK
-            <strong>GDPR</strong> and Google Play's User Data policy.
+            This policy covers the <strong>Fainto</strong> Android app, this website, and the
+            <strong>Fainto Web</strong> browser companion. In short: your financial data lives on your device by
+            default, we run no ads, analytics, or trackers, and nothing about your money leaves your phone unless you
+            deliberately switch on an optional feature — an account for backup &amp; sync, Cloud AI, or the web
+            companion. It's written to meet the EU/UK <strong>GDPR</strong> and Google Play's User Data policy.
           </p>
           <h2 data-i18n="privacy.h2.who">Who we are</h2>
           <p data-i18n="privacy.who" data-i18n-html="1">
-            Fainto is made by Mo. For anything privacy-related — including exercising your rights below — contact
-            <a href="mailto:support@fainto.app">support@fainto.app</a>. This is also the data controller under the GDPR.
+            Fainto is made by <strong>Mohsen Rezania</strong>, based in Poland — the data controller under the GDPR.
+            For anything privacy-related — including exercising your rights below — contact
+            <a href="mailto:support@fainto.app">support@fainto.app</a>.
           </p>
           <h2 data-i18n="privacy.h2.stores">What the app stores, and where</h2>
           <p data-i18n="privacy.stores" data-i18n-html="1">
             Everything you put into Fainto — accounts, balances, transactions, income, bills, budgets and the figures
-            used by the tax tools — is stored <strong>locally on your device</strong>. There is no Fainto account and no
-            sign-up, so we never receive, see, or store your financial data on any server. It is not collected by us,
-            and never sold, rented, or shared.
+            used by the tax tools — is stored <strong>locally on your device</strong>. No account is required to use
+            Fainto, and until you create one, we never receive, see, or store your financial data on any server. Your
+            data is never sold, rented, or shared — with or without an account.
+          </p>
+          <h2 data-i18n="privacy.h2.account">Optional account: backup &amp; sync (off unless you sign in)</h2>
+          <p data-i18n="privacy.account" data-i18n-html="1">
+            Creating a Fainto account (email &amp; password, or Google Sign-In) is <strong>optional</strong>. If you
+            sign in, the app backs up and keeps in sync your financial data — transactions, budgets, net-worth entries,
+            portfolio and crypto holdings, detected subscriptions, recurring payments, app preferences and your AI
+            coach chat history — in <strong>Google Firebase (Firestore)</strong>, stored under your account and
+            protected by per-user access rules. It is encrypted in transit and at rest on Google's infrastructure,
+            though not end-to-end. If you join a household, the budgets you choose to share are visible to the other
+            members of that household. Google acts as our data processor and may store this data on servers outside the
+            EEA under Google Cloud's data-processing terms (including the EU's standard contractual clauses); nobody
+            else receives this data, and we run no ads or analytics on it.
+          </p>
+          <h2 data-i18n="privacy.h2.webapp">Fainto Web (the browser companion)</h2>
+          <p data-i18n="privacy.webapp" data-i18n-html="1">
+            <a href="web/">fainto.app/web</a> shows your finances on a bigger screen, two ways.
+            <strong>Pairing (no account):</strong> your phone streams your data straight to your browser over an
+            encrypted peer-to-peer connection — it is never stored on a server. To establish the link, a short-lived
+            pairing record (connection metadata, including the network addresses the two devices need to find each
+            other) is held in Firebase only while pairing — it is deleted when the connection is made, and marked to
+            expire after five minutes in any case — and Google's STUN service is used for address discovery. What you see stays in the browser tab and is cleared when the tab closes.
+            <strong>Sign-in:</strong> the browser reads the data your account already syncs, over an encrypted
+            connection; the Google sign-in window is provided by Google and governed by Google's own privacy policy. A
+            sign-in session stays in this browser until you clear the site's data. The web companion loads the Firebase software from Google's servers and contains no ads, analytics, or
+            trackers.
           </p>
           <h2 data-i18n="privacy.h2.coach">The on-device AI coach</h2>
           <p data-i18n="privacy.coach" data-i18n-html="1">
@@ -211,8 +238,9 @@
           <h2 data-i18n="privacy.h2.cloudai">Optional Cloud AI (off by default)</h2>
           <p data-i18n="privacy.cloudai" data-i18n-html="1">
             Fainto includes an <strong>optional</strong> Cloud AI mode — a Premium feature that is
-            <strong>turned off unless you enable it</strong>. If, and only if, you switch it on and send a message, the
-            text of that message is transmitted over an encrypted (HTTPS) connection to our AI gateway,
+            <strong>turned off unless you enable it</strong>. If, and only if, you switch it on and send a message,
+            that message plus an aggregated financial summary (totals and categories — never your name, email, or
+            payment names) is transmitted over an encrypted (HTTPS) connection to our AI gateway,
             <strong>OpenRouter</strong>, and the model provider you choose, solely to generate a reply. We don't use it
             for advertising. You can leave Cloud AI off to stay fully on-device; if you use it, please also review
             OpenRouter's own privacy terms.
@@ -226,18 +254,22 @@
           <h2 data-i18n="privacy.h2.permissions">Permissions</h2>
           <p data-i18n="privacy.permissions">
             The app requests only what a feature needs — chiefly internet access, used to download the on-device AI
-            models you choose and to power optional Cloud AI. Granting or withholding access is your choice.
+            models you choose, to power optional Cloud AI, and — only if you use them — account backup &amp; sync and
+            web pairing. Granting or withholding access is your choice.
           </p>
           <h2 data-i18n="privacy.h2.keeping">Keeping and deleting your data</h2>
           <p data-i18n="privacy.keeping" data-i18n-html="1">
-            Because your data lives on your device, <strong>you</strong> control it. To remove everything, clear the
-            app's data or uninstall Fainto — there is no server-side account to delete. If you have emailed us, you can
-            ask us to delete that correspondence at any time.
+            Because your data lives on your device by default, <strong>you</strong> control it: to remove everything
+            stored locally, clear the app's data or uninstall Fainto. If you created an account, delete it in the app
+            (Settings → Account → <em>Delete account</em>) — this removes your synced data and the account itself from
+            our servers; a separate <em>Cloud reset</em> removes just the server copy. You can also email us and we'll
+            delete it for you. If you have emailed us, you can ask us to delete that correspondence at any time.
           </p>
           <h2 data-i18n="privacy.h2.security">Security</h2>
           <p data-i18n="privacy.security">
-            Keeping your data on your device rather than on our servers removes the biggest source of risk. Any optional
-            cloud request is sent over encrypted HTTPS.
+            Keeping your data on your device by default removes the biggest source of risk. Anything you opt to send —
+            Cloud AI messages, account sync, web pairing — travels over encrypted connections, and synced data is
+            encrypted at rest on Google's infrastructure.
           </p>
           <h2 data-i18n="privacy.h2.children">Children</h2>
           <p data-i18n="privacy.children">
@@ -246,12 +278,13 @@
           </p>
           <h2 data-i18n="privacy.h2.website">This website</h2>
           <p data-i18n="privacy.website" data-i18n-html="1">
-            fainto.app sets <strong>no cookies</strong> and runs no analytics, ads, or trackers; the fonts are served
-            from this domain, so opening the site makes no third-party requests. The
-            <a href="contact.html">contact</a> form sends nothing to a server — pressing <em>Send</em> opens your own
-            email app so you decide whether to email us. With no cookies or tracking, no consent banner is required. Our
-            web host may keep standard short-lived access logs (which can include your IP) purely to keep the site
-            online.
+            The pages of fainto.app set <strong>no cookies</strong> and run no analytics, ads, or trackers; the fonts
+            are served from this domain. The <a href="contact.html">contact</a> form sends nothing to a server —
+            pressing <em>Send</em> opens your own email app so you decide whether to email us. The one exception to
+            "no third-party requests" is the <a href="web/">web companion</a>: it loads Firebase from Google and talks
+            to Firebase only to deliver the pairing or sign-in you asked for, using browser storage strictly for that
+            purpose — never for advertising or analytics — so no consent banner is required. Our web host may keep
+            standard short-lived access logs (which can include your IP) purely to keep the site online.
           </p>
           <h2 data-i18n="privacy.h2.rights">Your GDPR rights</h2>
           <p data-i18n="privacy.rights" data-i18n-html="1">
@@ -261,7 +294,7 @@
           </p>
           <h2 data-i18n="privacy.h2.changes">Changes</h2>
           <p data-i18n="privacy.changes">If this policy changes, we'll update this page and the date below.</p>
-          <p class="prose-sig" data-i18n="privacy.updated">Last updated: 10 July 2026 · support@fainto.app</p>
+          <p class="prose-sig" data-i18n="privacy.updated">Last updated: 17 July 2026 · support@fainto.app</p>
         </div>
       </section>
     </main>
@@ -287,7 +320,7 @@
       <p class="made" data-i18n="footer.made">Developed &amp; designed with ❤️ in Poland.</p>
     </footer>
     <script src="theme.js" defer="defer"></script>
-    <script src="i18n.js?v=20260716" defer="defer"></script>
+    <script src="i18n.js?v=20260717" defer="defer"></script>
     <script src="lang.js?v=20260713a" defer="defer"></script>
     <script src="app.js?v=20260716" defer="defer"></script>
   </body>

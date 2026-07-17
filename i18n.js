@@ -23,23 +23,17 @@ window.__I18N = {
     "hero.slide1.aria": "1 von 3: Übersicht",
     "hero.slide2.aria": "2 von 3: KI-Coach",
     "hero.slide3.aria": "3 von 3: Vermögen",
-    "hero.slide1.alt":
-      "Faintos Übersicht: Nettoeinkommen 12 482,22 zł pro Monat (56.7% mehr), aufgeteilt in Einnahmen 12.5K, Ausgaben 1.0K und Ersparnisse 7.1K zł, darüber KI-Insights, Konten und Rechnungen.",
-    "hero.slide2.alt":
-      "Faintos KI-Coach beantwortet direkt auf dem Gerät eine Geldfrage mit dem Modell SmolLM 135M bei 10 Tokens pro Sekunde, gekennzeichnet als On-device · Privat.",
-    "hero.slide3.alt":
-      "Faintos Vermögensansicht: 107 400,00 zł Vermögenswerte und keine Verbindlichkeiten, dargestellt als grüner Ring mit Aufschlüsselung der Vermögenswerte.",
+    "hero.slide1.alt": "Faintos Übersicht: Nettoeinkommen 12 482,22 zł pro Monat (56.7% mehr), aufgeteilt in Einnahmen 12.5K, Ausgaben 1.0K und Ersparnisse 7.1K zł, darüber KI-Insights, Konten und Rechnungen.",
+    "hero.slide2.alt": "Faintos KI-Coach beantwortet direkt auf dem Gerät eine Geldfrage mit dem Modell SmolLM 135M bei 10 Tokens pro Sekunde, gekennzeichnet als On-device · Privat.",
+    "hero.slide3.alt": "Faintos Vermögensansicht: 107 400,00 zł Vermögenswerte und keine Verbindlichkeiten, dargestellt als grüner Ring mit Aufschlüsselung der Vermögenswerte.",
     "value.eyebrow": "Was es ist",
     "value.heading": "Ein KI-Finanzcoach, der auf deinem Handy läuft, nicht auf unseren Servern.",
     "value.item1.h": "Die KI läuft auf dem Gerät",
-    "value.item1.p":
-      "Fünf Sprachmodelle laufen lokal — vom 135M-Leichtgewicht bis zu Phi-4 Mini 3.8B — das Coaching passiert also auf deinem Handy, nicht auf einem Server.",
+    "value.item1.p": "Fünf Sprachmodelle laufen lokal — vom 135M-Leichtgewicht bis zu Phi-4 Mini 3.8B — das Coaching passiert also auf deinem Handy, nicht auf einem Server.",
     "value.item2.h": "Standardmäßig wird nichts hochgeladen",
-    "value.item2.p":
-      "Privat durch Architektur, nicht durch Richtlinien. Die App kann 0 Anfragen, 0 Bytes anzeigen — standardmäßig, ganz bewusst so gebaut. Cloud-KI nur mit ausdrücklicher Zustimmung.",
+    "value.item2.p": "Privat durch Architektur, nicht durch Richtlinien. Die App kann 0 Anfragen, 0 Bytes anzeigen — standardmäßig, ganz bewusst so gebaut. Cloud-KI nur mit ausdrücklicher Zustimmung.",
     "value.item3.h": "Steuerberechnung für 45 Länder",
-    "value.item3.p":
-      "Eine integrierte Engine wendet echte Einkommensteuerregeln für 45 Länder an, und die App ist in 25 Sprachen lokalisiert — damit die Zahlen zu deinem Wohnort passen.",
+    "value.item3.p": "Eine integrierte Engine wendet echte Einkommensteuerregeln für 45 Länder an, und die App ist in 25 Sprachen lokalisiert — damit die Zahlen zu deinem Wohnort passen.",
     "cta.heading": "Bei null starten. Bei null bleiben.",
     "cta.sub": "Nichts zu bezahlen, kein Konto anzulegen und standardmäßig nichts hochgeladen. iOS demnächst.",
     "cta.producthunt.aria": "Fainto vorgestellt auf Product Hunt (öffnet in neuem Tab)",
@@ -58,8 +52,7 @@ window.__I18N = {
     "contact.desc": "Kontaktieren Sie Fainto — Fragen, Fehler und Feedback gehen direkt an support@fainto.app.",
     "contact.eyebrow": "Kontakt",
     "contact.h1": "Nehmen Sie Kontakt auf.",
-    "contact.intro":
-      'Fragen, ein Fehler oder Feedback? Hinterlassen Sie unten eine Nachricht — sie geht direkt an <a href="mailto:support@fainto.app">support@fainto.app</a>. Auf dieser Website wird nichts gespeichert; das Formular öffnet lediglich Ihre eigene E-Mail-App.',
+    "contact.intro": "Fragen, ein Fehler oder Feedback? Hinterlassen Sie unten eine Nachricht — sie geht direkt an <a href=\"mailto:support@fainto.app\">support@fainto.app</a>. Auf dieser Website wird nichts gespeichert; das Formular öffnet lediglich Ihre eigene E-Mail-App.",
     "contact.form.name.label": "Name",
     "contact.form.email.label": "E-Mail",
     "contact.form.message.label": "Nachricht",
@@ -69,157 +62,113 @@ window.__I18N = {
     "about.desc": "Warum es Fainto gibt — ein privater, werbefreier Finanzcoach, der auf deinem Handy läuft.",
     "about.eyebrow": "Über uns",
     "about.h1": "Ich wollte einfach eine Finanz-App, die auf meiner Seite steht.",
-    "about.p1":
-      "Jede Finanz-App, die ich ausprobiert habe, arbeitete heimlich gegen mich — Werbung mitten zwischen meinen eigenen Transaktionen, meine Ausgaben wurden an „Partner“ weiterverkauft, irgendetwas telefonierte bei jedem Antippen nach Hause.",
-    "about.p2":
-      "Also habe ich Fainto gebaut. Es läuft vollständig auf deinem Handy, zeigt keine Werbung und sendet standardmäßig nichts über deine Finanzen irgendwohin. Echte Sprachmodelle übernehmen das Coaching direkt auf dem Gerät; eine integrierte Steuer-Engine deckt 45 Länder in 25 Sprachen ab. Kostenloser Start, kein Konto, kein Tracking.",
-    "about.p3":
-      "Es ist die App, die ich mir gewünscht habe: eine, die dir einen klaren Überblick über deine Finanzen gibt — und diesen dann für sich behält.",
-    "about.p4":
-      'Willst du es genauer wissen? <a href="features.html">Sieh dir alles an, was Fainto kann</a>, oder <a href="faq.html">stöbere in häufigen Fragen zu Fainto</a>.',
+    "about.p1": "Jede Finanz-App, die ich ausprobiert habe, arbeitete heimlich gegen mich — Werbung mitten zwischen meinen eigenen Transaktionen, meine Ausgaben wurden an „Partner“ weiterverkauft, irgendetwas telefonierte bei jedem Antippen nach Hause.",
+    "about.p2": "Also habe ich Fainto gebaut. Es läuft vollständig auf deinem Handy, zeigt keine Werbung und sendet standardmäßig nichts über deine Finanzen irgendwohin. Echte Sprachmodelle übernehmen das Coaching direkt auf dem Gerät; eine integrierte Steuer-Engine deckt 45 Länder in 25 Sprachen ab. Kostenloser Start, kein Konto, kein Tracking.",
+    "about.p3": "Es ist die App, die ich mir gewünscht habe: eine, die dir einen klaren Überblick über deine Finanzen gibt — und diesen dann für sich behält.",
+    "about.p4": "Willst du es genauer wissen? <a href=\"features.html\">Sieh dir alles an, was Fainto kann</a>, oder <a href=\"faq.html\">stöbere in häufigen Fragen zu Fainto</a>.",
     "about.sig": "— Mo, Macher von Fainto",
     "about.cta": "App herunterladen",
     "err404.title": "Seite nicht gefunden — Fainto",
-    "err404.desc":
-      "Diese Seite gibt es nicht. Kehre zur Fainto-Startseite zurück, entdecke alles, was Fainto kann, oder hol dir den privaten, offline-fähigen KI-Budget-Tracker für Android.",
+    "err404.desc": "Diese Seite gibt es nicht. Kehre zur Fainto-Startseite zurück, entdecke alles, was Fainto kann, oder hol dir den privaten, offline-fähigen KI-Budget-Tracker für Android.",
     "err404.eyebrow": "404",
     "err404.h1": "Diese Seite wurde verschoben oder hat nie existiert.",
-    "err404.body1":
-      "Der Link, dem du gefolgt bist, führt zu keiner Seite auf fainto.app — er wurde vielleicht geändert, oder es gab ihn nie. Kein Schaden entstanden, und beim Aufruf dieser Seite wurden keine Daten über dich erfasst. Hier geht’s zurück.",
-    "err404.body2":
-      'Kehre zur <a href="/">Fainto-Startseite</a> zurück, entdecke <a href="/features.html">alles, was Fainto kann</a> &mdash; den KI-Coach direkt auf deinem Gerät, die Steuer-Engine für 45 Länder und mehr &mdash; oder lies die <a href="/faq.html">häufig gestellten Fragen</a>.',
-    "err404.cta": '<a class="btn-primary" href="/index.html#get">App herunterladen</a>',
+    "err404.body1": "Der Link, dem du gefolgt bist, führt zu keiner Seite auf fainto.app — er wurde vielleicht geändert, oder es gab ihn nie. Kein Schaden entstanden, und beim Aufruf dieser Seite wurden keine Daten über dich erfasst. Hier geht’s zurück.",
+    "err404.body2": "Kehre zur <a href=\"/\">Fainto-Startseite</a> zurück, entdecke <a href=\"/features.html\">alles, was Fainto kann</a> &mdash; den KI-Coach direkt auf deinem Gerät, die Steuer-Engine für 45 Länder und mehr &mdash; oder lies die <a href=\"/faq.html\">häufig gestellten Fragen</a>.",
+    "err404.cta": "<a class=\"btn-primary\" href=\"/index.html#get\">App herunterladen</a>",
     "privacy.title": "Datenschutzerklärung — Fainto",
-    "privacy.desc":
-      "Die Website von Fainto sammelt keinerlei Daten über dich — keine Cookies, keine Analyse-Tools, keine Tracker, selbst gehostete Schriften. Hier erfährst du genau, wie wir mit Daten umgehen, DSGVO inklusive.",
+    "privacy.desc": "Wie Fainto deine Daten behandelt: standardmäßig lokal, keine Werbung oder Tracker, optionales verschlüsseltes Backup & Sync, deine DSGVO-Rechte — klar erklärt.",
     "privacy.nav.lang.aria": "Sprache",
     "privacy.eyebrow": "Datenschutz",
     "privacy.h1": "Datenschutzerklärung",
-    "privacy.intro":
-      "Diese Richtlinie gilt sowohl für die <strong>Fainto</strong>-Android-App als auch für diese Website. Kurz gesagt: Die von dir eingegebenen Finanzdaten bleiben auf deinem Gerät, wir schalten keine Werbung und verwenden keine Tracker, und nichts über dein Geld wird hochgeladen, es sei denn, du aktivierst bewusst eine optionale Funktion. Sie erfüllt die Anforderungen der EU/UK-<strong>DSGVO</strong> sowie die Richtlinie von Google Play zu Nutzerdaten.",
+    "privacy.intro": "Diese Richtlinie gilt für die <strong>Fainto</strong>-Android-App, diese Website und den Browser-Begleiter <strong>Fainto Web</strong>. Kurz gesagt: Deine Finanzdaten liegen standardmäßig auf deinem Gerät, wir schalten keine Werbung und verwenden keine Analyse-Tools oder Tracker, und nichts über dein Geld verlässt dein Smartphone, es sei denn, du aktivierst bewusst eine optionale Funktion — ein Konto für Backup &amp; Sync, Cloud-KI oder den Web-Begleiter. Sie erfüllt die Anforderungen der EU/UK-<strong>DSGVO</strong> sowie die Richtlinie von Google Play zu Nutzerdaten.",
     "privacy.h2.who": "Wer wir sind",
-    "privacy.who":
-      'Fainto wird von Mo entwickelt. Für alle Anliegen zum Datenschutz — einschließlich der Ausübung deiner unten genannten Rechte — wende dich an <a href="mailto:support@fainto.app">support@fainto.app</a>. Dies ist zugleich der Verantwortliche im Sinne der DSGVO.',
+    "privacy.who": "Fainto wird von <strong>Mohsen Rezania</strong> mit Sitz in Polen entwickelt — dem Verantwortlichen im Sinne der DSGVO. Für alle Anliegen zum Datenschutz — einschließlich der Ausübung deiner unten genannten Rechte — wende dich an <a href=\"mailto:support@fainto.app\">support@fainto.app</a>.",
     "privacy.h2.stores": "Was die App speichert – und wo",
-    "privacy.stores":
-      "Alles, was du in Fainto einträgst — Konten, Salden, Transaktionen, Einnahmen, Rechnungen, Budgets und die von den Steuer-Tools verwendeten Zahlen — wird <strong>lokal auf deinem Gerät</strong> gespeichert. Es gibt kein Fainto-Konto und keine Registrierung, daher erhalten, sehen oder speichern wir deine Finanzdaten niemals auf einem Server. Sie werden von uns nicht erfasst und niemals verkauft, vermietet oder weitergegeben.",
+    "privacy.stores": "Alles, was du in Fainto einträgst — Konten, Salden, Transaktionen, Einnahmen, Rechnungen, Budgets und die von den Steuer-Tools verwendeten Zahlen — wird <strong>lokal auf deinem Gerät</strong> gespeichert. Für die Nutzung von Fainto ist kein Konto erforderlich, und solange du keines erstellst, erhalten, sehen oder speichern wir deine Finanzdaten niemals auf einem Server. Deine Daten werden niemals verkauft, vermietet oder weitergegeben — mit oder ohne Konto.",
+    "privacy.h2.account": "Optionales Konto: Backup & Sync (deaktiviert, solange du dich nicht anmeldest)",
+    "privacy.account": "Ein Fainto-Konto anzulegen (E-Mail &amp; Passwort oder Google Sign-In) ist <strong>optional</strong>. Wenn du dich anmeldest, sichert und synchronisiert die App deine Finanzdaten — Transaktionen, Budgets, Nettovermögenseinträge, Portfolio- und Krypto-Bestände, erkannte Abonnements, wiederkehrende Zahlungen, App-Einstellungen und den Chatverlauf deines KI-Coachs — in <strong>Google Firebase (Firestore)</strong>, gespeichert unter deinem Konto und geschützt durch nutzerbezogene Zugriffsregeln. Die Daten sind bei der Übertragung und im Ruhezustand auf Googles Infrastruktur verschlüsselt, jedoch nicht Ende-zu-Ende. Wenn du einem Haushalt beitrittst, sind die Budgets, die du zum Teilen auswählst, für die anderen Mitglieder dieses Haushalts sichtbar. Google agiert dabei als unser Auftragsverarbeiter und kann diese Daten gemäß den Datenverarbeitungsbedingungen von Google Cloud (einschließlich der EU-Standardvertragsklauseln) auf Servern außerhalb des EWR speichern; niemand sonst erhält diese Daten, und wir setzen darauf weder Werbung noch Analyse-Tools ein.",
+    "privacy.h2.webapp": "Fainto Web (der Browser-Begleiter)",
+    "privacy.webapp": "<a href=\"web/\">fainto.app/web</a> zeigt deine Finanzen auf einem größeren Bildschirm — auf zwei Wegen. <strong>Kopplung (ohne Konto):</strong> Dein Smartphone streamt deine Daten über eine verschlüsselte Peer-to-Peer-Verbindung direkt in deinen Browser — sie werden nie auf einem Server gespeichert. Zum Aufbau der Verbindung wird ein kurzlebiger Kopplungsdatensatz (Verbindungs-Metadaten, einschließlich der Netzwerkadressen, über die sich die beiden Geräte finden) nur während der Kopplung in Firebase gehalten — er wird entfernt, sobald die Verbindung steht, und ist in jedem Fall so markiert, dass er nach fünf Minuten abläuft; für die Adressermittlung wird Googles STUN-Dienst genutzt. Was du siehst, bleibt im Browser-Tab und wird gelöscht, sobald der Tab geschlossen wird. <strong>Anmeldung:</strong> Der Browser liest über eine verschlüsselte Verbindung die Daten, die dein Konto ohnehin synchronisiert; das Google-Anmeldefenster wird von Google bereitgestellt und unterliegt Googles eigener Datenschutzerklärung. Eine Anmeldesitzung bleibt so lange in diesem Browser, bis du die Daten der Website löschst. Der Web-Begleiter lädt die Firebase-Software von Googles Servern und enthält keine Werbung, keine Analyse-Tools und keine Tracker.",
     "privacy.h2.coach": "Der KI-Coach auf dem Gerät",
-    "privacy.coach":
-      "Der KI-Coach von Fainto führt Sprachmodelle <strong>direkt auf deinem Smartphone</strong> aus. Im standardmäßigen On-Device-Modus werden deine Fragen und dein finanzieller Kontext lokal verarbeitet und verlassen niemals das Gerät.",
+    "privacy.coach": "Der KI-Coach von Fainto führt Sprachmodelle <strong>direkt auf deinem Smartphone</strong> aus. Im standardmäßigen On-Device-Modus werden deine Fragen und dein finanzieller Kontext lokal verarbeitet und verlassen niemals das Gerät.",
     "privacy.h2.cloudai": "Optionale Cloud-KI (standardmäßig deaktiviert)",
-    "privacy.cloudai":
-      "Fainto enthält einen <strong>optionalen</strong> Cloud-KI-Modus — eine Premium-Funktion, die <strong>deaktiviert bleibt, bis du sie aktivierst</strong>. Nur wenn du ihn einschaltest und eine Nachricht sendest, wird der Text dieser Nachricht über eine verschlüsselte (HTTPS) Verbindung an unser KI-Gateway, <strong>OpenRouter</strong>, sowie an den von dir gewählten Modellanbieter übertragen — einzig, um eine Antwort zu erzeugen. Wir nutzen dies nicht für Werbung. Du kannst die Cloud-KI deaktiviert lassen, um vollständig auf dem Gerät zu bleiben; wenn du sie nutzt, wirf bitte auch einen Blick in die eigenen Datenschutzbestimmungen von OpenRouter.",
+    "privacy.cloudai": "Fainto enthält einen <strong>optionalen</strong> Cloud-KI-Modus — eine Premium-Funktion, die <strong>deaktiviert bleibt, bis du sie aktivierst</strong>. Nur wenn du ihn einschaltest und eine Nachricht sendest, wird diese Nachricht zusammen mit einer aggregierten Finanzübersicht (Summen und Kategorien — niemals dein Name, deine E-Mail-Adresse oder die Namen deiner Zahlungen) über eine verschlüsselte (HTTPS) Verbindung an unser KI-Gateway, <strong>OpenRouter</strong>, sowie an den von dir gewählten Modellanbieter übertragen — einzig, um eine Antwort zu erzeugen. Wir nutzen dies nicht für Werbung. Du kannst die Cloud-KI deaktiviert lassen, um vollständig auf dem Gerät zu bleiben; wenn du sie nutzt, wirf bitte auch einen Blick in die eigenen Datenschutzbestimmungen von OpenRouter.",
     "privacy.h2.never": "Was wir niemals tun",
-    "privacy.never":
-      "Keine Werbung, keine Analyse- oder Nutzungsverfolgung, keine Tracker oder Profiling-SDKs von Drittanbietern und kein Verkauf und keine Weitergabe deiner persönlichen oder finanziellen Daten. Standardmäßig stellt die App <strong>0 Anfragen</strong> und sendet <strong>0 Byte</strong> — ganz bewusst so gestaltet.",
+    "privacy.never": "Keine Werbung, keine Analyse- oder Nutzungsverfolgung, keine Tracker oder Profiling-SDKs von Drittanbietern und kein Verkauf und keine Weitergabe deiner persönlichen oder finanziellen Daten. Standardmäßig stellt die App <strong>0 Anfragen</strong> und sendet <strong>0 Byte</strong> — ganz bewusst so gestaltet.",
     "privacy.h2.permissions": "Berechtigungen",
-    "privacy.permissions":
-      "Die App fordert nur das an, was eine Funktion benötigt — vor allem Internetzugriff, der zum Herunterladen der von dir gewählten On-Device-KI-Modelle und für die optionale Cloud-KI verwendet wird. Ob du den Zugriff gewährst oder verweigerst, entscheidest du.",
+    "privacy.permissions": "Die App fordert nur an, was eine Funktion benötigt — vor allem Internetzugriff, der zum Herunterladen der von dir gewählten On-Device-KI-Modelle, für die optionale Cloud-KI und — nur wenn du sie nutzt — für Konto-Backup & Sync sowie die Web-Kopplung verwendet wird. Ob du den Zugriff gewährst oder verweigerst, entscheidest du.",
     "privacy.h2.keeping": "Aufbewahrung und Löschung deiner Daten",
-    "privacy.keeping":
-      "Da deine Daten auf deinem Gerät liegen, hast <strong>du</strong> die Kontrolle darüber. Um alles zu entfernen, lösche die App-Daten oder deinstalliere Fainto — es gibt kein serverseitiges Konto zu löschen. Falls du uns eine E-Mail geschickt hast, kannst du jederzeit verlangen, dass wir diese Korrespondenz löschen.",
+    "privacy.keeping": "Da deine Daten standardmäßig auf deinem Gerät liegen, hast <strong>du</strong> die Kontrolle: Um alles lokal Gespeicherte zu entfernen, lösche die App-Daten oder deinstalliere Fainto. Falls du ein Konto erstellt hast, lösche es in der App (Einstellungen → Konto → <em>Konto löschen</em>) — das entfernt deine synchronisierten Daten und das Konto selbst von unseren Servern; die separate Funktion <em>Cloud-Daten zurücksetzen</em> entfernt nur die Serverkopie. Du kannst uns auch eine E-Mail schreiben, und wir übernehmen die Löschung für dich. Falls du uns eine E-Mail geschickt hast, kannst du jederzeit verlangen, dass wir diese Korrespondenz löschen.",
     "privacy.h2.security": "Sicherheit",
-    "privacy.security":
-      "Dass deine Daten auf deinem Gerät bleiben statt auf unseren Servern, beseitigt die größte Risikoquelle. Jede optionale Cloud-Anfrage wird über verschlüsseltes HTTPS gesendet.",
+    "privacy.security": "Dass deine Daten standardmäßig auf deinem Gerät bleiben, beseitigt die größte Risikoquelle. Alles, was du freiwillig sendest — Cloud-KI-Nachrichten, Konto-Synchronisierung, Web-Kopplung — wird über verschlüsselte Verbindungen übertragen, und synchronisierte Daten sind auf Googles Infrastruktur im Ruhezustand verschlüsselt.",
     "privacy.h2.children": "Kinder",
-    "privacy.children":
-      "Fainto ist ein Finanz-Tool für ein allgemeines Publikum und richtet sich nicht an Kinder unter 13 Jahren (oder dem entsprechenden Alter in deinem Land). Wir erfassen wissentlich keine Daten von Kindern.",
+    "privacy.children": "Fainto ist ein Finanz-Tool für ein allgemeines Publikum und richtet sich nicht an Kinder unter 13 Jahren (oder dem entsprechenden Alter in deinem Land). Wir erfassen wissentlich keine Daten von Kindern.",
     "privacy.h2.website": "Diese Website",
-    "privacy.website":
-      'fainto.app setzt <strong>keine Cookies</strong> und verwendet weder Analyse-Tools noch Werbung oder Tracker; die Schriftarten werden von dieser Domain ausgeliefert, sodass beim Aufrufen der Seite keine Anfragen an Drittanbieter erfolgen. Das <a href="contact.html">Kontaktformular</a> sendet nichts an einen Server — ein Klick auf <em>Senden</em> öffnet lediglich deine eigene E-Mail-App, sodass du selbst entscheidest, ob du uns schreibst. Da weder Cookies noch Tracking eingesetzt werden, ist kein Consent-Banner erforderlich. Unser Webhoster führt möglicherweise übliche, kurzlebige Zugriffsprotokolle (die deine IP-Adresse enthalten können), einzig um den Betrieb der Website sicherzustellen.',
+    "privacy.website": "Die Seiten von fainto.app setzen <strong>keine Cookies</strong> und verwenden weder Analyse-Tools noch Werbung oder Tracker; die Schriftarten werden von dieser Domain ausgeliefert. Das <a href=\"contact.html\">Kontaktformular</a> sendet nichts an einen Server — ein Klick auf <em>Senden</em> öffnet deine eigene E-Mail-App, sodass du selbst entscheidest, ob du uns schreibst. Die einzige Ausnahme von „keine Anfragen an Drittanbieter“ ist der <a href=\"web/\">Web-Begleiter</a>: Er lädt Firebase von Google und kommuniziert mit Firebase nur, um die von dir angeforderte Kopplung oder Anmeldung bereitzustellen; den Browser-Speicher nutzt er ausschließlich zu diesem Zweck — niemals für Werbung oder Analysen —, weshalb kein Consent-Banner erforderlich ist. Unser Webhoster führt möglicherweise übliche, kurzlebige Zugriffsprotokolle (die deine IP-Adresse enthalten können), einzig um den Betrieb der Website sicherzustellen.",
     "privacy.h2.rights": "Deine Rechte nach der DSGVO",
-    "privacy.rights":
-      'Sollten wir jemals personenbezogene Daten von dir verarbeiten (zum Beispiel eine E-Mail, die du uns schickst), hast du das Recht auf Auskunft, Berichtigung, Löschung oder Widerspruch gegen deren Nutzung sowie das Recht, dich bei deiner zuständigen Datenschutzbehörde zu beschweren. Schreib eine E-Mail an <a href="mailto:support@fainto.app">support@fainto.app</a>, und wir kümmern uns darum.',
+    "privacy.rights": "Sollten wir jemals personenbezogene Daten von dir verarbeiten (zum Beispiel eine E-Mail, die du uns schickst), hast du das Recht auf Auskunft, Berichtigung, Löschung oder Widerspruch gegen deren Nutzung sowie das Recht, dich bei deiner zuständigen Datenschutzbehörde zu beschweren. Schreib eine E-Mail an <a href=\"mailto:support@fainto.app\">support@fainto.app</a>, und wir kümmern uns darum.",
     "privacy.h2.changes": "Änderungen",
     "privacy.changes": "Falls sich diese Richtlinie ändert, aktualisieren wir diese Seite und das Datum unten.",
-    "privacy.updated": "Zuletzt aktualisiert: 10. Juli 2026 · support@fainto.app",
+    "privacy.updated": "Zuletzt aktualisiert: 17. Juli 2026 · support@fainto.app",
     "features.title": "Funktionen — Fainto Privater Budget-Tracker",
-    "features.desc":
-      "Die Funktionen von Fainto: ein KI-Coach direkt auf dem Gerät, privat durch Architektur statt durch Richtlinien, eine Steuer-Engine für 45 Länder, 25 Sprachen, kein Konto, keine Werbung, funktioniert offline.",
+    "features.desc": "Die Funktionen von Fainto: ein KI-Coach direkt auf dem Gerät, privat durch Architektur statt durch Richtlinien, eine Steuer-Engine für 45 Länder, 25 Sprachen, kein Konto, keine Werbung, funktioniert offline.",
     "features.eyebrow": "Funktionen",
     "features.h1": "Was Fainto kann",
-    "features.intro":
-      'Fainto ist ein privater, offline-first Budget-Tracker mit einem KI-Finanzcoach direkt auf dem Gerät. Hier ist alles, was die App kann — und wenn du die Geschichte dahinter erfahren möchtest, <a href="about.html">lies, warum Fainto entstanden ist</a>.',
+    "features.intro": "Fainto ist ein privater, offline-first Budget-Tracker mit einem KI-Finanzcoach direkt auf dem Gerät. Hier ist alles, was die App kann — und wenn du die Geschichte dahinter erfahren möchtest, <a href=\"about.html\">lies, warum Fainto entstanden ist</a>.",
     "features.h2.coach": "Ein KI-Finanzcoach, der auf deinem Handy läuft",
-    "features.coach.p":
-      "Das Coaching in Fainto übernehmen echte Sprachmodelle, die <strong>auf deinem Handy</strong> laufen, nicht auf einem Server. Fünf Modelle laufen direkt auf dem Gerät: <strong>SmolLM 135M</strong> und <strong>Qwen 2.5 0.5B</strong> in der kostenlosen Stufe sowie <strong>Qwen 2.5 1.5B</strong>, <strong>DeepSeek R1 1.5B</strong> und <strong>Phi-4 Mini 3.8B</strong> bei Premium. Wähle das Leichtgewicht für Geschwindigkeit oder die größeren Modelle für mehr Tiefe — sie lesen deine Ausgaben und beantworten deine Fragen, ohne einen Umweg über die Cloud zu nehmen. Wenn du ein größeres Modell möchtest, als dein Handy speichern kann, steht <strong>Cloud-KI über OpenRouter</strong> bei Premium zur Verfügung — allerdings streng optional: Nichts wird dorthin gesendet, es sei denn, du aktivierst es selbst.",
+    "features.coach.p": "Das Coaching in Fainto übernehmen echte Sprachmodelle, die <strong>auf deinem Handy</strong> laufen, nicht auf einem Server. Fünf Modelle laufen direkt auf dem Gerät: <strong>SmolLM 135M</strong> und <strong>Qwen 2.5 0.5B</strong> in der kostenlosen Stufe sowie <strong>Qwen 2.5 1.5B</strong>, <strong>DeepSeek R1 1.5B</strong> und <strong>Phi-4 Mini 3.8B</strong> bei Premium. Wähle das Leichtgewicht für Geschwindigkeit oder die größeren Modelle für mehr Tiefe — sie lesen deine Ausgaben und beantworten deine Fragen, ohne einen Umweg über die Cloud zu nehmen. Wenn du ein größeres Modell möchtest, als dein Handy speichern kann, steht <strong>Cloud-KI über OpenRouter</strong> bei Premium zur Verfügung — allerdings streng optional: Nichts wird dorthin gesendet, es sei denn, du aktivierst es selbst.",
     "features.h2.private": "Privat durch Architektur, nicht durch Richtlinien",
-    "features.private.p":
-      'Die meisten Apps versprechen Privatsphäre in einer Richtlinie, der du vertrauen musst. Fainto ist so gebaut, dass die Daten schlicht nirgendwohin können: Standardmäßig verlässt nichts über dein Geld das Gerät. Die App kann dir <strong>0 Anfragen, 0 Bytes</strong> anzeigen — standardmäßig, ganz bewusst so gebaut. Cloud-KI ist die einzige Funktion, die jemals etwas nach außen sendet, und sie ist deaktiviert, bis du sie aktivierst. Genau das bedeutet &ldquo;privat durch Architektur, nicht durch Richtlinien&rdquo; — die Garantie liegt darin, wie die App gebaut ist, nicht in einem Absatz Rechtstext. <a href="privacy.html">Lies nach, wie Fainto mit deinen Daten umgeht</a>, für alle Details.',
+    "features.private.p": "Die meisten Apps versprechen Privatsphäre in einer Richtlinie, der du vertrauen musst. Fainto ist so gebaut, dass die Daten schlicht nirgendwohin können: Standardmäßig verlässt nichts über dein Geld das Gerät. Die App kann dir <strong>0 Anfragen, 0 Bytes</strong> anzeigen — standardmäßig, ganz bewusst so gebaut. Cloud-KI ist die einzige Funktion, die jemals etwas nach außen sendet, und sie ist deaktiviert, bis du sie aktivierst. Genau das bedeutet &ldquo;privat durch Architektur, nicht durch Richtlinien&rdquo; — die Garantie liegt darin, wie die App gebaut ist, nicht in einem Absatz Rechtstext. <a href=\"privacy.html\">Lies nach, wie Fainto mit deinen Daten umgeht</a>, für alle Details.",
     "features.h2.offline": "Funktioniert vollständig offline",
-    "features.offline.p":
-      "Weil die Modelle und deine Daten auf dem Handy liegen, funktioniert Fainto auch ohne Netzwerk. Erfasse Ausgaben im Flugzeug, im Tunnel oder mit deaktivierten mobilen Daten — der KI-Coach antwortet trotzdem, und die Steuerberechnung läuft weiter. Es gibt keinen Server, der ausfallen kann, und keine Synchronisierung, auf die du warten musst. Die einzige Ausnahme ist die optionale Cloud-KI, die natürlich eine Verbindung braucht, sobald du sie nutzen möchtest.",
+    "features.offline.p": "Weil die Modelle und deine Daten auf dem Handy liegen, funktioniert Fainto auch ohne Netzwerk. Erfasse Ausgaben im Flugzeug, im Tunnel oder mit deaktivierten mobilen Daten — der KI-Coach antwortet trotzdem, und die Steuerberechnung läuft weiter. Es gibt keinen Server, der ausfallen kann, und keine Synchronisierung, auf die du warten musst. Die einzige Ausnahme ist die optionale Cloud-KI, die natürlich eine Verbindung braucht, sobald du sie nutzen möchtest.",
     "features.h2.free": "Kostenlos, kein Konto, keine Werbung",
-    "features.free.p":
-      "Fainto ist kostenlos nutzbar und braucht kein Konto — öffne die App und leg direkt los. Konten sind optional, sodass dich nichts zwingt, eine E-Mail-Adresse preiszugeben, nur um dein eigenes Geld zu sehen. Zwischen deinen Transaktionen taucht keine Werbung auf, und es gibt keine Tracker, keine Analysetools und keine Cookies, die beobachten, was du tust. Premium gibt es für die größeren KI-Modelle und die Cloud-KI, aber der Kern-Budget-Tracker und der Coach der kostenlosen Stufe kosten nichts.",
+    "features.free.p": "Fainto ist kostenlos nutzbar und braucht kein Konto — öffne die App und leg direkt los. Konten sind optional, sodass dich nichts zwingt, eine E-Mail-Adresse preiszugeben, nur um dein eigenes Geld zu sehen. Zwischen deinen Transaktionen taucht keine Werbung auf, und es gibt keine Tracker, keine Analysetools und keine Cookies, die beobachten, was du tust. Premium gibt es für die größeren KI-Modelle und die Cloud-KI, aber der Kern-Budget-Tracker und der Coach der kostenlosen Stufe kosten nichts.",
     "features.h2.tax": "Eine integrierte Steuer-Engine für 45 Länder",
-    "features.tax.p":
-      "Fainto enthält eine Einkommensteuer-Engine, die echte Regeln für <strong>45 Länder</strong> anwendet — 44 Länderkonfigurationen plus eine maßgeschneiderte Engine für Polen — sodass die Zahlen zu deinem tatsächlichen Wohnort passen statt zu einem generischen US-Standard. Gib einen Bruttobetrag ein und sieh, wie viel Steuer abgezogen wird: In der Polen-Voreinstellung werden aus einem Einkommen von <strong>PLN 240,000</strong> zum Beispiel nach den Regeln des Landes <strong>PLN 149,787</strong>. Die Schätzungen sind Bildungsinformationen, die dir bei der Planung helfen, keine Finanz- oder Steuerberatung.",
+    "features.tax.p": "Fainto enthält eine Einkommensteuer-Engine, die echte Regeln für <strong>45 Länder</strong> anwendet — 44 Länderkonfigurationen plus eine maßgeschneiderte Engine für Polen — sodass die Zahlen zu deinem tatsächlichen Wohnort passen statt zu einem generischen US-Standard. Gib einen Bruttobetrag ein und sieh, wie viel Steuer abgezogen wird: In der Polen-Voreinstellung werden aus einem Einkommen von <strong>PLN 240,000</strong> zum Beispiel nach den Regeln des Landes <strong>PLN 149,787</strong>. Die Schätzungen sind Bildungsinformationen, die dir bei der Planung helfen, keine Finanz- oder Steuerberatung.",
     "features.h2.localised": "Lokalisiert in 25 Sprachen",
-    "features.localised.p":
-      "Die Benutzeroberfläche ist in <strong>25 Sprachen</strong> übersetzt, sodass sich die App natürlich anfühlt, egal ob du dein Budget auf Englisch, Polnisch, Deutsch, Französisch oder in einer anderen unterstützten Sprache verwaltest. Die Lokalisierung ist mit der Steuer-Engine für mehrere Länder verzahnt — Währung, Steuerregeln und Formulierungen passen sich deiner Region an, statt dass du eine rein US-amerikanische App im Kopf übersetzen musst.",
+    "features.localised.p": "Die Benutzeroberfläche ist in <strong>25 Sprachen</strong> übersetzt, sodass sich die App natürlich anfühlt, egal ob du dein Budget auf Englisch, Polnisch, Deutsch, Französisch oder in einer anderen unterstützten Sprache verwaltest. Die Lokalisierung ist mit der Steuer-Engine für mehrere Länder verzahnt — Währung, Steuerregeln und Formulierungen passen sich deiner Region an, statt dass du eine rein US-amerikanische App im Kopf übersetzen musst.",
     "features.h2.seeit": "Sieh es dir in der App an",
-    "features.seeit.p":
-      'Die Übersicht bringt alles zusammen: Nettoeinkommen <strong>12 482,22 zł</strong> pro Monat (56.7% mehr), aufgeteilt in Einnahmen <strong>12.5K</strong>, Ausgaben <strong>1.0K</strong> und Ersparnisse <strong>7.1K zł</strong>, darüber KI-Insights, deine Konten und anstehende Rechnungen. Die Vermögensansicht summiert deine Vermögenswerte — im Beispiel <strong>107 400,00 zł</strong> — gegen deine Verbindlichkeiten. Jede Zahl hier bleibt auf dem Gerät und gehört nur dir. Jetzt für Android verfügbar — <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener">hol dir Fainto bei Google Play</a> — iOS kommt demnächst.',
-    "features.closing.p":
-      'Noch unentschlossen? <a href="faq.html">Sieh dir die häufig gestellten Fragen an</a> oder geh <a href="index.html">zurück zur Fainto-Startseite</a>.',
-    "features.cta": '<a class="btn-primary" href="index.html#get">App holen</a>',
+    "features.seeit.p": "Die Übersicht bringt alles zusammen: Nettoeinkommen <strong>12 482,22 zł</strong> pro Monat (56.7% mehr), aufgeteilt in Einnahmen <strong>12.5K</strong>, Ausgaben <strong>1.0K</strong> und Ersparnisse <strong>7.1K zł</strong>, darüber KI-Insights, deine Konten und anstehende Rechnungen. Die Vermögensansicht summiert deine Vermögenswerte — im Beispiel <strong>107 400,00 zł</strong> — gegen deine Verbindlichkeiten. Jede Zahl hier bleibt auf dem Gerät und gehört nur dir. Jetzt für Android verfügbar — <a href=\"https://play.google.com/store/apps/details?id=com.vaultai.app\" target=\"_blank\" rel=\"noopener\">hol dir Fainto bei Google Play</a> — iOS kommt demnächst.",
+    "features.closing.p": "Noch unentschlossen? <a href=\"faq.html\">Sieh dir die häufig gestellten Fragen an</a> oder geh <a href=\"index.html\">zurück zur Fainto-Startseite</a>.",
+    "features.cta": "<a class=\"btn-primary\" href=\"index.html#get\">App holen</a>",
     "faq.title": "Fainto FAQ — Privater KI-Budget-Tracker",
-    "faq.desc":
-      "Antworten zu Fainto: Ist die App kostenlos, funktioniert sie offline, welche Daten sie erfasst, welche Länder die Steuer-Engine abdeckt und welche KI-Modelle auf dem Gerät laufen.",
+    "faq.desc": "Antworten zu Fainto: Ist die App kostenlos, funktioniert sie offline, welche Daten sie erfasst, welche Länder die Steuer-Engine abdeckt und welche KI-Modelle auf dem Gerät laufen.",
     "faq.eyebrow": "FAQ",
     "faq.h1": "Fainto — häufig gestellte Fragen",
     "faq.q1": "Ist Fainto kostenlos?",
-    "faq.a1":
-      "Ja. Fainto ist kostenlos nutzbar, und der zentrale Budget-Tracker sowie der KI-Coach der kostenlosen Stufe kosten nichts. Eine Premium-Stufe schaltet größere KI-Modelle auf dem Gerät sowie optionale Cloud-KI frei, aber du kannst deine Finanzen verwalten und Coaching erhalten, ohne zu bezahlen.",
+    "faq.a1": "Ja. Fainto ist kostenlos nutzbar, und der zentrale Budget-Tracker sowie der KI-Coach der kostenlosen Stufe kosten nichts. Eine Premium-Stufe schaltet größere KI-Modelle auf dem Gerät sowie optionale Cloud-KI frei, aber du kannst deine Finanzen verwalten und Coaching erhalten, ohne zu bezahlen.",
     "faq.q2": "Braucht Fainto ein Konto?",
-    "faq.a2":
-      "Es ist kein Konto erforderlich. Du kannst Fainto öffnen und sofort mit dem Tracking beginnen. Konten sind optional, sodass du nie eine E-Mail-Adresse angeben musst, um deine eigenen Finanzen zu sehen.",
+    "faq.a2": "Es ist kein Konto erforderlich. Du kannst Fainto öffnen und sofort mit dem Tracking beginnen. Konten sind optional, sodass du nie eine E-Mail-Adresse angeben musst, um deine eigenen Finanzen zu sehen.",
     "faq.q3": "Funktioniert Fainto offline?",
-    "faq.a3":
-      "Ja. Die KI-Modelle und deine Daten befinden sich auf dem Smartphone, sodass Fainto vollständig offline funktioniert — du kannst Ausgaben erfassen und Coaching erhalten, auch ohne Netzwerkverbindung. Die einzige Funktion, die eine Verbindung benötigt, ist die optionale Cloud-KI, die standardmäßig deaktiviert ist, bis du sie aktivierst.",
+    "faq.a3": "Ja. Die KI-Modelle und deine Daten befinden sich auf dem Smartphone, sodass Fainto vollständig offline funktioniert — du kannst Ausgaben erfassen und Coaching erhalten, auch ohne Netzwerkverbindung. Nur die optionalen Extras benötigen eine Verbindung: die Opt-in-Cloud-KI, Konto-Backup & Sync und die Web-Kopplung — alle deaktiviert, bis du sie einschaltest.",
     "faq.q4": "Welche Daten erfasst Fainto?",
-    "faq.a4":
-      "Standardmäßig verlässt nichts über deine Finanzen das Gerät. Die Website verwendet keine Cookies, Analysetools oder Tracker, und die App ist so konzipiert, dass deine Finanzdaten auf deinem Smartphone bleiben. Die App kann dir 0 Anfragen und 0 gesendete Bytes anzeigen. Nur wenn du bewusst die Cloud-KI aktivierst, werden überhaupt Daten gesendet.",
+    "faq.a4": "Standardmäßig verlässt nichts über deine Finanzen das Gerät. Die Seiten der Website setzen keine Cookies und verwenden keine Analysetools oder Tracker (der optionale Web-Begleiter kommuniziert mit Googles Firebase nur für die Kopplung oder Anmeldung, die du selbst anstößt — siehe Datenschutzerklärung), und die App ist so konzipiert, dass deine Finanzdaten auf deinem Smartphone bleiben. Die App kann dir 0 Anfragen und 0 gesendete Bytes anzeigen. Gesendet wird nur dann etwas, wenn du dich bewusst dafür entscheidest — Cloud-KI, ein Konto für Backup & Sync oder die Web-Kopplung.",
     "faq.q5": "Werden meine Finanzdaten in die Cloud hochgeladen?",
-    "faq.a5":
-      "Standardmäßig nicht. Fainto ist privat durch Architektur, nicht durch Richtlinie: Deine Daten haben nirgendwo hinzugehen, es sei denn, du entscheidest dich dafür. Cloud-KI über OpenRouter ist die einzige Funktion, die überhaupt etwas nach außen sendet, und sie ist strikt optional — nichts wird dorthin geleitet, bis du sie selbst aktivierst.",
+    "faq.a5": "Standardmäßig nicht. Fainto ist privat durch Architektur, nicht durch Richtlinie: Deine Daten haben nirgendwo hinzugehen, es sei denn, du entscheidest dich dafür. Die Opt-in-Cloud-KI sendet deine Nachricht zusammen mit einer aggregierten Übersicht, und ein optionales Konto sichert und synchronisiert deine Daten in deinen privaten Cloud-Bereich — beides bleibt strikt deaktiviert, bis du es selbst aktivierst.",
     "faq.q6": "Welche KI-Modelle laufen bei Fainto auf dem Gerät?",
-    "faq.a6":
-      "Fünf Sprachmodelle laufen lokal auf deinem Smartphone. In der kostenlosen Stufe: SmolLM 135M und Qwen 2.5 0.5B. In Premium: Qwen 2.5 1.5B, DeepSeek R1 1.5B und Phi-4 Mini 3.8B. Alle fünf laufen auf dem Gerät, sodass das Coaching auf deinem Smartphone statt auf einem Server stattfindet.",
+    "faq.a6": "Fünf Sprachmodelle laufen lokal auf deinem Smartphone. In der kostenlosen Stufe: SmolLM 135M und Qwen 2.5 0.5B. In Premium: Qwen 2.5 1.5B, DeepSeek R1 1.5B und Phi-4 Mini 3.8B. Alle fünf laufen auf dem Gerät, sodass das Coaching auf deinem Smartphone statt auf einem Server stattfindet.",
     "faq.q7": "Was ist Cloud-KI und ist sie optional?",
-    "faq.a7":
-      "Cloud-KI ist eine optionale Premium-Funktion, die deine Fragen über OpenRouter an ein größeres Modell weiterleitet, wenn dein Smartphone kein ausreichend großes Modell aufnehmen kann. Sie ist strikt optional und standardmäßig deaktiviert — wenn du sie nie aktivierst, werden niemals Daten über deine Finanzen in die Cloud gesendet.",
+    "faq.a7": "Cloud-KI ist eine optionale Premium-Funktion, die deine Fragen über OpenRouter an ein größeres Modell weiterleitet, wenn dein Smartphone kein ausreichend großes Modell aufnehmen kann. Sie ist strikt optional und standardmäßig deaktiviert — wenn du sie nie aktivierst, werden niemals Daten über deine Finanzen in die Cloud gesendet.",
     "faq.q8": "Welche Länder unterstützt die Steuer-Engine?",
-    "faq.a8":
-      "Faintos integrierte Einkommensteuer-Engine deckt 45 Länder ab — 44 Länderkonfigurationen plus eine eigens entwickelte Engine für Polen —, sodass die Zahlen widerspiegeln, wo du tatsächlich lebst, statt einem generischen Standard zu folgen.",
+    "faq.a8": "Faintos integrierte Einkommensteuer-Engine deckt 45 Länder ab — 44 Länderkonfigurationen plus eine eigens entwickelte Engine für Polen —, sodass die Zahlen widerspiegeln, wo du tatsächlich lebst, statt einem generischen Standard zu folgen.",
     "faq.q9": "Wie viele Sprachen unterstützt Fainto?",
-    "faq.a9":
-      "Die Benutzeroberfläche ist in 25 Sprachen lokalisiert, sodass sich die App in deiner eigenen Sprache natürlich anfühlt und mit der länderübergreifenden Steuer-Engine für deine Region zusammenspielt.",
+    "faq.a9": "Die Benutzeroberfläche ist in 25 Sprachen lokalisiert, sodass sich die App in deiner eigenen Sprache natürlich anfühlt und mit der länderübergreifenden Steuer-Engine für deine Region zusammenspielt.",
     "faq.q10": "Gibt es eine iPhone- oder iOS-Version von Fainto?",
-    "faq.a10":
-      "Noch nicht. Fainto ist derzeit für Android verfügbar, eine iOS-Version folgt in Kürze. Einen Download-Link für iPhone gibt es derzeit nicht.",
+    "faq.a10": "Noch nicht. Fainto ist derzeit für Android verfügbar, eine iOS-Version folgt in Kürze. Einen Download-Link für iPhone gibt es derzeit nicht.",
     "faq.q11": "Zeigt Fainto Werbung?",
-    "faq.a11":
-      "Nein. Fainto enthält keine Werbung — nichts drängt sich zwischen deine Transaktionen — und es gibt keine Tracker, Analysetools oder Cookies, die dein Verhalten beobachten.",
+    "faq.a11": "Nein. Fainto enthält keine Werbung — nichts drängt sich zwischen deine Transaktionen — und es gibt keine Tracker, Analysetools oder Cookies, die dein Verhalten beobachten.",
     "faq.q12": "Wo kann ich Fainto herunterladen?",
-    "faq.a12":
-      'Fainto ist bei Google Play unter dem Namen „Fainto: AI Finance Coach" gelistet, zu finden unter <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener">https://play.google.com/store/apps/details?id=com.vaultai.app</a>. Es handelt sich um eine Android-App; iOS folgt in Kürze.',
+    "faq.a12": "Fainto ist bei Google Play unter dem Namen „Fainto: AI Finance Coach\" gelistet, zu finden unter <a href=\"https://play.google.com/store/apps/details?id=com.vaultai.app\" target=\"_blank\" rel=\"noopener\">https://play.google.com/store/apps/details?id=com.vaultai.app</a>. Es handelt sich um eine Android-App; iOS folgt in Kürze.",
     "faq.q13": "Ist Fainto eine Finanzberatung?",
-    "faq.a13":
-      "Nein. Fainto bietet Bildungsinformationen, die dir helfen, deine Finanzen zu verstehen und zu planen, einschließlich Steuerschätzungen. Es handelt sich nicht um eine Finanz- oder Steuerberatung.",
+    "faq.a13": "Nein. Fainto bietet Bildungsinformationen, die dir helfen, deine Finanzen zu verstehen und zu planen, einschließlich Steuerschätzungen. Es handelt sich nicht um eine Finanz- oder Steuerberatung.",
     "faq.q14": "Wie funktioniert der KI-Coach auf dem Gerät?",
-    "faq.a14":
-      "Eines von fünf lokalen Sprachmodellen liest deine Ausgaben aus und beantwortet deine Finanzfragen direkt auf dem Smartphone. Du kannst ein leichtes Modell für mehr Geschwindigkeit oder ein größeres für mehr Tiefe wählen — alles läuft ohne Umweg über die Cloud.",
+    "faq.a14": "Eines von fünf lokalen Sprachmodellen liest deine Ausgaben aus und beantwortet deine Finanzfragen direkt auf dem Smartphone. Du kannst ein leichtes Modell für mehr Geschwindigkeit oder ein größeres für mehr Tiefe wählen — alles läuft ohne Umweg über die Cloud.",
     "faq.q15": "Ist Fainto wirklich privat, wenn es KI verwendet?",
-    "faq.a15":
-      "Ja. Die KI läuft auf dem Gerät, sodass die Nutzung des Coachs deine Daten nirgendwohin sendet. Da die Modelle lokal sind, sind private KI und Datenschutz bei Fainto kein Kompromiss — das Coaching findet standardmäßig auf deinem Smartphone statt.",
-    "faq.q16": 'Was bedeutet „privat durch Architektur, nicht durch Richtlinie"?',
-    "faq.a16":
-      "Es bedeutet, dass die Datenschutzgarantie in der Funktionsweise der App verankert ist und nicht nur in einem Dokument versprochen wird. Deine Finanzdaten bleiben standardmäßig auf dem Gerät, weil sie nirgendwo anders hinkönnen — nicht, weil eine Richtlinie zusichert, dass ein Unternehmen sie nicht missbraucht.",
-    "faq.outro":
-      'Möchtest du das komplette Bild? <a href="features.html">Sieh dir die vollständige Funktionsübersicht an</a> oder <a href="privacy.html">lies Faintos Datenschutzerklärung</a>.',
-    "faq.cta": '<a class="btn-primary" href="index.html#get">App herunterladen</a>',
+    "faq.a15": "Ja. Im standardmäßigen On-Device-Modus läuft die KI auf deinem Smartphone, sodass die Nutzung des Coachs deine Daten nirgendwohin sendet. Da die Modelle lokal sind, sind private KI und Datenschutz bei Fainto kein Kompromiss — das Coaching findet standardmäßig auf deinem Smartphone statt.",
+    "faq.q16": "Was bedeutet „privat durch Architektur, nicht durch Richtlinie\"?",
+    "faq.a16": "Es bedeutet, dass die Datenschutzgarantie in der Funktionsweise der App verankert ist und nicht nur in einem Dokument versprochen wird. Deine Finanzdaten bleiben standardmäßig auf dem Gerät, weil sie nirgendwo anders hinkönnen — nicht, weil eine Richtlinie zusichert, dass ein Unternehmen sie nicht missbraucht.",
+    "faq.outro": "Möchtest du das komplette Bild? <a href=\"features.html\">Sieh dir die vollständige Funktionsübersicht an</a> oder <a href=\"privacy.html\">lies Faintos Datenschutzerklärung</a>.",
+    "faq.cta": "<a class=\"btn-primary\" href=\"index.html#get\">App herunterladen</a>",
   },
   pl: {
     "chrome.skip": "Przejdź do treści",
@@ -245,23 +194,17 @@ window.__I18N = {
     "hero.slide1.aria": "1 z 3: Przegląd",
     "hero.slide2.aria": "2 z 3: Trener AI",
     "hero.slide3.aria": "3 z 3: Wartość netto",
-    "hero.slide1.alt":
-      "Przegląd Fainto: dochód netto 12 482,22 zł miesięcznie (wzrost o 56.7%), podzielony na przychody 12.5K, wydatki 1.0K i oszczędności 7.1K zł, nad analizami AI, kontami i rachunkami.",
-    "hero.slide2.alt":
-      "Trener AI Fainto działający na urządzeniu odpowiada na pytanie o finanse za pomocą modelu SmolLM 135M z prędkością 10 tokenów na sekundę, oznaczony jako Na urządzeniu · Prywatnie.",
-    "hero.slide3.alt":
-      "Widok wartości netto Fainto: 107 400,00 zł aktywów i zero zobowiązań, przedstawione jako zielony pierścień z podziałem aktywów.",
+    "hero.slide1.alt": "Przegląd Fainto: dochód netto 12 482,22 zł miesięcznie (wzrost o 56.7%), podzielony na przychody 12.5K, wydatki 1.0K i oszczędności 7.1K zł, nad analizami AI, kontami i rachunkami.",
+    "hero.slide2.alt": "Trener AI Fainto działający na urządzeniu odpowiada na pytanie o finanse za pomocą modelu SmolLM 135M z prędkością 10 tokenów na sekundę, oznaczony jako Na urządzeniu · Prywatnie.",
+    "hero.slide3.alt": "Widok wartości netto Fainto: 107 400,00 zł aktywów i zero zobowiązań, przedstawione jako zielony pierścień z podziałem aktywów.",
     "value.eyebrow": "Czym to jest",
     "value.heading": "Trener finansowy AI, który działa na Twoim telefonie, a nie na naszych serwerach.",
     "value.item1.h": "AI działa na urządzeniu",
-    "value.item1.p":
-      "Pięć modeli językowych działa lokalnie — od lekkiego modelu 135M po Phi-4 Mini 3.8B — więc doradztwo odbywa się na Twoim telefonie, a nie na serwerze.",
+    "value.item1.p": "Pięć modeli językowych działa lokalnie — od lekkiego modelu 135M po Phi-4 Mini 3.8B — więc doradztwo odbywa się na Twoim telefonie, a nie na serwerze.",
     "value.item2.h": "Domyślnie nic nie jest wysyłane",
-    "value.item2.p":
-      "Prywatność z założenia architektury, a nie polityki. Aplikacja może pokazać 0 żądań, 0 bajtów — domyślnie i z założenia. AI w chmurze jest opcjonalne — włączasz je tylko Ty.",
+    "value.item2.p": "Prywatność z założenia architektury, a nie polityki. Aplikacja może pokazać 0 żądań, 0 bajtów — domyślnie i z założenia. AI w chmurze jest opcjonalne — włączasz je tylko Ty.",
     "value.item3.h": "Obliczenia podatkowe dla 45 krajów",
-    "value.item3.p":
-      "Wbudowany silnik stosuje rzeczywiste zasady podatku dochodowego dla 45 krajów, a aplikacja jest dostępna w 25 językach — więc liczby pasują do miejsca, w którym naprawdę mieszkasz.",
+    "value.item3.p": "Wbudowany silnik stosuje rzeczywiste zasady podatku dochodowego dla 45 krajów, a aplikacja jest dostępna w 25 językach — więc liczby pasują do miejsca, w którym naprawdę mieszkasz.",
     "cta.heading": "Zacznij od zera. Pozostań przy zerze.",
     "cta.sub": "Nic nie płacisz, nie zakładasz konta i domyślnie nic nie jest wysyłane. iOS już wkrótce.",
     "cta.producthunt.aria": "Fainto wyróżnione na Product Hunt (otwiera się w nowej karcie)",
@@ -280,169 +223,123 @@ window.__I18N = {
     "contact.desc": "Skontaktuj się z Fainto — pytania, błędy i opinie trafiają prosto na support@fainto.app.",
     "contact.eyebrow": "Kontakt",
     "contact.h1": "Skontaktuj się z nami.",
-    "contact.intro":
-      'Masz pytanie, znalazłeś błąd, a może chcesz podzielić się opinią? Zostaw wiadomość poniżej — trafi prosto na <a href="mailto:support@fainto.app">support@fainto.app</a>. Ta strona niczego nie przechowuje; formularz po prostu otwiera Twoją własną aplikację pocztową.',
+    "contact.intro": "Masz pytanie, znalazłeś błąd, a może chcesz podzielić się opinią? Zostaw wiadomość poniżej — trafi prosto na <a href=\"mailto:support@fainto.app\">support@fainto.app</a>. Ta strona niczego nie przechowuje; formularz po prostu otwiera Twoją własną aplikację pocztową.",
     "contact.form.name.label": "Imię",
     "contact.form.email.label": "E-mail",
     "contact.form.message.label": "Wiadomość",
     "contact.form.submit": "Wyślij wiadomość",
     "contact.form.note": "Otwieranie aplikacji pocztowej…",
     "err404.title": "Nie znaleziono strony — Fainto",
-    "err404.desc":
-      "Tej strony tu nie ma. Wróć na stronę główną Fainto, zobacz wszystko, co potrafi Fainto, albo pobierz na Androida prywatną, działającą offline aplikację do budżetowania z AI.",
+    "err404.desc": "Tej strony tu nie ma. Wróć na stronę główną Fainto, zobacz wszystko, co potrafi Fainto, albo pobierz na Androida prywatną, działającą offline aplikację do budżetowania z AI.",
     "err404.eyebrow": "404",
     "err404.h1": "Ta strona została przeniesiona albo nigdy nie istniała.",
-    "err404.body1":
-      "Odnośnik, w który kliknięto, nie prowadzi do żadnej istniejącej strony w fainto.app — mógł się zmienić albo nigdy go tu nie było. Nic się nie stało — nie zebraliśmy przy tym żadnych danych o Tobie. Oto droga powrotna.",
-    "err404.body2":
-      'Wróć na <a href="/">stronę główną Fainto</a>, zobacz <a href="/features.html">wszystko, co potrafi Fainto</a> &mdash; asystenta AI działającego bezpośrednio na urządzeniu, silnik podatkowy dla 45 krajów i wiele więcej &mdash; albo przeczytaj <a href="/faq.html">najczęściej zadawane pytania</a>.',
-    "err404.cta": '<a class="btn-primary" href="/index.html#get">Pobierz aplikację</a>',
+    "err404.body1": "Odnośnik, w który kliknięto, nie prowadzi do żadnej istniejącej strony w fainto.app — mógł się zmienić albo nigdy go tu nie było. Nic się nie stało — nie zebraliśmy przy tym żadnych danych o Tobie. Oto droga powrotna.",
+    "err404.body2": "Wróć na <a href=\"/\">stronę główną Fainto</a>, zobacz <a href=\"/features.html\">wszystko, co potrafi Fainto</a> &mdash; asystenta AI działającego bezpośrednio na urządzeniu, silnik podatkowy dla 45 krajów i wiele więcej &mdash; albo przeczytaj <a href=\"/faq.html\">najczęściej zadawane pytania</a>.",
+    "err404.cta": "<a class=\"btn-primary\" href=\"/index.html#get\">Pobierz aplikację</a>",
     "about.title": "O nas — Fainto",
-    "about.desc":
-      "Dlaczego powstało Fainto — prywatny, wolny od reklam coach finansowy, który działa na Twoim telefonie.",
+    "about.desc": "Dlaczego powstało Fainto — prywatny, wolny od reklam coach finansowy, który działa na Twoim telefonie.",
     "about.eyebrow": "O nas",
     "about.h1": "Chciałem po prostu aplikacji finansowej, która stoi po mojej stronie.",
-    "about.p1":
-      "Każda aplikacja finansowa, jakiej próbowałem, po cichu działała przeciwko mnie — reklamy wciśnięte między moje własne transakcje, moje wydatki sprzedawane „partnerom”, coś, co przy każdym dotknięciu łączyło się z serwerem.",
-    "about.p2":
-      "Dlatego stworzyłem Fainto. Działa w całości na Twoim telefonie, nie wyświetla reklam i domyślnie nigdzie nie wysyła żadnych informacji o Twoich finansach. Prawdziwe modele językowe prowadzą coaching bezpośrednio na urządzeniu, a wbudowany silnik podatkowy obsługuje 45 krajów w 25 językach. Bezpłatny start, bez konta, bez śledzenia.",
-    "about.p3":
-      "To aplikacja, której zawsze chciałem: taka, która daje Ci jasny obraz Twoich pieniędzy — i zatrzymuje go dla siebie.",
-    "about.p4":
-      'Chcesz poznać szczegóły? <a href="features.html">Zobacz wszystko, co potrafi Fainto</a>, albo <a href="faq.html">sprawdź najczęstsze pytania o Fainto</a>.',
+    "about.p1": "Każda aplikacja finansowa, jakiej próbowałem, po cichu działała przeciwko mnie — reklamy wciśnięte między moje własne transakcje, moje wydatki sprzedawane „partnerom”, coś, co przy każdym dotknięciu łączyło się z serwerem.",
+    "about.p2": "Dlatego stworzyłem Fainto. Działa w całości na Twoim telefonie, nie wyświetla reklam i domyślnie nigdzie nie wysyła żadnych informacji o Twoich finansach. Prawdziwe modele językowe prowadzą coaching bezpośrednio na urządzeniu, a wbudowany silnik podatkowy obsługuje 45 krajów w 25 językach. Bezpłatny start, bez konta, bez śledzenia.",
+    "about.p3": "To aplikacja, której zawsze chciałem: taka, która daje Ci jasny obraz Twoich pieniędzy — i zatrzymuje go dla siebie.",
+    "about.p4": "Chcesz poznać szczegóły? <a href=\"features.html\">Zobacz wszystko, co potrafi Fainto</a>, albo <a href=\"faq.html\">sprawdź najczęstsze pytania o Fainto</a>.",
     "about.sig": "— Mo, twórca Fainto",
     "about.cta": "Pobierz aplikację",
     "privacy.title": "Polityka prywatności — Fainto",
-    "privacy.desc":
-      "Strona internetowa Fainto nie zbiera o Tobie żadnych danych — brak plików cookie, brak analityki, brak narzędzi śledzących, czcionki hostowane lokalnie. Oto dokładnie, jak przetwarzamy dane, łącznie z RODO.",
+    "privacy.desc": "Jak Fainto przetwarza Twoje dane: lokalnie z założenia, bez reklam i śledzenia, opcjonalna szyfrowana kopia zapasowa i synchronizacja oraz Twoje prawa z RODO.",
     "privacy.nav.lang.aria": "Język",
     "privacy.eyebrow": "Prywatność",
     "privacy.h1": "Polityka prywatności",
-    "privacy.intro":
-      "Niniejsza polityka obejmuje zarówno aplikację <strong>Fainto</strong> na Androida, jak i tę stronę internetową. W skrócie: dane finansowe, które wprowadzasz, pozostają na Twoim urządzeniu, nie korzystamy z reklam ani narzędzi śledzących, a informacje o Twoich finansach nie są nigdzie przesyłane, chyba że świadomie włączysz opcjonalną funkcję. Dokument ten został przygotowany zgodnie z unijnym i brytyjskim <strong>RODO</strong> oraz z zasadami Google Play dotyczącymi danych użytkowników.",
+    "privacy.intro": "Niniejsza polityka obejmuje aplikację <strong>Fainto</strong> na Androida, tę stronę internetową oraz aplikację towarzyszącą <strong>Fainto Web</strong> działającą w przeglądarce. W skrócie: Twoje dane finansowe domyślnie pozostają na Twoim urządzeniu, nie korzystamy z reklam, analityki ani narzędzi śledzących, a żadne informacje o Twoich pieniądzach nie opuszczają telefonu, chyba że świadomie włączysz opcjonalną funkcję — konto do kopii zapasowej i synchronizacji, Cloud AI lub aplikację towarzyszącą w przeglądarce. Dokument został przygotowany zgodnie z unijnym i brytyjskim <strong>RODO</strong> oraz z zasadami Google Play dotyczącymi danych użytkowników.",
     "privacy.h2.who": "Kim jesteśmy",
-    "privacy.who":
-      'Fainto jest tworzone przez Mo. W sprawach związanych z prywatnością — w tym w celu skorzystania z opisanych poniżej praw — skontaktuj się pod adresem <a href="mailto:support@fainto.app">support@fainto.app</a>. Jest to również administrator danych w rozumieniu RODO.',
+    "privacy.who": "Fainto jest tworzone przez <strong>Mohsena Rezanię</strong> z siedzibą w Polsce — administratora danych w rozumieniu RODO. W sprawach związanych z prywatnością — w tym w celu skorzystania z opisanych poniżej praw — skontaktuj się pod adresem <a href=\"mailto:support@fainto.app\">support@fainto.app</a>.",
     "privacy.h2.stores": "Co aplikacja przechowuje i gdzie",
-    "privacy.stores":
-      "Wszystko, co wprowadzasz do Fainto — konta, salda, transakcje, dochody, rachunki, budżety oraz dane wykorzystywane przez narzędzia podatkowe — jest przechowywane <strong>lokalnie na Twoim urządzeniu</strong>. Nie istnieje konto Fainto ani rejestracja, dzięki czemu nigdy nie otrzymujemy, nie widzimy ani nie przechowujemy Twoich danych finansowych na żadnym serwerze. Nie są one przez nas zbierane ani nigdy sprzedawane, wynajmowane czy udostępniane.",
+    "privacy.stores": "Wszystko, co wprowadzasz do Fainto — konta, salda, transakcje, dochody, rachunki, budżety oraz dane wykorzystywane przez narzędzia podatkowe — jest przechowywane <strong>lokalnie na Twoim urządzeniu</strong>. Do korzystania z Fainto nie jest wymagane konto, a dopóki go nie utworzysz, nigdy nie otrzymujemy, nie widzimy ani nie przechowujemy Twoich danych finansowych na żadnym serwerze. Twoje dane nigdy nie są sprzedawane, wynajmowane ani udostępniane — niezależnie od tego, czy masz konto, czy nie.",
+    "privacy.h2.account": "Opcjonalne konto: kopia zapasowa i synchronizacja (wyłączone, dopóki się nie zalogujesz)",
+    "privacy.account": "Utworzenie konta Fainto (e-mail i hasło albo logowanie przez Google) jest <strong>opcjonalne</strong>. Jeśli się zalogujesz, aplikacja tworzy kopię zapasową i synchronizuje Twoje dane finansowe — transakcje, budżety, wpisy wartości netto, portfel inwestycyjny i kryptowaluty, wykryte subskrypcje, płatności cykliczne, ustawienia aplikacji oraz historię rozmów z asystentem AI — w <strong>Google Firebase (Firestore)</strong>, gdzie są przechowywane w ramach Twojego konta i chronione regułami dostępu na poziomie pojedynczego użytkownika. Dane są szyfrowane podczas przesyłania i w spoczynku w infrastrukturze Google, nie jest to jednak szyfrowanie end-to-end. Jeśli dołączysz do gospodarstwa domowego, budżety, które zdecydujesz się udostępnić, są widoczne dla pozostałych członków tego gospodarstwa. Google działa jako nasz podmiot przetwarzający dane i może przechowywać te dane na serwerach poza EOG na podstawie warunków przetwarzania danych Google Cloud (w tym standardowych klauzul umownych UE); nikt inny nie otrzymuje tych danych, a my nie wykorzystujemy ich do reklam ani analityki.",
+    "privacy.h2.webapp": "Fainto Web (aplikacja towarzysząca w przeglądarce)",
+    "privacy.webapp": "<a href=\"web/\">fainto.app/web</a> pokazuje Twoje finanse na większym ekranie na dwa sposoby. <strong>Parowanie (bez konta):</strong> Twój telefon przesyła dane bezpośrednio do przeglądarki przez szyfrowane połączenie peer-to-peer — nigdy nie są one zapisywane na serwerze. Aby nawiązać połączenie, krótkotrwały rekord parowania (metadane połączenia, w tym adresy sieciowe, których oba urządzenia potrzebują, aby się odnaleźć) jest przechowywany w Firebase wyłącznie na czas parowania — po nawiązaniu połączenia zostaje usunięty, a niezależnie od tego jest oznaczony tak, aby wygasł po pięciu minutach — a do wykrywania adresów wykorzystywana jest usługa STUN Google. To, co widzisz, pozostaje w karcie przeglądarki i jest usuwane po jej zamknięciu. <strong>Logowanie:</strong> przeglądarka odczytuje przez szyfrowane połączenie dane, które Twoje konto już synchronizuje; okno logowania Google jest dostarczane przez Google i podlega własnej polityce prywatności Google. Sesja logowania pozostaje w tej przeglądarce, dopóki nie wyczyścisz danych tej witryny. Aplikacja towarzysząca w przeglądarce pobiera oprogramowanie Firebase z serwerów Google i nie zawiera reklam, analityki ani narzędzi śledzących.",
     "privacy.h2.coach": "Asystent AI działający na urządzeniu",
-    "privacy.coach":
-      "Asystent AI Fainto uruchamia modele językowe <strong>bezpośrednio na Twoim telefonie</strong>. W domyślnym trybie działania na urządzeniu Twoje pytania i kontekst finansowy są przetwarzane lokalnie i nigdy nie opuszczają urządzenia.",
+    "privacy.coach": "Asystent AI Fainto uruchamia modele językowe <strong>bezpośrednio na Twoim telefonie</strong>. W domyślnym trybie działania na urządzeniu Twoje pytania i kontekst finansowy są przetwarzane lokalnie i nigdy nie opuszczają urządzenia.",
     "privacy.h2.cloudai": "Opcjonalna funkcja Cloud AI (domyślnie wyłączona)",
-    "privacy.cloudai":
-      "Fainto zawiera <strong>opcjonalny</strong> tryb Cloud AI — funkcję Premium, która jest <strong>wyłączona, dopóki jej nie włączysz</strong>. Tylko jeśli ją włączysz i wyślesz wiadomość, treść tej wiadomości zostanie przesłana przez szyfrowane połączenie (HTTPS) do naszej bramki AI, <strong>OpenRouter</strong>, oraz do wybranego przez Ciebie dostawcy modelu, wyłącznie w celu wygenerowania odpowiedzi. Nie wykorzystujemy tego do celów reklamowych. Możesz pozostawić Cloud AI wyłączone, aby działać w pełni na urządzeniu; jeśli z niej korzystasz, zapoznaj się także z własną polityką prywatności OpenRouter.",
+    "privacy.cloudai": "Fainto zawiera <strong>opcjonalny</strong> tryb Cloud AI — funkcję Premium, która jest <strong>wyłączona, dopóki jej nie włączysz</strong>. Tylko jeśli ją włączysz i wyślesz wiadomość, treść tej wiadomości wraz ze zbiorczym podsumowaniem finansów (sumy i kategorie — nigdy Twoje imię i nazwisko, adres e-mail ani nazwy płatności) zostanie przesłana przez szyfrowane połączenie (HTTPS) do naszej bramki AI, <strong>OpenRouter</strong>, oraz do wybranego przez Ciebie dostawcy modelu, wyłącznie w celu wygenerowania odpowiedzi. Nie wykorzystujemy tego do celów reklamowych. Możesz pozostawić Cloud AI wyłączone, aby działać w pełni na urządzeniu; jeśli z niej korzystasz, zapoznaj się także z własną polityką prywatności OpenRouter.",
     "privacy.h2.never": "Czego nigdy nie robimy",
-    "privacy.never":
-      "Żadnych reklam, żadnej analityki ani śledzenia sposobu korzystania z aplikacji, żadnych narzędzi śledzących ani pakietów SDK do profilowania firm trzecich, a także żadnej sprzedaży czy udostępniania Twoich danych osobowych lub finansowych. Domyślnie aplikacja wykonuje <strong>0 zapytań</strong> i wysyła <strong>0 bajtów</strong> — z założenia.",
+    "privacy.never": "Żadnych reklam, żadnej analityki ani śledzenia sposobu korzystania z aplikacji, żadnych narzędzi śledzących ani pakietów SDK do profilowania firm trzecich, a także żadnej sprzedaży czy udostępniania Twoich danych osobowych lub finansowych. Domyślnie aplikacja wykonuje <strong>0 zapytań</strong> i wysyła <strong>0 bajtów</strong> — z założenia.",
     "privacy.h2.permissions": "Uprawnienia",
-    "privacy.permissions":
-      "Aplikacja prosi wyłącznie o uprawnienia niezbędne dla danej funkcji — głównie o dostęp do internetu, wykorzystywany do pobierania wybranych przez Ciebie modeli AI działających na urządzeniu oraz do obsługi opcjonalnej funkcji Cloud AI. Udzielenie lub odmowa dostępu zależy wyłącznie od Ciebie.",
+    "privacy.permissions": "Aplikacja prosi wyłącznie o to, czego potrzebuje dana funkcja — głównie o dostęp do internetu, wykorzystywany do pobierania wybranych przez Ciebie modeli AI działających na urządzeniu, do obsługi opcjonalnej funkcji Cloud AI oraz — tylko jeśli z nich korzystasz — do kopii zapasowej i synchronizacji konta oraz parowania z przeglądarką. Udzielenie lub odmowa dostępu zależy wyłącznie od Ciebie.",
     "privacy.h2.keeping": "Przechowywanie i usuwanie danych",
-    "privacy.keeping":
-      "Ponieważ Twoje dane znajdują się na Twoim urządzeniu, to <strong>Ty</strong> masz nad nimi pełną kontrolę. Aby usunąć wszystko, wyczyść dane aplikacji lub odinstaluj Fainto — nie istnieje żadne konto po stronie serwera do usunięcia. W przypadku kontaktu z nami drogą e-mailową możesz w każdej chwili poprosić o usunięcie tej korespondencji.",
+    "privacy.keeping": "Ponieważ Twoje dane domyślnie znajdują się na Twoim urządzeniu, to <strong>Ty</strong> masz nad nimi kontrolę: aby usunąć wszystko, co jest przechowywane lokalnie, wyczyść dane aplikacji lub odinstaluj Fainto. Jeśli masz utworzone konto, usuń je w aplikacji (Ustawienia → Konto → <em>Usuń konto</em>) — spowoduje to usunięcie zsynchronizowanych danych oraz samego konta z naszych serwerów; osobna opcja <em>Reset chmury</em> usuwa jedynie kopię z serwera. Możesz też napisać do nas e-mail, a my usuniemy dane za Ciebie. Jeśli kontaktujesz się z nami e-mailowo, w każdej chwili możesz poprosić o usunięcie tej korespondencji.",
     "privacy.h2.security": "Bezpieczeństwo",
-    "privacy.security":
-      "Przechowywanie danych na Twoim urządzeniu, a nie na naszych serwerach, eliminuje największe źródło ryzyka. Wszelkie opcjonalne zapytania do chmury są wysyłane przez szyfrowane połączenie HTTPS.",
+    "privacy.security": "Domyślne przechowywanie danych na Twoim urządzeniu eliminuje największe źródło ryzyka. Wszystko, co zdecydujesz się wysłać — wiadomości Cloud AI, synchronizacja konta, parowanie z przeglądarką — jest przesyłane przez szyfrowane połączenia, a zsynchronizowane dane są szyfrowane w spoczynku w infrastrukturze Google.",
     "privacy.h2.children": "Dzieci",
-    "privacy.children":
-      "Fainto to narzędzie finansowe przeznaczone dla ogółu użytkowników i nie jest kierowane do dzieci poniżej 13. roku życia (lub odpowiedniego wieku obowiązującego w Twoim kraju). Świadomie nie zbieramy danych od dzieci.",
+    "privacy.children": "Fainto to narzędzie finansowe przeznaczone dla ogółu użytkowników i nie jest kierowane do dzieci poniżej 13. roku życia (lub odpowiedniego wieku obowiązującego w Twoim kraju). Świadomie nie zbieramy danych od dzieci.",
     "privacy.h2.website": "Ta strona internetowa",
-    "privacy.website":
-      'fainto.app <strong>nie ustawia plików cookie</strong> i nie korzysta z analityki, reklam ani narzędzi śledzących; czcionki są serwowane z tej domeny, więc otwarcie strony nie generuje żadnych zapytań do firm trzecich. Formularz <a href="contact.html">kontaktowy</a> nie wysyła niczego do serwera — kliknięcie <em>Wyślij</em> otwiera Twoją własną aplikację pocztową, dzięki czemu to Ty decydujesz, czy wysłać nam wiadomość. Ponieważ nie używamy plików cookie ani śledzenia, baner zgody nie jest wymagany. Nasz dostawca hostingu może przechowywać standardowe, krótkotrwałe logi dostępu (które mogą zawierać Twój adres IP) wyłącznie w celu utrzymania działania strony.',
+    "privacy.website": "Strony fainto.app <strong>nie ustawiają plików cookie</strong> i nie korzystają z analityki, reklam ani narzędzi śledzących; czcionki są serwowane z tej domeny. Formularz <a href=\"contact.html\">kontaktowy</a> nie wysyła niczego do serwera — kliknięcie <em>Wyślij</em> otwiera Twoją własną aplikację pocztową, dzięki czemu to Ty decydujesz, czy wysłać nam wiadomość. Jedynym wyjątkiem od zasady „żadnych zapytań do firm trzecich” jest <a href=\"web/\">aplikacja towarzysząca w przeglądarce</a>: pobiera ona Firebase od Google i komunikuje się z Firebase wyłącznie po to, aby zrealizować parowanie lub logowanie, o które prosisz, a z pamięci przeglądarki korzysta ściśle w tym celu — nigdy do reklam ani analityki — dlatego baner zgody nie jest wymagany. Nasz dostawca hostingu może przechowywać standardowe, krótkotrwałe logi dostępu (które mogą zawierać Twój adres IP) wyłącznie w celu utrzymania działania strony.",
     "privacy.h2.rights": "Twoje prawa wynikające z RODO",
-    "privacy.rights":
-      'Jeśli kiedykolwiek będziemy przechowywać Twoje dane osobowe (na przykład wiadomość e-mail, którą do nas wyślesz), masz prawo do dostępu do nich, ich poprawiania, usunięcia lub sprzeciwu wobec ich wykorzystania, a także do złożenia skargi do lokalnego organu ochrony danych osobowych. Napisz na adres <a href="mailto:support@fainto.app">support@fainto.app</a>, a zajmiemy się tym.',
+    "privacy.rights": "Jeśli kiedykolwiek będziemy przechowywać Twoje dane osobowe (na przykład wiadomość e-mail, którą do nas wyślesz), masz prawo do dostępu do nich, ich poprawiania, usunięcia lub sprzeciwu wobec ich wykorzystania, a także do złożenia skargi do lokalnego organu ochrony danych osobowych. Napisz na adres <a href=\"mailto:support@fainto.app\">support@fainto.app</a>, a zajmiemy się tym.",
     "privacy.h2.changes": "Zmiany",
     "privacy.changes": "Jeśli ta polityka ulegnie zmianie, zaktualizujemy tę stronę oraz podaną poniżej datę.",
-    "privacy.updated": "Ostatnia aktualizacja: 10 lipca 2026 · support@fainto.app",
+    "privacy.updated": "Ostatnia aktualizacja: 17 lipca 2026 · support@fainto.app",
     "features.title": "Funkcje — Fainto, prywatny tracker budżetu",
-    "features.desc":
-      "Funkcje Fainto: asystent AI działający lokalnie na urządzeniu, prywatność wynikająca z architektury, silnik podatkowy dla 45 krajów, 25 języków, brak konieczności zakładania konta, brak reklam, działa offline.",
+    "features.desc": "Funkcje Fainto: asystent AI działający lokalnie na urządzeniu, prywatność wynikająca z architektury, silnik podatkowy dla 45 krajów, 25 języków, brak konieczności zakładania konta, brak reklam, działa offline.",
     "features.eyebrow": "Funkcje",
     "features.h1": "Co potrafi Fainto",
-    "features.intro":
-      'Fainto to prywatny tracker budżetu działający przede wszystkim offline, z asystentem finansowym AI działającym lokalnie na urządzeniu. Oto wszystko, co potrafi — a jeśli chcesz poznać historię, która za tym stoi, <a href="about.html">przeczytaj, dlaczego powstało Fainto</a>.',
+    "features.intro": "Fainto to prywatny tracker budżetu działający przede wszystkim offline, z asystentem finansowym AI działającym lokalnie na urządzeniu. Oto wszystko, co potrafi — a jeśli chcesz poznać historię, która za tym stoi, <a href=\"about.html\">przeczytaj, dlaczego powstało Fainto</a>.",
     "features.h2.coach": "Asystent finansowy AI, który działa na Twoim telefonie",
-    "features.coach.p":
-      "Za doradztwo w Fainto odpowiadają prawdziwe modele językowe, które działają <strong>na Twoim telefonie</strong>, a nie na serwerze. Aplikacja zawiera pięć modeli działających lokalnie: <strong>SmolLM 135M</strong> i <strong>Qwen 2.5 0.5B</strong> w wersji darmowej oraz <strong>Qwen 2.5 1.5B</strong>, <strong>DeepSeek R1 1.5B</strong> i <strong>Phi-4 Mini 3.8B</strong> w Premium. Wybierz najlżejszy model dla szybkości działania albo większe modele dla głębszej analizy — odczytują Twoje wydatki i odpowiadają na pytania bez przesyłania danych do chmury. Jeśli potrzebujesz większego modelu, niż pomieści Twój telefon, w Premium dostępna jest <strong>Cloud AI przez OpenRouter</strong>, ale jest to funkcja ściśle opcjonalna: nic nie trafia do chmury, dopóki sam(a) jej nie włączysz.",
+    "features.coach.p": "Za doradztwo w Fainto odpowiadają prawdziwe modele językowe, które działają <strong>na Twoim telefonie</strong>, a nie na serwerze. Aplikacja zawiera pięć modeli działających lokalnie: <strong>SmolLM 135M</strong> i <strong>Qwen 2.5 0.5B</strong> w wersji darmowej oraz <strong>Qwen 2.5 1.5B</strong>, <strong>DeepSeek R1 1.5B</strong> i <strong>Phi-4 Mini 3.8B</strong> w Premium. Wybierz najlżejszy model dla szybkości działania albo większe modele dla głębszej analizy — odczytują Twoje wydatki i odpowiadają na pytania bez przesyłania danych do chmury. Jeśli potrzebujesz większego modelu, niż pomieści Twój telefon, w Premium dostępna jest <strong>Cloud AI przez OpenRouter</strong>, ale jest to funkcja ściśle opcjonalna: nic nie trafia do chmury, dopóki sam(a) jej nie włączysz.",
     "features.h2.private": "Prywatność wynikająca z architektury, nie z polityki",
-    "features.private.p":
-      'Większość aplikacji obiecuje prywatność w polityce, której musisz po prostu zaufać. Fainto jest zbudowane tak, że danym po prostu nie ma dokąd wyjść: domyślnie żadna informacja o Twoich finansach nie opuszcza urządzenia. Aplikacja może pokazać Ci <strong>0 zapytań, 0 bajtów</strong> — domyślnie, z założenia. Cloud AI to jedyna funkcja, która kiedykolwiek wysyła cokolwiek na zewnątrz, i jest wyłączona, dopóki sam(a) jej nie włączysz. Właśnie to oznacza &bdquo;prywatność wynikająca z architektury, nie z polityki&rdquo; — gwarancja tkwi w sposobie zbudowania aplikacji, a nie w akapicie tekstu prawnego. <a href="privacy.html">Sprawdź, jak Fainto obchodzi się z Twoimi danymi</a>, aby poznać pełne szczegóły.',
+    "features.private.p": "Większość aplikacji obiecuje prywatność w polityce, której musisz po prostu zaufać. Fainto jest zbudowane tak, że danym po prostu nie ma dokąd wyjść: domyślnie żadna informacja o Twoich finansach nie opuszcza urządzenia. Aplikacja może pokazać Ci <strong>0 zapytań, 0 bajtów</strong> — domyślnie, z założenia. Cloud AI to jedyna funkcja, która kiedykolwiek wysyła cokolwiek na zewnątrz, i jest wyłączona, dopóki sam(a) jej nie włączysz. Właśnie to oznacza &bdquo;prywatność wynikająca z architektury, nie z polityki&rdquo; — gwarancja tkwi w sposobie zbudowania aplikacji, a nie w akapicie tekstu prawnego. <a href=\"privacy.html\">Sprawdź, jak Fainto obchodzi się z Twoimi danymi</a>, aby poznać pełne szczegóły.",
     "features.h2.offline": "Działa w pełni offline",
-    "features.offline.p":
-      "Ponieważ modele i Twoje dane znajdują się na telefonie, Fainto działa nawet przy wyłączonej sieci. Zapisuj wydatki w samolocie, w tunelu albo z wyłączonym transferem danych — asystent AI nadal odpowiada, a obliczenia podatkowe nadal działają. Nie ma serwera, który mógłby paść, ani synchronizacji, na którą trzeba czekać. Jedynym wyjątkiem jest opcjonalna Cloud AI, która w naturalny sposób wymaga połączenia, gdy zdecydujesz się jej użyć.",
+    "features.offline.p": "Ponieważ modele i Twoje dane znajdują się na telefonie, Fainto działa nawet przy wyłączonej sieci. Zapisuj wydatki w samolocie, w tunelu albo z wyłączonym transferem danych — asystent AI nadal odpowiada, a obliczenia podatkowe nadal działają. Nie ma serwera, który mógłby paść, ani synchronizacji, na którą trzeba czekać. Jedynym wyjątkiem jest opcjonalna Cloud AI, która w naturalny sposób wymaga połączenia, gdy zdecydujesz się jej użyć.",
     "features.h2.free": "Darmowa, bez konta, bez reklam",
-    "features.free.p":
-      "Fainto jest darmowe w użyciu i nie wymaga konta — wystarczy otworzyć aplikację i zacząć śledzić finanse. Konta są opcjonalne, więc nic nie zmusza Cię do podania adresu e-mail, by zobaczyć swoje własne pieniądze. Nie ma reklam wciśniętych między Twoje transakcje ani trackerów, narzędzi analitycznych czy plików cookie śledzących Twoje działania. Premium istnieje dla większych modeli AI i Cloud AI, ale podstawowy tracker budżetu oraz asystent w wersji darmowej nic nie kosztują.",
+    "features.free.p": "Fainto jest darmowe w użyciu i nie wymaga konta — wystarczy otworzyć aplikację i zacząć śledzić finanse. Konta są opcjonalne, więc nic nie zmusza Cię do podania adresu e-mail, by zobaczyć swoje własne pieniądze. Nie ma reklam wciśniętych między Twoje transakcje ani trackerów, narzędzi analitycznych czy plików cookie śledzących Twoje działania. Premium istnieje dla większych modeli AI i Cloud AI, ale podstawowy tracker budżetu oraz asystent w wersji darmowej nic nie kosztują.",
     "features.h2.tax": "Wbudowany silnik podatkowy dla 45 krajów",
-    "features.tax.p":
-      "Fainto zawiera silnik podatku dochodowego, który stosuje rzeczywiste przepisy dla <strong>45 krajów</strong> — 44 konfiguracje krajowe plus dedykowany silnik dla Polski — dzięki czemu liczby odzwierciedlają miejsce, w którym faktycznie mieszkasz, a nie domyślne ustawienia dla USA. Podaj kwotę brutto i zobacz, ile wynosi podatek: na przykład w ustawieniach dla Polski dochód <strong>PLN 240,000</strong> po zastosowaniu przepisów kraju daje <strong>PLN 149,787</strong>. Szacunki mają charakter informacyjny i edukacyjny, pomocny w planowaniu — nie stanowią porady finansowej ani podatkowej.",
+    "features.tax.p": "Fainto zawiera silnik podatku dochodowego, który stosuje rzeczywiste przepisy dla <strong>45 krajów</strong> — 44 konfiguracje krajowe plus dedykowany silnik dla Polski — dzięki czemu liczby odzwierciedlają miejsce, w którym faktycznie mieszkasz, a nie domyślne ustawienia dla USA. Podaj kwotę brutto i zobacz, ile wynosi podatek: na przykład w ustawieniach dla Polski dochód <strong>PLN 240,000</strong> po zastosowaniu przepisów kraju daje <strong>PLN 149,787</strong>. Szacunki mają charakter informacyjny i edukacyjny, pomocny w planowaniu — nie stanowią porady finansowej ani podatkowej.",
     "features.h2.localised": "Zlokalizowany w 25 językach",
-    "features.localised.p":
-      "Interfejs został przetłumaczony na <strong>25 języków</strong>, dzięki czemu aplikacja brzmi naturalnie niezależnie od tego, czy planujesz budżet po angielsku, polsku, niemiecku, francusku czy w innym obsługiwanym języku. Lokalizacja idzie w parze z wielokrajowym silnikiem podatkowym — waluta, przepisy podatkowe i słownictwo są dopasowane do Twojego regionu, zamiast zmuszać Cię do tłumaczenia w głowie aplikacji stworzonej wyłącznie dla USA.",
+    "features.localised.p": "Interfejs został przetłumaczony na <strong>25 języków</strong>, dzięki czemu aplikacja brzmi naturalnie niezależnie od tego, czy planujesz budżet po angielsku, polsku, niemiecku, francusku czy w innym obsługiwanym języku. Lokalizacja idzie w parze z wielokrajowym silnikiem podatkowym — waluta, przepisy podatkowe i słownictwo są dopasowane do Twojego regionu, zamiast zmuszać Cię do tłumaczenia w głowie aplikacji stworzonej wyłącznie dla USA.",
     "features.h2.seeit": "Zobacz to w aplikacji",
-    "features.seeit.p":
-      'Ekran Przegląd łączy to wszystko w jedną całość: dochód netto <strong>12 482,22 zł</strong> miesięcznie (wzrost o 56.7%), podzielony na przychody <strong>12.5K</strong>, wydatki <strong>1.0K</strong> i oszczędności <strong>7.1K zł</strong>, a nad nim spostrzeżenia AI, Twoje konta i nadchodzące rachunki. Widok wartości netto sumuje Twoje aktywa — w przykładzie <strong>107 400,00 zł</strong> — w zestawieniu z zobowiązaniami. Każda liczba pozostaje na urządzeniu i należy wyłącznie do Ciebie. Dostępna już teraz na Androida — <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener">pobierz Fainto z Google Play</a> — a wersja na iOS pojawi się wkrótce.',
-    "features.closing.p":
-      'Wciąż się zastanawiasz? <a href="faq.html">Zobacz najczęściej zadawane pytania</a> albo wróć na <a href="index.html">stronę główną Fainto</a>.',
-    "features.cta": '<a class="btn-primary" href="index.html#get">Pobierz aplikację</a>',
+    "features.seeit.p": "Ekran Przegląd łączy to wszystko w jedną całość: dochód netto <strong>12 482,22 zł</strong> miesięcznie (wzrost o 56.7%), podzielony na przychody <strong>12.5K</strong>, wydatki <strong>1.0K</strong> i oszczędności <strong>7.1K zł</strong>, a nad nim spostrzeżenia AI, Twoje konta i nadchodzące rachunki. Widok wartości netto sumuje Twoje aktywa — w przykładzie <strong>107 400,00 zł</strong> — w zestawieniu z zobowiązaniami. Każda liczba pozostaje na urządzeniu i należy wyłącznie do Ciebie. Dostępna już teraz na Androida — <a href=\"https://play.google.com/store/apps/details?id=com.vaultai.app\" target=\"_blank\" rel=\"noopener\">pobierz Fainto z Google Play</a> — a wersja na iOS pojawi się wkrótce.",
+    "features.closing.p": "Wciąż się zastanawiasz? <a href=\"faq.html\">Zobacz najczęściej zadawane pytania</a> albo wróć na <a href=\"index.html\">stronę główną Fainto</a>.",
+    "features.cta": "<a class=\"btn-primary\" href=\"index.html#get\">Pobierz aplikację</a>",
     "faq.title": "Fainto FAQ — prywatny tracker budżetu z AI",
-    "faq.desc":
-      "Odpowiedzi na temat Fainto: czy aplikacja jest darmowa, czy działa offline, jakie dane zbiera, które kraje obsługuje silnik podatkowy i jakie modele AI działają lokalnie na urządzeniu.",
+    "faq.desc": "Odpowiedzi na temat Fainto: czy aplikacja jest darmowa, czy działa offline, jakie dane zbiera, które kraje obsługuje silnik podatkowy i jakie modele AI działają lokalnie na urządzeniu.",
     "faq.eyebrow": "FAQ",
     "faq.h1": "Fainto — najczęściej zadawane pytania",
     "faq.q1": "Czy Fainto jest darmowe?",
-    "faq.a1":
-      "Tak. Fainto jest darmowe w użyciu — podstawowy tracker budżetu oraz asystent AI w wersji darmowej nic nie kosztują. Wersja Premium odblokowuje większe modele AI działające na urządzeniu oraz opcjonalne Cloud AI, ale możesz śledzić swoje finanse i korzystać z coachingu bez płacenia.",
+    "faq.a1": "Tak. Fainto jest darmowe w użyciu — podstawowy tracker budżetu oraz asystent AI w wersji darmowej nic nie kosztują. Wersja Premium odblokowuje większe modele AI działające na urządzeniu oraz opcjonalne Cloud AI, ale możesz śledzić swoje finanse i korzystać z coachingu bez płacenia.",
     "faq.q2": "Czy Fainto wymaga konta?",
-    "faq.a2":
-      "Konto nie jest wymagane. Możesz otworzyć Fainto i od razu zacząć śledzić swoje finanse. Konta są opcjonalne, więc nigdy nie musisz podawać adresu e-mail, aby zobaczyć swoje własne pieniądze.",
+    "faq.a2": "Konto nie jest wymagane. Możesz otworzyć Fainto i od razu zacząć śledzić swoje finanse. Konta są opcjonalne, więc nigdy nie musisz podawać adresu e-mail, aby zobaczyć swoje własne pieniądze.",
     "faq.q3": "Czy Fainto działa offline?",
-    "faq.a3":
-      "Tak. Modele AI i Twoje dane znajdują się na telefonie, dzięki czemu Fainto działa w pełni offline — możesz zapisywać wydatki i korzystać z coachingu nawet bez połączenia z siecią. Jedyną funkcją wymagającą internetu jest opcjonalne Cloud AI, które jest wyłączone, dopóki go nie włączysz.",
+    "faq.a3": "Tak. Modele AI i Twoje dane znajdują się na telefonie, dzięki czemu Fainto działa w pełni offline — możesz zapisywać wydatki i korzystać z coachingu nawet bez połączenia z siecią. Połączenia wymagają jedynie opcjonalne dodatki: włączane samodzielnie Cloud AI, kopia zapasowa i synchronizacja konta oraz parowanie z przeglądarką — wszystkie wyłączone, dopóki ich nie włączysz.",
     "faq.q4": "Jakie dane zbiera Fainto?",
-    "faq.a4":
-      "Domyślnie żadne informacje o Twoich finansach nie opuszczają urządzenia. Strona internetowa nie korzysta z plików cookie, analityki ani trackerów, a aplikacja została zbudowana tak, aby Twoje dane finansowe pozostawały na telefonie. Aplikacja może pokazać Ci 0 zapytań i 0 wysłanych bajtów. Coś jest wysyłane wyłącznie wtedy, gdy świadomie włączysz Cloud AI.",
+    "faq.a4": "Domyślnie żadne informacje o Twoich pieniądzach nie opuszczają urządzenia. Strony witryny nie ustawiają plików cookie i nie korzystają z analityki ani trackerów (opcjonalna aplikacja towarzysząca w przeglądarce komunikuje się z Firebase od Google wyłącznie po to, aby zrealizować parowanie lub logowanie, o które prosisz — zobacz politykę prywatności), a aplikacja została zbudowana tak, aby Twoje dane finansowe pozostawały na telefonie. Aplikacja może pokazać Ci 0 zapytań i 0 wysłanych bajtów. Coś jest wysyłane wyłącznie wtedy, gdy świadomie się na to zdecydujesz — włączając Cloud AI, konto do kopii zapasowej i synchronizacji lub parowanie z przeglądarką.",
     "faq.q5": "Czy moje dane finansowe są przesyłane do chmury?",
-    "faq.a5":
-      "Nie, domyślnie nie. Fainto jest prywatne dzięki architekturze, a nie tylko dzięki polityce prywatności: Twoje dane nie mają dokąd trafić, chyba że sam(a) tak zdecydujesz. Cloud AI za pośrednictwem OpenRouter to jedyna funkcja, która cokolwiek wysyła na zewnątrz, i jest ona ściśle opcjonalna — nic nie trafia do niej, dopóki samodzielnie jej nie włączysz.",
+    "faq.a5": "Nie, domyślnie nie. Fainto jest prywatne dzięki architekturze, a nie tylko dzięki polityce prywatności: Twoje dane nie mają dokąd trafić, chyba że sam(a) tak zdecydujesz. Włączane samodzielnie Cloud AI wysyła Twoją wiadomość wraz ze zbiorczym podsumowaniem, a opcjonalne konto tworzy kopię zapasową i synchronizuje Twoje dane do Twojej prywatnej przestrzeni w chmurze — obie funkcje pozostają ściśle wyłączone, dopóki samodzielnie ich nie włączysz.",
     "faq.q6": "Jakie modele AI działają na urządzeniu w Fainto?",
-    "faq.a6":
-      "Na Twoim telefonie lokalnie działa pięć modeli językowych. W wersji darmowej: SmolLM 135M i Qwen 2.5 0.5B. W wersji Premium: Qwen 2.5 1.5B, DeepSeek R1 1.5B i Phi-4 Mini 3.8B. Wszystkie pięć działa na urządzeniu, więc coaching odbywa się na Twoim telefonie, a nie na serwerze.",
+    "faq.a6": "Na Twoim telefonie lokalnie działa pięć modeli językowych. W wersji darmowej: SmolLM 135M i Qwen 2.5 0.5B. W wersji Premium: Qwen 2.5 1.5B, DeepSeek R1 1.5B i Phi-4 Mini 3.8B. Wszystkie pięć działa na urządzeniu, więc coaching odbywa się na Twoim telefonie, a nie na serwerze.",
     "faq.q7": "Czym jest Cloud AI i czy jest opcjonalne?",
-    "faq.a7":
-      "Cloud AI to opcjonalna funkcja Premium, która przekazuje Twoje pytania do większego modelu za pośrednictwem OpenRouter, gdy telefon nie jest w stanie pomieścić wystarczająco dużego modelu. Jest ściśle opcjonalna i domyślnie wyłączona — jeśli nigdy jej nie włączysz, żadne informacje o Twoich finansach nie trafią do chmury.",
+    "faq.a7": "Cloud AI to opcjonalna funkcja Premium, która przekazuje Twoje pytania do większego modelu za pośrednictwem OpenRouter, gdy telefon nie jest w stanie pomieścić wystarczająco dużego modelu. Jest ściśle opcjonalna i domyślnie wyłączona — jeśli nigdy jej nie włączysz, żadne informacje o Twoich finansach nie trafią do chmury.",
     "faq.q8": "Które kraje obsługuje silnik podatkowy?",
-    "faq.a8":
-      "Wbudowany silnik podatku dochodowego Fainto obsługuje 45 krajów — 44 konfiguracje krajowe oraz dedykowany silnik dla Polski — dzięki czemu liczby odzwierciedlają miejsce, w którym faktycznie mieszkasz, a nie ogólny domyślny szablon.",
+    "faq.a8": "Wbudowany silnik podatku dochodowego Fainto obsługuje 45 krajów — 44 konfiguracje krajowe oraz dedykowany silnik dla Polski — dzięki czemu liczby odzwierciedlają miejsce, w którym faktycznie mieszkasz, a nie ogólny domyślny szablon.",
     "faq.q9": "Ile języków obsługuje Fainto?",
-    "faq.a9":
-      "Interfejs jest zlokalizowany w 25 językach, dzięki czemu aplikacja brzmi naturalnie w Twoim własnym języku i współgra z wielokrajowym silnikiem podatkowym dopasowanym do Twojego regionu.",
+    "faq.a9": "Interfejs jest zlokalizowany w 25 językach, dzięki czemu aplikacja brzmi naturalnie w Twoim własnym języku i współgra z wielokrajowym silnikiem podatkowym dopasowanym do Twojego regionu.",
     "faq.q10": "Czy istnieje wersja Fainto na iPhone'a lub iOS?",
-    "faq.a10":
-      "Jeszcze nie. Fainto jest obecnie dostępne na Androida, a wersja na iOS pojawi się wkrótce. Obecnie nie ma linku do pobrania na iPhone'a.",
+    "faq.a10": "Jeszcze nie. Fainto jest obecnie dostępne na Androida, a wersja na iOS pojawi się wkrótce. Obecnie nie ma linku do pobrania na iPhone'a.",
     "faq.q11": "Czy Fainto wyświetla reklamy?",
-    "faq.a11":
-      "Nie. W Fainto nie ma żadnych reklam — nic nie jest wciśnięte między Twoje transakcje — i nie ma trackerów, analityki ani plików cookie śledzących Twoje działania.",
+    "faq.a11": "Nie. W Fainto nie ma żadnych reklam — nic nie jest wciśnięte między Twoje transakcje — i nie ma trackerów, analityki ani plików cookie śledzących Twoje działania.",
     "faq.q12": "Gdzie mogę pobrać Fainto?",
-    "faq.a12":
-      'Fainto jest dostępne w Google Play pod nazwą „Fainto: AI Finance Coach”, pod adresem <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener">https://play.google.com/store/apps/details?id=com.vaultai.app</a>. To aplikacja na Androida; wersja na iOS pojawi się wkrótce.',
+    "faq.a12": "Fainto jest dostępne w Google Play pod nazwą „Fainto: AI Finance Coach”, pod adresem <a href=\"https://play.google.com/store/apps/details?id=com.vaultai.app\" target=\"_blank\" rel=\"noopener\">https://play.google.com/store/apps/details?id=com.vaultai.app</a>. To aplikacja na Androida; wersja na iOS pojawi się wkrótce.",
     "faq.q13": "Czy Fainto stanowi poradę finansową?",
-    "faq.a13":
-      "Nie. Fainto dostarcza informacji edukacyjnych, które pomagają zrozumieć i zaplanować swoje finanse, w tym szacunkowe wyliczenia podatkowe. Nie jest to porada finansowa ani podatkowa.",
+    "faq.a13": "Nie. Fainto dostarcza informacji edukacyjnych, które pomagają zrozumieć i zaplanować swoje finanse, w tym szacunkowe wyliczenia podatkowe. Nie jest to porada finansowa ani podatkowa.",
     "faq.q14": "Jak działa asystent AI na urządzeniu?",
-    "faq.a14":
-      "Jeden z pięciu lokalnych modeli językowych analizuje Twoje wydatki i odpowiada na pytania dotyczące finansów bezpośrednio na telefonie. Możesz wybrać lekki model dla szybkości działania lub większy dla większej głębi odpowiedzi — wszystko to bez konieczności łączenia się z chmurą.",
+    "faq.a14": "Jeden z pięciu lokalnych modeli językowych analizuje Twoje wydatki i odpowiada na pytania dotyczące finansów bezpośrednio na telefonie. Możesz wybrać lekki model dla szybkości działania lub większy dla większej głębi odpowiedzi — wszystko to bez konieczności łączenia się z chmurą.",
     "faq.q15": "Czy Fainto naprawdę jest prywatne, skoro korzysta z AI?",
-    "faq.a15":
-      "Tak. AI działa na urządzeniu, więc korzystanie z asystenta nie wysyła Twoich danych nigdzie na zewnątrz. Ponieważ modele są lokalne, prywatność i sztuczna inteligencja nie stoją w Fainto w sprzeczności — coaching domyślnie odbywa się na Twoim telefonie.",
+    "faq.a15": "Tak. W domyślnym trybie działania na urządzeniu AI pracuje na Twoim telefonie, więc korzystanie z asystenta nie wysyła Twoich danych nigdzie na zewnątrz. Ponieważ modele są lokalne, prywatność i sztuczna inteligencja nie stoją w Fainto w sprzeczności — coaching domyślnie odbywa się na Twoim telefonie.",
     "faq.q16": "Co oznacza „prywatność dzięki architekturze, nie dzięki polityce”?",
-    "faq.a16":
-      "Oznacza to, że gwarancja prywatności jest wbudowana w sposób działania aplikacji, a nie tylko obiecana w dokumencie. Twoje dane finansowe pozostają na urządzeniu, ponieważ domyślnie nie mają dokąd trafić — a nie dlatego, że polityka prywatności zapewnia, iż firma ich nie nadużyje.",
-    "faq.outro":
-      'Chcesz poznać pełny obraz? <a href="features.html">Zobacz pełne zestawienie funkcji</a> albo <a href="privacy.html">przeczytaj politykę prywatności Fainto</a>.',
-    "faq.cta": '<a class="btn-primary" href="index.html#get">Pobierz aplikację</a>',
+    "faq.a16": "Oznacza to, że gwarancja prywatności jest wbudowana w sposób działania aplikacji, a nie tylko obiecana w dokumencie. Twoje dane finansowe pozostają na urządzeniu, ponieważ domyślnie nie mają dokąd trafić — a nie dlatego, że polityka prywatności zapewnia, iż firma ich nie nadużyje.",
+    "faq.outro": "Chcesz poznać pełny obraz? <a href=\"features.html\">Zobacz pełne zestawienie funkcji</a> albo <a href=\"privacy.html\">przeczytaj politykę prywatności Fainto</a>.",
+    "faq.cta": "<a class=\"btn-primary\" href=\"index.html#get\">Pobierz aplikację</a>",
   },
   fa: {
     "chrome.skip": "پرش به محتوا",
@@ -468,23 +365,17 @@ window.__I18N = {
     "hero.slide1.aria": "1 از 3: نمای کلی",
     "hero.slide2.aria": "2 از 3: مربی هوش مصنوعی",
     "hero.slide3.aria": "3 از 3: ارزش خالص دارایی",
-    "hero.slide1.alt":
-      "نمای کلی Fainto: درآمد خالص 12 482,22 zł در ماه (56.7% رشد)، تقسیم‌شده به درآمد 12.5K، هزینه 1.0K و پس‌انداز 7.1K zł، بالای بینش‌های هوش مصنوعی، حساب‌ها و قبض‌ها.",
-    "hero.slide2.alt":
-      "مربی هوش مصنوعی روی‌دستگاهِ Fainto در حال پاسخ به یک پرسش مالی با مدل SmolLM 135M با سرعت 10 توکن در ثانیه، با برچسب روی‌دستگاه · خصوصی.",
-    "hero.slide3.alt":
-      "نمای ارزش خالص دارایی Fainto: 107 400,00 zł دارایی و صفر بدهی، نمایش‌داده‌شده به‌صورت حلقه‌ای سبز همراه با تفکیک دارایی‌ها.",
+    "hero.slide1.alt": "نمای کلی Fainto: درآمد خالص 12 482,22 zł در ماه (56.7% رشد)، تقسیم‌شده به درآمد 12.5K، هزینه 1.0K و پس‌انداز 7.1K zł، بالای بینش‌های هوش مصنوعی، حساب‌ها و قبض‌ها.",
+    "hero.slide2.alt": "مربی هوش مصنوعی روی‌دستگاهِ Fainto در حال پاسخ به یک پرسش مالی با مدل SmolLM 135M با سرعت 10 توکن در ثانیه، با برچسب روی‌دستگاه · خصوصی.",
+    "hero.slide3.alt": "نمای ارزش خالص دارایی Fainto: 107 400,00 zł دارایی و صفر بدهی، نمایش‌داده‌شده به‌صورت حلقه‌ای سبز همراه با تفکیک دارایی‌ها.",
     "value.eyebrow": "این چیست",
     "value.heading": "یک مربی مالی هوش مصنوعی که روی گوشی شما اجرا می‌شود، نه روی سرورهای ما.",
     "value.item1.h": "هوش مصنوعی روی دستگاه است",
-    "value.item1.p":
-      "پنج مدل زبانی به‌صورت محلی اجرا می‌شوند — از یک مدل سبک 135M تا Phi-4 Mini 3.8B — تا مربی‌گری روی گوشی شما انجام شود، نه روی سرور.",
+    "value.item1.p": "پنج مدل زبانی به‌صورت محلی اجرا می‌شوند — از یک مدل سبک 135M تا Phi-4 Mini 3.8B — تا مربی‌گری روی گوشی شما انجام شود، نه روی سرور.",
     "value.item2.h": "به‌طور پیش‌فرض هیچ‌چیز بارگذاری نمی‌شود",
-    "value.item2.p":
-      "خصوصی بر پایهٔ معماری، نه سیاست. برنامه می‌تواند 0 درخواست و 0 بایت را نشان دهد — به‌طور پیش‌فرض و طبق طراحی. هوش مصنوعی ابری فقط با انتخاب خودتان فعال می‌شود.",
+    "value.item2.p": "خصوصی بر پایهٔ معماری، نه سیاست. برنامه می‌تواند 0 درخواست و 0 بایت را نشان دهد — به‌طور پیش‌فرض و طبق طراحی. هوش مصنوعی ابری فقط با انتخاب خودتان فعال می‌شود.",
     "value.item3.h": "محاسبات مالیاتی برای 45 کشور",
-    "value.item3.p":
-      "یک موتور داخلی، قوانین واقعی مالیات بر درآمد 45 کشور را اجرا می‌کند و برنامه به 25 زبان بومی‌سازی شده — تا اعداد با جایی که واقعاً زندگی می‌کنید بخوانند.",
+    "value.item3.p": "یک موتور داخلی، قوانین واقعی مالیات بر درآمد 45 کشور را اجرا می‌کند و برنامه به 25 زبان بومی‌سازی شده — تا اعداد با جایی که واقعاً زندگی می‌کنید بخوانند.",
     "cta.heading": "از صفر شروع کنید. در صفر بمانید.",
     "cta.sub": "چیزی برای پرداخت نیست، حسابی برای ساختن نیست و به‌طور پیش‌فرض چیزی بارگذاری نمی‌شود. iOS به‌زودی.",
     "cta.producthunt.aria": "Fainto در Product Hunt معرفی شده است (در تب جدید باز می‌شود)",
@@ -500,12 +391,10 @@ window.__I18N = {
     "footer.copyright": "© 2026 Fainto",
     "footer.made": "توسعه و طراحی با ❤️ در لهستان.",
     "contact.title": "تماس با ما — Fainto",
-    "contact.desc":
-      "با Fainto در ارتباط باشید — سؤالات، اشکالات و بازخوردهای شما مستقیماً به support@fainto.app ارسال می‌شود.",
+    "contact.desc": "با Fainto در ارتباط باشید — سؤالات، اشکالات و بازخوردهای شما مستقیماً به support@fainto.app ارسال می‌شود.",
     "contact.eyebrow": "تماس",
     "contact.h1": "با ما در تماس باشید.",
-    "contact.intro":
-      'سؤالی دارید، با اشکالی مواجه شده‌اید یا نظری برای ما دارید؟ پیامی در پایین بنویسید — مستقیماً به <a href="mailto:support@fainto.app">support@fainto.app</a> ارسال می‌شود. هیچ اطلاعاتی در این سایت ذخیره نمی‌شود؛ این فرم فقط برنامهٔ ایمیل شما را باز می‌کند.',
+    "contact.intro": "سؤالی دارید، با اشکالی مواجه شده‌اید یا نظری برای ما دارید؟ پیامی در پایین بنویسید — مستقیماً به <a href=\"mailto:support@fainto.app\">support@fainto.app</a> ارسال می‌شود. هیچ اطلاعاتی در این سایت ذخیره نمی‌شود؛ این فرم فقط برنامهٔ ایمیل شما را باز می‌کند.",
     "contact.form.name.label": "نام",
     "contact.form.email.label": "ایمیل",
     "contact.form.message.label": "پیام",
@@ -515,157 +404,113 @@ window.__I18N = {
     "about.desc": "چرا Fainto وجود دارد — مربی مالی خصوصی و بدون تبلیغ که روی گوشی شما اجرا می‌شود.",
     "about.eyebrow": "درباره",
     "about.h1": "فقط یک اپلیکیشن مالی می‌خواستم که طرف من باشد.",
-    "about.p1":
-      "هر اپلیکیشن مالی‌ای که امتحان کردم، بی‌سروصدا علیه من عمل می‌کرد — تبلیغاتی که میان تراکنش‌های خودم جا داده شده بود، هزینه‌کردهایم که به «شرکا» فروخته می‌شد، و چیزی که با هر لمس، اطلاعاتم را به جایی گزارش می‌داد.",
-    "about.p2":
-      "پس Fainto را ساختم. این اپلیکیشن کاملاً روی گوشی شما اجرا می‌شود، هیچ تبلیغی نشان نمی‌دهد و به‌طور پیش‌فرض هیچ اطلاعاتی درباره پولتان به هیچ‌کجا نمی‌فرستد. مدل‌های زبانی واقعی، راهنمایی را به‌صورت درون‌دستگاهی انجام می‌دهند؛ یک موتور مالیاتی داخلی، 45 کشور را در 25 زبان پوشش می‌دهد. شروع رایگان، بدون نیاز به حساب کاربری، بدون ردیابی.",
-    "about.p3":
-      "این همان اپلیکیشنی است که آرزو داشتم وجود داشته باشد: اپی که دیدی شفاف از وضعیت مالی‌تان به شما می‌دهد — و بعد آن را فقط برای خودش نگه می‌دارد.",
-    "about.p4":
-      'جزئیات بیشتر می‌خواهید؟ <a href="features.html">همه‌ی کارهایی را که Fainto انجام می‌دهد ببینید</a>، یا <a href="faq.html">سوالات متداول درباره‌ی Fainto را مرور کنید</a>.',
+    "about.p1": "هر اپلیکیشن مالی‌ای که امتحان کردم، بی‌سروصدا علیه من عمل می‌کرد — تبلیغاتی که میان تراکنش‌های خودم جا داده شده بود، هزینه‌کردهایم که به «شرکا» فروخته می‌شد، و چیزی که با هر لمس، اطلاعاتم را به جایی گزارش می‌داد.",
+    "about.p2": "پس Fainto را ساختم. این اپلیکیشن کاملاً روی گوشی شما اجرا می‌شود، هیچ تبلیغی نشان نمی‌دهد و به‌طور پیش‌فرض هیچ اطلاعاتی درباره پولتان به هیچ‌کجا نمی‌فرستد. مدل‌های زبانی واقعی، راهنمایی را به‌صورت درون‌دستگاهی انجام می‌دهند؛ یک موتور مالیاتی داخلی، 45 کشور را در 25 زبان پوشش می‌دهد. شروع رایگان، بدون نیاز به حساب کاربری، بدون ردیابی.",
+    "about.p3": "این همان اپلیکیشنی است که آرزو داشتم وجود داشته باشد: اپی که دیدی شفاف از وضعیت مالی‌تان به شما می‌دهد — و بعد آن را فقط برای خودش نگه می‌دارد.",
+    "about.p4": "جزئیات بیشتر می‌خواهید؟ <a href=\"features.html\">همه‌ی کارهایی را که Fainto انجام می‌دهد ببینید</a>، یا <a href=\"faq.html\">سوالات متداول درباره‌ی Fainto را مرور کنید</a>.",
     "about.sig": "— Mo، سازنده‌ی Fainto",
     "about.cta": "دریافت اپلیکیشن",
     "privacy.title": "سیاست حفظ حریم خصوصی — Fainto",
-    "privacy.desc":
-      "وب‌سایت Fainto هیچ اطلاعاتی از شما جمع‌آوری نمی‌کند — بدون کوکی، بدون تحلیل آماری، بدون ردیاب، و فونت‌هایی که از سرور خودمان ارائه می‌شوند. در ادامه دقیقاً می‌بینید که چگونه با داده‌ها رفتار می‌کنیم، از جمله در چارچوب GDPR.",
+    "privacy.desc": "نحوه برخورد Fainto با داده‌های شما: محلی‌محور طبق طراحی، بدون تبلیغ و ردیاب، پشتیبان‌گیری و همگام‌سازی رمزنگاری‌شده اختیاری، و حقوق GDPR شما — به زبان ساده.",
     "privacy.nav.lang.aria": "زبان",
     "privacy.eyebrow": "حریم خصوصی",
     "privacy.h1": "سیاست حفظ حریم خصوصی",
-    "privacy.intro":
-      "این سیاست هم اپلیکیشن اندروید <strong>Fainto</strong> و هم این وب‌سایت را در بر می‌گیرد. به‌طور خلاصه: داده‌های مالی‌ای که وارد می‌کنید فقط روی دستگاه خودتان باقی می‌ماند، ما هیچ تبلیغ یا ردیابی اجرا نمی‌کنیم، و هیچ اطلاعاتی درباره پول شما بارگذاری نمی‌شود مگر اینکه خودتان عمداً یک قابلیت اختیاری را روشن کنید. این سند مطابق با <strong>GDPR</strong> اتحادیه اروپا/بریتانیا و سیاست داده‌های کاربر Google Play نوشته شده است.",
+    "privacy.intro": "این سیاست، اپلیکیشن اندروید <strong>Fainto</strong>، همین وب‌سایت و اپ همراه مرورگر، <strong>Fainto Web</strong>، را در بر می‌گیرد. به‌طور خلاصه: داده‌های مالی شما به‌طور پیش‌فرض روی دستگاه خودتان می‌ماند، ما هیچ تبلیغ، تحلیل آماری یا ردیابی اجرا نمی‌کنیم، و هیچ اطلاعاتی درباره پول شما از گوشی‌تان خارج نمی‌شود مگر اینکه خودتان عمداً یک قابلیت اختیاری را روشن کنید — حساب کاربری برای پشتیبان‌گیری و همگام‌سازی، هوش مصنوعی ابری، یا اپ همراه وب. این سند مطابق با <strong>GDPR</strong> اتحادیه اروپا/بریتانیا و سیاست داده‌های کاربر Google Play نوشته شده است.",
     "privacy.h2.who": "ما چه کسانی هستیم",
-    "privacy.who":
-      'Fainto توسط Mo ساخته شده است. برای هر موضوع مرتبط با حریم خصوصی — از جمله اعمال حقوق شما که در ادامه آمده — با <a href="mailto:support@fainto.app">support@fainto.app</a> تماس بگیرید. همین آدرس، کنترل‌کننده داده‌ها طبق GDPR نیز هست.',
+    "privacy.who": "Fainto توسط <strong>محسن رضانیا</strong>، مستقر در لهستان ساخته شده است — کنترل‌کنندهٔ داده‌ها طبق GDPR. برای هر موضوع مرتبط با حریم خصوصی — از جمله اعمال حقوق شما که در ادامه آمده — با <a href=\"mailto:support@fainto.app\">support@fainto.app</a> تماس بگیرید.",
     "privacy.h2.stores": "اپلیکیشن چه چیزی را کجا ذخیره می‌کند",
-    "privacy.stores":
-      "هر چیزی که در Fainto وارد می‌کنید — حساب‌ها، موجودی‌ها، تراکنش‌ها، درآمد، قبض‌ها، بودجه‌ها و ارقام مورد استفاده در ابزارهای مالیاتی — <strong>فقط به‌صورت محلی روی دستگاه شما</strong> ذخیره می‌شود. هیچ حساب کاربری یا ثبت‌نامی در Fainto وجود ندارد، بنابراین ما هرگز داده‌های مالی شما را روی هیچ سروری دریافت، مشاهده یا ذخیره نمی‌کنیم. این داده‌ها توسط ما جمع‌آوری نمی‌شوند و هرگز فروخته، اجاره داده یا به اشتراک گذاشته نمی‌شوند.",
+    "privacy.stores": "هر چیزی که در Fainto وارد می‌کنید — حساب‌ها، موجودی‌ها، تراکنش‌ها، درآمد، قبض‌ها، بودجه‌ها و ارقام مورد استفاده در ابزارهای مالیاتی — <strong>به‌صورت محلی روی دستگاه شما</strong> ذخیره می‌شود. برای استفاده از Fainto هیچ حساب کاربری‌ای لازم نیست، و تا زمانی که حسابی نسازید، ما هرگز داده‌های مالی شما را روی هیچ سروری دریافت، مشاهده یا ذخیره نمی‌کنیم. داده‌های شما هرگز فروخته، اجاره داده یا به اشتراک گذاشته نمی‌شوند — چه حساب داشته باشید و چه نداشته باشید.",
+    "privacy.h2.account": "حساب کاربری اختیاری: پشتیبان‌گیری و همگام‌سازی (خاموش مگر اینکه وارد شوید)",
+    "privacy.account": "ساختن حساب کاربری Fainto (با ایمیل و رمز عبور، یا ورود با Google) کاملاً <strong>اختیاری</strong> است. اگر وارد شوید، اپلیکیشن از داده‌های مالی شما — تراکنش‌ها، بودجه‌ها، اقلام ارزش خالص دارایی، دارایی‌های سبد سرمایه‌گذاری و رمزارز، اشتراک‌های شناسایی‌شده، پرداخت‌های تکرارشونده، تنظیمات اپلیکیشن و تاریخچه گفتگوی شما با دستیار هوش مصنوعی — در <strong>Google Firebase (Firestore)</strong> پشتیبان می‌گیرد و آن‌ها را همگام نگه می‌دارد؛ این داده‌ها زیر حساب خود شما ذخیره می‌شوند و با قواعد دسترسی مخصوص هر کاربر محافظت می‌شوند. داده‌ها هنگام انتقال و در حالت سکون روی زیرساخت Google رمزنگاری می‌شوند، هرچند رمزنگاری سرتاسری نیست. اگر به یک خانوار بپیوندید، بودجه‌هایی که خودتان برای اشتراک‌گذاری انتخاب می‌کنید برای دیگر اعضای آن خانوار قابل مشاهده خواهند بود. Google به‌عنوان پردازشگر داده ما عمل می‌کند و ممکن است این داده‌ها را طبق شرایط پردازش داده Google Cloud (از جمله بندهای قراردادی استاندارد اتحادیه اروپا) روی سرورهایی خارج از منطقه اقتصادی اروپا (EEA) ذخیره کند؛ هیچ‌کس دیگری این داده‌ها را دریافت نمی‌کند و ما هیچ تبلیغ یا تحلیل آماری‌ای روی آن‌ها اجرا نمی‌کنیم.",
+    "privacy.h2.webapp": "Fainto Web (اپ همراه در مرورگر)",
+    "privacy.webapp": "<a href=\"web/\">fainto.app/web</a> وضعیت مالی شما را به دو روش روی صفحه‌ای بزرگ‌تر نشان می‌دهد. <strong>جفت‌سازی (بدون حساب کاربری):</strong> گوشی شما داده‌هایتان را از طریق یک اتصال همتابه‌همتای رمزنگاری‌شده مستقیماً به مرورگرتان می‌فرستد — این داده‌ها هرگز روی سروری ذخیره نمی‌شوند. برای برقراری این پیوند، یک رکورد جفت‌سازی کوتاه‌عمر (فراداده اتصال، شامل نشانی‌های شبکه‌ای که دو دستگاه برای یافتن یکدیگر به آن نیاز دارند) تنها در طول جفت‌سازی در Firebase نگه داشته می‌شود — با برقراری اتصال حذف می‌گردد و در هر صورت طوری علامت‌گذاری می‌شود که پس از پنج دقیقه منقضی شود — و برای کشف نشانی از سرویس STUN متعلق به Google استفاده می‌شود. آنچه می‌بینید در همان تب مرورگر می‌ماند و با بستن تب پاک می‌شود. <strong>ورود به حساب:</strong> مرورگر همان داده‌هایی را که حساب شما از قبل همگام‌سازی می‌کند، از طریق یک اتصال رمزنگاری‌شده می‌خواند؛ پنجره ورود Google توسط Google ارائه می‌شود و تابع سیاست حریم خصوصی خود Google است. نشست ورود تا زمانی که داده‌های این سایت را پاک کنید در همین مرورگر باقی می‌ماند. اپ همراه وب، نرم‌افزار Firebase را از سرورهای Google بارگیری می‌کند و هیچ تبلیغ، تحلیل آماری یا ردیابی ندارد.",
     "privacy.h2.coach": "دستیار هوش مصنوعی روی دستگاه",
-    "privacy.coach":
-      "دستیار هوش مصنوعی Fainto مدل‌های زبانی را <strong>مستقیماً روی گوشی شما</strong> اجرا می‌کند. در حالت پیش‌فرض روی دستگاه، سؤالات و اطلاعات مالی شما به‌صورت محلی پردازش می‌شوند و هرگز از دستگاه خارج نمی‌شوند.",
+    "privacy.coach": "دستیار هوش مصنوعی Fainto مدل‌های زبانی را <strong>مستقیماً روی گوشی شما</strong> اجرا می‌کند. در حالت پیش‌فرض روی دستگاه، سؤالات و اطلاعات مالی شما به‌صورت محلی پردازش می‌شوند و هرگز از دستگاه خارج نمی‌شوند.",
     "privacy.h2.cloudai": "هوش مصنوعی ابری اختیاری (به‌طور پیش‌فرض خاموش)",
-    "privacy.cloudai":
-      "Fainto یک حالت هوش مصنوعی ابری <strong>اختیاری</strong> دارد — یک قابلیت پرمیوم که <strong>خاموش است مگر اینکه خودتان آن را فعال کنید</strong>. تنها و تنها در صورتی که آن را روشن کرده و پیامی ارسال کنید، متن آن پیام از طریق یک اتصال رمزنگاری‌شده (HTTPS) به درگاه هوش مصنوعی ما، <strong>OpenRouter</strong>، و ارائه‌دهنده مدلی که خودتان انتخاب کرده‌اید ارسال می‌شود، آن هم فقط برای تولید پاسخ. ما از آن برای تبلیغات استفاده نمی‌کنیم. می‌توانید هوش مصنوعی ابری را خاموش نگه دارید تا کاملاً روی دستگاه بمانید؛ اگر از آن استفاده می‌کنید، لطفاً شرایط حریم خصوصی OpenRouter را نیز مطالعه کنید.",
+    "privacy.cloudai": "Fainto یک حالت هوش مصنوعی ابری <strong>اختیاری</strong> دارد — یک قابلیت پرمیوم که <strong>خاموش است مگر اینکه خودتان آن را فعال کنید</strong>. تنها و تنها در صورتی که آن را روشن کرده و پیامی ارسال کنید، آن پیام به‌همراه یک خلاصه مالی تجمیعی (جمع‌ها و دسته‌بندی‌ها — و هرگز نام، ایمیل یا عنوان پرداخت‌های شما) از طریق یک اتصال رمزنگاری‌شده (HTTPS) به درگاه هوش مصنوعی ما، <strong>OpenRouter</strong>، و ارائه‌دهنده مدلی که خودتان انتخاب کرده‌اید ارسال می‌شود، آن هم فقط برای تولید پاسخ. ما از آن برای تبلیغات استفاده نمی‌کنیم. می‌توانید هوش مصنوعی ابری را خاموش نگه دارید تا کاملاً روی دستگاه بمانید؛ اگر از آن استفاده می‌کنید، لطفاً شرایط حریم خصوصی خود OpenRouter را نیز مطالعه کنید.",
     "privacy.h2.never": "کارهایی که ما هرگز انجام نمی‌دهیم",
-    "privacy.never":
-      "بدون تبلیغات، بدون تحلیل آماری یا ردیابی نحوه استفاده، بدون ردیاب یا SDK پروفایل‌سازی شخص‌ثالث، و بدون فروش یا اشتراک‌گذاری داده‌های شخصی یا مالی شما. اپلیکیشن به‌طور پیش‌فرض <strong>0 درخواست</strong> ارسال می‌کند و <strong>0 بایت</strong> می‌فرستد — این یک انتخاب طراحی است.",
+    "privacy.never": "بدون تبلیغات، بدون تحلیل آماری یا ردیابی نحوه استفاده، بدون ردیاب یا SDK پروفایل‌سازی شخص‌ثالث، و بدون فروش یا اشتراک‌گذاری داده‌های شخصی یا مالی شما. اپلیکیشن به‌طور پیش‌فرض <strong>0 درخواست</strong> ارسال می‌کند و <strong>0 بایت</strong> می‌فرستد — این یک انتخاب طراحی است.",
     "privacy.h2.permissions": "دسترسی‌ها",
-    "privacy.permissions":
-      "اپلیکیشن فقط چیزی را درخواست می‌کند که یک قابلیت به آن نیاز دارد — عمدتاً دسترسی به اینترنت، که برای دانلود مدل‌های هوش مصنوعی روی دستگاه که انتخاب می‌کنید و برای فعال کردن هوش مصنوعی ابری اختیاری استفاده می‌شود. دادن یا ندادن این دسترسی، انتخاب شماست.",
+    "privacy.permissions": "اپلیکیشن فقط چیزی را درخواست می‌کند که یک قابلیت به آن نیاز دارد — عمدتاً دسترسی به اینترنت، که برای دانلود مدل‌های هوش مصنوعی روی دستگاه که انتخاب می‌کنید، برای هوش مصنوعی ابری اختیاری و — تنها اگر از آن‌ها استفاده کنید — برای پشتیبان‌گیری و همگام‌سازی حساب و جفت‌سازی وب به کار می‌رود. دادن یا ندادن این دسترسی، انتخاب شماست.",
     "privacy.h2.keeping": "نگهداری و حذف داده‌های شما",
-    "privacy.keeping":
-      "از آنجا که داده‌های شما روی دستگاه خودتان قرار دارد، کنترل آن‌ها با <strong>شماست</strong>. برای حذف کامل، داده‌های اپلیکیشن را پاک کنید یا Fainto را حذف نصب کنید — هیچ حساب کاربری سمت سرور برای حذف وجود ندارد. اگر برای ما ایمیل زده‌اید، می‌توانید هر زمان از ما بخواهید آن مکاتبات را حذف کنیم.",
+    "privacy.keeping": "از آنجا که داده‌های شما به‌طور پیش‌فرض روی دستگاه خودتان قرار دارد، کنترل آن با <strong>شماست</strong>: برای حذف هر آنچه به‌صورت محلی ذخیره شده، داده‌های اپلیکیشن را پاک کنید یا Fainto را حذف نصب کنید. اگر حساب کاربری ساخته‌اید، آن را در خود اپلیکیشن حذف کنید (تنظیمات ← حساب ← <em>حذف حساب</em>) — این کار داده‌های همگام‌سازی‌شده و خود حساب را از سرورهای ما پاک می‌کند؛ گزینه جداگانه <em>بازنشانی ابری</em> فقط نسخه سمت سرور را حذف می‌کند. همچنین می‌توانید به ما ایمیل بزنید تا ما آن را برایتان حذف کنیم. اگر برای ما ایمیل زده‌اید، می‌توانید هر زمان از ما بخواهید آن مکاتبات را حذف کنیم.",
     "privacy.h2.security": "امنیت",
-    "privacy.security":
-      "نگه‌داشتن داده‌های شما روی دستگاه خودتان به‌جای سرورهای ما، بزرگ‌ترین منبع ریسک را از بین می‌برد. هر درخواست ابری اختیاری از طریق HTTPS رمزنگاری‌شده ارسال می‌شود.",
+    "privacy.security": "نگه‌داشتن داده‌های شما به‌طور پیش‌فرض روی دستگاه خودتان، بزرگ‌ترین منبع ریسک را از بین می‌برد. هر آنچه خودتان انتخاب می‌کنید ارسال شود — پیام‌های هوش مصنوعی ابری، همگام‌سازی حساب، جفت‌سازی وب — از طریق اتصال‌های رمزنگاری‌شده منتقل می‌شود، و داده‌های همگام‌سازی‌شده در حالت سکون روی زیرساخت Google رمزنگاری می‌شوند.",
     "privacy.h2.children": "کودکان",
-    "privacy.children":
-      "Fainto یک ابزار مالی برای عموم کاربران است و برای کودکان زیر 13 سال (یا سن معادل در محل زندگی شما) در نظر گرفته نشده است. ما آگاهانه هیچ داده‌ای از کودکان جمع‌آوری نمی‌کنیم.",
+    "privacy.children": "Fainto یک ابزار مالی برای عموم کاربران است و برای کودکان زیر 13 سال (یا سن معادل در محل زندگی شما) در نظر گرفته نشده است. ما آگاهانه هیچ داده‌ای از کودکان جمع‌آوری نمی‌کنیم.",
     "privacy.h2.website": "درباره این وب‌سایت",
-    "privacy.website":
-      'fainto.app <strong>هیچ کوکی‌ای</strong> تنظیم نمی‌کند و هیچ تحلیل آماری، تبلیغ یا ردیابی اجرا نمی‌کند؛ فونت‌ها از همین دامنه ارائه می‌شوند، بنابراین باز کردن سایت هیچ درخواستی به شخص‌ثالث ارسال نمی‌کند. فرم <a href="contact.html">تماس</a> هیچ‌چیزی به سرور ارسال نمی‌کند — فشردن دکمه <em>ارسال</em> اپلیکیشن ایمیل خودتان را باز می‌کند تا خودتان تصمیم بگیرید که آیا برای ما ایمیل بفرستید یا نه. از آنجا که هیچ کوکی یا ردیابی‌ای وجود ندارد، نیازی به بنر رضایت نیست. میزبان وب ما ممکن است لاگ‌های دسترسی کوتاه‌مدت استاندارد (که می‌تواند شامل آی‌پی شما باشد) را صرفاً برای آنلاین نگه‌داشتن سایت ذخیره کند.',
+    "privacy.website": "صفحات fainto.app <strong>هیچ کوکی‌ای</strong> تنظیم نمی‌کنند و هیچ تحلیل آماری، تبلیغ یا ردیابی اجرا نمی‌کنند؛ فونت‌ها از همین دامنه ارائه می‌شوند. فرم <a href=\"contact.html\">تماس</a> هیچ‌چیزی به سرور ارسال نمی‌کند — فشردن دکمه <em>ارسال</em> اپلیکیشن ایمیل خودتان را باز می‌کند تا خودتان تصمیم بگیرید که آیا برای ما ایمیل بفرستید یا نه. تنها استثنا در «بدون درخواست به شخص‌ثالث»، <a href=\"web/\">اپ همراه وب</a> است: این اپ Firebase را از Google بارگیری می‌کند و تنها برای انجام همان جفت‌سازی یا ورودی که خودتان درخواست کرده‌اید با Firebase ارتباط می‌گیرد، و از حافظه مرورگر صرفاً برای همین منظور استفاده می‌کند — هرگز برای تبلیغات یا تحلیل آماری — بنابراین نیازی به بنر رضایت نیست. میزبان وب ما ممکن است لاگ‌های دسترسی کوتاه‌مدت استاندارد (که می‌تواند شامل آی‌پی شما باشد) را صرفاً برای آنلاین نگه‌داشتن سایت ذخیره کند.",
     "privacy.h2.rights": "حقوق شما طبق GDPR",
-    "privacy.rights":
-      'اگر ما در هر زمانی داده‌های شخصی شما را نگه‌داری کنیم (برای مثال، ایمیلی که برای ما ارسال می‌کنید)، شما حق دارید به آن دسترسی داشته باشید، آن را اصلاح یا حذف کنید، یا به استفاده از آن اعتراض کنید، و همچنین می‌توانید به مرجع حفاظت از داده‌های محلی خود شکایت کنید. به <a href="mailto:support@fainto.app">support@fainto.app</a> ایمیل بزنید تا اقدام لازم را انجام دهیم.',
+    "privacy.rights": "اگر ما در هر زمانی داده‌های شخصی شما را نگه‌داری کنیم (برای مثال، ایمیلی که برای ما ارسال می‌کنید)، شما حق دارید به آن دسترسی داشته باشید، آن را اصلاح یا حذف کنید، یا به استفاده از آن اعتراض کنید، و همچنین می‌توانید به مرجع حفاظت از داده‌های محلی خود شکایت کنید. به <a href=\"mailto:support@fainto.app\">support@fainto.app</a> ایمیل بزنید تا اقدام لازم را انجام دهیم.",
     "privacy.h2.changes": "تغییرات",
     "privacy.changes": "اگر این سیاست تغییر کند، این صفحه و تاریخ زیر را به‌روزرسانی خواهیم کرد.",
-    "privacy.updated": "آخرین به‌روزرسانی: 10 ژوئیه 2026 · support@fainto.app",
+    "privacy.updated": "آخرین به‌روزرسانی: 17 ژوئیه 2026 · support@fainto.app",
     "err404.title": "صفحه پیدا نشد — Fainto",
-    "err404.desc":
-      "این صفحه اینجا نیست. به صفحهٔ اصلی Fainto برگردید، همهٔ امکانات Fainto را ببینید، یا ردیاب بودجهٔ خصوصی و آفلاین با هوش مصنوعی را برای Android دریافت کنید.",
+    "err404.desc": "این صفحه اینجا نیست. به صفحهٔ اصلی Fainto برگردید، همهٔ امکانات Fainto را ببینید، یا ردیاب بودجهٔ خصوصی و آفلاین با هوش مصنوعی را برای Android دریافت کنید.",
     "err404.eyebrow": "404",
     "err404.h1": "این صفحه جابه‌جا شده یا اصلاً وجود نداشته است.",
-    "err404.body1":
-      "لینکی که دنبال کردید به هیچ‌کجای fainto.app نمی‌رسد — شاید تغییر کرده یا اصلاً اینجا نبوده است. اتفاق بدی نیفتاده و در این مسیر هیچ اطلاعاتی از شما جمع‌آوری نشده است. این هم راه بازگشت.",
-    "err404.body2":
-      'به <a href="/">صفحهٔ اصلی Fainto</a> بازگردید، <a href="/features.html">همهٔ امکانات Fainto</a> را ببینید &mdash; مربی هوش مصنوعی روی‌دستگاه، موتور مالیاتی 45 کشور و موارد دیگر &mdash; یا <a href="/faq.html">پرسش‌های متداول</a> را بخوانید.',
-    "err404.cta": '<a class="btn-primary" href="/index.html#get">دریافت برنامه</a>',
+    "err404.body1": "لینکی که دنبال کردید به هیچ‌کجای fainto.app نمی‌رسد — شاید تغییر کرده یا اصلاً اینجا نبوده است. اتفاق بدی نیفتاده و در این مسیر هیچ اطلاعاتی از شما جمع‌آوری نشده است. این هم راه بازگشت.",
+    "err404.body2": "به <a href=\"/\">صفحهٔ اصلی Fainto</a> بازگردید، <a href=\"/features.html\">همهٔ امکانات Fainto</a> را ببینید &mdash; مربی هوش مصنوعی روی‌دستگاه، موتور مالیاتی 45 کشور و موارد دیگر &mdash; یا <a href=\"/faq.html\">پرسش‌های متداول</a> را بخوانید.",
+    "err404.cta": "<a class=\"btn-primary\" href=\"/index.html#get\">دریافت برنامه</a>",
     "features.title": "ویژگی‌ها — ردیاب بودجه خصوصی Fainto",
-    "features.desc":
-      "ویژگی‌های Fainto: مربی هوش مصنوعی درون‌دستگاهی، طراحی خصوصی از پایه، موتور مالیاتی برای 45 کشور، 25 زبان، بدون نیاز به حساب کاربری، بدون تبلیغات، کارکرد آفلاین.",
+    "features.desc": "ویژگی‌های Fainto: مربی هوش مصنوعی درون‌دستگاهی، طراحی خصوصی از پایه، موتور مالیاتی برای 45 کشور، 25 زبان، بدون نیاز به حساب کاربری، بدون تبلیغات، کارکرد آفلاین.",
     "features.eyebrow": "ویژگی‌ها",
     "features.h1": "Fainto چه می‌کند",
-    "features.intro":
-      'Fainto یک ردیاب بودجه خصوصی و آفلاین‌محور با مربی مالی هوش مصنوعی درون‌دستگاهی است. در ادامه همه کارهایی که انجام می‌دهد آمده — و اگر می‌خواهید داستان پشت آن را بدانید، <a href="about.html">بخوانید چرا Fainto ساخته شد</a>.',
+    "features.intro": "Fainto یک ردیاب بودجه خصوصی و آفلاین‌محور با مربی مالی هوش مصنوعی درون‌دستگاهی است. در ادامه همه کارهایی که انجام می‌دهد آمده — و اگر می‌خواهید داستان پشت آن را بدانید، <a href=\"about.html\">بخوانید چرا Fainto ساخته شد</a>.",
     "features.h2.coach": "مربی مالی هوش مصنوعی که روی گوشی شما اجرا می‌شود",
-    "features.coach.p":
-      "مربی‌گری در Fainto توسط مدل‌های زبانی واقعی انجام می‌شود که <strong>روی گوشی شما</strong> اجرا می‌شوند، نه روی یک سرور. پنج مدل به‌صورت درون‌دستگاهی ارائه می‌شوند: <strong>SmolLM 135M</strong> و <strong>Qwen 2.5 0.5B</strong> در نسخه رایگان، و <strong>Qwen 2.5 1.5B</strong>، <strong>DeepSeek R1 1.5B</strong> و <strong>Phi-4 Mini 3.8B</strong> در نسخه Premium. مدل سبک را برای سرعت یا مدل‌های بزرگ‌تر را برای عمق تحلیل انتخاب کنید — این مدل‌ها هزینه‌های شما را می‌خوانند و بدون رفت‌وبرگشت به فضای ابری به پرسش‌هایتان پاسخ می‌دهند. اگر به مدلی بزرگ‌تر از ظرفیت گوشی خود نیاز دارید، <strong>هوش مصنوعی ابری از طریق OpenRouter</strong> در نسخه Premium در دسترس است، اما کاملاً اختیاری است: چیزی به آن ارسال نمی‌شود مگر اینکه خودتان آن را فعال کنید.",
+    "features.coach.p": "مربی‌گری در Fainto توسط مدل‌های زبانی واقعی انجام می‌شود که <strong>روی گوشی شما</strong> اجرا می‌شوند، نه روی یک سرور. پنج مدل به‌صورت درون‌دستگاهی ارائه می‌شوند: <strong>SmolLM 135M</strong> و <strong>Qwen 2.5 0.5B</strong> در نسخه رایگان، و <strong>Qwen 2.5 1.5B</strong>، <strong>DeepSeek R1 1.5B</strong> و <strong>Phi-4 Mini 3.8B</strong> در نسخه Premium. مدل سبک را برای سرعت یا مدل‌های بزرگ‌تر را برای عمق تحلیل انتخاب کنید — این مدل‌ها هزینه‌های شما را می‌خوانند و بدون رفت‌وبرگشت به فضای ابری به پرسش‌هایتان پاسخ می‌دهند. اگر به مدلی بزرگ‌تر از ظرفیت گوشی خود نیاز دارید، <strong>هوش مصنوعی ابری از طریق OpenRouter</strong> در نسخه Premium در دسترس است، اما کاملاً اختیاری است: چیزی به آن ارسال نمی‌شود مگر اینکه خودتان آن را فعال کنید.",
     "features.h2.private": "خصوصی از پایه، نه از روی سیاست",
-    "features.private.p":
-      'بیشتر اپلیکیشن‌ها حریم خصوصی را در قالب سیاستی وعده می‌دهند که باید به آن اعتماد کنید. Fainto طوری ساخته شده که داده‌ها اصلاً جایی برای رفتن ندارند: به‌طور پیش‌فرض، هیچ اطلاعاتی درباره پول شما از دستگاه خارج نمی‌شود. این اپ می‌تواند <strong>0 درخواست، 0 بایت</strong> را به شما نشان دهد — به‌طور پیش‌فرض و از روی طراحی. هوش مصنوعی ابری تنها ویژگی‌ای است که چیزی به بیرون ارسال می‌کند، و تا وقتی خودتان آن را فعال نکنید، خاموش است. معنای &ldquo;خصوصی از پایه، نه از روی سیاست&rdquo; همین است — این تضمین در نحوه ساخت اپلیکیشن نهفته است، نه در یک بند از متن حقوقی. برای جزئیات کامل، <a href="privacy.html">نحوه برخورد Fainto با داده‌های شما را بررسی کنید</a>.',
+    "features.private.p": "بیشتر اپلیکیشن‌ها حریم خصوصی را در قالب سیاستی وعده می‌دهند که باید به آن اعتماد کنید. Fainto طوری ساخته شده که داده‌ها اصلاً جایی برای رفتن ندارند: به‌طور پیش‌فرض، هیچ اطلاعاتی درباره پول شما از دستگاه خارج نمی‌شود. این اپ می‌تواند <strong>0 درخواست، 0 بایت</strong> را به شما نشان دهد — به‌طور پیش‌فرض و از روی طراحی. هوش مصنوعی ابری تنها ویژگی‌ای است که چیزی به بیرون ارسال می‌کند، و تا وقتی خودتان آن را فعال نکنید، خاموش است. معنای &ldquo;خصوصی از پایه، نه از روی سیاست&rdquo; همین است — این تضمین در نحوه ساخت اپلیکیشن نهفته است، نه در یک بند از متن حقوقی. برای جزئیات کامل، <a href=\"privacy.html\">نحوه برخورد Fainto با داده‌های شما را بررسی کنید</a>.",
     "features.h2.offline": "کاملاً آفلاین کار می‌کند",
-    "features.offline.p":
-      "از آنجا که مدل‌ها و داده‌های شما روی گوشی قرار دارند، Fainto حتی با اینترنت خاموش هم کار می‌کند. هزینه‌هایتان را در هواپیما، در تونل، یا با داده اینترنت غیرفعال ثبت کنید — مربی هوش مصنوعی همچنان پاسخ می‌دهد و محاسبات مالیاتی همچنان اجرا می‌شود. هیچ سروری برای از کار افتادن و هیچ همگام‌سازی‌ای برای منتظر ماندن وجود ندارد. تنها استثنا هوش مصنوعی ابری اختیاری است که طبیعتاً هنگام استفاده به اتصال اینترنت نیاز دارد.",
+    "features.offline.p": "از آنجا که مدل‌ها و داده‌های شما روی گوشی قرار دارند، Fainto حتی با اینترنت خاموش هم کار می‌کند. هزینه‌هایتان را در هواپیما، در تونل، یا با داده اینترنت غیرفعال ثبت کنید — مربی هوش مصنوعی همچنان پاسخ می‌دهد و محاسبات مالیاتی همچنان اجرا می‌شود. هیچ سروری برای از کار افتادن و هیچ همگام‌سازی‌ای برای منتظر ماندن وجود ندارد. تنها استثنا هوش مصنوعی ابری اختیاری است که طبیعتاً هنگام استفاده به اتصال اینترنت نیاز دارد.",
     "features.h2.free": "رایگان، بدون حساب کاربری، بدون تبلیغات",
-    "features.free.p":
-      "استفاده از Fainto رایگان است و نیازی به حساب کاربری ندارد — آن را باز کنید و ردیابی را شروع کنید. ایجاد حساب کاربری اختیاری است، پس هیچ‌چیز شما را مجبور نمی‌کند برای دیدن پول خودتان ایمیلی ارائه دهید. هیچ تبلیغی میان تراکنش‌های شما جا داده نشده و هیچ ردیاب، ابزار تحلیلی یا کوکی‌ای رفتار شما را زیر نظر ندارد. نسخه Premium برای مدل‌های بزرگ‌تر هوش مصنوعی و هوش مصنوعی ابری وجود دارد، اما ردیاب اصلی بودجه و مربی نسخه رایگان کاملاً بدون هزینه هستند.",
+    "features.free.p": "استفاده از Fainto رایگان است و نیازی به حساب کاربری ندارد — آن را باز کنید و ردیابی را شروع کنید. ایجاد حساب کاربری اختیاری است، پس هیچ‌چیز شما را مجبور نمی‌کند برای دیدن پول خودتان ایمیلی ارائه دهید. هیچ تبلیغی میان تراکنش‌های شما جا داده نشده و هیچ ردیاب، ابزار تحلیلی یا کوکی‌ای رفتار شما را زیر نظر ندارد. نسخه Premium برای مدل‌های بزرگ‌تر هوش مصنوعی و هوش مصنوعی ابری وجود دارد، اما ردیاب اصلی بودجه و مربی نسخه رایگان کاملاً بدون هزینه هستند.",
     "features.h2.tax": "موتور مالیاتی داخلی برای 45 کشور",
-    "features.tax.p":
-      "Fainto دارای یک موتور مالیات بر درآمد است که قوانین واقعی <strong>45 کشور</strong> را اجرا می‌کند — 44 پیکربندی کشوری به‌علاوه یک موتور اختصاصی برای لهستان — تا اعداد نمایش‌داده‌شده منعکس‌کننده محل واقعی زندگی شما باشند، نه یک پیش‌فرض عمومی آمریکایی. یک رقم ناخالص وارد کنید و مالیات محاسبه‌شده را ببینید: برای مثال در پیش‌تنظیم لهستان، درآمد <strong>PLN 240,000</strong> پس از اعمال قوانین آن کشور به <strong>PLN 149,787</strong> می‌رسد. این برآوردها اطلاعاتی آموزشی برای کمک به برنامه‌ریزی شما هستند، نه مشاوره مالی یا مالیاتی.",
+    "features.tax.p": "Fainto دارای یک موتور مالیات بر درآمد است که قوانین واقعی <strong>45 کشور</strong> را اجرا می‌کند — 44 پیکربندی کشوری به‌علاوه یک موتور اختصاصی برای لهستان — تا اعداد نمایش‌داده‌شده منعکس‌کننده محل واقعی زندگی شما باشند، نه یک پیش‌فرض عمومی آمریکایی. یک رقم ناخالص وارد کنید و مالیات محاسبه‌شده را ببینید: برای مثال در پیش‌تنظیم لهستان، درآمد <strong>PLN 240,000</strong> پس از اعمال قوانین آن کشور به <strong>PLN 149,787</strong> می‌رسد. این برآوردها اطلاعاتی آموزشی برای کمک به برنامه‌ریزی شما هستند، نه مشاوره مالی یا مالیاتی.",
     "features.h2.localised": "بومی‌سازی‌شده به 25 زبان",
-    "features.localised.p":
-      "رابط کاربری به <strong>25 زبان</strong> ترجمه شده است، بنابراین چه بودجه‌بندی شما به انگلیسی، لهستانی، آلمانی، فرانسوی یا هر زبان دیگر پشتیبانی‌شده باشد، اپلیکیشن به‌طور طبیعی خوانده می‌شود. بومی‌سازی در کنار موتور مالیاتی چندکشوری کار می‌کند — واحد پول، قوانین مالیاتی و عبارت‌ها با منطقه شما هماهنگ هستند، به‌جای اینکه مجبور شوید یک اپ مخصوص آمریکا را در ذهن خود ترجمه کنید.",
+    "features.localised.p": "رابط کاربری به <strong>25 زبان</strong> ترجمه شده است، بنابراین چه بودجه‌بندی شما به انگلیسی، لهستانی، آلمانی، فرانسوی یا هر زبان دیگر پشتیبانی‌شده باشد، اپلیکیشن به‌طور طبیعی خوانده می‌شود. بومی‌سازی در کنار موتور مالیاتی چندکشوری کار می‌کند — واحد پول، قوانین مالیاتی و عبارت‌ها با منطقه شما هماهنگ هستند، به‌جای اینکه مجبور شوید یک اپ مخصوص آمریکا را در ذهن خود ترجمه کنید.",
     "features.h2.seeit": "آن را در اپلیکیشن ببینید",
-    "features.seeit.p":
-      'صفحه نمای‌کلی همه‌چیز را کنار هم می‌آورد: درآمد خالص <strong>12 482,22 zł</strong> در ماه (رشد 56.7%)، تقسیم‌شده به درآمد <strong>12.5K</strong>، هزینه‌ها <strong>1.0K</strong> و پس‌انداز <strong>7.1K zł</strong>، بالای بخش تحلیل‌های هوش مصنوعی، حساب‌ها و قبض‌های پیش‌رو. نمای ارزش خالص، دارایی‌های شما — <strong>107 400,00 zł</strong> در نمونه — را در برابر بدهی‌هایتان جمع می‌بندد. هر رقمی که اینجا می‌بینید فقط روی دستگاه شماست و متعلق به خود شماست. هم‌اکنون برای اندروید در دسترس است — <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener">Fainto را از Google Play دریافت کنید</a> — و نسخه iOS به‌زودی می‌آید.',
-    "features.closing.p":
-      'هنوز مطمئن نیستید؟ <a href="faq.html">پرسش‌های متداول را ببینید</a>، یا <a href="index.html">به صفحه اصلی Fainto بازگردید</a>.',
-    "features.cta": '<a class="btn-primary" href="index.html#get">دریافت اپلیکیشن</a>',
+    "features.seeit.p": "صفحه نمای‌کلی همه‌چیز را کنار هم می‌آورد: درآمد خالص <strong>12 482,22 zł</strong> در ماه (رشد 56.7%)، تقسیم‌شده به درآمد <strong>12.5K</strong>، هزینه‌ها <strong>1.0K</strong> و پس‌انداز <strong>7.1K zł</strong>، بالای بخش تحلیل‌های هوش مصنوعی، حساب‌ها و قبض‌های پیش‌رو. نمای ارزش خالص، دارایی‌های شما — <strong>107 400,00 zł</strong> در نمونه — را در برابر بدهی‌هایتان جمع می‌بندد. هر رقمی که اینجا می‌بینید فقط روی دستگاه شماست و متعلق به خود شماست. هم‌اکنون برای اندروید در دسترس است — <a href=\"https://play.google.com/store/apps/details?id=com.vaultai.app\" target=\"_blank\" rel=\"noopener\">Fainto را از Google Play دریافت کنید</a> — و نسخه iOS به‌زودی می‌آید.",
+    "features.closing.p": "هنوز مطمئن نیستید؟ <a href=\"faq.html\">پرسش‌های متداول را ببینید</a>، یا <a href=\"index.html\">به صفحه اصلی Fainto بازگردید</a>.",
+    "features.cta": "<a class=\"btn-primary\" href=\"index.html#get\">دریافت اپلیکیشن</a>",
     "faq.title": "سوالات متداول Fainto — ردیاب بودجه خصوصی با هوش مصنوعی",
-    "faq.desc":
-      "پاسخ به سوالاتی درباره Fainto: آیا رایگان است، آیا آفلاین کار می‌کند، چه داده‌ای جمع‌آوری می‌کند، موتور مالیاتی کدام کشورها را پوشش می‌دهد و چه مدل‌های هوش مصنوعی روی دستگاه اجرا می‌شوند.",
+    "faq.desc": "پاسخ به سوالاتی درباره Fainto: آیا رایگان است، آیا آفلاین کار می‌کند، چه داده‌ای جمع‌آوری می‌کند، موتور مالیاتی کدام کشورها را پوشش می‌دهد و چه مدل‌های هوش مصنوعی روی دستگاه اجرا می‌شوند.",
     "faq.eyebrow": "سوالات متداول",
     "faq.h1": "Fainto — سوالات متداول",
     "faq.q1": "آیا Fainto رایگان است؟",
-    "faq.a1":
-      "بله. استفاده از Fainto رایگان است و ردیاب بودجه اصلی و مربی هوش مصنوعی نسخه رایگان هیچ هزینه‌ای ندارند. نسخه پرمیوم مدل‌های بزرگ‌تر هوش مصنوعی روی دستگاه و هوش مصنوعی ابری اختیاری را باز می‌کند، اما می‌توانید بدون پرداخت هزینه، پول خود را ردیابی کرده و راهنمایی دریافت کنید.",
+    "faq.a1": "بله. استفاده از Fainto رایگان است و ردیاب بودجه اصلی و مربی هوش مصنوعی نسخه رایگان هیچ هزینه‌ای ندارند. نسخه پرمیوم مدل‌های بزرگ‌تر هوش مصنوعی روی دستگاه و هوش مصنوعی ابری اختیاری را باز می‌کند، اما می‌توانید بدون پرداخت هزینه، پول خود را ردیابی کرده و راهنمایی دریافت کنید.",
     "faq.q2": "آیا Fainto به حساب کاربری نیاز دارد؟",
-    "faq.a2":
-      "هیچ حساب کاربری لازم نیست. می‌توانید Fainto را باز کنید و بلافاصله ردیابی را شروع کنید. حساب‌های کاربری اختیاری هستند، بنابراین هرگز مجبور نیستید ایمیل خود را ارائه دهید تا پول خودتان را ببینید.",
+    "faq.a2": "هیچ حساب کاربری لازم نیست. می‌توانید Fainto را باز کنید و بلافاصله ردیابی را شروع کنید. حساب‌های کاربری اختیاری هستند، بنابراین هرگز مجبور نیستید ایمیل خود را ارائه دهید تا پول خودتان را ببینید.",
     "faq.q3": "آیا Fainto به‌صورت آفلاین کار می‌کند؟",
-    "faq.a3":
-      "بله. مدل‌های هوش مصنوعی و داده‌های شما روی گوشی قرار دارند، بنابراین Fainto به‌طور کامل آفلاین کار می‌کند — می‌توانید هزینه‌ها را ثبت کنید و بدون اتصال به شبکه راهنمایی دریافت کنید. تنها ویژگی که به اتصال اینترنت نیاز دارد، هوش مصنوعی ابری اختیاری است که تا زمانی که خودتان آن را فعال نکنید، خاموش می‌ماند.",
+    "faq.a3": "بله. مدل‌های هوش مصنوعی و داده‌های شما روی گوشی قرار دارند، بنابراین Fainto به‌طور کامل آفلاین کار می‌کند — می‌توانید هزینه‌ها را ثبت کنید و با شبکه خاموش راهنمایی دریافت کنید. فقط امکانات اختیاری به اتصال نیاز دارند: هوش مصنوعی ابری اختیاری، پشتیبان‌گیری و همگام‌سازی حساب، و جفت‌سازی وب — همگی خاموش‌اند مگر اینکه خودتان آن‌ها را روشن کنید.",
     "faq.q4": "Fainto چه داده‌ای جمع‌آوری می‌کند؟",
-    "faq.a4":
-      "به‌طور پیش‌فرض، هیچ اطلاعاتی درباره پول شما از دستگاه خارج نمی‌شود. این وب‌سایت هیچ کوکی، ابزار تحلیلی یا ردیابی ندارد و اپلیکیشن طوری ساخته شده که داده‌های مالی شما روی گوشی‌تان باقی بماند. اپلیکیشن می‌تواند 0 درخواست و 0 بایت ارسال‌شده را به شما نشان دهد. تنها زمانی که چیزی ارسال می‌شود، وقتی است که عمداً هوش مصنوعی ابری را فعال کنید.",
+    "faq.a4": "به‌طور پیش‌فرض، هیچ اطلاعاتی درباره پول شما از دستگاه خارج نمی‌شود. صفحات این وب‌سایت هیچ کوکی‌ای تنظیم نمی‌کنند و هیچ ابزار تحلیلی یا ردیابی اجرا نمی‌کنند (اپ همراه وبِ اختیاری تنها زمانی با Firebase متعلق به Google ارتباط برقرار می‌کند که خودتان جفت‌سازی یا ورود به حساب را درخواست کنید — به سیاست حریم خصوصی مراجعه کنید)، و اپلیکیشن طوری ساخته شده که داده‌های مالی شما روی گوشی‌تان باقی بماند. اپلیکیشن می‌تواند 0 درخواست و 0 بایت ارسال‌شده را به شما نشان دهد. چیزی تنها زمانی ارسال می‌شود که خودتان عمداً آن را فعال کنید — هوش مصنوعی ابری، حساب کاربری برای پشتیبان‌گیری و همگام‌سازی، یا جفت‌سازی وب.",
     "faq.q5": "آیا داده‌های مالی من در فضای ابری بارگذاری می‌شود؟",
-    "faq.a5":
-      "به‌طور پیش‌فرض خیر. Fainto از نظر معماری خصوصی است، نه صرفاً بر اساس یک سیاست: داده‌های شما هیچ مقصدی ندارند مگر اینکه خودتان انتخاب کنید. هوش مصنوعی ابری از طریق OpenRouter تنها ویژگی است که چیزی را ارسال می‌کند و کاملاً اختیاری است — تا زمانی که خودتان آن را فعال نکنید، هیچ داده‌ای به آن مسیر پیدا نمی‌کند.",
+    "faq.a5": "به‌طور پیش‌فرض خیر. Fainto از نظر معماری خصوصی است، نه صرفاً بر اساس یک سیاست: داده‌های شما هیچ مقصدی ندارند مگر اینکه خودتان انتخاب کنید. هوش مصنوعی ابری اختیاری، پیام شما را همراه با یک خلاصه تجمیعی ارسال می‌کند، و حساب کاربری اختیاری از داده‌های شما در فضای خصوصی خودتان در ابر پشتیبان می‌گیرد و آن‌ها را همگام نگه می‌دارد — هر دو کاملاً خاموش‌اند تا زمانی که خودتان آن‌ها را فعال کنید.",
     "faq.q6": "چه مدل‌های هوش مصنوعی روی دستگاه در Fainto اجرا می‌شوند؟",
-    "faq.a6":
-      "پنج مدل زبانی به‌صورت محلی روی گوشی شما اجرا می‌شوند. در نسخه رایگان: SmolLM 135M و Qwen 2.5 0.5B. در نسخه پرمیوم: Qwen 2.5 1.5B، DeepSeek R1 1.5B و Phi-4 Mini 3.8B. هر پنج مدل روی دستگاه اجرا می‌شوند، بنابراین راهنمایی روی گوشی شما انجام می‌شود، نه روی یک سرور.",
+    "faq.a6": "پنج مدل زبانی به‌صورت محلی روی گوشی شما اجرا می‌شوند. در نسخه رایگان: SmolLM 135M و Qwen 2.5 0.5B. در نسخه پرمیوم: Qwen 2.5 1.5B، DeepSeek R1 1.5B و Phi-4 Mini 3.8B. هر پنج مدل روی دستگاه اجرا می‌شوند، بنابراین راهنمایی روی گوشی شما انجام می‌شود، نه روی یک سرور.",
     "faq.q7": "هوش مصنوعی ابری چیست و آیا اختیاری است؟",
-    "faq.a7":
-      "هوش مصنوعی ابری یک ویژگی اختیاری در نسخه پرمیوم است که سوالات شما را از طریق OpenRouter به یک مدل بزرگ‌تر ارسال می‌کند، برای مواقعی که گوشی شما ظرفیت اجرای مدلی به آن بزرگی را ندارد. این ویژگی کاملاً اختیاری است و به‌طور پیش‌فرض خاموش است — اگر هرگز آن را فعال نکنید، هیچ اطلاعاتی درباره پول شما به فضای ابری ارسال نخواهد شد.",
+    "faq.a7": "هوش مصنوعی ابری یک ویژگی اختیاری در نسخه پرمیوم است که سوالات شما را از طریق OpenRouter به یک مدل بزرگ‌تر ارسال می‌کند، برای مواقعی که گوشی شما ظرفیت اجرای مدلی به آن بزرگی را ندارد. این ویژگی کاملاً اختیاری است و به‌طور پیش‌فرض خاموش است — اگر هرگز آن را فعال نکنید، هیچ اطلاعاتی درباره پول شما به فضای ابری ارسال نخواهد شد.",
     "faq.q8": "موتور مالیاتی از کدام کشورها پشتیبانی می‌کند؟",
-    "faq.a8":
-      "موتور مالیات بر درآمد داخلی Fainto، 45 کشور را پوشش می‌دهد — 44 پیکربندی کشوری به‌علاوه یک موتور اختصاصی برای لهستان — بنابراین اعداد نمایانگر محل واقعی زندگی شما هستند، نه یک مقدار پیش‌فرض عمومی.",
+    "faq.a8": "موتور مالیات بر درآمد داخلی Fainto، 45 کشور را پوشش می‌دهد — 44 پیکربندی کشوری به‌علاوه یک موتور اختصاصی برای لهستان — بنابراین اعداد نمایانگر محل واقعی زندگی شما هستند، نه یک مقدار پیش‌فرض عمومی.",
     "faq.q9": "Fainto از چند زبان پشتیبانی می‌کند؟",
-    "faq.a9":
-      "رابط کاربری به 25 زبان بومی‌سازی شده است، بنابراین اپلیکیشن به زبان خودتان طبیعی خوانده می‌شود و با موتور مالیاتی چندکشوری متناسب با منطقه شما همراه است.",
+    "faq.a9": "رابط کاربری به 25 زبان بومی‌سازی شده است، بنابراین اپلیکیشن به زبان خودتان طبیعی خوانده می‌شود و با موتور مالیاتی چندکشوری متناسب با منطقه شما همراه است.",
     "faq.q10": "آیا نسخه آیفون یا iOS از Fainto وجود دارد؟",
-    "faq.a10":
-      "هنوز خیر. Fainto در حال حاضر برای اندروید موجود است و نسخه iOS به‌زودی عرضه می‌شود. در حال حاضر هیچ لینک دانلودی برای آیفون وجود ندارد.",
+    "faq.a10": "هنوز خیر. Fainto در حال حاضر برای اندروید موجود است و نسخه iOS به‌زودی عرضه می‌شود. در حال حاضر هیچ لینک دانلودی برای آیفون وجود ندارد.",
     "faq.q11": "آیا Fainto تبلیغات نمایش می‌دهد؟",
-    "faq.a11":
-      "خیر. هیچ تبلیغی در Fainto وجود ندارد — چیزی بین تراکنش‌های شما جا داده نشده — و هیچ ردیاب، ابزار تحلیلی یا کوکی‌ای رفتار شما را زیر نظر ندارد.",
+    "faq.a11": "خیر. هیچ تبلیغی در Fainto وجود ندارد — چیزی بین تراکنش‌های شما جا داده نشده — و هیچ ردیاب، ابزار تحلیلی یا کوکی‌ای رفتار شما را زیر نظر ندارد.",
     "faq.q12": "از کجا می‌توانم Fainto را دانلود کنم؟",
-    "faq.a12":
-      'Fainto در Google Play با نام «Fainto: AI Finance Coach» در آدرس <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener">https://play.google.com/store/apps/details?id=com.vaultai.app</a> موجود است. این یک اپلیکیشن اندرویدی است؛ نسخه iOS به‌زودی عرضه می‌شود.',
+    "faq.a12": "Fainto در Google Play با نام «Fainto: AI Finance Coach» در آدرس <a href=\"https://play.google.com/store/apps/details?id=com.vaultai.app\" target=\"_blank\" rel=\"noopener\">https://play.google.com/store/apps/details?id=com.vaultai.app</a> موجود است. این یک اپلیکیشن اندرویدی است؛ نسخه iOS به‌زودی عرضه می‌شود.",
     "faq.q13": "آیا Fainto مشاوره مالی ارائه می‌دهد؟",
-    "faq.a13":
-      "خیر. Fainto اطلاعات آموزشی برای کمک به درک و برنامه‌ریزی مالی شما ارائه می‌دهد، از جمله برآوردهای مالیاتی. این موارد مشاوره مالی یا مالیاتی محسوب نمی‌شوند.",
+    "faq.a13": "خیر. Fainto اطلاعات آموزشی برای کمک به درک و برنامه‌ریزی مالی شما ارائه می‌دهد، از جمله برآوردهای مالیاتی. این موارد مشاوره مالی یا مالیاتی محسوب نمی‌شوند.",
     "faq.q14": "مربی هوش مصنوعی روی دستگاه چگونه کار می‌کند؟",
-    "faq.a14":
-      "یکی از پنج مدل زبانی محلی، هزینه‌های شما را می‌خواند و مستقیماً روی گوشی به سوالات مالی شما پاسخ می‌دهد. می‌توانید یک مدل سبک برای سرعت بیشتر یا یک مدل بزرگ‌تر برای عمق بیشتر انتخاب کنید و همه این‌ها بدون نیاز به ارتباط با فضای ابری اجرا می‌شوند.",
+    "faq.a14": "یکی از پنج مدل زبانی محلی، هزینه‌های شما را می‌خواند و مستقیماً روی گوشی به سوالات مالی شما پاسخ می‌دهد. می‌توانید یک مدل سبک برای سرعت بیشتر یا یک مدل بزرگ‌تر برای عمق بیشتر انتخاب کنید و همه این‌ها بدون نیاز به ارتباط با فضای ابری اجرا می‌شوند.",
     "faq.q15": "اگر Fainto از هوش مصنوعی استفاده می‌کند، آیا واقعاً خصوصی است؟",
-    "faq.a15":
-      "بله. هوش مصنوعی روی دستگاه اجرا می‌شود، بنابراین استفاده از مربی هوش مصنوعی داده‌های شما را به هیچ‌کجا ارسال نمی‌کند. از آنجا که مدل‌ها محلی هستند، در Fainto هوش مصنوعی خصوصی و حریم خصوصی هیچ تضادی با هم ندارند — راهنمایی به‌طور پیش‌فرض روی گوشی شما انجام می‌شود.",
+    "faq.a15": "بله. در حالت پیش‌فرض روی دستگاه، هوش مصنوعی روی گوشی شما اجرا می‌شود، بنابراین استفاده از مربی هوش مصنوعی داده‌های شما را به هیچ‌کجا ارسال نمی‌کند. از آنجا که مدل‌ها محلی هستند، در Fainto هوش مصنوعی خصوصی و حریم خصوصی هیچ تضادی با هم ندارند — راهنمایی به‌طور پیش‌فرض روی گوشی شما انجام می‌شود.",
     "faq.q16": "منظور از «خصوصی از نظر معماری، نه صرفاً سیاست» چیست؟",
-    "faq.a16":
-      "یعنی تضمین حریم خصوصی در نحوه عملکرد اپلیکیشن نهفته است، نه اینکه صرفاً در یک سند وعده داده شده باشد. داده‌های مالی شما روی دستگاه باقی می‌مانند، چون به‌طور پیش‌فرض مقصد دیگری ندارند، نه به این دلیل که یک سیاست می‌گوید شرکتی از آن‌ها سوءاستفاده نمی‌کند.",
-    "faq.outro":
-      'می‌خواهید تصویر کامل را ببینید؟ <a href="features.html">فهرست کامل ویژگی‌ها را مشاهده کنید</a>، یا <a href="privacy.html">سیاست حریم خصوصی Fainto را بخوانید</a>.',
-    "faq.cta": '<a class="btn-primary" href="index.html#get">دریافت اپلیکیشن</a>',
+    "faq.a16": "یعنی تضمین حریم خصوصی در نحوه عملکرد اپلیکیشن نهفته است، نه اینکه صرفاً در یک سند وعده داده شده باشد. داده‌های مالی شما روی دستگاه باقی می‌مانند، چون به‌طور پیش‌فرض مقصد دیگری ندارند، نه به این دلیل که یک سیاست می‌گوید شرکتی از آن‌ها سوءاستفاده نمی‌کند.",
+    "faq.outro": "می‌خواهید تصویر کامل را ببینید؟ <a href=\"features.html\">فهرست کامل ویژگی‌ها را مشاهده کنید</a>، یا <a href=\"privacy.html\">سیاست حریم خصوصی Fainto را بخوانید</a>.",
+    "faq.cta": "<a class=\"btn-primary\" href=\"index.html#get\">دریافت اپلیکیشن</a>",
   },
   tr: {
     "chrome.skip": "İçeriğe geç",
@@ -691,23 +536,17 @@ window.__I18N = {
     "hero.slide1.aria": "1 / 3: Genel Bakış",
     "hero.slide2.aria": "2 / 3: Yapay Zekâ Koçu",
     "hero.slide3.aria": "3 / 3: Net Değer",
-    "hero.slide1.alt":
-      "Fainto'nun genel bakış ekranı: aylık net gelir 12 482,22 zł (%56.7 artış); gelir 12.5K, gider 1.0K ve birikim 7.1K zł olarak ayrılmış; altında yapay zekâ içgörüleri, hesaplar ve faturalar.",
-    "hero.slide2.alt":
-      'Fainto\'nun cihaz üzerinde çalışan Yapay Zekâ Koçu, SmolLM 135M modeliyle saniyede 10 token hızında bir para sorusunu yanıtlıyor; "Cihaz üzerinde · Gizli" etiketiyle.',
-    "hero.slide3.alt":
-      "Fainto'nun net değer görünümü: 107 400,00 zł varlık ve sıfır borç, varlık dağılımıyla birlikte yeşil bir halka olarak gösteriliyor.",
+    "hero.slide1.alt": "Fainto'nun genel bakış ekranı: aylık net gelir 12 482,22 zł (%56.7 artış); gelir 12.5K, gider 1.0K ve birikim 7.1K zł olarak ayrılmış; altında yapay zekâ içgörüleri, hesaplar ve faturalar.",
+    "hero.slide2.alt": "Fainto'nun cihaz üzerinde çalışan Yapay Zekâ Koçu, SmolLM 135M modeliyle saniyede 10 token hızında bir para sorusunu yanıtlıyor; \"Cihaz üzerinde · Gizli\" etiketiyle.",
+    "hero.slide3.alt": "Fainto'nun net değer görünümü: 107 400,00 zł varlık ve sıfır borç, varlık dağılımıyla birlikte yeşil bir halka olarak gösteriliyor.",
     "value.eyebrow": "Nedir",
     "value.heading": "Sunucularımızda değil, telefonunuzda çalışan bir yapay zekâ para koçu.",
     "value.item1.h": "Yapay zekâ cihaz üzerinde",
-    "value.item1.p":
-      "Beş dil modeli yerel olarak çalışır — 135M'lik tüy sıkletten Phi-4 Mini 3.8B'ye kadar — böylece koçluk bir sunucuda değil, telefonunuzda gerçekleşir.",
+    "value.item1.p": "Beş dil modeli yerel olarak çalışır — 135M'lik tüy sıkletten Phi-4 Mini 3.8B'ye kadar — böylece koçluk bir sunucuda değil, telefonunuzda gerçekleşir.",
     "value.item2.h": "Varsayılan olarak hiçbir şey yüklenmez",
-    "value.item2.p":
-      "Politikayla değil, mimariyle gizli. Uygulama 0 istek, 0 bayt gösterebilir — varsayılan olarak, tasarım gereği. Bulut yapay zekâsı yalnızca siz seçerseniz devreye girer.",
+    "value.item2.p": "Politikayla değil, mimariyle gizli. Uygulama 0 istek, 0 bayt gösterebilir — varsayılan olarak, tasarım gereği. Bulut yapay zekâsı yalnızca siz seçerseniz devreye girer.",
     "value.item3.h": "45 ülke için vergi hesabı",
-    "value.item3.p":
-      "Yerleşik vergi motoru 45 ülkenin gerçek gelir vergisi kurallarını çalıştırır; uygulama 25 dile yerelleştirilmiştir — böylece rakamlar gerçekten yaşadığınız yere uyar.",
+    "value.item3.p": "Yerleşik vergi motoru 45 ülkenin gerçek gelir vergisi kurallarını çalıştırır; uygulama 25 dile yerelleştirilmiştir — böylece rakamlar gerçekten yaşadığınız yere uyar.",
     "cta.heading": "Sıfırla başlayın. Sıfırda kalın.",
     "cta.sub": "Ödeme yok, hesap açma yok ve varsayılan olarak hiçbir şey yüklenmez. iOS çok yakında.",
     "cta.producthunt.aria": "Fainto, Product Hunt'ta öne çıkarıldı (yeni sekmede açılır)",
@@ -723,12 +562,10 @@ window.__I18N = {
     "footer.copyright": "© 2026 Fainto",
     "footer.made": "Polonya'da ❤️ ile geliştirildi ve tasarlandı.",
     "contact.title": "İletişim — Fainto",
-    "contact.desc":
-      "Fainto ile iletişime geçin — sorularınız, hata bildirimleriniz ve geri bildirimleriniz doğrudan support@fainto.app adresine ulaşır.",
+    "contact.desc": "Fainto ile iletişime geçin — sorularınız, hata bildirimleriniz ve geri bildirimleriniz doğrudan support@fainto.app adresine ulaşır.",
     "contact.eyebrow": "İletişim",
     "contact.h1": "Bize ulaşın.",
-    "contact.intro":
-      'Sorularınız, bir hata bildiriminiz ya da geri bildiriminiz mi var? Aşağıya bir not bırakın — doğrudan <a href="mailto:support@fainto.app">support@fainto.app</a> adresine ulaşır. Bu sitede hiçbir şey saklanmaz; form yalnızca kendi e-posta uygulamanızı açar.',
+    "contact.intro": "Sorularınız, bir hata bildiriminiz ya da geri bildiriminiz mi var? Aşağıya bir not bırakın — doğrudan <a href=\"mailto:support@fainto.app\">support@fainto.app</a> adresine ulaşır. Bu sitede hiçbir şey saklanmaz; form yalnızca kendi e-posta uygulamanızı açar.",
     "contact.form.name.label": "Ad",
     "contact.form.email.label": "E-posta",
     "contact.form.message.label": "Mesaj",
@@ -738,156 +575,112 @@ window.__I18N = {
     "about.desc": "Fainto neden var — telefonunuzda çalışan, gizliliğe önem veren, reklamsız bir para koçu.",
     "about.eyebrow": "Hakkımızda",
     "about.h1": "Ben sadece benden yana olan bir para uygulaması istedim.",
-    "about.p1":
-      'Denediğim her finans uygulaması sessizce bana karşı çalışıyordu — kendi işlemlerimin arasına sıkıştırılmış reklamlar, harcamalarımın "iş ortaklarına" satılması, her dokunuşta bir yerlere haber veren bir şeyler.',
-    "about.p2":
-      "Bu yüzden Fainto'yu geliştirdim. Tamamen telefonunuzda çalışır, reklam göstermez ve varsayılan olarak paranızla ilgili hiçbir bilgiyi hiçbir yere göndermez. Koçluğu cihaz üzerinde gerçek dil modelleri yapar; yerleşik vergi motoru 45 ülkeyi 25 dilde kapsar. Başlangıçta ücretsiz, hesap gerektirmez, takip yok.",
-    "about.p3":
-      "Var olmasını istediğim uygulama bu: size paranız hakkında net bir görünüm sunan — ve sonra bunu kendine saklayan bir uygulama.",
-    "about.p4":
-      'Detayları mı istiyorsunuz? <a href="features.html">Fainto\'nun yaptığı her şeyi görün</a> ya da <a href="faq.html">Fainto hakkında sık sorulan soruları inceleyin</a>.',
+    "about.p1": "Denediğim her finans uygulaması sessizce bana karşı çalışıyordu — kendi işlemlerimin arasına sıkıştırılmış reklamlar, harcamalarımın \"iş ortaklarına\" satılması, her dokunuşta bir yerlere haber veren bir şeyler.",
+    "about.p2": "Bu yüzden Fainto'yu geliştirdim. Tamamen telefonunuzda çalışır, reklam göstermez ve varsayılan olarak paranızla ilgili hiçbir bilgiyi hiçbir yere göndermez. Koçluğu cihaz üzerinde gerçek dil modelleri yapar; yerleşik vergi motoru 45 ülkeyi 25 dilde kapsar. Başlangıçta ücretsiz, hesap gerektirmez, takip yok.",
+    "about.p3": "Var olmasını istediğim uygulama bu: size paranız hakkında net bir görünüm sunan — ve sonra bunu kendine saklayan bir uygulama.",
+    "about.p4": "Detayları mı istiyorsunuz? <a href=\"features.html\">Fainto'nun yaptığı her şeyi görün</a> ya da <a href=\"faq.html\">Fainto hakkında sık sorulan soruları inceleyin</a>.",
     "about.sig": "— Mo, Fainto'nun yaratıcısı",
     "about.cta": "Uygulamayı edinin",
     "err404.title": "Sayfa bulunamadı — Fainto",
-    "err404.desc":
-      "Bu sayfa burada değil. Fainto ana sayfasına dönün, Fainto'nun yaptığı her şeyi görün ya da Android için gizlilik odaklı, çevrimdışı çalışan AI bütçe takipçisini edinin.",
+    "err404.desc": "Bu sayfa burada değil. Fainto ana sayfasına dönün, Fainto'nun yaptığı her şeyi görün ya da Android için gizlilik odaklı, çevrimdışı çalışan AI bütçe takipçisini edinin.",
     "err404.eyebrow": "404",
     "err404.h1": "Bu sayfa taşındı ya da hiç var olmadı.",
-    "err404.body1":
-      "Takip ettiğiniz bağlantı fainto.app üzerinde hiçbir yere çıkmıyor — değişmiş olabilir ya da hiç burada olmamış olabilir. Bir zarar yok; buraya gelirken hakkınızda herhangi bir veri toplanmadı. İşte geri dönüş yolu.",
-    "err404.body2":
-      '<a href="/">Fainto ana sayfasına</a> dönün, <a href="/features.html">Fainto\'nun yaptığı her şeyi</a> görün &mdash; cihaz üzerinde çalışan AI koç, 45 ülkelik vergi motoru ve daha fazlası &mdash; ya da <a href="/faq.html">sıkça sorulan sorular</a>ı okuyun.',
-    "err404.cta": '<a class="btn-primary" href="/index.html#get">Uygulamayı edinin</a>',
+    "err404.body1": "Takip ettiğiniz bağlantı fainto.app üzerinde hiçbir yere çıkmıyor — değişmiş olabilir ya da hiç burada olmamış olabilir. Bir zarar yok; buraya gelirken hakkınızda herhangi bir veri toplanmadı. İşte geri dönüş yolu.",
+    "err404.body2": "<a href=\"/\">Fainto ana sayfasına</a> dönün, <a href=\"/features.html\">Fainto'nun yaptığı her şeyi</a> görün &mdash; cihaz üzerinde çalışan AI koç, 45 ülkelik vergi motoru ve daha fazlası &mdash; ya da <a href=\"/faq.html\">sıkça sorulan sorular</a>ı okuyun.",
+    "err404.cta": "<a class=\"btn-primary\" href=\"/index.html#get\">Uygulamayı edinin</a>",
     "privacy.title": "Gizlilik Politikası — Fainto",
-    "privacy.desc":
-      "Fainto'nun web sitesi hakkınızda hiçbir veri toplamaz — çerez yok, analitik yok, takip aracı yok, yazı tipleri kendi sunucumuzda barındırılır. Verileri tam olarak nasıl işlediğimiz, GDPR dahil, burada.",
+    "privacy.desc": "Fainto verilerinizi nasıl işler: yerel öncelikli tasarım, reklam ve takip aracı yok, isteğe bağlı şifreli yedekleme ve senkronizasyon ile GDPR haklarınız.",
     "privacy.nav.lang.aria": "Dil",
     "privacy.eyebrow": "Gizlilik",
     "privacy.h1": "Gizlilik Politikası",
-    "privacy.intro":
-      "Bu politika hem <strong>Fainto</strong> Android uygulamasını hem de bu web sitesini kapsar. Kısacası: girdiğiniz finansal veriler cihazınızda kalır, reklam veya takip aracı çalıştırmayız ve isteğe bağlı bir özelliği bilerek açmadığınız sürece paranızla ilgili hiçbir bilgi yüklenmez. Bu politika, AB/İngiltere <strong>GDPR</strong> ve Google Play'in Kullanıcı Verileri politikasını karşılayacak şekilde yazılmıştır.",
+    "privacy.intro": "Bu politika <strong>Fainto</strong> Android uygulamasını, bu web sitesini ve <strong>Fainto Web</strong> tarayıcı yardımcısını kapsar. Kısacası: finansal verileriniz varsayılan olarak cihazınızda kalır; reklam, analitik veya takip aracı çalıştırmayız ve isteğe bağlı bir özelliği — yedekleme ve senkronizasyon için bir hesabı, Bulut Yapay Zeka'yı veya web yardımcısını — bilerek açmadığınız sürece paranızla ilgili hiçbir bilgi telefonunuzdan çıkmaz. Bu politika, AB/İngiltere <strong>GDPR</strong> ve Google Play'in Kullanıcı Verileri politikasını karşılayacak şekilde yazılmıştır.",
     "privacy.h2.who": "Biz kimiz",
-    "privacy.who":
-      'Fainto, Mo tarafından geliştirilmiştir. Gizlilikle ilgili her konuda — aşağıdaki haklarınızı kullanmak dahil — <a href="mailto:support@fainto.app">support@fainto.app</a> adresinden bize ulaşın. Bu adres aynı zamanda GDPR kapsamındaki veri sorumlusudur.',
+    "privacy.who": "Fainto, Polonya merkezli <strong>Mohsen Rezania</strong> tarafından geliştirilmiştir — GDPR kapsamındaki veri sorumlusu kendisidir. Gizlilikle ilgili her konuda — aşağıdaki haklarınızı kullanmak dahil — <a href=\"mailto:support@fainto.app\">support@fainto.app</a> adresinden bize ulaşın.",
     "privacy.h2.stores": "Uygulama neyi, nerede saklar",
-    "privacy.stores":
-      "Fainto'ya girdiğiniz her şey — hesaplar, bakiyeler, işlemler, gelir, faturalar, bütçeler ve vergi araçlarında kullanılan rakamlar — <strong>yalnızca cihazınızda yerel olarak</strong> saklanır. Fainto hesabı veya kayıt işlemi olmadığından, finansal verilerinizi hiçbir sunucuda almayız, görmeyiz veya saklamayız. Bu veriler tarafımızca toplanmaz, asla satılmaz, kiralanmaz veya paylaşılmaz.",
+    "privacy.stores": "Fainto'ya girdiğiniz her şey — hesaplar, bakiyeler, işlemler, gelir, faturalar, bütçeler ve vergi araçlarında kullanılan rakamlar — <strong>cihazınızda yerel olarak</strong> saklanır. Fainto'yu kullanmak için hesap gerekmez ve siz bir hesap oluşturana kadar finansal verilerinizi hiçbir sunucuda almayız, görmeyiz veya saklamayız. Verileriniz — hesap olsun ya da olmasın — asla satılmaz, kiralanmaz veya paylaşılmaz.",
+    "privacy.h2.account": "İsteğe bağlı hesap: yedekleme ve senkronizasyon (oturum açmadıkça kapalı)",
+    "privacy.account": "Bir Fainto hesabı oluşturmak (e-posta ve şifre ya da Google ile Oturum Açma) <strong>isteğe bağlıdır</strong>. Oturum açarsanız uygulama, finansal verilerinizi — işlemler, bütçeler, net değer kayıtları, portföy ve kripto varlıkları, tespit edilen abonelikler, yinelenen ödemeler, uygulama tercihleri ve yapay zeka koçu sohbet geçmişiniz — <strong>Google Firebase (Firestore)</strong> üzerinde yedekler ve senkronize tutar; bu veriler hesabınız altında saklanır ve kullanıcı başına erişim kurallarıyla korunur. Veriler, Google'ın altyapısında aktarım sırasında ve depolanırken şifrelenir; ancak uçtan uca şifreli değildir. Bir haneye katılırsanız, paylaşmayı seçtiğiniz bütçeler o hanenin diğer üyeleri tarafından görülebilir. Google, veri işleyicimiz olarak hareket eder ve bu verileri, Google Cloud'un veri işleme koşulları (AB'nin standart sözleşme maddeleri dahil) kapsamında Avrupa Ekonomik Alanı (AEA) dışındaki sunucularda saklayabilir; bu verileri başka hiç kimse almaz ve üzerinde hiçbir reklam veya analitik çalıştırmayız.",
+    "privacy.h2.webapp": "Fainto Web (tarayıcı yardımcısı)",
+    "privacy.webapp": "<a href=\"web/\">fainto.app/web</a>, finansal durumunuzu daha büyük bir ekranda iki şekilde gösterir. <strong>Eşleştirme (hesapsız):</strong> telefonunuz, verilerinizi şifreli bir eşler arası bağlantı üzerinden doğrudan tarayıcınıza aktarır — veriler hiçbir zaman bir sunucuda saklanmaz. Bağlantıyı kurmak için kısa ömürlü bir eşleştirme kaydı (iki cihazın birbirini bulması için gereken ağ adresleri dahil bağlantı meta verileri) Firebase'de yalnızca eşleştirme sırasında tutulur — bağlantı kurulduğunda silinir ve her durumda beş dakika sonra süresi dolacak şekilde işaretlenir — ve adres keşfi için Google'ın STUN hizmeti kullanılır. Gördükleriniz tarayıcı sekmesinde kalır ve sekme kapandığında temizlenir. <strong>Oturum açma:</strong> tarayıcı, hesabınızın zaten senkronize ettiği verileri şifreli bir bağlantı üzerinden okur; Google oturum açma penceresi Google tarafından sağlanır ve Google'ın kendi gizlilik politikasına tabidir. Web yardımcısı, Firebase yazılımını Google'ın sunucularından yükler ve hiçbir reklam, analitik veya takip aracı içermez.",
     "privacy.h2.coach": "Cihaz üzerinde çalışan yapay zeka koçu",
-    "privacy.coach":
-      "Fainto'nun yapay zeka koçu, dil modellerini <strong>doğrudan telefonunuzda</strong> çalıştırır. Varsayılan cihaz üzerinde modda, sorularınız ve finansal bağlamınız yerel olarak işlenir ve cihazınızdan asla çıkmaz.",
+    "privacy.coach": "Fainto'nun yapay zeka koçu, dil modellerini <strong>doğrudan telefonunuzda</strong> çalıştırır. Varsayılan cihaz üzerinde modda, sorularınız ve finansal bağlamınız yerel olarak işlenir ve cihazınızdan asla çıkmaz.",
     "privacy.h2.cloudai": "İsteğe bağlı Bulut Yapay Zeka (varsayılan olarak kapalı)",
-    "privacy.cloudai":
-      "Fainto, <strong>isteğe bağlı</strong> bir Bulut Yapay Zeka modu içerir — siz etkinleştirmediğiniz sürece <strong>kapalı</strong> olan bir Premium özelliktir. Yalnızca ve yalnızca bu özelliği açar ve bir mesaj gönderirseniz, o mesajın metni şifreli (HTTPS) bir bağlantı üzerinden yalnızca bir yanıt oluşturmak amacıyla yapay zeka ağ geçidimiz <strong>OpenRouter</strong>'a ve seçtiğiniz model sağlayıcısına iletilir. Bunu reklam amacıyla kullanmayız. Tamamen cihaz üzerinde kalmak için Bulut Yapay Zeka'yı kapalı bırakabilirsiniz; kullanırsanız lütfen OpenRouter'ın kendi gizlilik koşullarını da inceleyin.",
+    "privacy.cloudai": "Fainto, <strong>isteğe bağlı</strong> bir Bulut Yapay Zeka modu içerir — siz etkinleştirmediğiniz sürece <strong>kapalı</strong> olan bir Premium özelliktir. Yalnızca ve yalnızca bu özelliği açar ve bir mesaj gönderirseniz, o mesaj ile toplulaştırılmış bir finansal özet (toplamlar ve kategoriler — asla adınız, e-postanız veya ödeme adlarınız değil), yalnızca bir yanıt oluşturmak amacıyla şifreli (HTTPS) bir bağlantı üzerinden yapay zeka ağ geçidimiz <strong>OpenRouter</strong>'a ve seçtiğiniz model sağlayıcısına iletilir. Bunu reklam amacıyla kullanmayız. Tamamen cihaz üzerinde kalmak için Bulut Yapay Zeka'yı kapalı bırakabilirsiniz; kullanırsanız lütfen OpenRouter'ın kendi gizlilik koşullarını da inceleyin.",
     "privacy.h2.never": "Asla yapmadıklarımız",
-    "privacy.never":
-      "Reklam yok, analitik veya kullanım takibi yok, üçüncü taraf takip araçları veya profil oluşturma SDK'ları yok, kişisel veya finansal verilerinizin satılması ya da paylaşılması yok. Uygulama varsayılan olarak <strong>0 istek</strong> yapar ve <strong>0 bayt</strong> gönderir — tasarım gereği.",
+    "privacy.never": "Reklam yok, analitik veya kullanım takibi yok, üçüncü taraf takip araçları veya profil oluşturma SDK'ları yok, kişisel veya finansal verilerinizin satılması ya da paylaşılması yok. Uygulama varsayılan olarak <strong>0 istek</strong> yapar ve <strong>0 bayt</strong> gönderir — tasarım gereği.",
     "privacy.h2.permissions": "İzinler",
-    "privacy.permissions":
-      "Uygulama yalnızca bir özelliğin ihtiyaç duyduğu izinleri ister — başlıca, seçtiğiniz cihaz üzerinde yapay zeka modellerini indirmek ve isteğe bağlı Bulut Yapay Zeka'yı kullanmak için internet erişimi. Bu erişimi vermek ya da vermemek sizin seçiminizdir.",
+    "privacy.permissions": "Uygulama yalnızca bir özelliğin ihtiyaç duyduğu izinleri ister — başlıca internet erişimi: seçtiğiniz cihaz üzerinde yapay zeka modellerini indirmek, isteğe bağlı Bulut Yapay Zeka'yı çalıştırmak ve — yalnızca kullanırsanız — hesap yedekleme ve senkronizasyonu ile web eşleştirmesi için kullanılır. Bu erişimi vermek ya da vermemek sizin seçiminizdir.",
     "privacy.h2.keeping": "Verilerinizi saklama ve silme",
-    "privacy.keeping":
-      "Verileriniz cihazınızda bulunduğu için, kontrol <strong>sizde</strong>dir. Her şeyi kaldırmak için uygulamanın verilerini temizleyin veya Fainto'yu kaldırın — silinecek bir sunucu tarafı hesap yoktur. Bize e-posta gönderdiyseniz, o yazışmayı istediğiniz zaman silmemizi isteyebilirsiniz.",
+    "privacy.keeping": "Verileriniz varsayılan olarak cihazınızda bulunduğu için kontrol <strong>sizde</strong>dir: yerel olarak saklanan her şeyi kaldırmak için uygulamanın verilerini temizleyin veya Fainto'yu kaldırın. Bir hesap oluşturduysanız, uygulamadan silin (Ayarlar → Hesap → <em>Hesabı sil</em>) — bu işlem, senkronize edilen verilerinizi ve hesabın kendisini sunucularımızdan kaldırır; ayrı bir <em>Bulut sıfırlama</em> işlemi ise yalnızca sunucudaki kopyayı kaldırır. Dilerseniz bize e-posta da gönderebilirsiniz; verilerinizi sizin için biz sileriz. Bize e-posta gönderdiyseniz, o yazışmayı istediğiniz zaman silmemizi isteyebilirsiniz.",
     "privacy.h2.security": "Güvenlik",
-    "privacy.security":
-      "Verilerinizi sunucularımızda değil cihazınızda tutmak, en büyük risk kaynağını ortadan kaldırır. İsteğe bağlı bulut istekleri şifreli HTTPS üzerinden gönderilir.",
+    "privacy.security": "Verilerinizi varsayılan olarak cihazınızda tutmak, en büyük risk kaynağını ortadan kaldırır. Göndermeyi seçtiğiniz her şey — Bulut Yapay Zeka mesajları, hesap senkronizasyonu, web eşleştirmesi — şifreli bağlantılar üzerinden iletilir ve senkronize edilen veriler Google'ın altyapısında depolanırken şifrelenir.",
     "privacy.h2.children": "Çocuklar",
-    "privacy.children":
-      "Fainto, genel kitleye yönelik bir finans aracıdır ve 13 yaşın altındaki çocuklara (veya yaşadığınız yerdeki eşdeğer yaşa) yönelik değildir. Çocuklardan bilerek veri toplamayız.",
+    "privacy.children": "Fainto, genel kitleye yönelik bir finans aracıdır ve 13 yaşın altındaki çocuklara (veya yaşadığınız yerdeki eşdeğer yaşa) yönelik değildir. Çocuklardan bilerek veri toplamayız.",
     "privacy.h2.website": "Bu web sitesi",
-    "privacy.website":
-      "fainto.app <strong>hiçbir çerez</strong> ayarlamaz ve analitik, reklam veya takip aracı çalıştırmaz; yazı tipleri bu alan adından sunulur, bu nedenle siteyi açmak hiçbir üçüncü taraf isteği oluşturmaz. <a href=\"contact.html\">İletişim</a> formu sunucuya hiçbir şey göndermez — <em>Gönder</em>'e basmak kendi e-posta uygulamanızı açar, böylece bize e-posta gönderip göndermeyeceğinize siz karar verirsiniz. Çerez veya takip olmadığından, onay banner'ı gerekmez. Web barındırıcımız, siteyi çevrimiçi tutmak amacıyla yalnızca standart, kısa ömürlü erişim günlükleri (IP adresinizi içerebilir) tutabilir.",
+    "privacy.website": "fainto.app sayfaları <strong>hiçbir çerez</strong> ayarlamaz ve analitik, reklam veya takip aracı çalıştırmaz; yazı tipleri bu alan adından sunulur. <a href=\"contact.html\">İletişim</a> formu sunucuya hiçbir şey göndermez — <em>Gönder</em>'e basmak kendi e-posta uygulamanızı açar, böylece bize e-posta gönderip göndermeyeceğinize siz karar verirsiniz. “Üçüncü taraf isteği yok” kuralının tek istisnası <a href=\"web/\">web yardımcısı</a>: Firebase'i Google'dan yükler ve Firebase ile yalnızca talep ettiğiniz eşleştirmeyi veya oturum açmayı gerçekleştirmek için iletişim kurar; tarayıcı depolamasını da yalnızca bu amaçla — asla reklam veya analitik için değil — kullanır, bu nedenle onay banner'ı gerekmez. Web barındırıcımız, siteyi çevrimiçi tutmak amacıyla yalnızca standart, kısa ömürlü erişim günlükleri (IP adresinizi içerebilir) tutabilir.",
     "privacy.h2.rights": "GDPR haklarınız",
-    "privacy.rights":
-      'Sizinle ilgili kişisel veri tutmamız durumunda (örneğin bize gönderdiğiniz bir e-posta), bu verilere erişme, düzeltme, silme veya kullanımına itiraz etme ve yerel veri koruma otoritenize şikayette bulunma hakkına sahipsiniz. <a href="mailto:support@fainto.app">support@fainto.app</a> adresine e-posta gönderin, gereğini yapalım.',
+    "privacy.rights": "Sizinle ilgili kişisel veri tutmamız durumunda (örneğin bize gönderdiğiniz bir e-posta), bu verilere erişme, düzeltme, silme veya kullanımına itiraz etme ve yerel veri koruma otoritenize şikayette bulunma hakkına sahipsiniz. <a href=\"mailto:support@fainto.app\">support@fainto.app</a> adresine e-posta gönderin, gereğini yapalım.",
     "privacy.h2.changes": "Değişiklikler",
     "privacy.changes": "Bu politika değişirse, bu sayfayı ve aşağıdaki tarihi güncelleyeceğiz.",
-    "privacy.updated": "Son güncelleme: 10 Temmuz 2026 · support@fainto.app",
+    "privacy.updated": "Son güncelleme: 17 Temmuz 2026 · support@fainto.app",
     "features.title": "Özellikler — Fainto Özel Bütçe Takip Uygulaması",
-    "features.desc":
-      "Fainto'nun özellikleri: cihaz üzerinde çalışan bir yapay zeka koçu, mimarisi gereği gizli tasarım, 45 ülke için vergi motoru, 25 dil desteği, hesap gerektirmez, reklamsız, çevrimdışı çalışır.",
+    "features.desc": "Fainto'nun özellikleri: cihaz üzerinde çalışan bir yapay zeka koçu, mimarisi gereği gizli tasarım, 45 ülke için vergi motoru, 25 dil desteği, hesap gerektirmez, reklamsız, çevrimdışı çalışır.",
     "features.eyebrow": "Özellikler",
     "features.h1": "Fainto ne yapar?",
-    "features.intro":
-      'Fainto, cihaz üzerinde çalışan bir yapay zeka para koçuna sahip, gizliliğe önem veren, çevrimdışı öncelikli bir bütçe takip uygulamasıdır. İşte yaptığı her şey — arkasındaki hikayeyi merak ediyorsanız <a href="about.html">Fainto\'nun neden geliştirildiğini okuyun</a>.',
+    "features.intro": "Fainto, cihaz üzerinde çalışan bir yapay zeka para koçuna sahip, gizliliğe önem veren, çevrimdışı öncelikli bir bütçe takip uygulamasıdır. İşte yaptığı her şey — arkasındaki hikayeyi merak ediyorsanız <a href=\"about.html\">Fainto'nun neden geliştirildiğini okuyun</a>.",
     "features.h2.coach": "Telefonunuzda çalışan bir yapay zeka para koçu",
-    "features.coach.p":
-      "Fainto'daki koçluk, bir sunucuda değil, <strong>telefonunuzda</strong> çalışan gerçek dil modelleri tarafından yapılır. Cihaz üzerinde beş model bulunur: ücretsiz katmanda <strong>SmolLM 135M</strong> ve <strong>Qwen 2.5 0.5B</strong>, Premium'da ise <strong>Qwen 2.5 1.5B</strong>, <strong>DeepSeek R1 1.5B</strong> ve <strong>Phi-4 Mini 3.8B</strong>. Hız için en hafif modeli veya derinlik için daha büyük modelleri seçebilirsiniz — bunlar harcamalarınızı okur ve buluta gitmeden sorularınızı yanıtlar. Telefonunuzun kaldırabileceğinden daha büyük bir model isterseniz, Premium'da <strong>OpenRouter üzerinden Bulut AI</strong> kullanılabilir; ancak bu tamamen isteğe bağlıdır: siz kendiniz açmadıkça hiçbir şey oraya yönlendirilmez.",
+    "features.coach.p": "Fainto'daki koçluk, bir sunucuda değil, <strong>telefonunuzda</strong> çalışan gerçek dil modelleri tarafından yapılır. Cihaz üzerinde beş model bulunur: ücretsiz katmanda <strong>SmolLM 135M</strong> ve <strong>Qwen 2.5 0.5B</strong>, Premium'da ise <strong>Qwen 2.5 1.5B</strong>, <strong>DeepSeek R1 1.5B</strong> ve <strong>Phi-4 Mini 3.8B</strong>. Hız için en hafif modeli veya derinlik için daha büyük modelleri seçebilirsiniz — bunlar harcamalarınızı okur ve buluta gitmeden sorularınızı yanıtlar. Telefonunuzun kaldırabileceğinden daha büyük bir model isterseniz, Premium'da <strong>OpenRouter üzerinden Bulut AI</strong> kullanılabilir; ancak bu tamamen isteğe bağlıdır: siz kendiniz açmadıkça hiçbir şey oraya yönlendirilmez.",
     "features.h2.private": "Politikayla değil, mimariyle gizli",
-    "features.private.p":
-      "Çoğu uygulama, güvenmeniz gereken bir politika içinde gizlilik vaat eder. Fainto ise verilerin gidecek hiçbir yeri olmayacak şekilde tasarlanmıştır: varsayılan olarak, paranızla ilgili hiçbir bilgi cihazınızdan çıkmaz. Uygulama size <strong>0 istek, 0 bayt</strong> gösterebilir — varsayılan olarak, tasarım gereği. Dışarıya herhangi bir veri gönderen tek özellik Bulut AI'dır ve siz etkinleştirmediğiniz sürece kapalıdır. &ldquo;Politikayla değil, mimariyle gizli&rdquo; ifadesinin anlamı budur — güvence bir hukuki metin paragrafında değil, uygulamanın nasıl inşa edildiğinde saklıdır. Tüm ayrıntılar için <a href=\"privacy.html\">Fainto'nun verilerinizi nasıl işlediğini inceleyin</a>.",
+    "features.private.p": "Çoğu uygulama, güvenmeniz gereken bir politika içinde gizlilik vaat eder. Fainto ise verilerin gidecek hiçbir yeri olmayacak şekilde tasarlanmıştır: varsayılan olarak, paranızla ilgili hiçbir bilgi cihazınızdan çıkmaz. Uygulama size <strong>0 istek, 0 bayt</strong> gösterebilir — varsayılan olarak, tasarım gereği. Dışarıya herhangi bir veri gönderen tek özellik Bulut AI'dır ve siz etkinleştirmediğiniz sürece kapalıdır. &ldquo;Politikayla değil, mimariyle gizli&rdquo; ifadesinin anlamı budur — güvence bir hukuki metin paragrafında değil, uygulamanın nasıl inşa edildiğinde saklıdır. Tüm ayrıntılar için <a href=\"privacy.html\">Fainto'nun verilerinizi nasıl işlediğini inceleyin</a>.",
     "features.h2.offline": "Tamamen çevrimdışı çalışır",
-    "features.offline.p":
-      "Modeller ve verileriniz telefonda bulunduğu için Fainto, ağ bağlantısı kapalıyken de çalışır. Uçakta, tünelde ya da mobil veri kapalıyken harcama girin — yapay zeka koçu yine yanıt verir, vergi hesaplamaları yine çalışır. Çökebilecek bir sunucu ya da beklenecek bir senkronizasyon yoktur. Tek istisna, kullanmayı tercih ettiğinizde doğal olarak bağlantı gerektiren isteğe bağlı Bulut AI'dır.",
+    "features.offline.p": "Modeller ve verileriniz telefonda bulunduğu için Fainto, ağ bağlantısı kapalıyken de çalışır. Uçakta, tünelde ya da mobil veri kapalıyken harcama girin — yapay zeka koçu yine yanıt verir, vergi hesaplamaları yine çalışır. Çökebilecek bir sunucu ya da beklenecek bir senkronizasyon yoktur. Tek istisna, kullanmayı tercih ettiğinizde doğal olarak bağlantı gerektiren isteğe bağlı Bulut AI'dır.",
     "features.h2.free": "Ücretsiz, hesapsız, reklamsız",
-    "features.free.p":
-      "Fainto kullanımı ücretsizdir ve hesap gerektirmez — açın ve takibe hemen başlayın. Hesaplar isteğe bağlıdır, yani kendi paranızı görmek için e-posta adresinizi vermeye zorlanmazsınız. İşlemlerinizin arasına sıkıştırılmış reklamlar, ne yaptığınızı izleyen izleyiciler, analitikler ya da çerezler yoktur. Premium, daha büyük yapay zeka modelleri ve Bulut AI için mevcuttur; ancak temel bütçe takipçisi ve ücretsiz katmandaki koç hiçbir ücret gerektirmez.",
+    "features.free.p": "Fainto kullanımı ücretsizdir ve hesap gerektirmez — açın ve takibe hemen başlayın. Hesaplar isteğe bağlıdır, yani kendi paranızı görmek için e-posta adresinizi vermeye zorlanmazsınız. İşlemlerinizin arasına sıkıştırılmış reklamlar, ne yaptığınızı izleyen izleyiciler, analitikler ya da çerezler yoktur. Premium, daha büyük yapay zeka modelleri ve Bulut AI için mevcuttur; ancak temel bütçe takipçisi ve ücretsiz katmandaki koç hiçbir ücret gerektirmez.",
     "features.h2.tax": "45 ülke için yerleşik bir vergi motoru",
-    "features.tax.p":
-      "Fainto, <strong>45 ülke</strong> için gerçek kurallarla çalışan bir gelir vergisi motoru içerir — 44 ülke yapılandırması artı özel bir Polonya motoru — böylece rakamlar genel bir ABD varsayılanı yerine gerçekten yaşadığınız yeri yansıtır. Brüt bir tutar girin ve verginin nasıl hesaplandığını görün: örneğin Polonya ön ayarında, <strong>PLN 240,000</strong> gelir, ülkenin kurallarına göre <strong>PLN 149,787</strong>'ye düşer. Bu tahminler, planlama yapmanıza yardımcı olacak eğitici bilgilerdir; finansal veya vergi danışmanlığı değildir.",
+    "features.tax.p": "Fainto, <strong>45 ülke</strong> için gerçek kurallarla çalışan bir gelir vergisi motoru içerir — 44 ülke yapılandırması artı özel bir Polonya motoru — böylece rakamlar genel bir ABD varsayılanı yerine gerçekten yaşadığınız yeri yansıtır. Brüt bir tutar girin ve verginin nasıl hesaplandığını görün: örneğin Polonya ön ayarında, <strong>PLN 240,000</strong> gelir, ülkenin kurallarına göre <strong>PLN 149,787</strong>'ye düşer. Bu tahminler, planlama yapmanıza yardımcı olacak eğitici bilgilerdir; finansal veya vergi danışmanlığı değildir.",
     "features.h2.localised": "25 dilde yerelleştirildi",
-    "features.localised.p":
-      "Arayüz <strong>25 dile</strong> çevrilmiştir, böylece bütçenizi İngilizce, Lehçe, Almanca, Fransızca veya desteklenen başka bir dilde tutarken uygulama doğal bir şekilde okunur. Yerelleştirme, çok ülkeli vergi motoruyla birlikte çalışır — para birimi, vergi kuralları ve ifadeler, sizi yalnızca ABD için tasarlanmış bir uygulamayı kafanızda çevirmeye zorlamak yerine bölgenizle uyumlu hale gelir.",
+    "features.localised.p": "Arayüz <strong>25 dile</strong> çevrilmiştir, böylece bütçenizi İngilizce, Lehçe, Almanca, Fransızca veya desteklenen başka bir dilde tutarken uygulama doğal bir şekilde okunur. Yerelleştirme, çok ülkeli vergi motoruyla birlikte çalışır — para birimi, vergi kuralları ve ifadeler, sizi yalnızca ABD için tasarlanmış bir uygulamayı kafanızda çevirmeye zorlamak yerine bölgenizle uyumlu hale gelir.",
     "features.h2.seeit": "Uygulamada görün",
-    "features.seeit.p":
-      'Genel Bakış hepsini bir araya getirir: aylık net gelir <strong>12 482,22 zł</strong> (56.7% artış), gelir <strong>12.5K</strong>, gider <strong>1.0K</strong> ve tasarruf <strong>7.1K zł</strong> olarak ayrılır; bunların üzerinde yapay zeka öngörüleri, hesaplarınız ve yaklaşan faturalarınız yer alır. Net değer görünümü, varlıklarınızı — örnekte <strong>107 400,00 zł</strong> — yükümlülüklerinize karşı toplar. Buradaki her rakam cihaz üzerinde işlenir ve yalnızca size aittir. Şu anda Android\'de kullanılabilir — <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener">Fainto\'yu Google Play\'den edinin</a> — iOS ise yakında geliyor.',
-    "features.closing.p":
-      'Hâlâ karar veremediniz mi? <a href="faq.html">Sıkça sorulan soruları inceleyin</a> ya da <a href="index.html">Fainto ana sayfasına dönün</a>.',
-    "features.cta": '<a class="btn-primary" href="index.html#get">Uygulamayı edinin</a>',
+    "features.seeit.p": "Genel Bakış hepsini bir araya getirir: aylık net gelir <strong>12 482,22 zł</strong> (56.7% artış), gelir <strong>12.5K</strong>, gider <strong>1.0K</strong> ve tasarruf <strong>7.1K zł</strong> olarak ayrılır; bunların üzerinde yapay zeka öngörüleri, hesaplarınız ve yaklaşan faturalarınız yer alır. Net değer görünümü, varlıklarınızı — örnekte <strong>107 400,00 zł</strong> — yükümlülüklerinize karşı toplar. Buradaki her rakam cihaz üzerinde işlenir ve yalnızca size aittir. Şu anda Android'de kullanılabilir — <a href=\"https://play.google.com/store/apps/details?id=com.vaultai.app\" target=\"_blank\" rel=\"noopener\">Fainto'yu Google Play'den edinin</a> — iOS ise yakında geliyor.",
+    "features.closing.p": "Hâlâ karar veremediniz mi? <a href=\"faq.html\">Sıkça sorulan soruları inceleyin</a> ya da <a href=\"index.html\">Fainto ana sayfasına dönün</a>.",
+    "features.cta": "<a class=\"btn-primary\" href=\"index.html#get\">Uygulamayı edinin</a>",
     "faq.title": "Fainto SSS — Gizlilik Odaklı Yapay Zeka Bütçe Takipçisi",
-    "faq.desc":
-      "Fainto hakkında sorular: ücretsiz mi, çevrimdışı çalışıyor mu, hangi verileri topluyor, vergi motoru hangi ülkeleri kapsıyor ve cihaz üzerinde hangi yapay zeka modelleri çalışıyor.",
+    "faq.desc": "Fainto hakkında sorular: ücretsiz mi, çevrimdışı çalışıyor mu, hangi verileri topluyor, vergi motoru hangi ülkeleri kapsıyor ve cihaz üzerinde hangi yapay zeka modelleri çalışıyor.",
     "faq.eyebrow": "SSS",
     "faq.h1": "Fainto — sıkça sorulan sorular",
     "faq.q1": "Fainto ücretsiz mi?",
-    "faq.a1":
-      "Evet. Fainto kullanımı ücretsizdir; temel bütçe takipçisi ve ücretsiz katmandaki yapay zeka koçu hiçbir ücret gerektirmez. Premium katman daha büyük cihaz üzerinde yapay zeka modellerinin ve isteğe bağlı Bulut Yapay Zeka'nın kilidini açar, ancak ödeme yapmadan da paranızı takip edip koçluk alabilirsiniz.",
+    "faq.a1": "Evet. Fainto kullanımı ücretsizdir; temel bütçe takipçisi ve ücretsiz katmandaki yapay zeka koçu hiçbir ücret gerektirmez. Premium katman daha büyük cihaz üzerinde yapay zeka modellerinin ve isteğe bağlı Bulut Yapay Zeka'nın kilidini açar, ancak ödeme yapmadan da paranızı takip edip koçluk alabilirsiniz.",
     "faq.q2": "Fainto bir hesap gerektirir mi?",
-    "faq.a2":
-      "Hesap gerekmez. Fainto'yu açıp hemen takibe başlayabilirsiniz. Hesaplar isteğe bağlıdır, bu yüzden kendi paranızı görmek için asla bir e-posta adresi vermeniz gerekmez.",
+    "faq.a2": "Hesap gerekmez. Fainto'yu açıp hemen takibe başlayabilirsiniz. Hesaplar isteğe bağlıdır, bu yüzden kendi paranızı görmek için asla bir e-posta adresi vermeniz gerekmez.",
     "faq.q3": "Fainto çevrimdışı çalışır mı?",
-    "faq.a3":
-      "Evet. Yapay zeka modelleri ve verileriniz telefonda bulunur, bu yüzden Fainto tamamen çevrimdışı çalışır — ağ kapalıyken bile harcamalarınızı kaydedebilir ve koçluk alabilirsiniz. Bağlantı gerektiren tek özellik, siz açmadıkça kapalı olan isteğe bağlı Bulut Yapay Zeka'dır.",
+    "faq.a3": "Evet. Yapay zeka modelleri ve verileriniz telefonda bulunur, bu yüzden Fainto tamamen çevrimdışı çalışır — ağ kapalıyken bile harcamalarınızı kaydedebilir ve koçluk alabilirsiniz. Yalnızca isteğe bağlı ek özellikler bağlantı gerektirir: tercihe bağlı Bulut Yapay Zeka, hesap yedekleme ve senkronizasyonu ile web eşleştirmesi — hepsi siz açmadıkça kapalıdır.",
     "faq.q4": "Fainto hangi verileri toplar?",
-    "faq.a4":
-      "Varsayılan olarak paranızla ilgili hiçbir bilgi cihazdan çıkmaz. Web sitesinde çerez, analitik veya izleyici bulunmaz ve uygulama, finansal verilerinizin telefonunuzda kalması için tasarlanmıştır. Uygulama size 0 istek ve 0 bayt gönderildiğini gösterebilir. Bir şeyin gönderildiği tek an, Bulut Yapay Zeka'yı bilinçli olarak etkinleştirdiğiniz andır.",
+    "faq.a4": "Varsayılan olarak paranızla ilgili hiçbir bilgi cihazdan çıkmaz. Web sitesinin sayfalarında çerez, analitik veya izleyici bulunmaz (isteğe bağlı web yardımcısı, Google'ın Firebase'iyle yalnızca sizin talep ettiğiniz eşleştirme veya oturum açma için iletişim kurar — gizlilik politikasına bakın) ve uygulama, finansal verilerinizin telefonunuzda kalması için tasarlanmıştır. Uygulama size 0 istek ve 0 bayt gönderildiğini gösterebilir. Bir şey yalnızca siz bilinçli olarak etkinleştirdiğinizde gönderilir — Bulut Yapay Zeka, yedekleme ve senkronizasyon için bir hesap veya web eşleştirmesi.",
     "faq.q5": "Finansal verilerim buluta yükleniyor mu?",
-    "faq.a5":
-      "Varsayılan olarak hayır. Fainto, politikayla değil mimariyle gizlidir: siz seçmedikçe verilerinizin gidebileceği bir yer yoktur. OpenRouter üzerinden Bulut Yapay Zeka, dışarı bir şey gönderen tek özelliktir ve kesinlikle isteğe bağlıdır — siz kendiniz etkinleştirmedikçe hiçbir şey ona yönlendirilmez.",
+    "faq.a5": "Varsayılan olarak hayır. Fainto, politikayla değil mimariyle gizlidir: siz seçmedikçe verilerinizin gidebileceği bir yer yoktur. Tercihe bağlı Bulut Yapay Zeka, mesajınızı toplulaştırılmış bir özetle birlikte gönderir; isteğe bağlı bir hesap ise verilerinizi buluttaki özel alanınıza yedekler ve senkronize eder — ikisi de siz kendiniz etkinleştirene kadar kesinlikle kapalıdır.",
     "faq.q6": "Fainto'da cihaz üzerinde hangi yapay zeka modelleri çalışır?",
-    "faq.a6":
-      "Telefonunuzda yerel olarak beş dil modeli çalışır. Ücretsiz katmanda: SmolLM 135M ve Qwen 2.5 0.5B. Premium'da: Qwen 2.5 1.5B, DeepSeek R1 1.5B ve Phi-4 Mini 3.8B. Beşi de cihaz üzerinde çalışır, yani koçluk bir sunucuda değil telefonunuzda gerçekleşir.",
+    "faq.a6": "Telefonunuzda yerel olarak beş dil modeli çalışır. Ücretsiz katmanda: SmolLM 135M ve Qwen 2.5 0.5B. Premium'da: Qwen 2.5 1.5B, DeepSeek R1 1.5B ve Phi-4 Mini 3.8B. Beşi de cihaz üzerinde çalışır, yani koçluk bir sunucuda değil telefonunuzda gerçekleşir.",
     "faq.q7": "Bulut Yapay Zeka nedir ve isteğe bağlı mıdır?",
-    "faq.a7":
-      "Bulut Yapay Zeka, telefonunuz yeterince büyük bir model barındıramadığında sorularınızı OpenRouter üzerinden daha büyük bir modele yönlendiren isteğe bağlı bir Premium özelliğidir. Kesinlikle isteğe bağlıdır ve varsayılan olarak kapalıdır — hiçbir zaman etkinleştirmezseniz paranızla ilgili hiçbir bilgi buluta gönderilmez.",
+    "faq.a7": "Bulut Yapay Zeka, telefonunuz yeterince büyük bir model barındıramadığında sorularınızı OpenRouter üzerinden daha büyük bir modele yönlendiren isteğe bağlı bir Premium özelliğidir. Kesinlikle isteğe bağlıdır ve varsayılan olarak kapalıdır — hiçbir zaman etkinleştirmezseniz paranızla ilgili hiçbir bilgi buluta gönderilmez.",
     "faq.q8": "Vergi motoru hangi ülkeleri destekler?",
-    "faq.a8":
-      "Fainto'nun yerleşik gelir vergisi motoru 45 ülkeyi kapsar — 44 ülke yapılandırması artı Polonya için özel olarak tasarlanmış bir motor — böylece rakamlar genel bir varsayılanı değil, gerçekten yaşadığınız yeri yansıtır.",
+    "faq.a8": "Fainto'nun yerleşik gelir vergisi motoru 45 ülkeyi kapsar — 44 ülke yapılandırması artı Polonya için özel olarak tasarlanmış bir motor — böylece rakamlar genel bir varsayılanı değil, gerçekten yaşadığınız yeri yansıtır.",
     "faq.q9": "Fainto kaç dili destekler?",
-    "faq.a9":
-      "Arayüz 25 dile yerelleştirilmiştir, bu yüzden uygulama kendi dilinizde doğal bir şekilde okunur ve bölgeniz için çok ülkeli vergi motoruyla uyum içinde çalışır.",
+    "faq.a9": "Arayüz 25 dile yerelleştirilmiştir, bu yüzden uygulama kendi dilinizde doğal bir şekilde okunur ve bölgeniz için çok ülkeli vergi motoruyla uyum içinde çalışır.",
     "faq.q10": "Fainto'nun iPhone veya iOS sürümü var mı?",
-    "faq.a10":
-      "Henüz yok. Fainto şu anda Android'de kullanılabilir ve iOS sürümü yakında geliyor. Şu an için bir iPhone indirme bağlantısı bulunmuyor.",
+    "faq.a10": "Henüz yok. Fainto şu anda Android'de kullanılabilir ve iOS sürümü yakında geliyor. Şu an için bir iPhone indirme bağlantısı bulunmuyor.",
     "faq.q11": "Fainto reklam gösterir mi?",
-    "faq.a11":
-      "Hayır. Fainto'da reklam yoktur — işlemlerinizin arasına hiçbir şey sıkıştırılmaz — ve ne yaptığınızı izleyen hiçbir izleyici, analitik veya çerez yoktur.",
+    "faq.a11": "Hayır. Fainto'da reklam yoktur — işlemlerinizin arasına hiçbir şey sıkıştırılmaz — ve ne yaptığınızı izleyen hiçbir izleyici, analitik veya çerez yoktur.",
     "faq.q12": "Fainto'yu nereden indirebilirim?",
-    "faq.a12":
-      'Fainto, Google Play\'de "Fainto: AI Finance Coach" adıyla listelenmektedir: <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener">https://play.google.com/store/apps/details?id=com.vaultai.app</a>. Bir Android uygulamasıdır; iOS sürümü yakında geliyor.',
+    "faq.a12": "Fainto, Google Play'de \"Fainto: AI Finance Coach\" adıyla listelenmektedir: <a href=\"https://play.google.com/store/apps/details?id=com.vaultai.app\" target=\"_blank\" rel=\"noopener\">https://play.google.com/store/apps/details?id=com.vaultai.app</a>. Bir Android uygulamasıdır; iOS sürümü yakında geliyor.",
     "faq.q13": "Fainto finansal tavsiye midir?",
-    "faq.a13":
-      "Hayır. Fainto, vergi tahminleri de dahil olmak üzere paranızı anlamanıza ve planlamanıza yardımcı olacak eğitici bilgiler sunar. Finansal veya vergi tavsiyesi değildir.",
+    "faq.a13": "Hayır. Fainto, vergi tahminleri de dahil olmak üzere paranızı anlamanıza ve planlamanıza yardımcı olacak eğitici bilgiler sunar. Finansal veya vergi tavsiyesi değildir.",
     "faq.q14": "Cihaz üzerindeki yapay zeka koçu nasıl çalışır?",
-    "faq.a14":
-      "Beş yerel dil modelinden biri harcamalarınızı okur ve para ile ilgili sorularınızı doğrudan telefonda yanıtlar. Hız için hafif bir model ya da daha fazla derinlik için daha büyük bir model seçebilirsiniz ve bunların hepsi buluta gidip gelmeden çalışır.",
+    "faq.a14": "Beş yerel dil modelinden biri harcamalarınızı okur ve para ile ilgili sorularınızı doğrudan telefonda yanıtlar. Hız için hafif bir model ya da daha fazla derinlik için daha büyük bir model seçebilirsiniz ve bunların hepsi buluta gidip gelmeden çalışır.",
     "faq.q15": "Fainto yapay zeka kullanıyorsa gerçekten gizli mi?",
-    "faq.a15":
-      "Evet. Yapay zeka cihaz üzerinde çalışır, bu yüzden koçu kullanmak verilerinizi hiçbir yere göndermez. Modeller yerel olduğu için Fainto'da gizli yapay zeka ile gizlilik arasında bir ödünleşim yoktur — koçluk varsayılan olarak telefonunuzda gerçekleşir.",
-    "faq.q16": '"Politikayla değil mimariyle gizli" ne anlama gelir?',
-    "faq.a16":
-      "Bu, gizlilik güvencesinin sadece bir belgede vaat edilmediği, uygulamanın çalışma biçimine gömülü olduğu anlamına gelir. Para verileriniz, bir şirketin bunu kötüye kullanmayacağını söyleyen bir politika olduğu için değil, varsayılan olarak gidebileceği başka bir yer olmadığı için cihazda kalır.",
-    "faq.outro":
-      'Tüm resmi görmek mi istiyorsunuz? <a href="features.html">Tüm özellik dökümünü görün</a> veya <a href="privacy.html">Fainto\'nun gizlilik politikasını okuyun</a>.',
-    "faq.cta": '<a class="btn-primary" href="index.html#get">Uygulamayı edinin</a>',
+    "faq.a15": "Evet. Varsayılan cihaz üzerinde modda yapay zeka telefonunuzda çalışır, bu yüzden koçu kullanmak verilerinizi hiçbir yere göndermez. Modeller yerel olduğu için Fainto'da gizli yapay zeka ile gizlilik arasında bir ödünleşim yoktur — koçluk varsayılan olarak telefonunuzda gerçekleşir.",
+    "faq.q16": "\"Politikayla değil mimariyle gizli\" ne anlama gelir?",
+    "faq.a16": "Bu, gizlilik güvencesinin sadece bir belgede vaat edilmediği, uygulamanın çalışma biçimine gömülü olduğu anlamına gelir. Para verileriniz, bir şirketin bunu kötüye kullanmayacağını söyleyen bir politika olduğu için değil, varsayılan olarak gidebileceği başka bir yer olmadığı için cihazda kalır.",
+    "faq.outro": "Tüm resmi görmek mi istiyorsunuz? <a href=\"features.html\">Tüm özellik dökümünü görün</a> veya <a href=\"privacy.html\">Fainto'nun gizlilik politikasını okuyun</a>.",
+    "faq.cta": "<a class=\"btn-primary\" href=\"index.html#get\">Uygulamayı edinin</a>",
   },
 };
