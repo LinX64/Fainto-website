@@ -102,7 +102,7 @@
     var fpRaw = isObj(raw.financialProfile) ? raw.financialProfile : {};
     var nwRaw = isObj(raw.netWorth) ? raw.netWorth : {};
     var financialProfile = {
-      currency: str(fpRaw.currency, 'USD'),
+      currency: str(fpRaw.currency, 'PLN'),
       fullName: typeof fpRaw.fullName === 'string' ? fpRaw.fullName : '',
     };
     var transactions = asArray(raw.transactions).map(sanitizeTransaction).filter(Boolean);
@@ -319,7 +319,7 @@
     if (transactions.length === 0) {
       return { error: 'No rows in the CSV could be read as transactions (' + skipped + ' rows skipped). Check the date and amount columns.' };
     }
-    var currency = 'USD';
+    var currency = 'PLN';
     var bestCount = 0;
     Object.keys(currencyCounts).forEach(function (code) {
       if (currencyCounts[code] > bestCount) { bestCount = currencyCounts[code]; currency = code; }
@@ -814,7 +814,7 @@
     var animate = opts.animate !== false;   // default true; false skips the entrance on re-render
     var omit = opts.omitSections || [];      // names to skip (e.g. 'budgets' — phone-only in the cloud bundle)
     function want(name) { return omit.indexOf(name) === -1; }
-    var currency = opts && opts.currency || (bundle.financialProfile && bundle.financialProfile.currency) || 'USD';
+    var currency = opts && opts.currency || (bundle.financialProfile && bundle.financialProfile.currency) || 'PLN';
     var now = new Date();
     var txState = { query: '', sort: 'newest', page: 0 };
     var html = (want('overview') ? buildOverviewSection(bundle, now) : '') +

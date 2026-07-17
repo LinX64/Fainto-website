@@ -170,6 +170,10 @@ button, input { font-family: inherit; }
 .gate-card h2 { font-size: 22px; font-weight: 500; letter-spacing: 0.002em; margin: 0 0 var(--sp-sm); }
 .gate-card p.desc { color: var(--muted); font-size: 17px; line-height: 1.55; margin: 0 0 var(--sp-xl); }
 .reassure { font-size: 13px; color: var(--muted); line-height: 1.5; margin-top: var(--sp-md); }
+.icon-btn { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; }
+.icon-btn:hover { background: var(--surface-2); color: var(--text); }
+.icon-btn:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }
+.icon-btn svg { width: 18px; height: 18px; }
 .mode-switch { display: none; } /* only shown in the focused connect/signin modes */
 html[data-mode="connect"] .mode-switch,
 html[data-mode="signin"] .mode-switch { display: block; margin-top: var(--sp-md); }
@@ -793,6 +797,18 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
       // script, so the page can never brick on a permanent "Checking your session…" spinner.
       setTimeout(function () { root.removeAttribute('data-auth'); }, 8000);
     }
+    // Light/dark toggle — persists the same key the dashboard uses, so the choice carries everywhere.
+    document.addEventListener('DOMContentLoaded', function () {
+      var btn = document.getElementById('themeToggle');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var cur = root.getAttribute('data-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var next = (cur ? cur === 'dark' : prefersDark) ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('fainto_dashboard_theme', next); } catch (e) {}
+      });
+    });
   }());
 </script>
 </head>
@@ -810,6 +826,9 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
       <a href="/faq.html">FAQ</a>
       <a href="/contact.html">Contact</a>
       <a href="/privacy.html">Privacy</a>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light/dark theme" title="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
     </nav>
   </header>
 
@@ -1610,7 +1629,7 @@ var QRCode;
 })();
 </script>
 
-<script src="dashboard-core.js?v=20260717d"></script>
+<script src="dashboard-core.js?v=20260717e"></script>
 <script type="module">
 import {
   getFirebaseAuth,
@@ -2084,7 +2103,9 @@ function handoff(bundleCandidate, onError) {
     if (onError) onError('Could not store the data locally (storage may be full or blocked).');
     return;
   }
-  location.href = 'dashboard.html';
+  // replace (not href) so Back from the dashboard skips the now-spent QR page — which would
+  // otherwise force a re-pair — and lands on the entry chooser instead.
+  location.replace('dashboard.html');
 }
 
 if (!isFirebaseConfigured()) {
@@ -2426,7 +2447,7 @@ if (!isFirebaseConfigured()) {
           interactive: true,
           animate: firstPaint,        // replay the entrance only on first paint, not after each edit
           omitSections: ['budgets'],  // budgets live only on the phone — never in the cloud bundle
-          currency: (clean.financialProfile && clean.financialProfile.currency) || 'USD',
+          currency: (clean.financialProfile && clean.financialProfile.currency) || 'PLN',
           onEditTx: onEditTx,
           onDeleteTx: onDeleteTx,
           onAddTx: onAddTx,

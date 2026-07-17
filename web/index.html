@@ -58,6 +58,10 @@
   .topnav { display: flex; align-items: center; gap: 20px; }
   .topnav a { font-size: 15px; font-weight: 500; color: var(--muted); text-decoration: none; }
   .topnav a:hover { color: var(--text); }
+  .icon-btn { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); cursor: pointer; }
+  .icon-btn:hover { background: var(--surface-2); color: var(--text); }
+  .icon-btn:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }
+  .icon-btn svg { width: 18px; height: 18px; }
   .openfile { font-size: 15px; font-weight: 500; color: var(--muted); text-decoration: underline; text-underline-offset: 4px; }
   .openfile:hover { color: var(--text); }
   @media (max-width: 480px) { .topnav { gap: 12px; } }
@@ -107,10 +111,22 @@
 <script>
   // Carry the dashboard's light/dark choice so the whole companion stays one product (no flash on nav).
   (function () {
+    var root = document.documentElement;
     try {
       var t = localStorage.getItem('fainto_dashboard_theme');
-      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      if (t === 'light' || t === 'dark') root.setAttribute('data-theme', t);
     } catch (e) {}
+    document.addEventListener('DOMContentLoaded', function () {
+      var btn = document.getElementById('themeToggle');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        var cur = root.getAttribute('data-theme');
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var next = (cur ? cur === 'dark' : prefersDark) ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('fainto_dashboard_theme', next); } catch (e) {}
+      });
+    });
   }());
 </script>
 </head>
@@ -125,6 +141,9 @@
       <a href="/faq.html">FAQ</a>
       <a href="/contact.html">Contact</a>
       <a href="/privacy.html">Privacy</a>
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light/dark theme" title="Toggle theme">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
+      </button>
     </nav>
   </header>
 
