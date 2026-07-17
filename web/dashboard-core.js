@@ -107,12 +107,19 @@
     if (ts === null) return null;
     var type = (raw.type === 'INCOME' || raw.type === 'EXPENSE') ? raw.type : null;
     if (!type) return null;
+    // Repair rows from a bad CSV backfill: the real date can land in the note ("29-05-2026")
+    // while timestampMillis holds a garbage value that renders as "Nov 13, 36".
+    var note = typeof raw.note === 'string' ? raw.note.trim() : '';
+    if (!isSaneTs(ts) && note) {
+      var noteDate = parseLooseDate(note);
+      if (noteDate !== null) { ts = noteDate; note = ''; }   // move the date out of the note into the timestamp
+    }
     var tx = {
       timestampMillis: ts,
       category: str(raw.category, 'OTHER'),
       type: type,
       amount: num(raw.amount),
-      note: typeof raw.note === 'string' ? raw.note : '',
+      note: note,
       foreignAmount: numOrNull(raw.foreignAmount),
       foreignCurrency: typeof raw.foreignCurrency === 'string' ? raw.foreignCurrency : null,
       // Per-transaction icon override (syncs to the phone); null → use the category's default icon.
@@ -286,6 +293,36 @@
       if (y < 100) y += 2000;
       return dayFirst ? csvDateMs(y, +m[2], +m[1]) : csvDateMs(y, +m[1], +m[2]);
     }
+    m = raw.match(/^(\d{1,2})-(\d{1,2})-(\d{2,4})/);        // DD-MM-YYYY (dashes) — not just the ISO YYYY-MM-DD above
+    if (m) {
+      var yd = +m[3];
+      if (yd < 100) yd += 2000;
+      return dayFirst ? csvDateMs(yd, +m[2], +m[1]) : csvDateMs(yd, +m[1], +m[2]);
+    }
+    return null;
+  }
+
+  // Sane epoch-millis window: reject values that would render as a nonsense year
+  // (e.g. a bad backfill leaving seconds or an epoch-day count → "Nov 13, 36").
+  var TS_MIN = Date.UTC(2000, 0, 1);
+  var TS_MAX = Date.UTC(2100, 0, 1);
+  function isSaneTs(ms) { return typeof ms === 'number' && isFinite(ms) && ms >= TS_MIN && ms < TS_MAX; }
+
+  // Parse a note that is ENTIRELY a single date token (anchored) → epoch millis, else null.
+  // Used to recover a real date that a bad CSV backfill dumped into the note field.
+  function parseLooseDate(s) {
+    var raw = String(s == null ? '' : s).trim();
+    if (!raw) return null;
+    var m = raw.match(/^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})$/);   // ISO YYYY-MM-DD or YYYY/MM/DD
+    if (m) return csvDateMs(+m[1], +m[2], +m[3]);
+    m = raw.match(/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{2,4})$/);   // DD-MM-YYYY / DD.MM.YYYY / DD/MM/YYYY
+    if (m) {
+      var a = +m[1], b = +m[2], y = +m[3];
+      if (y < 100) y += 2000;
+      if (a > 12 && b <= 12) return csvDateMs(y, b, a);           // first field clearly a day
+      if (b > 12 && a <= 12) return csvDateMs(y, a, b);           // second field clearly a day → month-first
+      return csvDateMs(y, b, a);                                  // ambiguous → day-first (app locale)
+    }
     return null;
   }
 
@@ -359,7 +396,7 @@
     var dataRows = rows.slice(1);
     var dayFirst = false;
     for (var r = 0; r < dataRows.length; r += 1) {
-      var dm = String(dataRows[r][dateIdx] == null ? '' : dataRows[r][dateIdx]).trim().match(/^(\d{1,2})\/(\d{1,2})\/\d{2,4}/);
+      var dm = String(dataRows[r][dateIdx] == null ? '' : dataRows[r][dateIdx]).trim().match(/^(\d{1,2})[\/-](\d{1,2})[\/-]\d{2,4}/);
       if (dm && +dm[1] > 12) { dayFirst = true; break; }
     }
     var currencyCounts = {};
@@ -738,13 +775,19 @@
     var isIncome = t.type === 'INCOME';
     var cat = catMeta(t.category);
     var sign = isIncome ? '+' : '−';
-    var foreignBadge = (t.foreignAmount !== null && t.foreignCurrency) ?
+    // Only show the foreign badge when it adds information: a real amount in a DIFFERENT currency.
+    var showForeign = t.foreignAmount !== null && t.foreignAmount !== 0 && t.foreignCurrency &&
+      t.foreignCurrency.toUpperCase() !== String(currency || '').toUpperCase();
+    var foreignBadge = showForeign ?
       '<span class="badge">' + t.foreignAmount.toFixed(2) + ' ' + escapeHtml(t.foreignCurrency) + '</span>' : '';
+    // Never print a nonsense date from a garbage timestamp; fall back to note-only.
+    var datePart = isSaneTs(t.timestampMillis) ? formatDate(t.timestampMillis) : '';
+    var desc = [datePart, t.note ? escapeHtml(t.note) : ''].filter(Boolean).join(' &middot; ');
     var opts = {
       color: cat.color,                                         // icon badge tinted by category
       iconHtml: iconSvg(txIconName(t.iconKey, t.category)),     // override icon, else category default
       name: titleCase(t.category),
-      descHtml: formatDate(t.timestampMillis) + (t.note ? ' &middot; ' + escapeHtml(t.note) : ''),
+      descHtml: desc,
       amountHtml: '<span style="color:' + (isIncome ? 'var(--green)' : 'var(--acc-spend)') + '">' +
         sign + formatMoney(Math.abs(t.amount), currency) + '</span>' + foreignBadge,
     };
@@ -931,5 +974,16 @@
     iconSvg: iconSvg,
     iconKeySvg: iconKeySvg,
     catMeta: catMeta,
+    // Pure internals exposed for the zero-dependency test suite (tests/dashboard-core.test.js).
+    // No DOM, no side effects — safe to ship; the render pages never touch this key.
+    __test: {
+      txRowHtml: txRowHtml,
+      sanitizeTransaction: sanitizeTransaction,
+      parseCsvDate: parseCsvDate,
+      parseLooseDate: parseLooseDate,
+      isSaneTs: isSaneTs,
+      txFilterSort: txFilterSort,
+      buildRow: buildRow,
+    },
   };
 }());

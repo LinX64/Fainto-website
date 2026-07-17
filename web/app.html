@@ -1653,7 +1653,7 @@ var QRCode;
 })();
 </script>
 
-<script src="dashboard-core.js?v=20260717f"></script>
+<script src="dashboard-core.js?v=20260717g"></script>
 <script type="module">
 import {
   getFirebaseAuth,
@@ -1902,6 +1902,12 @@ function csvParseDate(s, dayFirst) {
     if (y < 100) y += 2000;
     return dayFirst ? csvDateMs(y, +m[2], +m[1]) : csvDateMs(y, +m[1], +m[2]);
   }
+  m = raw.match(/^(\d{1,2})-(\d{1,2})-(\d{2,4})/);        // DD-MM-YYYY (dashes) — not just the ISO YYYY-MM-DD above
+  if (m) {
+    var yd = +m[3];
+    if (yd < 100) yd += 2000;
+    return dayFirst ? csvDateMs(yd, +m[2], +m[1]) : csvDateMs(yd, +m[1], +m[2]);
+  }
   return null;
 }
 
@@ -2015,7 +2021,7 @@ function parseCsvTransactions(text) {
   }
   var dayFirst = false;
   for (var r = 0; r < dataRows.length; r += 1) {
-    var dm = String(dataRows[r][dateIdx] == null ? '' : dataRows[r][dateIdx]).trim().match(/^(\d{1,2})\/(\d{1,2})\/\d{2,4}/);
+    var dm = String(dataRows[r][dateIdx] == null ? '' : dataRows[r][dateIdx]).trim().match(/^(\d{1,2})[\/-](\d{1,2})[\/-]\d{2,4}/);
     if (dm && +dm[1] > 12) { dayFirst = true; break; }
   }
   var transactions = [], skipped = 0;
