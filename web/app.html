@@ -2790,12 +2790,15 @@ if (!isFirebaseConfigured()) {
   (async function maybeStartQr() {
     var params = new URLSearchParams(location.search);
     if (params.get('mode') === 'signin' || params.get('signout') === '1') return;
+    var explicitConnect = params.get('mode') === 'connect';
     if (isFirebaseConfigured()) {
       try {
         var auth = getFirebaseAuth();
         if (auth.authStateReady) await auth.authStateReady();
-        // A signed-in account resumes into the account panel — don't also open pairing.
-        if (auth.currentUser && !auth.currentUser.isAnonymous) return;
+        // Only in the default/dual view does a signed-in account skip pairing (it
+        // auto-resumes to the dashboard). Explicit ?mode=connect ALWAYS pairs, even
+        // when signed in — otherwise the QR stays stuck on "Generating code…".
+        if (!explicitConnect && auth.currentUser && !auth.currentUser.isAnonymous) return;
       } catch (e) { /* fall through and start pairing */ }
     }
     startQrSession();
