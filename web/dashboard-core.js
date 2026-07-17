@@ -520,9 +520,10 @@
         (opts.descHtml ? '<div class="row-desc">' + opts.descHtml + '</div>' : '') +
         (opts.extraHtml || '') +
       '</div>' +
-      '<div class="row-amount tnum">' + opts.amountHtml +
-        ((typeof opts.actionsHtml === 'string' && opts.actionsHtml.length > 0) ? '<span class="row-actions">' + opts.actionsHtml + '</span>' : '') +
-      '</div>' +
+      '<div class="row-amount tnum">' + opts.amountHtml + '</div>' +
+      // actions are a sibling of .row-amount (not nested) so the flex:none amount cell can't push
+      // the row-main category/date to 0px on phones — the 560px rule wraps them to their own line.
+      ((typeof opts.actionsHtml === 'string' && opts.actionsHtml.length > 0) ? '<span class="row-actions">' + opts.actionsHtml + '</span>' : '') +
     '</div>';
   }
 
@@ -613,7 +614,8 @@
         extra: i >= TOP_ROWS,
         color: barColor,
         name: titleCase(b.category),
-        descHtml: formatMoney(b.spent, currency) + ' of ' + formatMoney(b.limitAmount, currency) + ' &middot; ' + titleCase(b.period),
+        descHtml: formatMoney(b.spent, currency) + ' / ' + formatMoney(b.limitAmount, currency) +
+          (b.period && String(b.period).toUpperCase() !== 'MONTHLY' ? ' &middot; ' + titleCase(b.period) : ''),
         extraHtml: progressHtml,
         amountHtml: leftLabel,
       });
@@ -687,7 +689,7 @@
       '<div class="rows" id="txRows"></div>' +
       '<div class="tx-pagination">' +
         '<button type="button" id="txPrev">Previous</button>' +
-        '<span id="txPageInfo"></span>' +
+        '<span id="txPageInfo" aria-live="polite" aria-atomic="true"></span>' +
         '<button type="button" id="txNext">Next</button>' +
       '</div>' +
     '</section>';
@@ -784,8 +786,11 @@
     });
   }
 
-  function revealMotion(root) {
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function revealMotion(root, animate) {
+    if (animate === undefined) animate = true;
+    // animate:false (a mutation re-render) reveals everything synchronously — same end state as
+    // reduced-motion — so the dashboard doesn't replay its full entrance after every edit.
+    var reduce = !animate || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
     var cards = root.querySelectorAll('.card.stagger');
     Array.prototype.forEach.call(cards, function (card, i) {
       if (reduce) {
@@ -806,14 +811,17 @@
   function renderDashboard(rootEl, bundle, opts) {
     opts = opts || {};
     var interactive = !!opts.interactive;
+    var animate = opts.animate !== false;   // default true; false skips the entrance on re-render
+    var omit = opts.omitSections || [];      // names to skip (e.g. 'budgets' — phone-only in the cloud bundle)
+    function want(name) { return omit.indexOf(name) === -1; }
     var currency = opts && opts.currency || (bundle.financialProfile && bundle.financialProfile.currency) || 'USD';
     var now = new Date();
     var txState = { query: '', sort: 'newest', page: 0 };
-    var html = buildOverviewSection(bundle, now) +
-      buildAccountsSection(bundle) +
-      buildBillsSection(bundle, now) +
-      buildBudgetsSection(bundle, now) +
-      buildTransactionsSection(bundle);
+    var html = (want('overview') ? buildOverviewSection(bundle, now) : '') +
+      (want('accounts') ? buildAccountsSection(bundle) : '') +
+      (want('bills') ? buildBillsSection(bundle, now) : '') +
+      (want('budgets') ? buildBudgetsSection(bundle, now) : '') +
+      (want('transactions') ? buildTransactionsSection(bundle) : '');
     rootEl.innerHTML = html;
     wireShowAllButtons(rootEl);
     wireTransactionsSection(rootEl, bundle, txState, {
@@ -823,7 +831,7 @@
       onDeleteTx: opts.onDeleteTx,
       onAddTx: opts.onAddTx,
     });
-    revealMotion(rootEl);
+    revealMotion(rootEl, animate);
   }
 
   window.FaintoDashboard = {

@@ -32,12 +32,19 @@
     --pad: 16px;
   }
   @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
       --bg: #33333D; --surface: #373741; --surface-2: #3F3F49; --surface-3: #474751;
       --text: #FFFFFF; --muted: #AEAEB1; --line: rgba(174, 174, 177, 0.2); --outline: #8F8F99;
       --acc-brand: #72DEFF; --acc-income: #36F0AB; --acc-savings: #FFCF44;
       --chrome: #FFFFFF; --on-chrome: #2A2931;
     }
+  }
+  /* Explicit theme carried from the dashboard's toggle overrides the OS preference. */
+  :root[data-theme="dark"] {
+    --bg: #33333D; --surface: #373741; --surface-2: #3F3F49; --surface-3: #474751;
+    --text: #FFFFFF; --muted: #AEAEB1; --line: rgba(174, 174, 177, 0.2); --outline: #8F8F99;
+    --acc-brand: #72DEFF; --acc-income: #36F0AB; --acc-savings: #FFCF44;
+    --chrome: #FFFFFF; --on-chrome: #2A2931;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: var(--bg); color: var(--text);
@@ -97,6 +104,15 @@
     .cta { animation: enter 300ms var(--ease-emph-dec) 160ms backwards; }
   }
 </style>
+<script>
+  // Carry the dashboard's light/dark choice so the whole companion stays one product (no flash on nav).
+  (function () {
+    try {
+      var t = localStorage.getItem('fainto_dashboard_theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  }());
+</script>
 </head>
 <body>
 <div class="wrap">
@@ -120,23 +136,23 @@
       <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8.5a16 16 0 0 1 20 0"></path><path d="M5.5 12.5a11 11 0 0 1 13 0"></path><path d="M9 16.5a6 6 0 0 1 6 0"></path><circle cx="12" cy="20" r="1" fill="currentColor" stroke="none"></circle></svg>
       <div class="tag tag-income">Local · private by default</div>
       <h2>Connect over Wi‑Fi</h2>
-      <p>Scan a QR code and your phone streams straight to this browser — your data never touches a
-        server.</p>
+      <p>Scan a QR code and your phone streams a view‑only snapshot to this browser — your data never
+        touches a server.</p>
       <a class="cardcta cta-solid" href="app.html?mode=connect">Scan &amp; connect →</a>
     </div>
     <div class="card">
       <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 20c0-4 3.5-7 8-7s8 3 8 7"></path></svg>
       <div class="tag tag-savings">Optional · cloud</div>
       <h2>Sign in</h2>
-      <p>View the data you’ve chosen to sync, from anywhere. Entirely optional — the app works fully
-        without it.</p>
+      <p>View and edit the data you sync — add expenses or import a bank CSV, and changes sync back to
+        your phone. Optional; the app works fully without it.</p>
       <a class="cardcta cta-outline" href="app.html?mode=signin">Sign in →</a>
     </div>
   </div>
 
   <div class="cta">
     <a class="btn" href="https://play.google.com/store/apps/details?id=com.vaultai.app">Get the Android app</a>
-    <a class="openfile" href="dashboard.html?open=1">Open an exported file →</a>
+    <a class="openfile" href="dashboard.html?open=1">Open a Fainto export or bank CSV →</a>
   </div>
 
   <footer>
