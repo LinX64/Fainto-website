@@ -112,7 +112,10 @@
     var note = typeof raw.note === 'string' ? raw.note.trim() : '';
     if (!isSaneTs(ts) && note) {
       var noteDate = parseLooseDate(note);
-      if (noteDate !== null) { ts = noteDate; note = ''; }   // move the date out of the note into the timestamp
+      // Only move the date out of the note when the recovered date is itself sane — otherwise an
+      // out-of-range year (e.g. "29-05-1850") would clear the note AND leave an insane timestamp,
+      // so the row would render neither a date nor the note (silent data loss).
+      if (noteDate !== null && isSaneTs(noteDate)) { ts = noteDate; note = ''; }
     }
     var tx = {
       timestampMillis: ts,

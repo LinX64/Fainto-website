@@ -398,6 +398,30 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
   .account-dash { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-lg); align-items: start; }
   .account-dash > .card:first-child, .account-dash > .card:last-child { grid-column: 1 / -1; }
 }
+
+/* ---------- Signed-in desktop dashboard ----------
+   The gate/sign-in views stay narrow; only the signed-in account view (data-view="account",
+   set in enterAccount) opens up to use the full desktop width instead of a lone 880px column.
+   Overview + Accounts + Bills sit side by side across the top; Transactions spans full width
+   underneath. ID selectors outrank the 760px first/last-child span rule, so the areas win. */
+html[data-view="account"] .page { max-width: 1320px; }
+
+@media (min-width: 1080px) {
+  html[data-view="account"] .account-dash {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "overview accounts bills"
+      "txns     txns     txns";
+    gap: var(--sp-xl);
+  }
+  html[data-view="account"] .account-dash > #sec-overview { grid-area: overview; }
+  html[data-view="account"] .account-dash > #sec-accounts { grid-area: accounts; }
+  html[data-view="account"] .account-dash > #sec-bills { grid-area: bills; }
+  html[data-view="account"] .account-dash > #sec-transactions { grid-area: txns; }
+}
+
+/* The add/edit form is a single column — cap it so its inputs don't stretch the full 1320px shell. */
+html[data-view="account"] #expenseForm { max-width: 640px; }
 .tnum { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
 
 /* Designed empty / load-error state for the account panel (mirrors dashboard.html's .empty-card). */
@@ -574,6 +598,7 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
   font-feature-settings: 'tnum' 1;
   flex: none;
   text-align: right;
+  white-space: nowrap;   /* keep the figure intact; the min-width:0 .row-main yields space instead */
 }
 
 .row .row-amount .badge {
@@ -771,9 +796,11 @@ html[data-mode="connect"] footer.site-footer { margin-top: var(--sp-md); padding
 .icon-opt[aria-pressed="true"] { border-color: var(--acc-brand); color: var(--text); background: var(--surface-2); }
 .icon-opt:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }
 
-/* Horizontal transaction list on wide screens (was one long vertical column) */
+/* Horizontal transaction list on wide screens (was one long vertical column).
+   minmax(0, 1fr) — NOT 1fr — so a wide amount + Edit/Delete can't blow the track past the
+   card edge; the min-width:0 .row-main absorbs the squeeze instead of the row overflowing. */
 @media (min-width: 760px) {
-  #sec-transactions .rows { display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--sp-xl); }
+  #sec-transactions .rows { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); column-gap: var(--sp-xl); }
   #sec-transactions .rows .row:nth-child(2) { border-top: none; }
 }
 .tx-add {
@@ -1653,7 +1680,7 @@ var QRCode;
 })();
 </script>
 
-<script src="dashboard-core.js?v=20260717g"></script>
+<script src="dashboard-core.js?v=20260718a"></script>
 <script type="module">
 import {
   getFirebaseAuth,
@@ -2301,6 +2328,7 @@ if (!isFirebaseConfigured()) {
     try { window.dispatchEvent(new Event('fainto:signed-in')); } catch (e) {} // tear down any anon QR session
     currentUid = uid;
     showError('');
+    document.documentElement.setAttribute('data-view', 'account'); // widen the shell for the desktop dashboard
     var grid = document.querySelector('.gate-grid');
     if (grid) grid.style.display = 'none';
     var intro = document.querySelector('.intro');
