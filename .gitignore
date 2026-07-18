@@ -16,4 +16,6 @@ credentials*
 
 # Local scratch (not part of the site)
 graphify-out/
-__probe.html
+# Every throwaway probe/harness page is named __*.html — a single rule so a new one can
+# never be committed (or mirrored to production) just because it wasn't listed by name.
+__*.html

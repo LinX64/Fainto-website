@@ -29,6 +29,13 @@ RedirectMatch 301 ^/web/demo\.html$ /web/dashboard.html
   </FilesMatch>
 
   <Files "app.html">
-    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://*.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://firestore.googleapis.com; frame-src https://vaultai-26d8f.firebaseapp.com https://accounts.google.com; form-action 'self'; upgrade-insecure-requests"
+    Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self' https://*.googleapis.com https://securetoken.googleapis.com https://identitytoolkit.googleapis.com https://firestore.googleapis.com; frame-src https://vaultai-26d8f.firebaseapp.com https://accounts.google.com https://apis.google.com; form-action 'self'; upgrade-insecure-requests"
+
+    # The ROOT .htaccess sets Cross-Origin-Opener-Policy "same-origin", and mod_headers
+    # inherits it into this directory. That severs the opener link that Firebase's
+    # signInWithPopup needs to hand the credential back, so Google sign-in hangs on a
+    # popup that never resolves. Only this page opens an auth popup, so relax it here
+    # (and only here) — index/dashboard keep the strict root policy.
+    Header always set Cross-Origin-Opener-Policy "same-origin-allow-popups"
   </Files>
 </IfModule>

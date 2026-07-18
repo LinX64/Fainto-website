@@ -74,6 +74,7 @@ jobs:
             --exclude '\.claude/' \
             --exclude 'graphify-out/' \
             --exclude 'tests/' \
+            --exclude-glob '__*.html' \
             ./ .
           bye
           EOF

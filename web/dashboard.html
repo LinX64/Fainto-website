@@ -13,6 +13,17 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#F5F5F7" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#33333D" media="(prefers-color-scheme: dark)">
+<script>
+/* Theme must be applied before first paint. The main IIFE at the end of <body> sits behind
+ * a render-blocking dashboard-core.js, so applying it there flashes the OS theme first for
+ * anyone whose stored choice differs. Same head-script pattern as index.html. */
+(function () {
+  try {
+    var t = localStorage.getItem('fainto_dashboard_theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) { /* storage unavailable */ }
+}());
+</script>
 <style>
 @font-face {
   font-family: 'Lexend';
@@ -275,6 +286,8 @@ a.brand { text-decoration: none; color: inherit; }
   transition: background 150ms var(--ease-std), border-color 150ms var(--ease-std), color 150ms var(--ease-std);
 }
 .top-link:hover { color: var(--text); background: var(--surface-2); border-color: var(--outline); }
+/* `display: inline-flex` above outranks the UA `[hidden] { display: none }` rule. */
+.top-link[hidden] { display: none; }
 
 footer.bottom {
   text-align: center;
@@ -282,6 +295,17 @@ footer.bottom {
   font-size: 14px;
   padding: var(--sp-4) 0 var(--sp-3);
 }
+
+.foot-link {
+  font: inherit;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  padding: 0 0 0 var(--sp-1);
+  text-decoration: underline;
+  cursor: pointer;
+}
+.foot-link:hover { color: var(--text); }
 
 /* ---- shared card / section system ---- */
 
@@ -747,9 +771,9 @@ footer.bottom {
       <span class="name">Fainto</span>
     </a>
     <div class="top-actions">
-      <a class="top-link" href="./app.html?mode=connect">Reconnect</a>
-      <a class="top-link" href="./app.html?mode=signin">Sign in</a>
-      <button class="top-link" id="dashSignout" type="button">Disconnect</button>
+      <a class="top-link" href="./app.html?mode=connect" id="dashReconnect" hidden>Reconnect</a>
+      <a class="top-link" href="./app.html?mode=signin" id="dashSignin" hidden>Sign in</a>
+      <button class="top-link" id="dashSignout" type="button" hidden>Disconnect</button>
       <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light/dark theme" title="Toggle theme">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
       </button>
@@ -761,10 +785,12 @@ footer.bottom {
 
   <footer class="bottom">
     Fainto — processed entirely on this device. Nothing is uploaded.
+    <button class="foot-link" id="whatsNew" type="button">What&rsquo;s new</button>
   </footer>
 </div>
 
-<script src="dashboard-core.js?v=20260718a"></script>
+<script src="dashboard-core.js?v=20260718b"></script>
+<script src="changelog.js?v=20260718b"></script>
 <script>
 (function () {
   'use strict';
@@ -780,8 +806,31 @@ footer.bottom {
   applyStoredTheme();
 
   var dashSignout = document.getElementById('dashSignout');
+  var dashReconnect = document.getElementById('dashReconnect');
+  var dashSignin = document.getElementById('dashSignin');
+
+  // The header is state-driven: this page has no Firebase, so "connected" means
+  // a paired bundle is in sessionStorage. Showing Disconnect/Reconnect to a
+  // signed-out visitor (or to someone who just opened a local file) is a lie.
+  //   'connected' — paired/signed-in bundle in sessionStorage
+  //   'local'     — a file the visitor opened in this tab; nothing to disconnect
+  //   'empty'     — nothing loaded; only offer the way in
+  function setHeaderState(state) {
+    if (dashReconnect) dashReconnect.hidden = state !== 'connected';
+    if (dashSignin) dashSignin.hidden = state === 'connected';
+    if (dashSignout) {
+      dashSignout.hidden = state === 'empty';
+      dashSignout.textContent = state === 'local' ? 'Close file' : 'Disconnect';
+    }
+  }
+
   if (dashSignout) {
     dashSignout.addEventListener('click', function () {
+      // A locally-opened file never touched Firebase — just drop it in-tab.
+      if (dashSignout.textContent === 'Close file') {
+        renderEmptyState(null); // resets the header to the 'empty' state
+        return;
+      }
       // This viewer is offline (no Firebase). Drop the in-tab data and hand off to
       // app.html, which performs the actual Firebase sign-out.
       try { sessionStorage.removeItem('fainto_bundle'); } catch (e) {}
@@ -822,6 +871,17 @@ footer.bottom {
     });
   }
 
+  // True when a sanitized bundle actually carries at least one Fainto section.
+  function hasAnyData(b) {
+    if (!b) return false;
+    var nw = b.netWorth || {};
+    return (b.transactions && b.transactions.length > 0) ||
+      (nw.assets && nw.assets.length > 0) ||
+      (nw.liabilities && nw.liabilities.length > 0) ||
+      (b.budgets && b.budgets.length > 0) ||
+      (b.bills && b.bills.length > 0);
+  }
+
   function resolveFromSession() {
     var raw = null;
     try { raw = sessionStorage.getItem('fainto_bundle'); } catch (e) { return null; }
@@ -844,6 +904,7 @@ footer.bottom {
   }
 
   function renderEmptyState(errorMessage) {
+    setHeaderState('empty');
     appEl.innerHTML =
       '<section class="card empty-card">' +
         '<div class="empty-mark">' +
@@ -871,6 +932,7 @@ footer.bottom {
         if (/\.csv$/i.test(file.name || '')) {
           var result = core.parseCsvToBundle(text);
           if (result.bundle) {
+            setHeaderState('local');
             core.renderDashboard(appEl, result.bundle, { interactive: false });
             showImportNotice('Imported ' + result.imported + ' transactions · ' + result.skipped + ' rows skipped');
           } else {
@@ -879,7 +941,12 @@ footer.bottom {
           return;
         }
         var bundle = core.resolveFromFileText(text);
+        // sanitizeBundle defaults every field, so ANY JSON object survives it — package.json
+        // would open as a valid-looking all-zero dashboard. Require at least one real Fainto
+        // section before we claim the file is an export.
+        if (bundle && !hasAnyData(bundle)) bundle = null;
         if (bundle) {
+          setHeaderState('local');
           core.renderDashboard(appEl, bundle, { interactive: false });
         } else {
           renderEmptyState('The selected file was not a valid Fainto export.');
@@ -893,10 +960,16 @@ footer.bottom {
   }
 
   function boot() {
-    var bundle = resolveFromSession();
+    // ?open= is an explicit "I want to open a file" intent from the web start page. It has
+    // to win over a bundle left in sessionStorage by an earlier pairing, or a tab that has
+    // ever paired can never reach the file picker again.
+    var wantsOpen = /[?&]open=/.test(location.search);
+    var bundle = wantsOpen ? null : resolveFromSession();
     if (bundle) {
+      setHeaderState('connected');
       core.renderDashboard(appEl, bundle, { interactive: false });
-    } else if (/[?&]open=/.test(location.search)) {
+    } else if (wantsOpen) {
+      setHeaderState('empty');
       renderEmptyState(null);
     } else {
       location.replace('./');
@@ -904,6 +977,21 @@ footer.bottom {
   }
 
   boot();
+
+  // Back-button (bfcache) restore does not re-run this script, so a page frozen while it
+  // still held data would come back showing that data under a "connected" header even
+  // though Disconnect already cleared the session. Re-run the state machine on restore.
+  window.addEventListener('pageshow', function (evt) {
+    if (evt.persisted) boot();
+  });
+
+  // "What's new" — the Android release-notes dialog, ported. Auto-shows once per version;
+  // the footer link reopens it on demand.
+  if (window.FaintoChangelog) {
+    var whatsNew = document.getElementById('whatsNew');
+    if (whatsNew) whatsNew.addEventListener('click', window.FaintoChangelog.open);
+    window.FaintoChangelog.maybeShow();
+  }
 }());
 </script>
 </body>

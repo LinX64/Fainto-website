@@ -94,12 +94,18 @@
     if (!p) return '';
     return '<svg class="fic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + p + '</svg>';
   }
-  function catMeta(category) { return CATS[category] || CATS.OTHER; }
+  // own() everywhere below: a bare `CATS[c]` also finds inherited Object.prototype members,
+  // so a category of 'constructor' or 'toString' resolves to a function instead of falling
+  // back to OTHER — which then renders style="background:undefined" and drops the icon.
+  function own(obj, key) {
+    return typeof key === 'string' && Object.prototype.hasOwnProperty.call(obj, key);
+  }
+  function catMeta(category) { return own(CATS, category) ? CATS[category] : CATS.OTHER; }
   function txIconName(iconKey, category) {
-    if (iconKey && ICONKEY_SVG[iconKey]) return ICONKEY_SVG[iconKey];
+    if (own(ICONKEY_SVG, iconKey)) return ICONKEY_SVG[iconKey];
     return catMeta(category).icon;
   }
-  function iconKeySvg(iconKey) { return iconSvg(ICONKEY_SVG[iconKey] || 'circle'); }
+  function iconKeySvg(iconKey) { return iconSvg(own(ICONKEY_SVG, iconKey) ? ICONKEY_SVG[iconKey] : 'circle'); }
 
   function sanitizeTransaction(raw) {
     if (!isObj(raw)) return null;
@@ -190,8 +196,12 @@
     if (!isObj(raw)) return null;
     var fpRaw = isObj(raw.financialProfile) ? raw.financialProfile : {};
     var nwRaw = isObj(raw.netWorth) ? raw.netWorth : {};
+    // Currency is the one bundle field that reaches innerHTML unescaped: when Intl rejects
+    // it, formatMoney's fallback concatenates it raw. Constrain it to an ISO-4217 shape at
+    // the door so a hand-edited or hostile export can never smuggle markup through.
+    var rawCurrency = str(fpRaw.currency, 'PLN').toUpperCase();
     var financialProfile = {
-      currency: str(fpRaw.currency, 'PLN'),
+      currency: /^[A-Z]{3}$/.test(rawCurrency) ? rawCurrency : 'PLN',
       fullName: typeof fpRaw.fullName === 'string' ? fpRaw.fullName : '',
     };
     var transactions = asArray(raw.transactions).map(sanitizeTransaction).filter(Boolean);
@@ -489,7 +499,10 @@
         style: 'currency', currency: currency, currencyDisplay: 'symbol',
       }).format(v);
     } catch (e) {
-      return v.toFixed(2) + ' ' + (currency || '');
+      // Every caller injects this return value into innerHTML. Transaction/recurring rows
+      // carry their own un-normalised `currency`, so escape the fallback rather than trust
+      // that sanitizeBundle covered the field this call came from.
+      return v.toFixed(2) + ' ' + escapeHtml(currency || '');
     }
   }
 
@@ -760,7 +773,11 @@
     var list = txns;
     if (q) {
       list = list.filter(function (t) {
-        return (t.category && t.category.toLowerCase().indexOf(q) !== -1) ||
+        // Match the LABEL the row actually prints too: rows show titleCase(category), so
+        // searching "eating out" must find an EATING_OUT transaction.
+        var label = t.category ? titleCase(t.category).toLowerCase() : '';
+        return (label && label.indexOf(q) !== -1) ||
+               (t.category && t.category.toLowerCase().indexOf(q) !== -1) ||
                (t.note && t.note.toLowerCase().indexOf(q) !== -1);
       });
     }
