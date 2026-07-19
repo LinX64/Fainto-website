@@ -130,6 +130,10 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+::selection {
+  background: var(--violet);
+  color: var(--on-primary);
+}
 img {
   max-width: 100%;
   display: block;
@@ -1402,6 +1406,18 @@ html.js-motion .reveal {
 html.js-motion .reveal.in {
   opacity: 1;
   transform: none;
+}
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+  .nav,
+  .hero-mesh,
+  .hero-wash,
+  .spark {
+    display: none;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   html {

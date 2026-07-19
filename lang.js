@@ -9,12 +9,28 @@
     tr: { flag: "🇹🇷", name: "Türkçe" },
     fa: { flag: "", name: "فارسی" },
   };
-  var DICT = window.__I18N || {};
   var OG_LOCALE = { en: "en_US", de: "de_DE", pl: "pl_PL", tr: "tr_TR", fa: "fa_IR" };
+  // English needs no file — the DOM's authored text is the English copy, restored via the
+  // data-i18n-en snapshot below. Non-English dictionaries load on demand, one file per
+  // language, so a visitor only ever downloads the language they actually see.
+  var SELF_SRC = (document.currentScript && document.currentScript.src) || "";
+  var BASE = SELF_SRC.replace(/lang\.js(\?.*)?$/, "");
+
+  function ensureLang(lang, cb) {
+    if (lang === "en" || (window.FAINTO_I18N && window.FAINTO_I18N[lang])) {
+      cb();
+      return;
+    }
+    var s = document.createElement("script");
+    s.src = BASE + "i18n." + lang + ".js?v=20260719";
+    s.onload = cb;
+    s.onerror = cb; // fail open — apply() falls back to the English snapshot
+    document.head.appendChild(s);
+  }
 
   function apply(lang) {
     if (LANGS.indexOf(lang) < 0) lang = "en";
-    var d = lang === "en" ? null : DICT[lang];
+    var d = lang === "en" ? null : window.FAINTO_I18N && window.FAINTO_I18N[lang];
 
     var nodes = document.querySelectorAll("[data-i18n]");
     for (var i = 0; i < nodes.length; i++) {
@@ -68,7 +84,9 @@
       if (LANGS.indexOf(primary) >= 0) cur = primary;
     }
   } catch (e) {}
-  apply(cur);
+  ensureLang(cur, function () {
+    apply(cur);
+  });
 
   var wrap = document.querySelector("[data-lang]");
   if (!wrap) return;
@@ -94,7 +112,9 @@
       try {
         localStorage.setItem("fainto-lang", cur);
       } catch (e) {}
-      apply(cur);
+      ensureLang(cur, function () {
+        apply(cur);
+      });
       close();
       btn.focus();
     });
