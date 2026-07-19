@@ -1368,7 +1368,7 @@ textarea.input {
     grid-template-columns: 1fr;
   }
 }
-@media (max-width: 680px) {
+@media (max-width: 729px) {
   .nav-inner {
     flex-wrap: wrap;
     row-gap: 2px;
