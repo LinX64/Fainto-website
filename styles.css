@@ -747,11 +747,12 @@ html.js-motion .blob-d {
   position: relative;
   z-index: 1;
   margin: 0;
-  padding: 11px;
+  padding: 10px;
   border-radius: var(--r-device);
   background: var(--bezel);
   box-shadow:
-    inset 0 0 0 1.5px color-mix(in srgb, var(--surface-4), white 6%),
+    inset 0 0 0 1.5px color-mix(in srgb, var(--surface-4), white 14%),
+    inset 0 0 0 4px color-mix(in srgb, var(--bezel), black 40%),
     var(--el-2),
     var(--el-3);
 }
@@ -759,18 +760,19 @@ html.js-motion .blob-d {
 .hero-shot::before {
   content: "";
   position: absolute;
-  right: -2px;
-  width: 3px;
+  right: -2.5px;
+  width: 3.5px;
   border-radius: 0 3px 3px 0;
-  background: color-mix(in srgb, var(--surface-4), black 34%);
+  background: color-mix(in srgb, var(--surface-4), black 30%);
+  box-shadow: inset 0.5px 0.5px 0 color-mix(in srgb, var(--surface-4), white 12%);
 }
 .hero-shot::before {
-  top: 23%;
-  height: 44px;
+  top: 20%;
+  height: 76px;
 }
 .hero-shot::after {
-  top: 39%;
-  height: 68px;
+  top: calc(20% + 90px);
+  height: 42px;
 }
 .cam {
   position: absolute;
@@ -795,13 +797,12 @@ html.js-motion .blob-d {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
   border-radius: var(--r-device-inner);
-  gap: 6%;
 }
 .shot-track::-webkit-scrollbar {
   display: none;
 }
 .shot-slide {
-  flex: 0 0 94%;
+  flex: 0 0 100%;
   scroll-snap-align: center;
 }
 .shot-slide picture {
@@ -814,6 +815,8 @@ html.js-motion .blob-d {
   border-radius: var(--r-device-inner);
 }
 .shot-nav {
+  position: relative;
+  z-index: 1;
   display: flex;
   justify-content: center;
   margin-top: 10px;
