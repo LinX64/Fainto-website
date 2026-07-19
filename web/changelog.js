@@ -81,6 +81,8 @@
     'font:inherit;font-size:15px;font-weight:600;cursor:pointer;transition:opacity 150ms var(--ease-std)}',
     '.cl-got:hover{opacity:0.88}',
     '.cl-got:focus-visible,.cl-past-sum:focus-visible{outline:2px solid var(--acc-brand);outline-offset:2px}',
+    '@keyframes cl-enter{from{opacity:0;transform:translateY(8px) scale(.98)}}',
+    '@media (prefers-reduced-motion:no-preference){.cl-dialog[open]{animation:cl-enter 220ms var(--ease-std)}}',
     '@media (prefers-reduced-motion:reduce){.cl-dialog{animation:none}}',
   ].join('');
 

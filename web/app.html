@@ -312,7 +312,7 @@ footer.site-footer a:focus-visible { outline: 2px solid var(--acc-brand); outlin
 @media (prefers-reduced-motion: no-preference) {
   .spinner { animation: spin .7s linear infinite; }
   .progress-fill { transition: width .2s var(--ease-std); }
-  .btn, .field input, .link-btn, .topnav a {
+  .btn, .field input, .link-btn, .topnav a, .tx-act, .cat-chip, .icon-opt {
     transition: background-color 150ms var(--ease-std), border-color 150ms var(--ease-std), color 150ms var(--ease-std);
   }
   @keyframes enter { from { opacity: 0; transform: translateY(8px); } }
@@ -769,6 +769,7 @@ html[data-view="account"] #expenseForm { max-width: 640px; }
   font-family: inherit;
 }
 .tx-act:hover { background: var(--surface-2); }
+.tx-act:active { background: var(--surface-2); }
 .tx-act:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }
 /* Delete stays quiet at rest (a wall of coral pills would outshout the data); danger colour on intent. */
 .tx-act-del { color: var(--muted); border-color: var(--line); }
@@ -796,6 +797,7 @@ html[data-view="account"] #expenseForm { max-width: 640px; }
 .cat-chip .cat-chip-ic .fic { width: 19px; height: 19px; }
 .cat-chip .cat-chip-label { color: var(--muted); }
 .cat-chip:hover { border-color: var(--outline); }
+.cat-chip:active { border-color: var(--outline); }
 .cat-chip[aria-pressed="true"] { border-color: var(--chip); background: var(--surface-2); }
 .cat-chip[aria-pressed="true"] .cat-chip-label { color: var(--text); }
 .cat-chip:focus-visible { outline: 2px solid var(--acc-brand); outline-offset: 2px; }

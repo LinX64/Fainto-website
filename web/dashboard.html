@@ -267,6 +267,8 @@ header.top {
   border-color: var(--outline);
 }
 
+.icon-btn:active { background: var(--surface-2); }
+
 .icon-btn svg { width: 20px; height: 20px; }
 
 a.brand { text-decoration: none; color: inherit; }
@@ -286,6 +288,7 @@ a.brand { text-decoration: none; color: inherit; }
   transition: background 150ms var(--ease-std), border-color 150ms var(--ease-std), color 150ms var(--ease-std);
 }
 .top-link:hover { color: var(--text); background: var(--surface-2); border-color: var(--outline); }
+.top-link:active { background: var(--surface-2); border-color: var(--outline); }
 /* `display: inline-flex` above outranks the UA `[hidden] { display: none }` rule. */
 .top-link[hidden] { display: none; }
 
