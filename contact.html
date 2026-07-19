@@ -186,7 +186,7 @@
       </div>
     </header>
     <main id="main" tabindex="-1">
-      <section class="section page">
+      <section class="section page page-contact">
         <div class="wrap prose">
           <p class="eyebrow" data-i18n="contact.eyebrow">Contact</p>
           <h1 data-i18n="contact.h1">Get in touch.</h1>
@@ -217,8 +217,9 @@
               <textarea class="input" name="message" rows="6" required minlength="10" maxlength="3000"></textarea>
             </label>
             <button class="btn-primary" type="submit" data-i18n="contact.form.submit">Send message</button>
-            <p class="form-note" data-form-note role="status" hidden data-i18n="contact.form.note">
-              Opening your email app&hellip;
+            <p class="form-note" data-form-note role="status" hidden data-i18n="contact.form.note" data-i18n-html="1">
+              Your email app should open now &mdash; if nothing happens, email
+              <a href="mailto:support@fainto.app">support@fainto.app</a> directly.
             </p>
           </form>
         </div>
@@ -231,6 +232,20 @@
         </a>
         <div class="footer-meta">
           <span data-i18n="footer.tagline">Private by architecture, not by policy.</span>
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.vaultai.app"
+            target="_blank"
+            rel="noopener"
+            aria-label="Get it on Google Play (opens in a new tab)"
+            data-i18n-attr="aria-label:store.googleplay.aria"
+            data-i18n="footer.link.googleplay"
+            >Google&nbsp;Play</a
+          >
+          <span aria-hidden="true">·</span>
+          <a href="web/" aria-label="Open Fainto Web in your browser" data-i18n-attr="aria-label:store.web.aria"
+            >Fainto&nbsp;Web</a
+          >
           <span aria-hidden="true">·</span> <a href="about.html" data-i18n="footer.link.about">About</a>
           <span aria-hidden="true">·</span>
           <a href="features.html" data-i18n="footer.link.features">Features</a>

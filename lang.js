@@ -10,6 +10,7 @@
     fa: { flag: "", name: "فارسی" },
   };
   var DICT = window.__I18N || {};
+  var OG_LOCALE = { en: "en_US", de: "de_DE", pl: "pl_PL", tr: "tr_TR", fa: "fa_IR" };
 
   function apply(lang) {
     if (LANGS.indexOf(lang) < 0) lang = "en";
@@ -43,6 +44,9 @@
 
     root.setAttribute("lang", lang);
     root.setAttribute("dir", lang === "fa" ? "rtl" : "ltr");
+
+    var ogLocale = document.querySelector('meta[property="og:locale"]');
+    if (ogLocale) ogLocale.setAttribute("content", OG_LOCALE[lang] || "en_US");
 
     var fl = document.querySelector("[data-lang-flag]");
     var nm = document.querySelector("[data-lang-name]");

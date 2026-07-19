@@ -181,7 +181,7 @@
       </div>
     </header>
     <main id="main" tabindex="-1">
-      <section class="section page">
+      <section class="section page page-features">
         <div class="wrap prose">
           <p class="eyebrow" data-i18n="features.eyebrow">Features</p>
           <h1 data-i18n="features.h1">What Fainto does</h1>
@@ -238,6 +238,22 @@
             to translate a US-only app in your head.
           </p>
           <h2 data-i18n="features.h2.seeit">See it in the app</h2>
+          <figure class="hero-shot features-shot">
+            <span class="cam" aria-hidden="true"></span>
+            <picture>
+              <source srcset="assets/screens/overview.avif" type="image/avif" />
+              <source srcset="assets/screens/overview.webp" type="image/webp" />
+              <img
+                src="assets/screens/overview.png"
+                width="640"
+                height="1316"
+                loading="lazy"
+                decoding="async"
+                alt="Fainto's overview: net income 12 482,22 zł per month (up 56.7%), split into income 12.5K, expenses 1.0K and savings 7.1K zł, above AI insights, accounts and bills."
+                data-i18n-attr="alt:hero.slide1.alt"
+              />
+            </picture>
+          </figure>
           <p data-i18n="features.seeit.p" data-i18n-html="1">
             The Overview brings it together: net income <strong>12 482,22 zł</strong> a month (up 56.7%), split into
             income <strong>12.5K</strong>, expenses <strong>1.0K</strong>, and savings <strong>7.1K zł</strong>, above
@@ -248,6 +264,11 @@
               >get Fainto on Google Play</a
             >
             — and iOS is coming soon.
+          </p>
+          <h2 data-i18n="features.h2.web">Also on the web</h2>
+          <p data-i18n="features.web.p" data-i18n-html="1">
+            Prefer a bigger screen? Pair your phone with <a href="web/">Fainto Web</a> to view your dashboard in the
+            browser — no account required, and nothing leaves your phone unless you choose to sign in.
           </p>
           <p data-i18n="features.closing.p" data-i18n-html="1">
             Still deciding? <a href="faq.html">See frequently asked questions</a>, or head
@@ -266,6 +287,20 @@
         </a>
         <div class="footer-meta">
           <span data-i18n="footer.tagline">Private by architecture, not by policy.</span>
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.vaultai.app"
+            target="_blank"
+            rel="noopener"
+            aria-label="Get it on Google Play (opens in a new tab)"
+            data-i18n-attr="aria-label:store.googleplay.aria"
+            data-i18n="footer.link.googleplay"
+            >Google&nbsp;Play</a
+          >
+          <span aria-hidden="true">·</span>
+          <a href="web/" aria-label="Open Fainto Web in your browser" data-i18n-attr="aria-label:store.web.aria"
+            >Fainto&nbsp;Web</a
+          >
           <span aria-hidden="true">·</span>
           <a href="about.html" data-i18n="footer.link.about">About</a> <span aria-hidden="true">·</span>
           <a href="features.html" data-i18n="footer.link.features">Features</a> <span aria-hidden="true">·</span>

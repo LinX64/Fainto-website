@@ -92,14 +92,6 @@
               },
               {
                 "@type": "Question",
-                "name": "Does Fainto work offline?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes. The AI models and your data live on the phone, so Fainto works fully offline — you can log spending and get coaching with the network off. Only the optional extras need a connection: opt-in Cloud AI, account backup & sync, and web pairing — all off unless you turn them on."
-                }
-              },
-              {
-                "@type": "Question",
                 "name": "What data does Fainto collect?",
                 "acceptedAnswer": {
                   "@type": "Answer",
@@ -116,6 +108,30 @@
               },
               {
                 "@type": "Question",
+                "name": "Does Fainto show ads?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "No. There are no ads in Fainto — nothing is wedged between your transactions — and there are no trackers, analytics, or cookies watching what you do."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Is Fainto really private if it uses AI?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. In the default on-device mode, the AI runs on your phone, so using the coach does not send your data anywhere. Because the models are local, private AI and privacy are not a trade-off in Fainto — the coaching happens on your phone by default."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What does \"private by architecture, not by policy\" mean?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "It means the privacy guarantee is built into how the app works, not just promised in a document. Your money data stays on the device because it has nowhere else to go by default, rather than because a policy says a company won't misuse it."
+                }
+              },
+              {
+                "@type": "Question",
                 "name": "What AI models run on-device in Fainto?",
                 "acceptedAnswer": {
                   "@type": "Answer",
@@ -128,6 +144,22 @@
                 "acceptedAnswer": {
                   "@type": "Answer",
                   "text": "Cloud AI is an optional Premium feature that routes your questions to a larger model through OpenRouter when your phone can't hold one big enough. It is strictly opt-in and off by default — if you never enable it, nothing about your money is ever sent to the cloud."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does the on-device AI coach work?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "One of five local language models reads your spending and answers your money questions directly on the phone. You can pick a lightweight model for speed or a larger one for more depth, and it all runs without a round trip to the cloud."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Does Fainto work offline?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. The AI models and your data live on the phone, so Fainto works fully offline — you can log spending and get coaching with the network off. Only the optional extras need a connection: opt-in Cloud AI, account backup & sync, and web pairing — all off unless you turn them on."
                 }
               },
               {
@@ -156,14 +188,6 @@
               },
               {
                 "@type": "Question",
-                "name": "Does Fainto show ads?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "No. There are no ads in Fainto — nothing is wedged between your transactions — and there are no trackers, analytics, or cookies watching what you do."
-                }
-              },
-              {
-                "@type": "Question",
                 "name": "Where can I download Fainto?",
                 "acceptedAnswer": {
                   "@type": "Answer",
@@ -176,30 +200,6 @@
                 "acceptedAnswer": {
                   "@type": "Answer",
                   "text": "No. Fainto provides educational information to help you understand and plan your money, including tax estimates. It is not financial or tax advice."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "How does the on-device AI coach work?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "One of five local language models reads your spending and answers your money questions directly on the phone. You can pick a lightweight model for speed or a larger one for more depth, and it all runs without a round trip to the cloud."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "Is Fainto really private if it uses AI?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "Yes. In the default on-device mode, the AI runs on your phone, so using the coach does not send your data anywhere. Because the models are local, private AI and privacy are not a trade-off in Fainto — the coaching happens on your phone by default."
-                }
-              },
-              {
-                "@type": "Question",
-                "name": "What does \"private by architecture, not by policy\" mean?",
-                "acceptedAnswer": {
-                  "@type": "Answer",
-                  "text": "It means the privacy guarantee is built into how the app works, not just promised in a document. Your money data stays on the device because it has nowhere else to go by default, rather than because a policy says a company won't misuse it."
                 }
               }
             ]
@@ -314,14 +314,15 @@
       </div>
     </header>
     <main id="main" tabindex="-1">
-      <section class="section page">
+      <section class="section page page-faq">
         <div class="wrap prose">
           <p class="eyebrow" data-i18n="faq.eyebrow">FAQ</p>
           <h1 data-i18n="faq.h1">Fainto — frequently asked questions</h1>
 
           <div class="faq-list">
+            <h2 class="faq-group" data-i18n="faq.group.pricing">Pricing &amp; access</h2>
             <details class="faq-item" open>
-              <summary><h2 class="faq-q" data-i18n="faq.q1">Is Fainto free?</h2></summary>
+              <summary><h3 class="faq-q" data-i18n="faq.q1">Is Fainto free?</h3></summary>
               <p data-i18n="faq.a1">
                 Yes. Fainto is free to use, and the core budget tracker and free-tier AI coach cost nothing. A Premium
                 tier unlocks larger on-device AI models and optional Cloud AI, but you can track your money and get
@@ -329,22 +330,15 @@
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q2">Does Fainto need an account?</h2></summary>
+              <summary><h3 class="faq-q" data-i18n="faq.q2">Does Fainto need an account?</h3></summary>
               <p data-i18n="faq.a2">
                 No account is required. You can open Fainto and start tracking immediately. Accounts are optional, so
                 you never have to hand over an email to see your own money.
               </p>
             </details>
+            <h2 class="faq-group" data-i18n="faq.group.privacy">Privacy &amp; data</h2>
             <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q3">Does Fainto work offline?</h2></summary>
-              <p data-i18n="faq.a3">
-                Yes. The AI models and your data live on the phone, so Fainto works fully offline — you can log spending
-                and get coaching with the network off. Only the optional extras need a connection: opt-in Cloud AI,
-                account backup &amp; sync, and web pairing — all off unless you turn them on.
-              </p>
-            </details>
-            <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q4">What data does Fainto collect?</h2></summary>
+              <summary><h3 class="faq-q" data-i18n="faq.q4">What data does Fainto collect?</h3></summary>
               <p data-i18n="faq.a4">
                 By default, nothing about your money leaves the device. The website's pages set no cookies and run no
                 analytics or trackers (the optional web companion talks to Google's Firebase only for the pairing or
@@ -354,7 +348,7 @@
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q5">Is my financial data uploaded to the cloud?</h2></summary>
+              <summary><h3 class="faq-q" data-i18n="faq.q5">Is my financial data uploaded to the cloud?</h3></summary>
               <p data-i18n="faq.a5">
                 Not by default. Fainto is private by architecture, not by policy: your data has nowhere to go unless you
                 choose it. Opt-in Cloud AI sends your message with an aggregated summary, and an optional account backs
@@ -363,75 +357,14 @@
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q6">What AI models run on-device in Fainto?</h2></summary>
-              <p data-i18n="faq.a6">
-                Five language models run locally on your phone. On the free tier: SmolLM 135M and Qwen 2.5 0.5B. On
-                Premium: Qwen 2.5 1.5B, DeepSeek R1 1.5B, and Phi-4 Mini 3.8B. All five run on-device, so the coaching
-                happens on your phone rather than on a server.
-              </p>
-            </details>
-            <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q7">What is Cloud AI and is it optional?</h2></summary>
-              <p data-i18n="faq.a7">
-                Cloud AI is an optional Premium feature that routes your questions to a larger model through OpenRouter
-                when your phone can't hold one big enough. It is strictly opt-in and off by default — if you never
-                enable it, nothing about your money is ever sent to the cloud.
-              </p>
-            </details>
-            <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q8">Which countries does the tax engine support?</h2></summary>
-              <p data-i18n="faq.a8">
-                Fainto's built-in income-tax engine covers 45 countries — 44 country configurations plus a bespoke
-                Poland engine — so the numbers reflect where you actually live rather than a generic default.
-              </p>
-            </details>
-            <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q9">How many languages does Fainto support?</h2></summary>
-              <p data-i18n="faq.a9">
-                The interface is localised in 25 languages, so the app reads naturally in your own language and pairs
-                with the multi-country tax engine for your region.
-              </p>
-            </details>
-            <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q10">Is there an iPhone or iOS version of Fainto?</h2></summary>
-              <p data-i18n="faq.a10">
-                Not yet. Fainto is available on Android now, and an iOS version is coming soon. There is no iPhone
-                download link at this time.
-              </p>
-            </details>
-            <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q11">Does Fainto show ads?</h2></summary>
+              <summary><h3 class="faq-q" data-i18n="faq.q11">Does Fainto show ads?</h3></summary>
               <p data-i18n="faq.a11">
                 No. There are no ads in Fainto — nothing is wedged between your transactions — and there are no
                 trackers, analytics, or cookies watching what you do.
               </p>
             </details>
             <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q12">Where can I download Fainto?</h2></summary>
-              <p data-i18n="faq.a12" data-i18n-html="1">
-                Fainto is on Google Play, listed as "Fainto: AI Finance Coach", at
-                <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener"
-                  >https://play.google.com/store/apps/details?id=com.vaultai.app</a
-                >. It is an Android app; iOS is coming soon.
-              </p>
-            </details>
-            <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q13">Is Fainto financial advice?</h2></summary>
-              <p data-i18n="faq.a13">
-                No. Fainto provides educational information to help you understand and plan your money, including tax
-                estimates. It is not financial or tax advice.
-              </p>
-            </details>
-            <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q14">How does the on-device AI coach work?</h2></summary>
-              <p data-i18n="faq.a14">
-                One of five local language models reads your spending and answers your money questions directly on the
-                phone. You can pick a lightweight model for speed or a larger one for more depth, and it all runs
-                without a round trip to the cloud.
-              </p>
-            </details>
-            <details class="faq-item">
-              <summary><h2 class="faq-q" data-i18n="faq.q15">Is Fainto really private if it uses AI?</h2></summary>
+              <summary><h3 class="faq-q" data-i18n="faq.q15">Is Fainto really private if it uses AI?</h3></summary>
               <p data-i18n="faq.a15">
                 Yes. In the default on-device mode, the AI runs on your phone, so using the coach does not send your
                 data anywhere. Because the models are local, private AI and privacy are not a trade-off in Fainto —
@@ -440,12 +373,84 @@
             </details>
             <details class="faq-item">
               <summary>
-                <h2 class="faq-q" data-i18n="faq.q16">What does "private by architecture, not by policy" mean?</h2>
+                <h3 class="faq-q" data-i18n="faq.q16">What does "private by architecture, not by policy" mean?</h3>
               </summary>
               <p data-i18n="faq.a16">
                 It means the privacy guarantee is built into how the app works, not just promised in a document. Your
                 money data stays on the device because it has nowhere else to go by default, rather than because a
                 policy says a company won't misuse it.
+              </p>
+            </details>
+            <h2 class="faq-group" data-i18n="faq.group.ai">AI &amp; on-device models</h2>
+            <details class="faq-item">
+              <summary><h3 class="faq-q" data-i18n="faq.q6">What AI models run on-device in Fainto?</h3></summary>
+              <p data-i18n="faq.a6">
+                Five language models run locally on your phone. On the free tier: SmolLM 135M and Qwen 2.5 0.5B. On
+                Premium: Qwen 2.5 1.5B, DeepSeek R1 1.5B, and Phi-4 Mini 3.8B. All five run on-device, so the coaching
+                happens on your phone rather than on a server.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary><h3 class="faq-q" data-i18n="faq.q7">What is Cloud AI and is it optional?</h3></summary>
+              <p data-i18n="faq.a7">
+                Cloud AI is an optional Premium feature that routes your questions to a larger model through OpenRouter
+                when your phone can't hold one big enough. It is strictly opt-in and off by default — if you never
+                enable it, nothing about your money is ever sent to the cloud.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary><h3 class="faq-q" data-i18n="faq.q14">How does the on-device AI coach work?</h3></summary>
+              <p data-i18n="faq.a14">
+                One of five local language models reads your spending and answers your money questions directly on the
+                phone. You can pick a lightweight model for speed or a larger one for more depth, and it all runs
+                without a round trip to the cloud.
+              </p>
+            </details>
+            <h2 class="faq-group" data-i18n="faq.group.availability">Coverage &amp; availability</h2>
+            <details class="faq-item">
+              <summary><h3 class="faq-q" data-i18n="faq.q3">Does Fainto work offline?</h3></summary>
+              <p data-i18n="faq.a3">
+                Yes. The AI models and your data live on the phone, so Fainto works fully offline — you can log spending
+                and get coaching with the network off. Only the optional extras need a connection: opt-in Cloud AI,
+                account backup &amp; sync, and web pairing — all off unless you turn them on.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary><h3 class="faq-q" data-i18n="faq.q8">Which countries does the tax engine support?</h3></summary>
+              <p data-i18n="faq.a8">
+                Fainto's built-in income-tax engine covers 45 countries — 44 country configurations plus a bespoke
+                Poland engine — so the numbers reflect where you actually live rather than a generic default.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary><h3 class="faq-q" data-i18n="faq.q9">How many languages does Fainto support?</h3></summary>
+              <p data-i18n="faq.a9">
+                The interface is localised in 25 languages, so the app reads naturally in your own language and pairs
+                with the multi-country tax engine for your region.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary><h3 class="faq-q" data-i18n="faq.q10">Is there an iPhone or iOS version of Fainto?</h3></summary>
+              <p data-i18n="faq.a10">
+                Not yet. Fainto is available on Android now, and an iOS version is coming soon. There is no iPhone
+                download link at this time.
+              </p>
+            </details>
+            <details class="faq-item">
+              <summary><h3 class="faq-q" data-i18n="faq.q12">Where can I download Fainto?</h3></summary>
+              <p data-i18n="faq.a12" data-i18n-html="1">
+                Fainto is on Google Play, listed as "Fainto: AI Finance Coach", at
+                <a href="https://play.google.com/store/apps/details?id=com.vaultai.app" target="_blank" rel="noopener"
+                  >https://play.google.com/store/apps/details?id=com.vaultai.app</a
+                >. It is an Android app; iOS is coming soon.
+              </p>
+            </details>
+            <h2 class="faq-group" data-i18n="faq.group.legal">Legal</h2>
+            <details class="faq-item">
+              <summary><h3 class="faq-q" data-i18n="faq.q13">Is Fainto financial advice?</h3></summary>
+              <p data-i18n="faq.a13">
+                No. Fainto provides educational information to help you understand and plan your money, including tax
+                estimates. It is not financial or tax advice.
               </p>
             </details>
           </div>
@@ -467,6 +472,20 @@
         </a>
         <div class="footer-meta">
           <span data-i18n="footer.tagline">Private by architecture, not by policy.</span>
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.vaultai.app"
+            target="_blank"
+            rel="noopener"
+            aria-label="Get it on Google Play (opens in a new tab)"
+            data-i18n-attr="aria-label:store.googleplay.aria"
+            data-i18n="footer.link.googleplay"
+            >Google&nbsp;Play</a
+          >
+          <span aria-hidden="true">·</span>
+          <a href="web/" aria-label="Open Fainto Web in your browser" data-i18n-attr="aria-label:store.web.aria"
+            >Fainto&nbsp;Web</a
+          >
           <span aria-hidden="true">·</span> <a href="about.html" data-i18n="footer.link.about">About</a>
           <span aria-hidden="true">·</span>
           <a href="features.html" data-i18n="footer.link.features">Features</a>

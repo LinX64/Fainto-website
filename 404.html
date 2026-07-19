@@ -151,9 +151,10 @@
       </div>
     </header>
     <main id="main" tabindex="-1">
-      <section class="section page">
+      <section class="section page page-404">
         <div class="wrap prose">
           <p class="eyebrow" data-i18n="err404.eyebrow">404</p>
+          <p class="err-code" aria-hidden="true">404</p>
           <h1 data-i18n="err404.h1">This page moved, or never existed.</h1>
           <p data-i18n="err404.body1">
             The link you followed doesn&rsquo;t lead anywhere on fainto.app &mdash; it may have changed, or it was never
@@ -177,6 +178,20 @@
         </a>
         <div class="footer-meta">
           <span data-i18n="footer.tagline">Private by architecture, not by policy.</span>
+          <span aria-hidden="true">·</span>
+          <a
+            href="https://play.google.com/store/apps/details?id=com.vaultai.app"
+            target="_blank"
+            rel="noopener"
+            aria-label="Get it on Google Play (opens in a new tab)"
+            data-i18n-attr="aria-label:store.googleplay.aria"
+            data-i18n="footer.link.googleplay"
+            >Google&nbsp;Play</a
+          >
+          <span aria-hidden="true">·</span>
+          <a href="/web/" aria-label="Open Fainto Web in your browser" data-i18n-attr="aria-label:store.web.aria"
+            >Fainto&nbsp;Web</a
+          >
           <span aria-hidden="true">·</span> <a href="/about.html" data-i18n="footer.link.about">About</a>
           <span aria-hidden="true">·</span> <a href="/features.html" data-i18n="footer.link.features">Features</a>
           <span aria-hidden="true">·</span> <a href="/faq.html" data-i18n="footer.link.faq">FAQ</a>
