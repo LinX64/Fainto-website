@@ -19,8 +19,13 @@
  * anyone whose stored choice differs. Same head-script pattern as index.html. */
 (function () {
   try {
-    var t = localStorage.getItem('fainto_dashboard_theme');
-    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    var t = localStorage.getItem('fainto_dashboard_theme') || localStorage.getItem('fainto-theme');
+    if (t === 'light' || t === 'dark') {
+      document.documentElement.setAttribute('data-theme', t);
+      var metas = document.querySelectorAll('meta[name="theme-color"]');
+      var color = t === 'light' ? '#F5F5F7' : '#33333D';
+      for (var i = 0; i < metas.length; i++) metas[i].setAttribute('content', color);
+    }
   } catch (e) { /* storage unavailable */ }
 }());
 </script>
@@ -799,11 +804,18 @@ footer.bottom {
   'use strict';
 
   var THEME_KEY = 'fainto_dashboard_theme';
+  var THEME_KEY_ALT = 'fainto-theme';
+  var themeMetas = document.querySelectorAll('meta[name="theme-color"]');
+  function syncThemeMeta(theme) {
+    var color = theme === 'light' ? '#F5F5F7' : '#33333D';
+    for (var i = 0; i < themeMetas.length; i++) themeMetas[i].setAttribute('content', color);
+  }
   function applyStoredTheme() {
     var stored = null;
-    try { stored = localStorage.getItem(THEME_KEY); } catch (e) { stored = null; }
+    try { stored = localStorage.getItem(THEME_KEY) || localStorage.getItem(THEME_KEY_ALT); } catch (e) { stored = null; }
     if (stored === 'light' || stored === 'dark') {
       document.documentElement.setAttribute('data-theme', stored);
+      syncThemeMeta(stored);
     }
   }
   applyStoredTheme();
@@ -851,7 +863,11 @@ footer.bottom {
     var isDark = current ? current === 'dark' : prefersDark;
     var next = isDark ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
-    try { localStorage.setItem(THEME_KEY, next); } catch (e) { /* storage unavailable */ }
+    syncThemeMeta(next);
+    try {
+      localStorage.setItem(THEME_KEY, next);
+      localStorage.setItem(THEME_KEY_ALT, next);
+    } catch (e) { /* storage unavailable */ }
   });
 
   // Shared, first-party render core loaded above from dashboard-core.js.

@@ -15,6 +15,7 @@
     root.setAttribute("data-theme", next);
     try {
       localStorage.setItem("fainto-theme", next);
+      localStorage.setItem("fainto_dashboard_theme", next);
     } catch (e) {}
     sync();
   });

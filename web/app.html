@@ -851,10 +851,18 @@ html[data-view="account"] #expenseForm { max-width: 640px; }
 <script>
   (function () {
     var root = document.documentElement;
+    var metas = document.querySelectorAll('meta[name="theme-color"]');
+    function syncMeta(theme) {
+      var color = theme === 'light' ? '#F5F5F7' : '#33333D';
+      for (var i = 0; i < metas.length; i++) metas[i].setAttribute('content', color);
+    }
     // Carry the dashboard's light/dark choice across the whole companion (no flash on nav).
     try {
-      var t = localStorage.getItem('fainto_dashboard_theme');
-      if (t === 'light' || t === 'dark') root.setAttribute('data-theme', t);
+      var t = localStorage.getItem('fainto_dashboard_theme') || localStorage.getItem('fainto-theme');
+      if (t === 'light' || t === 'dark') {
+        root.setAttribute('data-theme', t);
+        syncMeta(t);
+      }
     } catch (e) {}
     var params = new URLSearchParams(location.search);
     var m = params.get('mode');
@@ -887,7 +895,11 @@ html[data-view="account"] #expenseForm { max-width: 640px; }
         var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         var next = (cur ? cur === 'dark' : prefersDark) ? 'light' : 'dark';
         root.setAttribute('data-theme', next);
-        try { localStorage.setItem('fainto_dashboard_theme', next); } catch (e) {}
+        syncMeta(next);
+        try {
+          localStorage.setItem('fainto_dashboard_theme', next);
+          localStorage.setItem('fainto-theme', next);
+        } catch (e) {}
       });
     });
   }());
