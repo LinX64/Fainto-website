@@ -492,10 +492,16 @@
     }).join(' ');
   }
 
+  // Number formatting should follow the account's currency, not the visitor's browser/OS
+  // language — a PLN account viewed from an en-US browser otherwise renders "PLN 97,260.65"
+  // instead of the Polish convention "97 260,65 zł" the app and site's sample data use.
+  var CURRENCY_LOCALES = { PLN: 'pl-PL' };
+
   function formatMoney(value, currency) {
     var v = num(value);
     try {
-      return new Intl.NumberFormat(navigator.language || 'en-US', {
+      var locale = CURRENCY_LOCALES[currency] || navigator.language || 'en-US';
+      return new Intl.NumberFormat(locale, {
         style: 'currency', currency: currency, currencyDisplay: 'symbol',
       }).format(v);
     } catch (e) {
@@ -638,8 +644,9 @@
       '</div>' +
       '<p class="diverging-caption">Assets ' + formatMoney(assetsTotal, currency) + ' &middot; Liabilities ' + formatMoney(liabilitiesTotal, currency) + '</p>' +
       '<div class="cashflow-line">' +
-        '<span class="dot" style="background:var(--green)"></span> This month <b class="tnum in">' + formatMoney(income, currency) + '</b> in &middot; ' +
-        '<span class="dot" style="background:var(--orange)"></span> <b class="tnum out">' + formatMoney(expense, currency) + '</b> out' +
+        '<span class="flow-clause"><span class="dot" style="background:var(--green)"></span> This month <b class="tnum in">' + formatMoney(income, currency) + '</b> in</span>' +
+        ' &middot; ' +
+        '<span class="flow-clause"><span class="dot" style="background:var(--orange)"></span> <b class="tnum out">' + formatMoney(expense, currency) + '</b> out</span>' +
       '</div>' +
     '</section>';
   }

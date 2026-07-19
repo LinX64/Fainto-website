@@ -783,6 +783,7 @@ footer.bottom {
     <div class="top-actions">
       <a class="top-link" href="./app.html?mode=connect" id="dashReconnect" hidden>Reconnect</a>
       <a class="top-link" href="./app.html?mode=signin" id="dashSignin" hidden>Sign in</a>
+      <button class="top-link" id="dashExport" type="button" hidden>Export CSV</button>
       <button class="top-link" id="dashSignout" type="button" hidden>Disconnect</button>
       <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light/dark theme" title="Toggle theme">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path></svg>
@@ -825,6 +826,10 @@ footer.bottom {
   var dashSignout = document.getElementById('dashSignout');
   var dashReconnect = document.getElementById('dashReconnect');
   var dashSignin = document.getElementById('dashSignin');
+  var dashExport = document.getElementById('dashExport');
+  // The bundle currently on screen (connected, local-file, or CSV-imported) — kept only so
+  // "Export CSV" has something to serialize; never sent anywhere, just read back into a Blob.
+  var currentBundle = null;
 
   // The header is state-driven: this page has no Firebase, so "connected" means
   // a paired bundle is in sessionStorage. Showing Disconnect/Reconnect to a
@@ -839,6 +844,8 @@ footer.bottom {
       dashSignout.hidden = state === 'empty';
       dashSignout.textContent = state === 'local' ? 'Close file' : 'Disconnect';
     }
+    if (dashExport) dashExport.hidden = state === 'empty';
+    if (state === 'empty') currentBundle = null;
   }
 
   if (dashSignout) {
@@ -954,6 +961,7 @@ footer.bottom {
           var result = core.parseCsvToBundle(text);
           if (result.bundle) {
             setHeaderState('local');
+            currentBundle = result.bundle;
             core.renderDashboard(appEl, result.bundle, { interactive: false });
             showImportNotice('Imported ' + result.imported + ' transactions · ' + result.skipped + ' rows skipped');
           } else {
@@ -968,6 +976,7 @@ footer.bottom {
         if (bundle && !hasAnyData(bundle)) bundle = null;
         if (bundle) {
           setHeaderState('local');
+          currentBundle = bundle;
           core.renderDashboard(appEl, bundle, { interactive: false });
         } else {
           renderEmptyState('The selected file was not a valid Fainto export.');
@@ -980,6 +989,36 @@ footer.bottom {
     });
   }
 
+  // "Save a copy" of the data already in this tab, before it disappears with the session
+  // (sessionStorage.fainto_bundle is wiped on disconnect / tab close). Fully client-side —
+  // a Blob + same-origin download link, no network call, consistent with the offline posture.
+  function csvField(v) {
+    var s = String(v == null ? '' : v);
+    return /[",\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+  }
+  function transactionsToCsv(bundle) {
+    var currency = (bundle.financialProfile && bundle.financialProfile.currency) || 'PLN';
+    var lines = [['Date', 'Type', 'Category', 'Amount', 'Currency', 'Note'].map(csvField).join(',')];
+    (bundle.transactions || []).forEach(function (t) {
+      var d = new Date(t.timestampMillis);
+      var iso = isFinite(d.getTime()) ? d.toISOString().slice(0, 10) : '';
+      lines.push([iso, t.type || '', t.category || '', t.amount != null ? t.amount : '', currency, t.note || ''].map(csvField).join(','));
+    });
+    return lines.join('\r\n');
+  }
+  if (dashExport) dashExport.addEventListener('click', function () {
+    if (!currentBundle || !currentBundle.transactions || !currentBundle.transactions.length) return;
+    var blob = new Blob([transactionsToCsv(currentBundle)], { type: 'text/csv;charset=utf-8;' });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'fainto-transactions-' + new Date().toISOString().slice(0, 10) + '.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+  });
+
   function boot() {
     // ?open= is an explicit "I want to open a file" intent from the web start page. It has
     // to win over a bundle left in sessionStorage by an earlier pairing, or a tab that has
@@ -988,6 +1027,7 @@ footer.bottom {
     var bundle = wantsOpen ? null : resolveFromSession();
     if (bundle) {
       setHeaderState('connected');
+      currentBundle = bundle;
       core.renderDashboard(appEl, bundle, { interactive: false });
     } else if (wantsOpen) {
       setHeaderState('empty');

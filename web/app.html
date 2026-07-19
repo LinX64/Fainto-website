@@ -202,6 +202,11 @@ html[data-mode="signin"] .mode-switch { display: block; margin-top: var(--sp-md)
 .account-panel:focus { outline: none; }
 .account-head { margin-bottom: var(--sp-md); }
 .account-sub { color: var(--muted); font-size: 15px; line-height: 1.5; margin: 4px 0 0; }
+.sync-row { display: flex; align-items: center; gap: var(--sp-sm); margin-top: var(--sp-sm); }
+.sync-status { font-size: 13px; color: var(--muted); }
+.sync-row .icon-btn { width: 32px; height: 32px; }
+.sync-row .icon-btn svg { width: 15px; height: 15px; }
+.sync-row .icon-btn:disabled { opacity: 0.5; cursor: default; }
 
 .seg { display: flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; }
 .seg button { flex: 1; min-height: 44px; border: 0; background: transparent; color: var(--muted); font-size: 15px; font-weight: 600; cursor: pointer; font-family: inherit; }
@@ -247,11 +252,19 @@ html[data-mode="signin"] .mode-switch { display: block; margin-top: var(--sp-md)
 .status-row.error { color: var(--acc-spend); }
 .qr-countdown { font-size: 13px; color: var(--muted); text-align: center; margin-top: var(--sp-sm); }
 .qr-countdown[hidden] { display: none; }
-.checking-session { justify-content: center; margin: var(--sp-xl) 0; }
+.checking-session { margin: var(--sp-xl) 0; }
 .checking-session[hidden] { display: none; }
-/* Auth-resolve gate: while a persisted session is restoring, show only the spinner —
-   no sign-in/connect cards, no account panel — so nothing flashes before auth settles. */
-html[data-auth="pending"] #checkingSession[hidden] { display: flex; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+/* Content-shaped placeholder (mirrors the real .gate-grid two-card layout, same 28px radius)
+   instead of a bare spinner — while a persisted session is restoring, no sign-in/connect
+   cards, no account panel, so nothing flashes before auth settles. */
+.skel-gate { display: flex; gap: var(--sp-xl); }
+@media (max-width: 760px) { .skel-gate { flex-direction: column; } }
+.skel-gate .gate-card.skel-card { flex: 1; }
+html[data-auth="pending"] #checkingSession[hidden] { display: block; }
 html[data-auth="pending"] .gate-grid,
 html[data-auth="pending"] #panel-account { display: none; }
 
@@ -321,6 +334,8 @@ footer.site-footer a:focus-visible { outline: 2px solid var(--chrome); outline-o
   .gate-grid .gate-card:nth-child(1) { animation-delay: 80ms; }
   .gate-grid .gate-card:nth-child(2) { animation-delay: 120ms; }
   footer.site-footer { animation-delay: 160ms; }
+  @keyframes skel-pulse { 0%, 100% { opacity: 0.55; } 50% { opacity: 1; } }
+  .skel-card .skel-line { animation: skel-pulse 1.4s ease-in-out infinite; }
 }
 
 /* ---------- connect-focused mode: fit one viewport, no vertical scroll ----------
@@ -427,21 +442,73 @@ html[data-view="account"] .page { max-width: 1320px; }
       "overview accounts bills"
       "txns     txns     txns";
     gap: var(--sp-xl);
+    align-items: stretch;
   }
   html[data-view="account"] .account-dash > #sec-overview { grid-area: overview; }
   html[data-view="account"] .account-dash > #sec-accounts { grid-area: accounts; }
   html[data-view="account"] .account-dash > #sec-bills { grid-area: bills; }
   html[data-view="account"] .account-dash > #sec-transactions { grid-area: txns; }
+  /* Stretch the three top-row cards to a shared bottom edge instead of sizing to content
+     (Overview has fewer rows than Accounts/Bills, which left a dead gap under it). */
+  html[data-view="account"] .account-dash > #sec-overview,
+  html[data-view="account"] .account-dash > #sec-accounts,
+  html[data-view="account"] .account-dash > #sec-bills {
+    display: flex;
+    flex-direction: column;
+  }
+  html[data-view="account"] #sec-overview .cashflow-line { margin-top: auto; }
 }
 
-/* The add/edit form is a single column — cap it so its inputs don't stretch the full 1320px shell. */
-html[data-view="account"] #expenseForm { max-width: 640px; }
+/* ---------- Sheet dialogs (add/edit transaction; in-system confirm) ----------
+   Native <dialog> — same first-party, zero-dependency pattern changelog.js already uses for
+   the "What's new" sheet: showModal() gives free focus-trap + Escape-to-close + ::backdrop. */
+.sheet-dialog {
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--surface);
+  color: var(--text);
+  padding: var(--sp-xxl);
+  width: min(92vw, 640px);
+  max-height: min(88vh, 720px);
+  overflow-y: auto;
+}
+@media (max-width: 600px) { .sheet-dialog { padding: var(--sp-xl); } }
+.sheet-dialog::backdrop { background: color-mix(in srgb, var(--chrome) 55%, transparent); }
+.sheet-dialog-sm { width: min(92vw, 420px); }
+.dialog-actions { display: flex; gap: var(--sp-md); margin-top: var(--sp-lg); }
+.dialog-actions .btn { flex: 1; }
+.confirm-message { font-size: 16px; line-height: 1.55; color: var(--text); margin: 0 0 var(--sp-lg); white-space: pre-line; }
+
+/* ---------- Toast (terminal add/edit/delete confirmations) ---------- */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: var(--sp-xl);
+  transform: translateX(-50%);
+  max-width: min(92vw, 440px);
+  background: var(--chrome);
+  color: var(--on-chrome);
+  border-radius: 28px;
+  padding: var(--sp-md) var(--sp-xl);
+  font-size: 15px;
+  text-align: center;
+  z-index: 80;
+}
+.toast[hidden] { display: none; }
+
 .tnum { font-variant-numeric: tabular-nums; font-feature-settings: 'tnum' 1; }
 
 /* Designed empty / load-error state for the account panel (mirrors dashboard.html's .empty-card). */
 .empty-card { text-align: center; padding: var(--sp-xl) var(--sp-lg); }
 .empty-title { font-size: clamp(24px, 3.5vw, 32px); font-weight: 600; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 var(--sp-sm); }
 .empty-sub { font-size: 17px; color: var(--muted); margin: 0 auto var(--sp-lg); max-width: 46ch; }
+
+/* First-paint skeleton (previews the real Overview/Accounts/Bills/Transactions grid instead of
+   blanking to plain text). Static translucent bars by default; a pulse is added only under the
+   page's existing additive-motion rule below. */
+.skel-card .skel-line { height: 14px; background: var(--surface-2); border-radius: 0; margin-bottom: var(--sp-md); opacity: 0.7; }
+.skel-card .skel-line:last-child { margin-bottom: 0; }
+.skel-card .skel-title { width: 40%; height: 18px; margin-bottom: var(--sp-lg); }
 
 .card {
   background: var(--surface);
@@ -565,6 +632,13 @@ html[data-view="account"] #expenseForm { max-width: 640px; }
 .cashflow-line b { color: var(--text); font-weight: 600; }
 .cashflow-line b.in { color: var(--green); }
 .cashflow-line b.out { color: var(--orange); }
+
+.flow-clause {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  white-space: nowrap;
+}
 
 .dot { width: 8px; height: 8px; display: inline-block; flex: none; }
 
@@ -939,9 +1013,12 @@ html[data-view="account"] #expenseForm { max-width: 640px; }
     (Firebase Console → vaultai-26d8f → Project settings → Your apps) before either option below will work.
   </div>
 
-  <div class="status-row checking-session" id="checkingSession" hidden role="status" aria-live="polite">
-    <span class="spinner"></span>
-    <span>Checking your session&hellip;</span>
+  <div class="checking-session" id="checkingSession" hidden role="status" aria-live="polite">
+    <span class="sr-only">Checking your session&hellip;</span>
+    <div class="skel-gate" aria-hidden="true">
+      <div class="gate-card skel-card"><div class="skel-line skel-title"></div><div class="skel-line"></div><div class="skel-line"></div></div>
+      <div class="gate-card skel-card"><div class="skel-line skel-title"></div><div class="skel-line"></div><div class="skel-line"></div></div>
+    </div>
   </div>
 
   <div class="gate-grid">
@@ -1033,45 +1110,75 @@ html[data-view="account"] #expenseForm { max-width: 640px; }
     <div class="account-head">
       <h2 id="account-heading">Your account</h2>
       <p class="account-sub">Signed in as <span id="accountWho">your account</span> &middot; edits sync to your phone.</p>
+      <div class="sync-row">
+        <span class="sync-status" id="syncStatus" role="status" aria-live="polite">Syncing&hellip;</span>
+        <button type="button" class="icon-btn" id="refreshBtn" aria-label="Refresh dashboard" title="Refresh">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+        </button>
+      </div>
     </div>
 
     <div id="accountDash" class="account-dash" aria-live="polite"></div>
 
-    <form id="expenseForm" novalidate hidden>
-      <div class="edit-banner" id="editBanner">Editing an existing transaction — <button type="button" class="link-btn" id="cancelEditBtn">cancel</button></div>
-      <div class="field">
-        <label>Type</label>
-        <div class="seg" role="group" aria-label="Transaction type">
-          <button type="button" id="expTypeExpense" aria-pressed="true">Expense</button>
-          <button type="button" id="expTypeIncome" aria-pressed="false">Income</button>
-        </div>
-      </div>
-      <div class="field-row">
+    <!-- The add/edit form opens as a native <dialog> sheet anchored center-viewport, so the
+         distance between tapping "Add" and typing an amount is constant regardless of how
+         long the transaction list has grown (was: scrollIntoView past the whole list). -->
+    <dialog class="sheet-dialog" id="expenseDialog" aria-label="Add or edit transaction">
+      <form id="expenseForm" novalidate>
+        <div class="edit-banner" id="editBanner">Editing an existing transaction — <button type="button" class="link-btn" id="cancelEditBtn">cancel</button></div>
         <div class="field">
-          <label for="expAmount">Amount</label>
-          <input type="text" inputmode="decimal" id="expAmount" placeholder="0.00" autocomplete="off" required>
+          <label>Type</label>
+          <div class="seg" role="group" aria-label="Transaction type">
+            <button type="button" id="expTypeExpense" aria-pressed="true">Expense</button>
+            <button type="button" id="expTypeIncome" aria-pressed="false">Income</button>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label for="expAmount">Amount</label>
+            <input type="text" inputmode="decimal" id="expAmount" placeholder="0.00" autocomplete="off" required>
+          </div>
+          <div class="field">
+            <label for="expDate">Date</label>
+            <input type="date" id="expDate" required>
+          </div>
         </div>
         <div class="field">
-          <label for="expDate">Date</label>
-          <input type="date" id="expDate" required>
+          <label id="catPickerLabel">Category</label>
+          <div class="cat-picker" id="expCatPicker" role="group" aria-labelledby="catPickerLabel"></div>
         </div>
+        <div class="field">
+          <button type="button" class="link-btn icon-toggle" id="iconToggle" aria-expanded="false" aria-controls="expIconPicker">Choose an icon <span class="opt">(optional)</span></button>
+          <div class="icon-picker" id="expIconPicker" role="group" aria-label="Transaction icon" hidden></div>
+        </div>
+        <div class="field">
+          <label for="expNote">Note <span class="opt">(optional)</span></label>
+          <input type="text" id="expNote" maxlength="500" autocomplete="off" placeholder="e.g. Groceries at the market">
+        </div>
+        <div class="dialog-actions">
+          <button type="button" class="btn btn-secondary" id="expenseCancelBtn">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="expenseSubmit">Add &amp; sync</button>
+        </div>
+        <div class="status-row" id="expenseStatus" role="status" aria-live="polite"></div>
+        <div class="alert alert-error" id="expenseError" hidden role="alert"></div>
+      </form>
+    </dialog>
+
+    <!-- Reusable in-system confirm dialog (delete transaction / CSV bulk-import) — replaces
+         window.confirm() so destructive confirmations match the Rally token system instead of
+         a browser-native dialog, while keeping the same blocking-until-choice behavior. -->
+    <dialog class="sheet-dialog sheet-dialog-sm" id="confirmDialog" aria-labelledby="confirmMessage">
+      <p class="confirm-message" id="confirmMessage"></p>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-secondary" id="confirmCancelBtn">Cancel</button>
+        <button type="button" class="btn btn-primary" id="confirmOkBtn">Confirm</button>
       </div>
-      <div class="field">
-        <label id="catPickerLabel">Category</label>
-        <div class="cat-picker" id="expCatPicker" role="group" aria-labelledby="catPickerLabel"></div>
-      </div>
-      <div class="field">
-        <button type="button" class="link-btn icon-toggle" id="iconToggle" aria-expanded="false" aria-controls="expIconPicker">Choose an icon <span class="opt">(optional)</span></button>
-        <div class="icon-picker" id="expIconPicker" role="group" aria-label="Transaction icon" hidden></div>
-      </div>
-      <div class="field">
-        <label for="expNote">Note <span class="opt">(optional)</span></label>
-        <input type="text" id="expNote" maxlength="500" autocomplete="off" placeholder="e.g. Groceries at the market">
-      </div>
-      <button type="submit" class="btn btn-primary" id="expenseSubmit">Add &amp; sync</button>
-      <div class="status-row" id="expenseStatus" role="status" aria-live="polite"></div>
-      <div class="alert alert-error" id="expenseError" hidden role="alert"></div>
-    </form>
+    </dialog>
+
+    <!-- Toast — surfaces terminal add/edit/delete confirmations even after the dialog above
+         has closed, and gives the inline-delete path (which never opens a dialog) its only
+         visible pending/done feedback. -->
+    <div class="toast" id="acctToast" role="status" aria-live="polite" hidden></div>
 
     <div class="divider">Bulk import</div>
 
@@ -2394,7 +2501,9 @@ if (!isFirebaseConfigured()) {
   }
 
   function wireAccount() {
+    var expDialog = qs('expenseDialog');
     var expForm = qs('expenseForm');
+    var expenseCancelBtn = qs('expenseCancelBtn');
     var amtInput = qs('expAmount');
     var catPicker = qs('expCatPicker');
     var iconPicker = qs('expIconPicker');
@@ -2415,12 +2524,86 @@ if (!isFirebaseConfigured()) {
     var editBanner = qs('editBanner');
     var cancelEditBtn = qs('cancelEditBtn');
     var submitBtn = qs('expenseSubmit');
+    var toastEl = qs('acctToast');
+    var confirmDialog = qs('confirmDialog');
+    var confirmMessageEl = qs('confirmMessage');
+    var confirmOkBtn = qs('confirmOkBtn');
+    var confirmCancelBtn = qs('confirmCancelBtn');
+    var syncStatusEl = qs('syncStatus');
+    var refreshBtn = qs('refreshBtn');
+    var lastSyncedAt = null;
     var txType = 'EXPENSE';
     var editingId = null;
     var editingOriginal = null;
     var dashTxById = {};   // (docId||id) -> full raw transaction, for edit fidelity
     var dashTxCount = 0;   // authoritative Firestore doc count, for the last-item delete guard
     var busy = false;
+    var toastTimer = null;
+
+    // ---- Toast: terminal confirmations that must survive the add/edit dialog closing, and the
+    // inline-delete path's only pending/done feedback (that path never opens the dialog at all). ----
+    function showToast(message) {
+      if (!toastEl) return;
+      if (toastTimer) clearTimeout(toastTimer);
+      toastEl.textContent = message;
+      toastEl.hidden = false;
+      toastTimer = setTimeout(function () { toastEl.hidden = true; }, 4000);
+    }
+    function hideToast() {
+      if (!toastEl) return;
+      if (toastTimer) clearTimeout(toastTimer);
+      toastEl.hidden = true;
+    }
+
+    // ---- In-system confirm dialog — replaces window.confirm() so destructive/bulk confirmations
+    // match the token system instead of an unthemeable browser-native dialog. Promise-based so the
+    // existing async callers can `await` it exactly where they previously blocked on confirm(). ----
+    function showConfirm(message, confirmLabel) {
+      return new Promise(function (resolve) {
+        if (!confirmDialog || typeof confirmDialog.showModal !== 'function') { resolve(window.confirm(message)); return; }
+        confirmMessageEl.textContent = message;
+        confirmOkBtn.textContent = confirmLabel || 'Confirm';
+        var settled = false;
+        function finish(result) {
+          if (settled) return;
+          settled = true;
+          confirmOkBtn.removeEventListener('click', onOk);
+          confirmCancelBtn.removeEventListener('click', onCancel);
+          confirmDialog.removeEventListener('cancel', onCancel);
+          confirmDialog.removeEventListener('close', onClose);
+          confirmDialog.removeEventListener('click', onBackdrop);
+          if (confirmDialog.open) confirmDialog.close();
+          resolve(result);
+        }
+        function onOk() { finish(true); }
+        function onCancel(e) { if (e && e.preventDefault) e.preventDefault(); finish(false); }
+        function onClose() { finish(false); }
+        // Click on the backdrop (the dialog element itself, outside its content) cancels —
+        // same convention as changelog.js's "What's new" sheet.
+        function onBackdrop(e) { if (e.target === confirmDialog) finish(false); }
+        confirmOkBtn.addEventListener('click', onOk);
+        confirmCancelBtn.addEventListener('click', onCancel);
+        confirmDialog.addEventListener('cancel', onCancel); // Escape key
+        confirmDialog.addEventListener('close', onClose);   // any other close path
+        confirmDialog.addEventListener('click', onBackdrop);
+        confirmDialog.showModal();
+      });
+    }
+
+    // ---- Sync freshness: a "Synced Xm ago" timestamp + manual refresh, since the dashboard
+    // otherwise only re-fetches after this tab's own writes — if the paired phone writes while
+    // the tab stays open, nothing here updates without a full page reload. ----
+    function updateSyncStatus() {
+      if (!syncStatusEl || !lastSyncedAt) return;
+      var secs = Math.max(0, Math.round((Date.now() - lastSyncedAt) / 1000));
+      var label;
+      if (secs < 10) label = 'Synced just now';
+      else if (secs < 60) label = 'Synced ' + secs + 's ago';
+      else if (secs < 3600) label = 'Synced ' + Math.round(secs / 60) + 'm ago';
+      else label = 'Synced ' + Math.round(secs / 3600) + 'h ago';
+      syncStatusEl.textContent = label;
+    }
+    setInterval(updateSyncStatus, 30000);
 
     // ---- Category + icon pickers (visuals from dashboard-core's shared catalog) ----
     var FD = window.FaintoDashboard || {};
@@ -2504,6 +2687,13 @@ if (!isFirebaseConfigured()) {
       var s = n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       return (tx.type === 'INCOME' ? '+' : '−') + s;
     }
+    // Day-level date (not exact millis) + amount + note — a CSV re-import of the same
+    // statement rewrites the same values but not necessarily the same time-of-day, so this
+    // catches the common "re-downloaded an overlapping date range" duplicate case.
+    function txDedupeKey(tx) {
+      return millisToIso(tx.timestampMillis) + '|' + (Number(tx.amount) || 0).toFixed(2) + '|' +
+        String(tx.note || '').trim().toLowerCase();
+    }
     function resetForm() {
       editingId = null; editingOriginal = null;
       editBanner.classList.remove('on');
@@ -2514,16 +2704,20 @@ if (!isFirebaseConfigured()) {
       if (iconToggle) iconToggle.setAttribute('aria-expanded', 'false');
       dateInput.value = todayIso();
       setType('EXPENSE');
-      expForm.hidden = true; // collapsed by default — opened by Add/Edit, keeps the view compact
+      showExpError('');
+      if (expDialog.open) expDialog.close(); // collapsed by default — opened by Add/Edit
     }
+    if (expenseCancelBtn) expenseCancelBtn.addEventListener('click', function () { resetForm(); });
+    // Click on the backdrop (the dialog element itself, outside its content) closes — same
+    // convention as changelog.js's "What's new" sheet.
+    expDialog.addEventListener('click', function (e) { if (e.target === expDialog) resetForm(); });
     // Interactive dashboard callbacks (invoked by FaintoDashboard.renderDashboard).
     // The renderer passes the SANITIZED tx (carries id + __docId); we look the full
     // raw transaction back up (dashTxById) so an edit preserves fields the renderer
     // strips (tags/receiptUri/importSource/etc.).
     function onAddTx() {
       resetForm();
-      expForm.hidden = false;
-      expForm.scrollIntoView({ block: 'start' });
+      if (!expDialog.open) expDialog.showModal();
       amtInput.focus();
     }
     function onEditTx(tx) {
@@ -2541,8 +2735,7 @@ if (!isFirebaseConfigured()) {
       submitBtn.textContent = 'Save changes';
       editBanner.classList.add('on');
       showExpError(''); expStatus.textContent = '';
-      expForm.hidden = false;
-      expForm.scrollIntoView({ block: 'start' });
+      if (!expDialog.open) expDialog.showModal();
       amtInput.focus();
     }
     cancelEditBtn.addEventListener('click', function () { resetForm(); });
@@ -2554,6 +2747,22 @@ if (!isFirebaseConfigured()) {
       if (!t) return;
       if (t.tagName !== 'BUTTON' && t.tagName !== 'A' && t.tabIndex < 0) t.setAttribute('tabindex', '-1');
       try { t.focus(); } catch (e) {}
+    }
+    // First-paint loading state: preview the real Overview/Accounts/Bills/Transactions grid
+    // instead of blanking to plain text (reuses the same section ids so the existing
+    // grid-template-areas rules place these placeholders exactly where the real cards land).
+    function renderAccountSkeleton() {
+      function skelCard(id, lines) {
+        var rows = '';
+        for (var i = 0; i < lines; i += 1) rows += '<div class="skel-line"></div>';
+        return '<div class="card skel-card" id="' + id + '" aria-hidden="true">' +
+          '<div class="skel-line skel-title"></div>' + rows + '</div>';
+      }
+      dashEl.innerHTML =
+        skelCard('sec-overview', 2) +
+        skelCard('sec-accounts', 3) +
+        skelCard('sec-bills', 3) +
+        skelCard('sec-transactions', 4);
     }
     function renderAccountEmpty() {
       dashEl.textContent = '';
@@ -2576,7 +2785,7 @@ if (!isFirebaseConfigured()) {
       btn.addEventListener('click', function () { renderAccountDash(); });
       card.appendChild(t); card.appendChild(s); card.appendChild(btn);
       dashEl.appendChild(card);
-      expForm.hidden = false; // load failed — still let the user add a transaction
+      if (!expDialog.open) expDialog.showModal(); // load failed — still let the user add a transaction
     }
 
     async function renderAccountDash() {
@@ -2584,11 +2793,13 @@ if (!isFirebaseConfigured()) {
         dashEl.textContent = 'The dashboard view could not load — please refresh the page.';
         return;
       }
-      // Only blank to a loading note on first paint; on re-render the old dashboard stays put
-      // (the #expenseStatus row shows progress) so mutations don't blink the whole panel.
-      if (firstPaint) dashEl.textContent = 'Loading your dashboard…';
+      // Only skeleton-load on first paint; on re-render the old dashboard stays put
+      // (the toast shows progress) so mutations don't blink the whole panel.
+      if (firstPaint) renderAccountSkeleton();
       try {
         var raw = await buildBundleFromFirestore(currentUid);
+        lastSyncedAt = Date.now();
+        updateSyncStatus();
         dashTxCount = (raw.transactions || []).length;
         dashTxById = {};
         (raw.transactions || []).forEach(function (tx) {
@@ -2596,7 +2807,7 @@ if (!isFirebaseConfigured()) {
         });
         if (isBundleEmpty(raw)) {
           renderAccountEmpty();
-          expForm.hidden = false; // nothing to show yet — surface the add form directly
+          if (!expDialog.open) expDialog.showModal(); // nothing to show yet — surface the add form directly
           firstPaint = false;
           return;
         }
@@ -2632,20 +2843,21 @@ if (!isFirebaseConfigured()) {
       }
       var full = dashTxById[docId] || tx;
       var label = (full.note ? full.note : (full.category || 'this transaction')) + ' · ' + fmtAmount(full);
-      if (!window.confirm('Delete “' + label + '”? This removes it from your account and your phone.')) return;
+      var ok = await showConfirm('Delete “' + label + '”? This removes it from your account and your phone.', 'Delete');
+      if (!ok) return;
       var guard = writeGuard();
       if (guard) { showAccountError(guard); return; }
       busy = true;
       showAccountError('');
-      expStatus.textContent = 'Deleting…';
+      showToast('Deleting…'); // inline-delete never opens the dialog — the toast is its only feedback
       try {
         await deleteTransaction(currentUid, docId);
         dashTxCount = Math.max(0, dashTxCount - 1); // reflect immediately so a stale count can't permit emptying
-        expStatus.textContent = '✓ Deleted — syncing to your phone.';
+        showToast('✓ Deleted — syncing to your phone.');
         if (editingId === docId) resetForm();
         await renderAccountDash();
       } catch (err) {
-        expStatus.textContent = '';
+        hideToast();
         showAccountError('Could not delete: ' + friendlyWriteError(err));
       } finally {
         busy = false;
@@ -2683,7 +2895,9 @@ if (!isFirebaseConfigured()) {
       expStatus.textContent = editing ? 'Saving changes…' : 'Saving…';
       try {
         await writeTransaction(currentUid, tx, editDocId, editing);
-        expStatus.textContent = editing ? '✓ Updated — syncing to your phone.' : '✓ Synced — it’ll appear on your phone shortly.';
+        // The dialog is about to close (resetForm), so the confirmation goes to the toast —
+        // #expenseStatus only ever covers the "Saving…" state while the dialog is still open.
+        showToast(editing ? '✓ Updated — syncing to your phone.' : '✓ Synced — it’ll appear on your phone shortly.');
         resetForm();
         await renderAccountDash();
         focusDashTop();
@@ -2708,21 +2922,42 @@ if (!isFirebaseConfigured()) {
         if (parsed.error) { setCsvStatus(parsed.error, true); csvInput.value = ''; return; }
         var reguard = writeGuard(); // re-check: the session may have changed during the async read
         if (reguard) { setCsvStatus(reguard, true); csvInput.value = ''; return; }
+        // De-dupe against the account's existing transactions (date+amount+note) before ever
+        // offering the import — the old confirm text merely warned "importing twice creates
+        // duplicates" instead of preventing it. Also catches repeated rows within the same file.
+        var existingKeys = {};
+        Object.keys(dashTxById).forEach(function (id) { existingKeys[txDedupeKey(dashTxById[id])] = true; });
+        var deduped = [], dupeCount = 0;
+        parsed.transactions.forEach(function (t) {
+          var k = txDedupeKey(t);
+          if (existingKeys[k]) { dupeCount += 1; return; }
+          existingKeys[k] = true;
+          deduped.push(t);
+        });
+        var totalSkipped = parsed.skipped + dupeCount;
+        if (deduped.length === 0) {
+          setCsvStatus('Nothing to import — all ' + parsed.transactions.length + ' row' + (parsed.transactions.length === 1 ? '' : 's') +
+            ' already exist' + (parsed.transactions.length === 1 ? 's' : '') + ' in your account.', true);
+          csvInput.value = '';
+          return;
+        }
         // Confirm before committing to the synced ledger — show the income/expense split so a
         // miscategorised statement is caught before it reaches the phone (mirrors the delete confirm).
         var inc = 0, exp = 0;
-        parsed.transactions.forEach(function (t) { if (t.type === 'INCOME') inc++; else exp++; });
-        var confirmMsg = 'Import ' + parsed.transactions.length + ' transaction' + (parsed.transactions.length === 1 ? '' : 's') +
+        deduped.forEach(function (t) { if (t.type === 'INCOME') inc++; else exp++; });
+        var confirmMsg = 'Import ' + deduped.length + ' transaction' + (deduped.length === 1 ? '' : 's') +
           ' (' + exp + ' expense' + (exp === 1 ? '' : 's') + ', ' + inc + ' income' +
-          (parsed.skipped ? ', ' + parsed.skipped + ' skipped' : '') + ')?\n\n' +
-          'They add to your account and sync to your phone. Importing the same file twice creates duplicates.';
-        if (!window.confirm(confirmMsg)) { setCsvStatus('Import cancelled.', true); csvInput.value = ''; return; }
+          (totalSkipped ? ', ' + totalSkipped + ' skipped' : '') +
+          (dupeCount ? ' incl. ' + dupeCount + ' duplicate' + (dupeCount === 1 ? '' : 's') : '') + ')?\n\n' +
+          'They add to your account and sync to your phone.';
+        var ok = await showConfirm(confirmMsg, 'Import');
+        if (!ok) { setCsvStatus('Import cancelled.', true); csvInput.value = ''; return; }
         busy = true;
         csvInput.value = ''; // clear now so a second pick can't fire a concurrent import
-        setCsvStatus('Importing ' + parsed.transactions.length + '…');
+        setCsvStatus('Importing ' + deduped.length + '…');
         try {
-          await writeTransactionsBatch(currentUid, parsed.transactions);
-          setCsvStatus('✓ Imported ' + parsed.imported + ' · ' + parsed.skipped + ' skipped — syncing to your phone.', true);
+          await writeTransactionsBatch(currentUid, deduped);
+          setCsvStatus('✓ Imported ' + deduped.length + ' · ' + totalSkipped + ' skipped — syncing to your phone.', true);
           await renderAccountDash();
         } catch (err) {
           setCsvStatus('Import failed: ' + friendlyWriteError(err), true);
@@ -2751,6 +2986,18 @@ if (!isFirebaseConfigured()) {
         signOutBtn.textContent = label;
         showAccountError('Could not sign out: ' + friendlyWriteError(err));
       }
+    });
+
+    if (refreshBtn) refreshBtn.addEventListener('click', function () {
+      if (busy) return;
+      refreshBtn.disabled = true;
+      renderAccountDash().then(function () { refreshBtn.disabled = false; });
+    });
+    // The paired phone can write new transactions while this tab stays open — the normal case
+    // for a companion dashboard used alongside the phone — so silently re-sync when the tab
+    // regains focus instead of requiring the user to think to reload.
+    document.addEventListener('visibilitychange', function () {
+      if (document.visibilityState === 'visible' && !busy && lastSyncedAt) renderAccountDash();
     });
 
     renderAccountDash(); // initial render of the signed-in account's dashboard
