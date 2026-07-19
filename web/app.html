@@ -245,6 +245,8 @@ html[data-mode="signin"] .mode-switch { display: block; margin-top: var(--sp-md)
 @keyframes spin { to { transform: rotate(360deg); } }
 .status-row.success { color: var(--acc-income); }
 .status-row.error { color: var(--acc-spend); }
+.qr-countdown { font-size: 13px; color: var(--muted); text-align: center; margin-top: var(--sp-sm); }
+.qr-countdown[hidden] { display: none; }
 .checking-session { justify-content: center; margin: var(--sp-xl) 0; }
 .checking-session[hidden] { display: none; }
 /* Auth-resolve gate: while a persisted session is restoring, show only the spinner —
@@ -934,13 +936,15 @@ html[data-view="account"] #expenseForm { max-width: 640px; }
       <h2 id="qr-heading">Connect over Wi&#8209;Fi</h2>
       <p class="desc">Scan from the Fainto app — your phone streams a view‑only snapshot straight to this browser, never through a server.</p>
 
-      <ol class="qr-steps">
+      <ol class="qr-steps" id="qrSteps">
         <li>Phone and this computer on the <strong>same Wi‑Fi</strong> network.</li>
-        <li>In Fainto, tap the floating <strong>Connect</strong> button on the Overview screen.</li>
+        <li>In Fainto, open <strong>Settings → Export</strong>, tap <strong>Connect to Web</strong>, then <strong>Scan QR code</strong>.</li>
         <li>Scan the code.</li>
       </ol>
 
-      <div class="qr-stage">
+      <div class="alert alert-info" id="qrSameDevice" hidden>Viewing this on your phone? This code can’t be scanned by the same device that’s showing it — open <strong>fainto.app/web</strong> on a computer instead, or send yourself this link to scan from there.</div>
+
+      <div class="qr-stage" id="qrStage">
         <div class="qr-frame" id="qrFrame">
           <div class="qr-placeholder" id="qrPlaceholder">Generating code&hellip;</div>
         </div>
@@ -950,6 +954,7 @@ html[data-view="account"] #expenseForm { max-width: 640px; }
           <span class="spinner" id="qrSpinner"></span>
           <span id="qrStatusText">Generating code&hellip;</span>
         </div>
+        <div class="qr-countdown" id="qrCountdown" hidden></div>
       </div>
       <div class="alert alert-error" id="qrError" hidden role="alert"></div>
       <div class="qr-actions" id="qrActions">
@@ -2720,6 +2725,9 @@ if (!isFirebaseConfigured()) {
       signOutBtn.textContent = 'Signing out…';
       try {
         await signOut(getFirebaseAuth());
+        // Same leak this panel's sibling header link already guards against: a paired
+        // Wi‑Fi/QR bundle in sessionStorage must not survive sign-out either.
+        try { sessionStorage.removeItem('fainto_bundle'); } catch (e) {}
         location.reload();
       } catch (err) {
         // Don't reload on failure — that would drop the user back into a still-signed-in view silently.
@@ -2856,6 +2864,13 @@ if (!isFirebaseConfigured()) {
       onAuthStateChanged(auth, function () { resolveGate(); });
     }
   })();
+
+  // Back-button (bfcache) restore does not re-run this script, so a page frozen while it
+  // still held the signed-in account view (real transactions/net worth) would come back
+  // showing that data with no re-auth check, even after Sign out. Force a reload on restore.
+  window.addEventListener('pageshow', function (evt) {
+    if (evt.persisted) location.reload();
+  });
 })();
 
 /* ============================================================
@@ -2878,10 +2893,28 @@ if (!isFirebaseConfigured()) {
   var qrRetryBtn = qs('qrRetryBtn');
   var qrProgressBar = qs('qrProgressBar');
   var qrProgressFill = qs('qrProgressFill');
+  var qrCountdown = qs('qrCountdown');
+  var qrSteps = qs('qrSteps');
+  var qrStage = qs('qrStage');
+  var qrSameDevice = qs('qrSameDevice');
+
+  // A visitor who opens this page on the same phone they'd be scanning with can never
+  // complete the pairing — swap the unscannable code for an explainer instead of letting
+  // them stare at a QR code that can't work, and skip the pointless pairing session.
+  var sameDeviceViewer = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  if (sameDeviceViewer) {
+    qrSteps.hidden = true;
+    qrStage.hidden = true;
+    qrActions.hidden = true;
+    qrSameDevice.hidden = false;
+  }
 
   var SIGNALING_COLLECTION = 'webrtc_sessions';
   var SESSION_TTL_MS = 5 * 60 * 1000;
-  var SESSION_TIMEOUT_MS = 60 * 1000;
+  // A first-time scan needs a trip through Settings → Export → Connect to Web plus a
+  // camera-permission grant, so 60s was too tight — 4 min leaves headroom while still
+  // sitting comfortably inside the 5 min Firestore pairing doc's own expiresAt.
+  var SESSION_TIMEOUT_MS = 4 * 60 * 1000;
   var ICE_SERVERS = [{ urls: 'stun:stun.l.google.com:19302' }];
   var MAX_TOTAL_CHUNKS = 50000;
   var MAX_TOTAL_BYTES = 256 * 1024 * 1024;
@@ -2902,6 +2935,31 @@ if (!isFirebaseConfigured()) {
     qrActions.classList.toggle('show-retry', !!message);
     // The alert box carries the full message; hide the status row so the same text isn't stacked twice.
     qrStatus.hidden = !!message;
+    if (message && current) stopCountdown(current);
+  }
+
+  // Typeset text updated once a second — same class of update as the chunk-progress
+  // percentage above, never a tweened/animated numeral — so users see the pairing
+  // window closing instead of hitting a surprise timeout.
+  function stopCountdown(session) {
+    if (session && session.countdownHandle) { clearInterval(session.countdownHandle); session.countdownHandle = null; }
+    qrCountdown.hidden = true;
+  }
+
+  function tickCountdown(session) {
+    var remaining = session.timeoutAt - Date.now();
+    if (remaining <= 0) { stopCountdown(session); return; }
+    var totalSec = Math.ceil(remaining / 1000);
+    var min = Math.floor(totalSec / 60);
+    var sec = totalSec % 60;
+    qrCountdown.textContent = 'Code active for ' + min + ':' + (sec < 10 ? '0' : '') + sec;
+  }
+
+  function startCountdown(session, ms) {
+    session.timeoutAt = Date.now() + ms;
+    qrCountdown.hidden = false;
+    tickCountdown(session);
+    session.countdownHandle = setInterval(function () { tickCountdown(session); }, 1000);
   }
 
   function resetProgressWatchdog(session) {
@@ -2941,6 +2999,7 @@ if (!isFirebaseConfigured()) {
     session.closed = true;
     if (session.timeoutHandle) clearTimeout(session.timeoutHandle);
     if (session.progressTimer) clearTimeout(session.progressTimer);
+    stopCountdown(session);
     if (session.unsubscribeDoc) session.unsubscribeDoc();
     if (session.unsubscribeCandidates) session.unsubscribeCandidates();
     try { session.channel && session.channel.close(); } catch (err) { /* already closed */ }
@@ -3056,7 +3115,7 @@ if (!isFirebaseConfigured()) {
     var parsed = safeParseJson(text);
     if (!parsed) { showError('The received data was not valid JSON.'); return; }
 
-    setStatus('Connected!', 'success');
+    setStatus('Connected! (session ' + session.id.slice(-6).toUpperCase() + ')', 'success');
     teardown(session);
     handoff(parsed, showError);
   }
@@ -3132,6 +3191,8 @@ if (!isFirebaseConfigured()) {
       unsubscribeDoc: null,
       unsubscribeCandidates: null,
       timeoutHandle: null,
+      countdownHandle: null,
+      timeoutAt: 0,
     };
     current = session;
 
@@ -3148,7 +3209,8 @@ if (!isFirebaseConfigured()) {
     channel.onopen = function () {
       if (session.closed) return;
       clearTimeout(session.timeoutHandle);
-      setStatus('Connected — waiting for your data…');
+      stopCountdown(session);
+      setStatus('Connected — waiting for your data… (session ' + session.id.slice(-6).toUpperCase() + ')');
       cleanupSignalingDoc(docRef, session);
     };
     channel.onmessage = function (event) { handleChannelMessage(session, event.data); };
@@ -3178,6 +3240,7 @@ if (!isFirebaseConfigured()) {
 
     renderQrCode(sessionId);
     setStatus('Scan this with the Fainto app');
+    startCountdown(session, SESSION_TIMEOUT_MS);
 
     session.unsubscribeDoc = onSnapshot(docRef, function (snap) {
       if (session.closed) return;
@@ -3208,9 +3271,10 @@ if (!isFirebaseConfigured()) {
   // Arriving with ?signout=1 skips the auto-start below (Firebase is still tearing the
   // session down), which would leave the dual view's QR panel sitting on "Generating code…"
   // forever. initSession fires this once the sign-out settles, so pairing starts for real.
-  window.addEventListener('fainto:signed-out', function () { if (!current) startQrSession(); });
+  window.addEventListener('fainto:signed-out', function () { if (!current && !sameDeviceViewer) startQrSession(); });
 
   (async function maybeStartQr() {
+    if (sameDeviceViewer) return; // no scanner to feed a code to on this device — see above
     var params = new URLSearchParams(location.search);
     if (params.get('mode') === 'signin' || params.get('signout') === '1') return;
     var explicitConnect = params.get('mode') === 'connect';
