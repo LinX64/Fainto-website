@@ -74,11 +74,11 @@
   // category -> { label, color token, default icon } — mirrors the app's TransactionCategory.icon()
   var CATS = {
     FOOD:          { label: 'Food',          color: 'var(--orange)',      icon: 'utensils' },
-    HOUSING:       { label: 'Housing',       color: 'var(--blue-deep)',   icon: 'house' },
+    HOUSING:       { label: 'Housing',       color: 'var(--lavender)',    icon: 'house' },
     TRANSPORT:     { label: 'Transport',     color: 'var(--acc-brand)',   icon: 'car' },
     UTILITIES:     { label: 'Utilities',     color: 'var(--yellow)',      icon: 'zap' },
-    ENTERTAINMENT: { label: 'Entertainment', color: 'var(--purple-deep)', icon: 'gamepad-2' },
-    HEALTH:        { label: 'Health',        color: 'var(--acc-spend)',   icon: 'heart-pulse' },
+    ENTERTAINMENT: { label: 'Entertainment', color: 'var(--purple)',      icon: 'gamepad-2' },
+    HEALTH:        { label: 'Health',        color: 'var(--rose)',        icon: 'heart-pulse' },
     SHOPPING:      { label: 'Shopping',      color: 'var(--orange-deep)', icon: 'shopping-cart' },
     SAVINGS:       { label: 'Savings',       color: 'var(--green)',       icon: 'trending-up' },
     SALARY:        { label: 'Salary',        color: 'var(--green-deep)',  icon: 'trending-down' },
@@ -638,8 +638,8 @@
       '</div>' +
       '<p class="diverging-caption">Assets ' + formatMoney(assetsTotal, currency) + ' &middot; Liabilities ' + formatMoney(liabilitiesTotal, currency) + '</p>' +
       '<div class="cashflow-line">' +
-        '<span class="dot" style="background:var(--green)"></span> This month <b class="tnum">' + formatMoney(income, currency) + '</b> in &middot; ' +
-        '<span class="dot" style="background:var(--orange)"></span> <b class="tnum">' + formatMoney(expense, currency) + '</b> out' +
+        '<span class="dot" style="background:var(--green)"></span> This month <b class="tnum in">' + formatMoney(income, currency) + '</b> in &middot; ' +
+        '<span class="dot" style="background:var(--orange)"></span> <b class="tnum out">' + formatMoney(expense, currency) + '</b> out' +
       '</div>' +
     '</section>';
   }
