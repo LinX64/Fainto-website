@@ -1118,7 +1118,12 @@ html[data-view="account"] .page { max-width: 1320px; }
       </div>
     </div>
 
-    <div id="accountDash" class="account-dash" aria-live="polite"></div>
+    <div id="accountDash" class="account-dash"></div>
+    <!-- Dedicated status region: accountDash's whole subtree is torn down and rebuilt on every
+         mutation, so an aria-live region ON that container would have a screen reader re-read the
+         entire multi-section dashboard after every add/edit/delete. This sr-only region instead
+         gets a short, human-readable summary per mutation — same pattern as #expenseStatus. -->
+    <div class="sr-only" id="dashStatus" role="status" aria-live="polite"></div>
 
     <!-- The add/edit form opens as a native <dialog> sheet anchored center-viewport, so the
          distance between tapping "Add" and typing an amount is constant regardless of how
@@ -2519,6 +2524,7 @@ if (!isFirebaseConfigured()) {
     var csvSpinner = qs('csvSpinner');
     var csvImportBtn = qs('csvImportBtn');
     var dashEl = qs('accountDash');
+    var dashStatus = qs('dashStatus');
     var accountError = qs('accountError');
     var signOutBtn = qs('accountSignOut');
     var editBanner = qs('editBanner');
@@ -2553,6 +2559,18 @@ if (!isFirebaseConfigured()) {
       if (!toastEl) return;
       if (toastTimer) clearTimeout(toastTimer);
       toastEl.hidden = true;
+    }
+
+    // ---- sr-only mutation announcer: a short "Added/Updated/Deleted <amount> in <category>"
+    // summary per edit, separate from accountDash so a screen reader never re-reads the whole
+    // rebuilt dashboard subtree after a routine write. ----
+    function announceDash(message) {
+      if (!dashStatus) return;
+      dashStatus.textContent = message;
+    }
+    function txSummary(tx) {
+      var catLabel = (FD.categories && FD.categories[tx.category] && FD.categories[tx.category].label) || 'Other';
+      return fmtAmount(tx) + ' in ' + catLabel + (tx.note ? ' — ' + tx.note : '');
     }
 
     // ---- In-system confirm dialog — replaces window.confirm() so destructive/bulk confirmations
@@ -2854,6 +2872,7 @@ if (!isFirebaseConfigured()) {
         await deleteTransaction(currentUid, docId);
         dashTxCount = Math.max(0, dashTxCount - 1); // reflect immediately so a stale count can't permit emptying
         showToast('✓ Deleted — syncing to your phone.');
+        announceDash('Deleted: ' + txSummary(full));
         if (editingId === docId) resetForm();
         await renderAccountDash();
       } catch (err) {
@@ -2898,6 +2917,7 @@ if (!isFirebaseConfigured()) {
         // The dialog is about to close (resetForm), so the confirmation goes to the toast —
         // #expenseStatus only ever covers the "Saving…" state while the dialog is still open.
         showToast(editing ? '✓ Updated — syncing to your phone.' : '✓ Synced — it’ll appear on your phone shortly.');
+        announceDash((editing ? 'Updated: ' : 'Added: ') + txSummary(tx));
         resetForm();
         await renderAccountDash();
         focusDashTop();

@@ -636,7 +636,7 @@
     });
 
     return '<section class="card stagger" id="sec-overview">' +
-      '<h2 class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 17 9 11 13 15 21 6"></polyline><polyline points="15 6 21 6 21 12"></polyline></svg>Overview</h2>' +
+      '<h3 class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 17 9 11 13 15 21 6"></polyline><polyline points="15 6 21 6 21 12"></polyline></svg>Overview</h3>' +
       '<p class="hero-amount">' + formatMoney(netWorth, currency) + '</p>' +
       '<div class="diverging">' +
         '<div class="half left"><div class="bar" style="width:' + leftPct + '%;background:var(--orange)"></div></div>' +
@@ -686,9 +686,9 @@
       });
     }).join('') : '<div class="empty-row">No accounts yet.</div>';
     var showAll = assets.length > TOP_ROWS ?
-      '<button class="show-all" type="button" data-toggle="sec-accounts-rows">Show all (' + assets.length + ')</button>' : '';
+      '<button class="show-all" type="button" data-toggle="sec-accounts-rows" aria-expanded="false" aria-controls="sec-accounts-rows">Show all (' + assets.length + ')</button>' : '';
     return '<section class="card stagger" id="sec-accounts">' +
-      '<h2 class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h11v4"></path><rect x="3" y="9" width="18" height="11" rx="1.5"></rect><circle cx="16" cy="14.5" r="1.3" fill="currentColor" stroke="none"></circle></svg>Accounts</h2>' +
+      '<h3 class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h11v4"></path><rect x="3" y="9" width="18" height="11" rx="1.5"></rect><circle cx="16" cy="14.5" r="1.3" fill="currentColor" stroke="none"></circle></svg>Accounts</h3>' +
       '<p class="hero-amount">' + formatMoney(total, currency) + '</p>' +
       spark +
       '<div class="rows" id="sec-accounts-rows">' + rowsHtml + '</div>' +
@@ -721,9 +721,9 @@
       });
     }).join('') : '<div class="empty-row">No bills or subscriptions yet.</div>';
     var showAll = items.length > TOP_ROWS ?
-      '<button class="show-all" type="button" data-toggle="sec-bills-rows">Show all (' + items.length + ')</button>' : '';
+      '<button class="show-all" type="button" data-toggle="sec-bills-rows" aria-expanded="false" aria-controls="sec-bills-rows">Show all (' + items.length + ')</button>' : '';
     return '<section class="card stagger" id="sec-bills">' +
-      '<h2 class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v19l-3-2-2 2-2-2-2 2-3-2z"></path><path d="M9 8h6M9 12h6"></path></svg>Bills &amp; Recurring</h2>' +
+      '<h3 class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2h12v19l-3-2-2 2-2-2-2 2-3-2z"></path><path d="M9 8h6M9 12h6"></path></svg>Bills &amp; Recurring</h3>' +
       '<p class="hero-amount">' + formatMoney(total, currency) + '</p>' +
       '<p class="hero-caption">Monthly equivalent</p>' +
       spark +
@@ -762,9 +762,9 @@
       });
     }).join('') : '<div class="empty-row">No budgets set.</div>';
     var showAll = computed.length > TOP_ROWS ?
-      '<button class="show-all" type="button" data-toggle="sec-budgets-rows">Show all (' + computed.length + ')</button>' : '';
+      '<button class="show-all" type="button" data-toggle="sec-budgets-rows" aria-expanded="false" aria-controls="sec-budgets-rows">Show all (' + computed.length + ')</button>' : '';
     return '<section class="card stagger" id="sec-budgets">' +
-      '<h2 class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 12V3"></path><path d="M12 12l7-3.5"></path></svg>Budgets</h2>' +
+      '<h3 class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 12V3"></path><path d="M12 12l7-3.5"></path></svg>Budgets</h3>' +
       '<p class="hero-amount">' + formatMoney(totalSpent, currency) + '</p>' +
       '<p class="hero-caption">of ' + formatMoney(totalLimit, currency) + ' budgeted</p>' +
       spark +
@@ -829,7 +829,7 @@
 
   function buildTransactionsSection(bundle) {
     return '<section class="card stagger" id="sec-transactions">' +
-      '<h2 class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h13l-3-3"></path><path d="M20 17H7l3 3"></path></svg>Transactions</h2>' +
+      '<h3 class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h13l-3-3"></path><path d="M20 17H7l3 3"></path></svg>Transactions</h3>' +
       '<div class="tx-controls">' +
         '<input type="text" class="tx-search" id="txSearch" placeholder="Search category or note" aria-label="Search transactions">' +
         '<select class="tx-sort" id="txSort" aria-label="Sort transactions">' +
@@ -935,6 +935,7 @@
         expanded = !expanded;
         Array.prototype.forEach.call(extras, function (el) { el.style.display = expanded ? '' : 'none'; });
         button.textContent = expanded ? 'Show less' : originalLabel;
+        button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
       });
     });
   }

@@ -79,6 +79,7 @@
             o = t ? "auto" : "smooth",
             a = 0,
             r = !1,
+            k = !1,
             s = null,
             c = document.createElement("div");
           c.className = "shot-nav";
@@ -97,7 +98,24 @@
               i
             );
           });
-          c.appendChild(l), i.appendChild(c);
+          if ((c.appendChild(l), !t)) {
+            var w = document.createElement("button");
+            (w.type = "button"),
+              (w.className = "shot-pause"),
+              w.setAttribute("aria-pressed", "false"),
+              w.setAttribute("aria-label", "Pause slideshow"),
+              (w.innerHTML =
+                '<svg class="glyph icon-pause" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M8 5h3v14H8zM13 5h3v14h-3z"/></svg><svg class="glyph icon-play" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M8 5l11 7-11 7z"/></svg>'),
+              w.addEventListener("click", function () {
+                (k = !k),
+                  w.classList.toggle("is-paused", k),
+                  w.setAttribute("aria-pressed", String(k)),
+                  w.setAttribute("aria-label", k ? "Play slideshow" : "Pause slideshow"),
+                  k ? E() : p();
+              }),
+              c.appendChild(w);
+          }
+          i.appendChild(c);
           var u = !1;
           e.addEventListener(
             "scroll",
@@ -150,7 +168,7 @@
         v((a + 1) % n.length);
       }
       function p() {
-        t || null !== s || (s = setInterval(h, 4e3));
+        t || k || null !== s || (s = setInterval(h, 4e3));
       }
       function E() {
         null !== s && (clearInterval(s), (s = null));

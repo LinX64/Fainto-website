@@ -844,6 +844,39 @@ html.js-motion .blob-d {
   background-clip: content-box;
   opacity: 1;
 }
+.shot-pause {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  margin-left: 8px;
+  padding: 5px;
+  border: 1px solid transparent;
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    color var(--dur-fast) var(--ease-std),
+    background var(--dur-fast) var(--ease-std);
+}
+.shot-pause:hover {
+  color: var(--text);
+}
+.shot-pause .glyph {
+  width: 14px;
+  height: 14px;
+}
+.shot-pause .icon-play {
+  display: none;
+}
+.shot-pause.is-paused .icon-pause {
+  display: none;
+}
+.shot-pause.is-paused .icon-play {
+  display: inline-flex;
+}
 .spark {
   position: absolute;
   z-index: 2;
